@@ -723,6 +723,23 @@ public class DialogCell extends BaseCell {
         }  else if (dialogsType == 2) {
             return MessagesController.getInstance().dialogsGroupsOnly;
         }
+        //plus
+        else if (dialogsType == 3) {
+            return MessagesController.getInstance().dialogsUsers;
+        } else if (dialogsType == 4) {
+            return MessagesController.getInstance().dialogsGroups;
+        } else if (dialogsType == 5) {
+            return MessagesController.getInstance().dialogsChannels;
+        } else if (dialogsType == 6) {
+            return MessagesController.getInstance().dialogsBots;
+        } else if (dialogsType == 7) {
+            return MessagesController.getInstance().dialogsMegaGroups;
+        } else if (dialogsType == 8) {
+            return MessagesController.getInstance().dialogsFavs;
+        } else if (dialogsType == 9) {
+            return MessagesController.getInstance().dialogsGroupsAll;
+        }
+        //
         return null;
     }
 

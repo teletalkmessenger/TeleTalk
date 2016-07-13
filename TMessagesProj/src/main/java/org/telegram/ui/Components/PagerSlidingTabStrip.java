@@ -15,6 +15,7 @@ import android.graphics.Paint.Style;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
@@ -151,6 +152,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     }
 
     private void scrollToChild(int position, int offset) {
+        Log.d("HOJJAT_HOJJAT", "scrollToChild() called with: " + "position = [" + position + "], offset = [" + offset + "]");
         if (tabCount == 0) {
             return;
         }
@@ -203,6 +205,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            Log.d("HOJJAT_HOJJAT", "onPageScrolled() called with: " + "position = [" + position + "], positionOffset = [" + positionOffset + "], positionOffsetPixels = [" + positionOffsetPixels + "]");
             currentPosition = position;
             currentPositionOffset = positionOffset;
             scrollToChild(position, (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()));
@@ -214,6 +217,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
         @Override
         public void onPageScrollStateChanged(int state) {
+            Log.d("HOJJAT_HOJJAT", "onPageScrollStateChanged() called with: " + "state = [" + state + "]");
             if (state == ViewPager.SCROLL_STATE_IDLE) {
                 scrollToChild(pager.getCurrentItem(), 0);
             }
@@ -224,6 +228,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
         @Override
         public void onPageSelected(int position) {
+            Log.d("HOJJAT_HOJJAT", "onPageSelected() called with: " + "position = [" + position + "]");
             if (delegatePageListener != null) {
                 delegatePageListener.onPageSelected(position);
             }

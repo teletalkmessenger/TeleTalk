@@ -20,13 +20,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.Outline;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -38,47 +48,57 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.viewpagerindicator.IconPageIndicator;
+import com.viewpagerindicator.IconPagerAdapter;
+import com.viewpagerindicator.TabPageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
+
+import org.telegram.Util;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.BuildVars;
 import org.telegram.messenger.ChatObject;
+import org.telegram.messenger.ContactsController;
 import org.telegram.messenger.DialogObject;
+import org.telegram.messenger.FileLog;
 import org.telegram.messenger.ImageLoader;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MessageObject;
-import org.telegram.messenger.UserObject;
-import org.telegram.messenger.query.SearchQuery;
-import org.telegram.messenger.support.widget.LinearLayoutManager;
-import org.telegram.messenger.support.widget.RecyclerView;
-import org.telegram.messenger.FileLog;
-import org.telegram.tgnet.TLRPC;
-import org.telegram.messenger.ContactsController;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.MessagesStorage;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
 import org.telegram.messenger.UserConfig;
-import org.telegram.ui.ActionBar.BottomSheet;
-import org.telegram.ui.Adapters.DialogsAdapter;
-import org.telegram.ui.Adapters.DialogsSearchAdapter;
-import org.telegram.ui.Cells.HintDialogCell;
-import org.telegram.ui.Cells.ProfileSearchCell;
-import org.telegram.ui.Cells.UserCell;
-import org.telegram.ui.Cells.DialogCell;
+import org.telegram.messenger.UserObject;
+import org.telegram.messenger.query.SearchQuery;
+import org.telegram.messenger.support.widget.LinearLayoutManager;
+import org.telegram.messenger.support.widget.RecyclerView;
+import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.ActionBar;
 import org.telegram.ui.ActionBar.ActionBarMenu;
 import org.telegram.ui.ActionBar.ActionBarMenuItem;
 import org.telegram.ui.ActionBar.BaseFragment;
+import org.telegram.ui.ActionBar.BottomSheet;
 import org.telegram.ui.ActionBar.MenuDrawable;
-import org.telegram.ui.Components.PlayerView;
+import org.telegram.ui.ActionBar.Theme;
+import org.telegram.ui.Adapters.DialogsAdapter;
+import org.telegram.ui.Adapters.DialogsSearchAdapter;
+import org.telegram.ui.Cells.DialogCell;
+import org.telegram.ui.Cells.HintDialogCell;
+import org.telegram.ui.Cells.ProfileSearchCell;
+import org.telegram.ui.Cells.UserCell;
 import org.telegram.ui.Components.EmptyTextProgressView;
 import org.telegram.ui.Components.LayoutHelper;
+//import org.telegram.ui.Components.PagerSlidingTabStrip;
+import org.telegram.ui.Components.PagerSlidingTabStrip;
+import org.telegram.ui.Components.PlayerView;
 import org.telegram.ui.Components.RecyclerListView;
-import org.telegram.ui.ActionBar.Theme;
 
 import java.util.ArrayList;
 
 public class DialogsActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate {
-    
+
+    private static final String TAG = "HOJJAT_DialogsActivity";
+
     private RecyclerListView listView;
     private LinearLayoutManager layoutManager;
     private DialogsAdapter dialogsAdapter;
@@ -316,7 +336,8 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
         FrameLayout frameLayout = new FrameLayout(context);
         fragmentView = frameLayout;
-        
+
+
         listView = new RecyclerListView(context);
         listView.setVerticalScrollBarEnabled(true);
         listView.setItemAnimator(null);
@@ -332,7 +353,9 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(layoutManager);
         listView.setVerticalScrollbarPosition(LocaleController.isRTL ? ListView.SCROLLBAR_POSITION_LEFT : ListView.SCROLLBAR_POSITION_RIGHT);
-        frameLayout.addView(listView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+        //hojjat
+        addPagerAndListView(context, frameLayout);
+//        frameLayout.addView(listView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
         listView.setOnItemClickListener(new RecyclerListView.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -704,7 +727,8 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     final View topChild = recyclerView.getChildAt(0);
                     int firstViewTop = 0;
                     if (topChild != null) {
-                        firstViewTop = topChild.getTop();
+                        //hojjat
+                        firstViewTop = topChild.getTop() + strip.getHeight();
                     }
                     boolean goingDown;
                     boolean changed = true;
@@ -995,7 +1019,8 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             updateVisibleRows(MessagesController.UPDATE_MASK_SEND_STATE);
         } else if (id == NotificationCenter.didSetPasscode) {
             updatePasscodeButton();
-        } if (id == NotificationCenter.needReloadRecentDialogsSearch) {
+        }
+        if (id == NotificationCenter.needReloadRecentDialogsSearch) {
             if (dialogsSearchAdapter != null) {
                 dialogsSearchAdapter.loadRecentSearch();
             }
@@ -1016,6 +1041,23 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         } else if (dialogsType == 2) {
             return MessagesController.getInstance().dialogsGroupsOnly;
         }
+        //plus
+        else if (dialogsType == 3) {
+            return MessagesController.getInstance().dialogsUsers;
+        } else if (dialogsType == 4) {
+            return MessagesController.getInstance().dialogsGroups;
+        } else if (dialogsType == 5) {
+            return MessagesController.getInstance().dialogsChannels;
+        } else if (dialogsType == 6) {
+            return MessagesController.getInstance().dialogsBots;
+        } else if (dialogsType == 7) {
+            return MessagesController.getInstance().dialogsMegaGroups;
+        } else if (dialogsType == 8) {
+            return MessagesController.getInstance().dialogsFavs;
+        } else if (dialogsType == 9) {
+            return MessagesController.getInstance().dialogsGroupsAll;
+        }
+        //
         return null;
     }
 
@@ -1167,6 +1209,205 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             } else {
                 finishFragment();
             }
+        }
+    }
+
+    class CustomPagerAdapter extends FragmentPagerAdapter {
+
+        Fragment f;
+
+        public CustomPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 0;
+        }
+    }
+
+    PagerSlidingTabStrip strip;
+
+    private void addPagerAndListView(final Context context, FrameLayout frameLayout) {
+        final ViewPager pager = new ViewPager(context);
+        //http://stackoverflow.com/questions/24310277/how-to-use-a-view-pager-inside-a-navigation-drawer
+        pager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow Drawer to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow Drawer to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+                // Handle viewPager touch events.
+                v.onTouchEvent(event);
+                listView.dispatchTouchEvent(event);
+                return true;
+            }
+        });
+        pager.setId(-1);
+
+//        final TabPageIndicator strip = new TabPageIndicator(context);
+        strip = new PagerSlidingTabStrip(context);
+//        final com.astuetz.PagerSlidingTabStrip strip = new com.astuetz.PagerSlidingTabStrip(context);
+
+        strip.setShouldExpand(true);
+        strip.setPadding(0, AndroidUtilities.dp(10), 0, AndroidUtilities.dp(10));
+        strip.setIndicatorHeight(AndroidUtilities.dp(5));
+        strip.setUnderlineHeight(AndroidUtilities.dp(1));
+        strip.setBackgroundColor(0xff527da3);
+//        strip.setIndicatorColor(0xff2b96e2);
+        strip.setIndicatorColor(0xffffffff);
+        strip.setUnderlineColor(0xffe2e5e7);
+        strip.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        strip.setBackgroundResource(R.drawable.vpi__tab_indicator);
+
+        ViewPager.LayoutParams layoutParams = new ViewPager.LayoutParams();
+        layoutParams.height = ViewPager.LayoutParams.WRAP_CONTENT;
+        layoutParams.width = ViewPager.LayoutParams.MATCH_PARENT;
+        layoutParams.gravity = Gravity.TOP;
+
+        pager.setAdapter(new MPagerAdaper());
+
+        strip.setViewPager(pager);
+
+//        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        strip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.d(TAG, "onPageSelected " + position);
+                switch (position) {
+                    case 0:
+                        dialogsType = 0;
+                        break;
+                    case 1:
+                        dialogsType = 3;
+                        break;
+                    case 2:
+                        dialogsType = 9;
+                        break;
+                    case 3:
+                        dialogsType = 5;
+                        break;
+                    case 4:
+                        dialogsType = 6;
+                        break;
+                    default:
+                        dialogsType = 0;
+                }
+                refreshAdapter(new DialogsAdapter(context, dialogsType));
+                pager.getAdapter().notifyDataSetChanged();
+                listView.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_CANCEL, 0, 0, 0));
+                listView.stopScroll();
+                listView.scrollToPosition(0);
+
+                Log.d(TAG, "onPageSelected: layoutManager.findLastVisibleItemPosition: " + layoutManager.findLastVisibleItemPosition());
+                Log.d(TAG, "onPageSelected: getDialogsArray.size:" + getDialogsArray().size());
+//                if (layoutManager.findLastVisibleItemPosition() >= getDialogsArray().size() - 10) {
+//                    MessagesController.getInstance().loadDialogs(-1, 100, !MessagesController.getInstance().dialogsEndReached);
+//                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        Util.runOnceWhenViewWasDrawn(strip, new Runnable() {
+            @Override
+            public void run() {
+                listView.setPadding(0, strip.getHeight(), 0, 0);
+                listView.setClipToPadding(false);
+                listView.scrollToPosition(0);
+            }
+        });
+        pager.addView(new FrameLayout(context));
+        frameLayout.addView(listView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+        frameLayout.addView(pager, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+        frameLayout.addView(strip, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+    }
+
+    private void refreshAdapter(DialogsAdapter adapter) {
+        dialogsAdapter = adapter;
+        listView.setAdapter(dialogsAdapter);
+        dialogsAdapter.notifyDataSetChanged();
+    }
+
+    class MPagerAdaper extends PagerAdapter implements PagerSlidingTabStrip.IconTabProvider {
+
+        @Override
+        public int getPageIconResId(int position) {
+                        switch (position) {
+                case 0:
+                    return R.drawable.ic_tab_all;
+                case 1:
+                    return R.drawable.ic_tab_users;
+                case 2:
+                    return R.drawable.ic_tab_group;
+                case 3:
+                    return R.drawable.ic_tab_channel;
+                case 4:
+                    return R.drawable.ic_tab_bot;
+                default:
+                    return R.drawable.ic_emoji_smile;
+            }
+
+        }
+
+        @Override
+        public int getCount() {
+            return 5;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+//            switch (position) {
+//                case 0:
+//                    return "All";
+//                case 1:
+//                    return "Users";
+//                case 2:
+//                    return "Groups";
+//                case 3:
+//                    return "Channels";
+//                case 4:
+//                    return "Bots";
+//                default:
+//                    return "ERROR";
+//            }
+            return "";
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            return null;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+
         }
     }
 }

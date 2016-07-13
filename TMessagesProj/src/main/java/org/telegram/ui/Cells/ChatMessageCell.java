@@ -10,6 +10,7 @@ package org.telegram.ui.Cells;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -3742,6 +3743,8 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 invalidate();
             } else {
                 photoImage.setAllowStartAnimation(true);
+                //hojjat
+//                photoImage.setImageBitmap(BitmapFactory.decodeResource(null, R.drawable.addmember));
                 photoImage.startAnimation();
                 currentMessageObject.audioProgress = 0;
                 buttonState = -1;

@@ -9,15 +9,15 @@
 package org.telegram.messenger;
 
 public class BuildVars {
-    public static boolean DEBUG_VERSION = false;
+    public static boolean DEBUG_VERSION = true;
     public static int BUILD_VERSION = 821;
     public static String BUILD_VERSION_STRING = "3.10";
-    public static int APP_ID = 0; //obtain your own APP_ID at https://core.telegram.org/api/obtaining_api_id
-    public static String APP_HASH = ""; //obtain your own APP_HASH at https://core.telegram.org/api/obtaining_api_id
-    public static String HOCKEY_APP_HASH = "your-hockeyapp-api-key-here";
-    public static String HOCKEY_APP_HASH_DEBUG = "your-hockeyapp-api-key-here";
+    public static int APP_ID = 2458; //obtain your own APP_ID at https://core.telegram.org/api/obtaining_api_id
+    public static String APP_HASH = "5bce48dc7d331e62c955669eb7233217"; //obtain your own APP_HASH at https://core.telegram.org/api/obtaining_api_id
+    public static String HOCKEY_APP_HASH = "02162a794aef472c9bea69744662fb9d";
+    public static String HOCKEY_APP_HASH_DEBUG = "02162a794aef472c9bea69744662fb9d";
     public static String GCM_SENDER_ID = "760348033672";
-    public static String SEND_LOGS_EMAIL = "email@gmail.com";
+    public static String SEND_LOGS_EMAIL = "imani.hojjat95@gmail.com";
     public static String BING_SEARCH_KEY = ""; //obtain your own KEY at https://www.bing.com/dev/en-us/dev-center
     public static String FOURSQUARE_API_KEY = ""; //obtain your own KEY at https://developer.foursquare.com/
     public static String FOURSQUARE_API_ID = ""; //obtain your own API_ID at https://developer.foursquare.com/

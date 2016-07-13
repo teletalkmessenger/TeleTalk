@@ -276,7 +276,7 @@ public class ApplicationLoader extends Application {
         }
 
         ApplicationLoader app = (ApplicationLoader)ApplicationLoader.applicationContext;
-        app.initPlayServices();
+//        app.initPlayServices(); hojjat
         FileLog.e("tmessages", "app initied");
 
         ContactsController.getInstance().checkAppAccount();

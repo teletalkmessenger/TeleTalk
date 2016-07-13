@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
@@ -34,6 +35,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.ContextThemeWrapper;
@@ -48,12 +50,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.telegram.Util;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.Emoji;
 import org.telegram.messenger.ImageLoader;
@@ -98,11 +105,15 @@ import org.telegram.ui.Components.SizeNotifierFrameLayoutPhoto;
 import org.telegram.ui.Components.VideoPlayer;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+
+import io.resana.AdView;
 
 @SuppressWarnings("unchecked")
 public class PhotoViewer implements NotificationCenter.NotificationCenterDelegate, GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
@@ -220,7 +231,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
     private boolean isFirstLoading;
     private boolean needSearchImageInArr;
     private boolean loadingMoreImages;
-    private boolean endReached[] = new boolean[] {false, true};
+    private boolean endReached[] = new boolean[]{false, true};
     private boolean opennedFromMedia;
 
     private boolean draggingDown = false;
@@ -264,9 +275,9 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
     private Scroller scroller = null;
 
     private ArrayList<MessageObject> imagesArrTemp = new ArrayList<>();
-    private HashMap<Integer, MessageObject>[] imagesByIdsTemp = new HashMap[] {new HashMap<>(), new HashMap<>()};
+    private HashMap<Integer, MessageObject>[] imagesByIdsTemp = new HashMap[]{new HashMap<>(), new HashMap<>()};
     private ArrayList<MessageObject> imagesArr = new ArrayList<>();
-    private HashMap<Integer, MessageObject>[] imagesByIds = new HashMap[] {new HashMap<>(), new HashMap<>()};
+    private HashMap<Integer, MessageObject>[] imagesByIds = new HashMap[]{new HashMap<>(), new HashMap<>()};
     private ArrayList<TLRPC.FileLocation> imagesArrLocations = new ArrayList<>();
     private ArrayList<TLRPC.Photo> avatarsArr = new ArrayList<>();
     private ArrayList<Integer> imagesArrLocationsSizes = new ArrayList<>();
@@ -1273,7 +1284,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         menuItem = menu.addItem(0, R.drawable.ic_ab_other);
         String str = LocaleController.getString("OpenInBrowser", R.string.OpenInBrowser);
         if (!TextUtils.isEmpty(str)) { //TODO add new string later
-            str = str.substring(0,1).toUpperCase() + str.substring(1).toLowerCase();
+            str = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
         }
         menuItem.addSubItem(gallery_menu_openin, str, 0);
         menuItem.addSubItem(gallery_menu_showall, LocaleController.getString("ShowAllMedia", R.string.ShowAllMedia), 0);
@@ -1721,6 +1732,12 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             return;
         }
         releasePlayer();
+
+
+        //hojjat
+        parentActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
         if (videoTextureView == null) {
             aspectRatioFrameLayout = new AspectRatioFrameLayout(parentActivity);
             aspectRatioFrameLayout.setVisibility(View.INVISIBLE);
@@ -1759,6 +1776,9 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             });
             aspectRatioFrameLayout.addView(videoTextureView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT, Gravity.CENTER));
         }
+        //hojjat
+        aspectRatioFrameLayout.setBackgroundColor(Color.CYAN);
+        setupAds();
         textureUploaded = false;
         videoCrossfadeStarted = false;
         videoTextureView.setAlpha(videoCrossfadeAlpha = 0.0f);
@@ -1778,8 +1798,15 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                             isPlaying = true;
                             videoPlayButton.setImageResource(R.drawable.inline_video_pause);
                             AndroidUtilities.runOnUIThread(updateProgressRunnable);
+
+                            //hojjat
+                            startVideoBannerAdIfNeeded();
+                            subtitleAdView.play();
                         }
                     } else if (isPlaying) {
+                        //hojjat
+                        subtitleAdView.pause();
+
                         isPlaying = false;
                         videoPlayButton.setImageResource(R.drawable.inline_video_play);
                         AndroidUtilities.cancelRunOnUIThread(updateProgressRunnable);
@@ -1839,6 +1866,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
     }
 
     private void releasePlayer() {
+        parentActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         if (videoPlayer != null) {
             videoPlayer.release();
             videoPlayer = null;
@@ -1862,6 +1890,8 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             shareButton.setVisibility(View.VISIBLE);
             menuItem.hideSubItem(gallery_menu_share);
         }
+//        hojjat
+        releaseVideoBannerAd();
     }
 
     private void updateCaptionTextForCurrentPhoto(Object object) {
@@ -4428,4 +4458,141 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
     public boolean onDoubleTapEvent(MotionEvent e) {
         return false;
     }
+
+    AdView subtitleAdView;
+
+    boolean videoBannerAdInited;
+    boolean videoBannerAdShown;
+    android.os.Handler videoBannerAdHandler;
+    LinearLayout videoBannerAd;
+    public static final int VIDEO_BANNER_AD_DURATION = 2500;
+    Runnable endVideoBannerAd;
+
+    private void startVideoBannerAdIfNeeded() {
+        Log.d(TAG, "startVideoBannerAdIfNeeded()");
+        if (videoBannerAdShown || !videoBannerAdInited)
+            return;
+        bottomLayout.setVisibility(View.GONE);
+        videoPlayButton.performClick();
+        final View progress = videoBannerAd.getChildAt(1);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(progress, "translationX", -Util.getScreenWidth(parentActivity), 0);
+        anim.setDuration(VIDEO_BANNER_AD_DURATION);
+        anim.setInterpolator(new LinearInterpolator());
+        anim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                progress.setVisibility(View.VISIBLE);
+                videoBannerAd.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progress.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        anim.start();
+
+        videoBannerAdHandler.postDelayed(endVideoBannerAd, VIDEO_BANNER_AD_DURATION);
+        videoBannerAdShown = true;
+    }
+
+    private void endVideoBannerAd() {
+        Log.d(TAG, "endVideoBannerAd()");
+        videoPlayButton.performClick();
+        containerView.removeView(videoBannerAd);
+        bottomLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void setupAds() {
+        setupSubtitleAd();
+        setupBannerAd();
+    }
+
+    private void setupBannerAd() {
+        Log.d(TAG, "setupBannerAd()");
+        if (videoBannerAdInited || !AdProvider.isBannerAdAvailable())
+            return;
+        videoBannerAd = new LinearLayout(actvityContext);
+        videoBannerAd.setOrientation(LinearLayout.VERTICAL);
+        videoBannerAd.setBackgroundColor(Color.BLACK);
+        videoBannerAd.setGravity(Gravity.CENTER);
+        videoBannerAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(actvityContext, "Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ImageView adImg = new ImageView(actvityContext);
+        adImg.setImageDrawable(AdProvider.getBannerDrawable(actvityContext));
+        adImg.setAdjustViewBounds(true);
+        videoBannerAd.addView(adImg, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+        View progress = new View(actvityContext);
+        progress.setLayoutParams(LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, Util.dpToPx(actvityContext, 2)));
+        progress.setVisibility(View.INVISIBLE);
+        progress.setBackgroundColor(Color.YELLOW);
+        videoBannerAd.addView(progress);
+
+        videoBannerAd.setVisibility(View.INVISIBLE);
+        containerView.addView(videoBannerAd, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT, Gravity.CENTER));
+        videoBannerAdHandler = new android.os.Handler();
+        endVideoBannerAd = new Runnable() {
+            @Override
+            public void run() {
+                endVideoBannerAd();
+            }
+        };
+        videoBannerAdInited = true;
+    }
+
+    private void setupSubtitleAd() {
+        subtitleAdView = new AdView(actvityContext);
+        subtitleAdView.setLayoutParams(LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+        subtitleAdView.setup(null, null);
+        aspectRatioFrameLayout.addView(subtitleAdView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+    }
+
+    private void releaseVideoBannerAd() {
+        Log.d(TAG, "releaseVideoBannerAd()");
+        if (!videoBannerAdInited)
+            return;
+        videoBannerAdHandler.removeCallbacks(endVideoBannerAd);
+        containerView.removeView(videoBannerAd);
+        videoBannerAdHandler = null;
+        endVideoBannerAd = null;
+        videoBannerAd = null;
+        videoBannerAdShown = false;
+        videoBannerAdInited = false;
+    }
+
+    static class AdProvider {
+        static boolean isBannerAdAvailable() {
+            return true;
+        }
+
+        static Drawable getBannerDrawable(Context context) {
+            try {
+                // get input stream
+                InputStream ims = context.getAssets().open("nazdika.png");
+                // load image as Drawable
+                return Drawable.createFromStream(ims, null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    private static final String TAG = "HOJJAT_PhotoViewer";
 }

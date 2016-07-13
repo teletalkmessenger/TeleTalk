@@ -39,6 +39,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
@@ -57,76 +58,76 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.telegram.messenger.AndroidUtilities;
 import org.telegram.PhoneFormat.PhoneFormat;
+import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.AnimatorListenerAdapterProxy;
+import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.ChatObject;
+import org.telegram.messenger.ContactsController;
 import org.telegram.messenger.Emoji;
+import org.telegram.messenger.FileLoader;
+import org.telegram.messenger.FileLog;
+import org.telegram.messenger.ImageReceiver;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MediaController;
+import org.telegram.messenger.MessageObject;
+import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.MessagesStorage;
+import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.NotificationsController;
+import org.telegram.messenger.R;
 import org.telegram.messenger.SecretChatHelper;
 import org.telegram.messenger.SendMessagesHelper;
+import org.telegram.messenger.UserConfig;
 import org.telegram.messenger.UserObject;
 import org.telegram.messenger.Utilities;
 import org.telegram.messenger.VideoEditedInfo;
 import org.telegram.messenger.browser.Browser;
 import org.telegram.messenger.query.BotQuery;
 import org.telegram.messenger.query.DraftQuery;
-import org.telegram.messenger.query.MessagesSearchQuery;
 import org.telegram.messenger.query.MessagesQuery;
+import org.telegram.messenger.query.MessagesSearchQuery;
 import org.telegram.messenger.query.SearchQuery;
 import org.telegram.messenger.query.StickersQuery;
 import org.telegram.messenger.support.widget.GridLayoutManager;
 import org.telegram.messenger.support.widget.LinearLayoutManager;
 import org.telegram.messenger.support.widget.RecyclerView;
-import org.telegram.messenger.ApplicationLoader;
-import org.telegram.messenger.FileLoader;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.RequestDelegate;
 import org.telegram.tgnet.TLObject;
 import org.telegram.tgnet.TLRPC;
-import org.telegram.messenger.ContactsController;
-import org.telegram.messenger.FileLog;
-import org.telegram.messenger.MessageObject;
-import org.telegram.messenger.MessagesController;
-import org.telegram.messenger.NotificationCenter;
-import org.telegram.messenger.R;
-import org.telegram.messenger.UserConfig;
-import org.telegram.ui.ActionBar.ActionBarLayout;
-import org.telegram.ui.ActionBar.BackDrawable;
-import org.telegram.ui.ActionBar.BottomSheet;
-import org.telegram.ui.ActionBar.SimpleTextView;
-import org.telegram.ui.Adapters.MentionsAdapter;
-import org.telegram.ui.Adapters.StickersAdapter;
-import org.telegram.messenger.AnimatorListenerAdapterProxy;
-import org.telegram.ui.Cells.ChatActionCell;
-import org.telegram.ui.Cells.ChatLoadingCell;
 import org.telegram.ui.ActionBar.ActionBar;
+import org.telegram.ui.ActionBar.ActionBarLayout;
 import org.telegram.ui.ActionBar.ActionBarMenu;
 import org.telegram.ui.ActionBar.ActionBarMenuItem;
+import org.telegram.ui.ActionBar.BackDrawable;
+import org.telegram.ui.ActionBar.BaseFragment;
+import org.telegram.ui.ActionBar.BottomSheet;
+import org.telegram.ui.ActionBar.SimpleTextView;
+import org.telegram.ui.ActionBar.Theme;
+import org.telegram.ui.Adapters.MentionsAdapter;
+import org.telegram.ui.Adapters.StickersAdapter;
+import org.telegram.ui.Cells.BotHelpCell;
+import org.telegram.ui.Cells.ChatActionCell;
+import org.telegram.ui.Cells.ChatLoadingCell;
 import org.telegram.ui.Cells.ChatMessageCell;
 import org.telegram.ui.Cells.ChatUnreadCell;
 import org.telegram.ui.Cells.CheckBoxCell;
 import org.telegram.ui.Components.AlertsCreator;
 import org.telegram.ui.Components.BackupImageView;
-import org.telegram.ui.ActionBar.BaseFragment;
-import org.telegram.ui.Cells.BotHelpCell;
 import org.telegram.ui.Components.ChatActivityEnterView;
-import org.telegram.messenger.ImageReceiver;
 import org.telegram.ui.Components.ChatAttachAlert;
 import org.telegram.ui.Components.ChatAvatarContainer;
 import org.telegram.ui.Components.ContextProgressView;
 import org.telegram.ui.Components.ExtendedGridLayoutManager;
-import org.telegram.ui.Components.PlayerView;
 import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.NumberTextView;
+import org.telegram.ui.Components.PlayerView;
 import org.telegram.ui.Components.RecyclerListView;
 import org.telegram.ui.Components.ShareAlert;
 import org.telegram.ui.Components.Size;
 import org.telegram.ui.Components.SizeNotifierFrameLayout;
 import org.telegram.ui.Components.StickersAlert;
-import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Components.URLSpanBotCommand;
 import org.telegram.ui.Components.URLSpanNoUnderline;
 import org.telegram.ui.Components.URLSpanReplacement;
@@ -278,13 +279,13 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private HashMap<Integer, MessageObject>[] messagesDict = new HashMap[]{new HashMap<>(), new HashMap<>()};
     private HashMap<String, ArrayList<MessageObject>> messagesByDays = new HashMap<>();
     protected ArrayList<MessageObject> messages = new ArrayList<>();
-    private int maxMessageId[] = new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE};
-    private int minMessageId[] = new int[] {Integer.MIN_VALUE, Integer.MIN_VALUE};
-    private int maxDate[] = new int[] {Integer.MIN_VALUE, Integer.MIN_VALUE};
+    private int maxMessageId[] = new int[]{Integer.MAX_VALUE, Integer.MAX_VALUE};
+    private int minMessageId[] = new int[]{Integer.MIN_VALUE, Integer.MIN_VALUE};
+    private int maxDate[] = new int[]{Integer.MIN_VALUE, Integer.MIN_VALUE};
     private int minDate[] = new int[2];
     private boolean endReached[] = new boolean[2];
     private boolean cacheEndReached[] = new boolean[2];
-    private boolean forwardEndReached[] = new boolean[] {true, true};
+    private boolean forwardEndReached[] = new boolean[]{true, true};
     private boolean loading;
     private boolean firstLoading = true;
     private int loadsCount;
@@ -700,7 +701,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         cantDeleteMessagesCount = 0;
 
         hasOwnBackground = true;
-        if (chatAttachAlert != null){
+        if (chatAttachAlert != null) {
             chatAttachAlert.onDestroy();
             chatAttachAlert = null;
         }
@@ -2606,7 +2607,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             FileLog.e("tmessages", e);
         }
         fixLayoutInternal();
-
+        Log.d(TAG, "currentUser:: " + currentUser);
+        Log.d(TAG, "currentChat:: " + currentChat);
         return fragmentView;
     }
 
@@ -3008,7 +3010,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             int checkLoadCount;
             if (scroll) {
                 checkLoadCount = 25;
-            } else  {
+            } else {
                 checkLoadCount = 5;
             }
             if (firstVisibleItem <= checkLoadCount && !loading) {
@@ -4552,6 +4554,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
     @Override
     public void didReceivedNotification(int id, final Object... args) {
+
+
         if (id == NotificationCenter.messagesDidLoaded) {
             int guid = (Integer) args[10];
             if (guid == classGuid) {
@@ -4567,6 +4571,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     waitingForLoad.remove(index);
                 }
                 ArrayList<MessageObject> messArr = (ArrayList<MessageObject>) args[2];
+                //hojjat nothing
                 if (waitingForReplyMessageLoad) {
                     boolean found = false;
                     for (int a = 0; a < messArr.size(); a++) {
@@ -4589,7 +4594,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 loadsCount++;
                 long did = (Long) args[0];
                 int loadIndex = did == dialog_id ? 0 : 1;
-                int count = (Integer) args[1];
+                int count = (Integer) args[1] ;
                 boolean isCache = (Boolean) args[3];
                 int fnid = (Integer) args[4];
                 int last_unread_date = (Integer) args[7];
@@ -4610,8 +4615,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     forwardEndReached[0] = false;
                     minMessageId[0] = 0;
                 }
-
-                if (loadsCount == 1 && messArr.size() > 20) {
+                if (loadsCount == 1 && messArr.size() > 20 ) {
                     loadsCount++;
                 }
 
@@ -7976,6 +7980,10 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         private int messagesStartRow;
         private int messagesEndRow;
 
+
+        int numOfAds;
+        int[] adPositions;
+
         public ChatActivityAdapter(Context context) {
             mContext = context;
             isBot = currentUser != null && currentUser.bot;
@@ -8008,7 +8016,42 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 messagesStartRow = -1;
                 messagesEndRow = -1;
             }
+//            numOfAds = (rowCount - InChatAdProvider.startAdsFrom) / InChatAdProvider.adsGap;
+////            rowCount += numOfAds;
+//            numOfAds = (rowCount + numOfAds - InChatAdProvider.startAdsFrom) / InChatAdProvider.adsGap;
+//            rowCount = rowCount + numOfAds;
+//
+//            adPositions = new int[numOfAds];
+//            int tmp = rowCount - InChatAdProvider.startAdsFrom;
+//            int i = 0;
+//            while (tmp > InChatAdProvider.adsGap) {
+//                adPositions[i] = tmp;
+//                tmp -= InChatAdProvider.adsGap;
+//                i++;
+//            }
         }
+
+//        boolean isPositionForAd(int position) {
+//            for (int adPosition : adPositions) {
+//                if (adPosition == position)
+//                    return true;
+//            }
+//            return false;
+////            return rowCount - position == 10;
+//        }
+
+//        int getRealPosition(int position) {
+//            for (int adPosition : adPositions) {
+//                if (position > adPosition)
+//                    position--;
+//            }
+//            return position;
+////            if (rowCount - position < 10) {
+////                return position - 1;
+////            }
+////            return position;
+//        }
+
 
         private class Holder extends RecyclerView.ViewHolder {
 
@@ -8029,8 +8072,14 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            Log.d(TAG, "onCreateViewHolder: viewType " + viewType);
             View view = null;
-            if (viewType == 0) {
+            if (viewType == 913) {
+                TextView tv = new TextView(parent.getContext());
+                tv.setPadding(50, 50, 50, 50);
+                tv.setTextSize(30);
+                view = tv;
+            } else if (viewType == 0) {
                 if (!chatMessageCellsCache.isEmpty()) {
                     view = chatMessageCellsCache.get(0);
                     chatMessageCellsCache.remove(0);
@@ -8322,6 +8371,12 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            Log.d(TAG, "onBindViewHolder: position" + position);
+//            if (isPositionForAd(position)) {
+//                ((TextView) holder.itemView).setText("Advertisment");
+//            } else {
+//                position = getRealPosition(position);
+
             if (position == botInfoRow) {
                 BotHelpCell helpView = (BotHelpCell) holder.itemView;
                 helpView.setText(!botInfo.isEmpty() ? botInfo.get(currentUser.id).description : null);
@@ -8331,54 +8386,66 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             } else if (position >= messagesStartRow && position < messagesEndRow) {
                 MessageObject message = messages.get(messages.size() - (position - messagesStartRow) - 1);
                 View view = holder.itemView;
-
-                boolean selected = false;
-                boolean disableSelection = false;
-                if (actionBar.isActionModeShowed()) {
-                    MessageObject messageObject = chatActivityEnterView != null ? chatActivityEnterView.getEditingMessageObject() : null;
-                    if (messageObject == message || selectedMessagesIds[message.getDialogId() == dialog_id ? 0 : 1].containsKey(message.getId())) {
-                        view.setBackgroundColor(Theme.MSG_SELECTED_BACKGROUND_COLOR);
-                        selected = true;
+                if (message.contentType == 913) {
+                    ((TextView) view).setText(message.ad);
+                } else {
+                    boolean selected = false;
+                    boolean disableSelection = false;
+                    if (actionBar.isActionModeShowed()) {
+                        MessageObject messageObject = chatActivityEnterView != null ? chatActivityEnterView.getEditingMessageObject() : null;
+                        if (messageObject == message || selectedMessagesIds[message.getDialogId() == dialog_id ? 0 : 1].containsKey(message.getId())) {
+                            view.setBackgroundColor(Theme.MSG_SELECTED_BACKGROUND_COLOR);
+                            selected = true;
+                        } else {
+                            view.setBackgroundColor(0);
+                        }
+                        disableSelection = true;
                     } else {
                         view.setBackgroundColor(0);
                     }
-                    disableSelection = true;
-                } else {
-                    view.setBackgroundColor(0);
-                }
 
-                if (view instanceof ChatMessageCell) {
-                    ChatMessageCell messageCell = (ChatMessageCell) view;
-                    messageCell.isChat = currentChat != null;
-                    messageCell.setMessageObject(message);
-                    messageCell.setCheckPressed(!disableSelection, disableSelection && selected);
-                    if (view instanceof ChatMessageCell && MediaController.getInstance().canDownloadMedia(MediaController.AUTODOWNLOAD_MASK_AUDIO)) {
-                        ((ChatMessageCell) view).downloadAudioIfNeed();
+                    if (view instanceof ChatMessageCell) {
+                        ChatMessageCell messageCell = (ChatMessageCell) view;
+                        messageCell.isChat = currentChat != null;
+                        messageCell.setMessageObject(message);
+                        messageCell.setCheckPressed(!disableSelection, disableSelection && selected);
+                        if (view instanceof ChatMessageCell && MediaController.getInstance().canDownloadMedia(MediaController.AUTODOWNLOAD_MASK_AUDIO)) {
+                            ((ChatMessageCell) view).downloadAudioIfNeed();
+                        }
+                        messageCell.setHighlighted(highlightMessageId != Integer.MAX_VALUE && message.getId() == highlightMessageId);
+                        if (searchContainer != null && searchContainer.getVisibility() == View.VISIBLE && MessagesSearchQuery.getLastSearchQuery() != null) {
+                            messageCell.setHighlightedText(MessagesSearchQuery.getLastSearchQuery());
+                        } else {
+                            messageCell.setHighlightedText(null);
+                        }
+                    } else if (view instanceof ChatActionCell) {
+                        ChatActionCell actionCell = (ChatActionCell) view;
+                        actionCell.setMessageObject(message);
+                    } else if (view instanceof ChatUnreadCell) {
+                        ChatUnreadCell unreadCell = (ChatUnreadCell) view;
+                        unreadCell.setText(LocaleController.formatPluralString("NewMessages", unread_to_load));
                     }
-                    messageCell.setHighlighted(highlightMessageId != Integer.MAX_VALUE && message.getId() == highlightMessageId);
-                    if (searchContainer != null && searchContainer.getVisibility() == View.VISIBLE && MessagesSearchQuery.getLastSearchQuery() != null) {
-                        messageCell.setHighlightedText(MessagesSearchQuery.getLastSearchQuery());
-                    } else {
-                        messageCell.setHighlightedText(null);
-                    }
-                } else if (view instanceof ChatActionCell) {
-                    ChatActionCell actionCell = (ChatActionCell) view;
-                    actionCell.setMessageObject(message);
-                } else if (view instanceof ChatUnreadCell) {
-                    ChatUnreadCell unreadCell = (ChatUnreadCell) view;
-                    unreadCell.setText(LocaleController.formatPluralString("NewMessages", unread_to_load));
                 }
             }
+//            }
         }
 
         @Override
         public int getItemViewType(int position) {
+            int res;
+//            if (isPositionForAd(position)) {
+//                res = 913;
+//            } else {
+//                position = getRealPosition(position);
             if (position >= messagesStartRow && position < messagesEndRow) {
-                return messages.get(messages.size() - (position - messagesStartRow) - 1).contentType;
+                res = messages.get(messages.size() - (position - messagesStartRow) - 1).contentType;
             } else if (position == botInfoRow) {
-                return 3;
-            }
-            return 4;
+                res = 3;
+            } else
+                res = 4;
+//            }
+//            Log.d(TAG, "getItemViewType(" + position + ") ->" + res);
+            return res;
         }
 
         @Override
@@ -8494,5 +8561,27 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 FileLog.e("tmessages", e);
             }
         }
+
     }
+
+    static class InChatAdProvider {
+        public static final int startAdsFrom = 5;
+        public static final int adsGap = 10;
+        static int numOfAds;
+
+        public static ArrayList<MessageObject> addAds(ArrayList<MessageObject> messArr) {
+            Log.d(TAG, "addAds() called with: " + "messArr.size = [" + messArr.size() + "]");
+            numOfAds = messArr.size() / adsGap;
+            for (int i = 1; i <= numOfAds; i++) {
+                MessageObject messageObject = messArr.get(adsGap * i - 1);
+                messageObject.contentType = 913;
+                messageObject.ad = "Advertisment" + i;
+                messageObject.messageOwner.id = -913;
+                messArr.add(adsGap * i, messageObject);
+            }
+            return messArr;
+        }
+    }
+
+    private static final String TAG = "HOJJAT_ChatActivity";
 }

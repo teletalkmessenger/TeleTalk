@@ -2,14 +2,21 @@ apply plugin: 'com.android.application'
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
     compile 'com.android.support:support-v4:23.4.0'
-    compile "com.google.android.gms:play-services-gcm:8.4.0"
-    compile "com.google.android.gms:play-services-maps:8.4.0"
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
     compile 'net.hockeyapp.android:HockeySDK:4.0.1'
     compile 'com.googlecode.mp4parser:isoparser:1.0.6'
+    compile(name:'resana-release', ext:'aar')
+    compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 }
 
 android {
@@ -17,41 +24,42 @@ android {
     buildToolsVersion '23.0.3'
 
     useLibrary 'org.apache.http.legacy'
-    defaultConfig.applicationId = "org.telegram.messenger"
+//    defaultConfig.applicationId = "org.telegram.messenger"
+    defaultConfig.applicationId = "org.telegram.my"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    signingConfigs {
-        debug {
-            storeFile file("config/release.keystore")
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
-        }
-
-        release {
-            storeFile file("config/release.keystore")
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            storeFile file("config/release.keystore")
+//            storePassword RELEASE_STORE_PASSWORD
+//            keyAlias RELEASE_KEY_ALIAS
+//            keyPassword RELEASE_KEY_PASSWORD
+//        }
+//
+//        release {
+//            storeFile file("config/release.keystore")
+//            storePassword RELEASE_STORE_PASSWORD
+//            keyAlias RELEASE_KEY_ALIAS
+//            keyPassword RELEASE_KEY_PASSWORD
+//        }
+//    }
 
     buildTypes {
         debug {
             debuggable true
             jniDebuggable true
-            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.debug
             applicationIdSuffix ".beta"
         }
 
         release {
             debuggable false
             jniDebuggable false
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -59,7 +67,7 @@ android {
         foss {
             debuggable false
             jniDebuggable false
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
     }
 
@@ -118,4 +126,4 @@ android {
     }
 }
 
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'

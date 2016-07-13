@@ -507,7 +507,7 @@ public class EmojiView extends FrameLayout implements NotificationCenter.Notific
             R.drawable.ic_emoji_sticker};
 
     private Listener listener;
-    private ViewPager pager;
+        private ViewPager pager;
     private FrameLayout recentsWrap;
     private FrameLayout stickersWrap;
     private ArrayList<GridView> views = new ArrayList<>();

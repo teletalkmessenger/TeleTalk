@@ -18,11 +18,12 @@ package org.telegram.messenger.exoplayer;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 /**
  * A {@link FrameLayout} that resizes itself to match a specified aspect ratio.
  */
-public final class AspectRatioFrameLayout extends FrameLayout {
+public final class AspectRatioFrameLayout extends RelativeLayout {
 
   /**
    * The {@link FrameLayout} will not resize itself if the fractional difference between its natural

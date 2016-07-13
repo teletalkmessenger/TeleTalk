@@ -6,6 +6,14 @@
  * Copyright Nikolai Kudashov, 2013-2016.
  */
 
+//TA Avvale processDialogsUpdate
+//TODO
+//TODO
+//TODO
+//TODO
+//TODO
+//TODO
+//TODO
 package org.telegram.messenger;
 
 import android.app.Activity;
@@ -59,6 +67,17 @@ public class MessagesController implements NotificationCenter.NotificationCenter
     public ArrayList<TLRPC.TL_dialog> dialogs = new ArrayList<>();
     public ArrayList<TLRPC.TL_dialog> dialogsServerOnly = new ArrayList<>();
     public ArrayList<TLRPC.TL_dialog> dialogsGroupsOnly = new ArrayList<>();
+
+    //plus
+    public ArrayList<TLRPC.TL_dialog> dialogsUsers = new ArrayList<>();
+    public ArrayList<TLRPC.TL_dialog> dialogsGroups = new ArrayList<>();
+    public ArrayList<TLRPC.TL_dialog> dialogsGroupsAll = new ArrayList<>();
+    public ArrayList<TLRPC.TL_dialog> dialogsChannels = new ArrayList<>();
+    public ArrayList<TLRPC.TL_dialog> dialogsMegaGroups = new ArrayList<>();
+    public ArrayList<TLRPC.TL_dialog> dialogsBots = new ArrayList<>();
+    public ArrayList<TLRPC.TL_dialog> dialogsFavs = new ArrayList<>();
+    //
+
     public int nextDialogsCacheOffset;
     public ConcurrentHashMap<Long, Integer> dialogs_read_inbox_max = new ConcurrentHashMap<>(100, 1.0f, 2);
     public ConcurrentHashMap<Long, Integer> dialogs_read_outbox_max = new ConcurrentHashMap<>(100, 1.0f, 2);
@@ -533,6 +552,17 @@ public class MessagesController implements NotificationCenter.NotificationCenter
         channelViewsToReload.clear();
         dialogsServerOnly.clear();
         dialogsGroupsOnly.clear();
+
+        //plus
+        dialogsUsers.clear();
+        dialogsGroups.clear();
+        dialogsGroupsAll.clear();
+        dialogsChannels.clear();
+        dialogsMegaGroups.clear();
+        dialogsBots.clear();
+        dialogsFavs.clear();
+        //
+
         dialogMessagesByIds.clear();
         dialogMessagesByRandomIds.clear();
         users.clear();
@@ -1865,6 +1895,17 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                         });
                     }
                     dialogsGroupsOnly.remove(dialog);
+
+                    //plus
+                    dialogsUsers.remove(dialog);
+                    dialogsGroups.remove(dialog);
+                    dialogsGroupsAll.remove(dialog);
+                    dialogsChannels.remove(dialog);
+                    dialogsMegaGroups.remove(dialog);
+                    dialogsBots.remove(dialog);
+                    dialogsFavs.remove(dialog);
+                    //
+
                     dialogs_dict.remove(did);
                     dialogs_read_inbox_max.remove(did);
                     dialogs_read_outbox_max.remove(did);
@@ -7127,6 +7168,15 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                 dialogs.remove(dialog);
                 dialogsServerOnly.remove(dialog);
                 dialogsGroupsOnly.remove(dialog);
+                //plus
+                dialogsUsers.remove(dialog);
+                dialogsGroups.remove(dialog);
+                dialogsGroupsAll.remove(dialog);
+                dialogsChannels.remove(dialog);
+                dialogsMegaGroups.remove(dialog);
+                dialogsBots.remove(dialog);
+                dialogsFavs.remove(dialog);
+                //
                 dialogs_dict.remove(dialog.id);
                 dialogs_read_inbox_max.remove(dialog.id);
                 dialogs_read_outbox_max.remove(dialog.id);
@@ -7204,6 +7254,15 @@ public class MessagesController implements NotificationCenter.NotificationCenter
     public void sortDialogs(HashMap<Integer, TLRPC.Chat> chatsDict) {
         dialogsServerOnly.clear();
         dialogsGroupsOnly.clear();
+        //plus
+        dialogsUsers.clear();
+        dialogsGroups.clear();
+        dialogsGroupsAll.clear();
+        dialogsChannels.clear();
+        dialogsMegaGroups.clear();
+        dialogsBots.clear();
+        dialogsFavs.clear();
+        //
         Collections.sort(dialogs, dialogComparator);
         for (int a = 0; a < dialogs.size(); a++) {
             TLRPC.TL_dialog d = dialogs.get(a);
@@ -7216,18 +7275,55 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                     if (chat != null && (chat.megagroup && chat.editor || chat.creator)) {
                         dialogsGroupsOnly.add(d);
                     }
-                } else if (lower_id < 0) {
-                    if (chatsDict != null) {
-                        TLRPC.Chat chat = chatsDict.get(-lower_id);
-                        if (chat != null && chat.migrated_to != null) {
-                            dialogs.remove(a);
-                            a--;
-                            continue;
+                    //plus
+                    if (chat != null) {
+                        if (chat.megagroup) {
+                            dialogsMegaGroups.add(d);
+                            dialogsGroupsAll.add(d);
+                        } else {
+                            dialogsChannels.add(d);
                         }
                     }
-                    dialogsGroupsOnly.add(d);
+                    //
+                } else {
+                    if (lower_id < 0) {
+                        if (chatsDict != null) {
+                            TLRPC.Chat chat = chatsDict.get(-lower_id);
+                            if (chat != null && chat.migrated_to != null) {
+                                dialogs.remove(a);
+                                a--;
+                                continue;
+                            }
+                        }
+                        dialogsGroupsOnly.add(d);
+                        //plus
+                        dialogsGroups.add(d);
+                        dialogsGroupsAll.add(d);
+                        //
+                    }
+                    //plus
+                    else {
+                        TLRPC.User user = getUser((int) d.id);
+                        if (user != null) {
+                            if (user.bot) {
+                                dialogsBots.add(d);
+                            } else {
+                                dialogsUsers.add(d);
+                            }
+                        }
+                    }
+                    //
                 }
             }
+            //plus hojjat
+            TLRPC.EncryptedChat chat = getEncryptedChat(high_id);
+            if (chat instanceof TLRPC.TL_encryptedChat) {
+                dialogsUsers.add(d);
+            }
+//            if (Favourite.isFavourite(d.id)) {
+//                dialogsFavs.add(d);
+//            }
+            //
         }
     }
 

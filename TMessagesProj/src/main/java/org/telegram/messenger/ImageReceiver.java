@@ -9,6 +9,7 @@
 package org.telegram.messenger;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -935,6 +936,8 @@ public class ImageReceiver implements NotificationCenter.NotificationCenterDeleg
                 fileDrawable.setParentView(parentView);
                 if (allowStartAnimation) {
                     fileDrawable.start();
+                    //hojjat
+//                    currentImage = parentView.getContext().getResources().getDrawable(R.drawable.addmember);
                 }
             }
 

@@ -92,6 +92,8 @@ public class MessageObject {
         this(message, users, null, generateLayout);
     }
 
+    public String ad;
+
     public MessageObject(TLRPC.Message message, AbstractMap<Integer, TLRPC.User> users, AbstractMap<Integer, TLRPC.Chat> chats, boolean generateLayout) {
         if (textPaint == null) {
             textPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);

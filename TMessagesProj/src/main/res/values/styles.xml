@@ -8,6 +8,8 @@
         <item name="android:colorBackground">@android:color/white</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
+        <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
     </style>
 
     <style name="Theme.TMessages" parent="@android:style/Theme.Holo.Light">

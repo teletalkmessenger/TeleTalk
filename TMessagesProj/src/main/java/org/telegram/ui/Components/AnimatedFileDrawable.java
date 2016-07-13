@@ -8,9 +8,12 @@
 
 package org.telegram.ui.Components;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
@@ -21,25 +24,32 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 
+import org.telegram.Util;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.FileLog;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
+    private static final String TAG = "HOJJAT_AnDrawable";
 
     private static native int createDecoder(String src, int[] params);
+
     private static native void destroyDecoder(int ptr);
+
     private static native int getVideoFrame(int ptr, Bitmap bitmap, int[] params);
 
     private long lastFrameTime;
     private int lastTimeStamp;
     private int invalidateAfter = 50;
-    private final int[] metaData = new int[3];
+    private final int[] metaData = new int[3];  //[0]:width   [1]:height   [2]:time
     private Runnable loadFrameTask;
     private Bitmap renderingBitmap;
     private Bitmap nextRenderingBitmap;
@@ -66,14 +76,24 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     private volatile boolean isRunning;
     private volatile boolean isRecycled;
     private volatile int nativePtr;
-    private static ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2, new ThreadPoolExecutor.DiscardPolicy());
+    private static ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2, new ThreadPoolExecutor.AbortPolicy());
 
     private View parentView = null;
     private View secondParentView = null;
 
+
+    public static final int AD_DURATION = 2500;
+    boolean showAd = true;
+    long adStartTime;
+    int adCurrentTime;
+    int[] adPixels;
+
+    boolean firstFrameAfterAd = true;
+
     protected final Runnable mInvalidateTask = new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "mInvalidateTask");
             if (secondParentView != null) {
                 secondParentView.invalidate();
             } else if (parentView != null) {
@@ -85,6 +105,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     private Runnable uiRunnable = new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "uiRunnable");
             if (destroyWhenDone && nativePtr != 0) {
                 destroyDecoder(nativePtr);
                 nativePtr = 0;
@@ -117,6 +138,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     private Runnable loadFrameRunnable = new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "loadFrameRunnable");
             if (!isRecycled) {
                 if (!decoderCreated && nativePtr == 0) {
                     nativePtr = createDecoder(path.getAbsolutePath(), metaData);
@@ -134,7 +156,24 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
                         }
                     }
                     if (backgroundBitmap != null) {
-                        getVideoFrame(nativePtr, backgroundBitmap, metaData);
+                        if (showAd && adCurrentTime < AD_DURATION) {
+                            getAdFrame();
+                        } else {
+                            if (showAd && firstFrameAfterAd) {
+                                nextRenderingShader = null;
+                                nextRenderingShader  = null;
+                                renderingBitmap = null;
+                                renderingShader = null;
+                                try {
+                                    backgroundBitmap = Bitmap.createBitmap(metaData[0], metaData[1], Bitmap.Config.ARGB_8888);
+                                    backgroundShader = new BitmapShader(backgroundBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+                                } catch (Throwable e) {
+                                    FileLog.e("tmessages", e);
+                                }
+                                firstFrameAfterAd = false;
+                            }
+                            getVideoFrame(nativePtr, backgroundBitmap, metaData);
+                        }
                     }
                 } catch (Throwable e) {
                     FileLog.e("tmessages", e);
@@ -144,9 +183,55 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
         }
     };
 
+    private void getAdFrame() {
+        if (adPixels == null) {
+            adStartTime = System.currentTimeMillis();
+            Context c = parentView.getContext();
+            GiffAd ad = new AdProvider().getGiffAd(c, metaData[0], metaData[1]);
+            float widthScale = (float) ad.bitmap.getWidth() / metaData[0];
+            float heightScale = (float) ad.bitmap.getHeight() / metaData[1];
+            float scale = Math.max(widthScale, heightScale);
+            int w = (int) (metaData[0] * scale);
+            int h = (int) (metaData[1] * scale);
+            backgroundBitmap = Util.scalePreserveRatio(ad.bitmap, w, h, ad.backColor);
+            backgroundShader = new BitmapShader(backgroundBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            adPixels = new int[backgroundBitmap.getHeight() * backgroundBitmap.getWidth()];
+            backgroundBitmap.getPixels(adPixels, 0, backgroundBitmap.getWidth(), 0, 0,
+                    backgroundBitmap.getWidth(), backgroundBitmap.getHeight());
+
+            //avoid memory leaks
+            ad.bitmap.recycle();
+            ad.bitmap = null;
+        } else {
+            setProgress();
+            backgroundBitmap.setPixels(adPixels, 0, backgroundBitmap.getWidth(), 0, 0,
+                    backgroundBitmap.getWidth(), backgroundBitmap.getHeight());
+        }
+        adCurrentTime = (int) (System.currentTimeMillis() - adStartTime);
+    }
+
+    int progressHeight;
+
+    private void setProgress() {
+        if (progressHeight == 0 && dstRect.height() != 0) {
+            progressHeight = (int) Util.dpToPx(parentView.getContext(), 4) * backgroundBitmap.getHeight() / dstRect.height();
+            for (int i = backgroundBitmap.getHeight() - 1; i > backgroundBitmap.getHeight() - 2 * progressHeight; i--)
+                for (int j = 0; j < backgroundBitmap.getWidth(); j++)
+                    adPixels[backgroundBitmap.getWidth() * i + j] = Color.WHITE;
+            for (int i = backgroundBitmap.getHeight() - (progressHeight / 2); i > backgroundBitmap.getHeight() - 3 * progressHeight / 2; i--)
+                for (int j = 0; j < backgroundBitmap.getWidth(); j++)
+                    adPixels[backgroundBitmap.getWidth() * i + j] = Color.GRAY;
+        }
+        float progress = (float) adCurrentTime / AD_DURATION;
+        for (int i = backgroundBitmap.getHeight() - (progressHeight / 2); i > backgroundBitmap.getHeight() - 3 * progressHeight / 2; i--)
+            for (int j = 0; j < (int) (backgroundBitmap.getWidth() * progress); j++)
+                adPixels[backgroundBitmap.getWidth() * i + j] = Color.RED;
+    }
+
     private final Runnable mStartTask = new Runnable() {
         @Override
         public void run() {
+            Log.d(TAG, "mStartTask");
             if (secondParentView != null) {
                 secondParentView.invalidate();
             } else if (parentView != null) {
@@ -156,6 +241,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     };
 
     public AnimatedFileDrawable(File file, boolean createDecoder) {
+        Log.d(TAG, "AnimatedFileDrawable()");
         path = file;
         if (createDecoder) {
             nativePtr = createDecoder(file.getAbsolutePath(), metaData);
@@ -227,6 +313,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
 
     @Override
     public void start() {
+        Log.d(TAG, "start() called with: " + "");
         if (isRunning) {
             return;
         }
@@ -238,6 +325,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     }
 
     private void scheduleNextGetFrame() {
+        Log.d(TAG, "scheduleNextGetFrame(): " + loadFrameTask + " , " + nativePtr + " , " + decoderCreated + " , " + destroyWhenDone);
         if (loadFrameTask != null || nativePtr == 0 && decoderCreated || destroyWhenDone) {
             return;
         }
@@ -256,12 +344,14 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
 
     @Override
     public int getIntrinsicHeight() {
-        return decoderCreated ? metaData[1] : AndroidUtilities.dp(100);
+//        return decoderCreated ? metaData[1] : AndroidUtilities.dp(100);
+        return backgroundBitmap.getHeight();
     }
 
     @Override
     public int getIntrinsicWidth() {
-        return decoderCreated ? metaData[0] : AndroidUtilities.dp(100);
+//        return decoderCreated ? metaData[0] : AndroidUtilities.dp(100);
+        return backgroundBitmap.getWidth();
     }
 
     @Override
@@ -295,7 +385,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
                 dstRect.set(getBounds());
                 scaleX = (float) dstRect.width() / renderingBitmap.getWidth();
                 scaleY = (float) dstRect.height() / renderingBitmap.getHeight();
-                applyTransformation = false;
+//                applyTransformation = false;
             }
             if (roundRadius != 0) {
                 int bitmapW = renderingBitmap.getWidth();
@@ -332,12 +422,14 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
 
     @Override
     public int getMinimumHeight() {
-        return decoderCreated ? metaData[1] : AndroidUtilities.dp(100);
+//        return decoderCreated ? metaData[1] : AndroidUtilities.dp(100);
+        return backgroundBitmap.getHeight();
     }
 
     @Override
     public int getMinimumWidth() {
-        return decoderCreated ? metaData[0] : AndroidUtilities.dp(100);
+//        return decoderCreated ? metaData[0] : AndroidUtilities.dp(100);
+        return backgroundBitmap.getWidth();
     }
 
     public Bitmap getAnimatedBitmap() {
@@ -363,5 +455,51 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
         drawable.metaData[0] = metaData[0];
         drawable.metaData[1] = metaData[1];
         return drawable;
+    }
+
+    class AdProvider {
+        Bitmap getAdBitmap(Context context) {
+            try {
+                InputStream ims;
+                // get input stream
+//                if (((int) (Math.random() * 3)) == 0)
+//                    ims = context.getAssets().open("ad.jpg");
+//                else
+                ims = context.getAssets().open("nazdika.png");
+                // load image as Drawable
+                return BitmapFactory.decodeStream(ims);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+        }
+
+        GiffAd getGiffAd(Context context, int width, int height) {
+            float ratio = (float) width / height;
+            GiffAd ad = new GiffAd();
+            String file;
+            if (ratio > 1.3) {
+                file = "horizontal.jpg";
+                ad.backColor = Color.argb(255, 220, 220, 220);
+            } else if (ratio < 0.7) {
+                file = "vertical.jpg";
+                ad.backColor = Color.BLUE;
+            } else {
+                file = "square.jpg";
+                ad.backColor = Color.RED;
+            }
+            try {
+                InputStream ims = context.getAssets().open(file);
+                ad.bitmap = BitmapFactory.decodeStream(ims);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return ad;
+        }
+    }
+
+    class GiffAd {
+        Bitmap bitmap;
+        int backColor;
     }
 }
