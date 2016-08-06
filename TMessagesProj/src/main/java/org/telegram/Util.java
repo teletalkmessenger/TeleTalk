@@ -17,6 +17,9 @@ import android.view.ViewTreeObserver;
  * Created by hojjatimani on 7/11/2016 AD.
  */
 public class Util {
+    public static final boolean hojjatUi = true;
+    public static final float niceTextSizeFactor = 0.93f;
+
     public static int getScreenWidth(Activity activity) {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -97,6 +100,4 @@ public class Util {
             return imageToScale;
         }
     }
-
-
 }

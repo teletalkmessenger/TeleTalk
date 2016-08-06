@@ -18,8 +18,6 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:colorPrimaryDark">#426482</item>
         <item name="android:colorPrimary">#527da3</item>
-        <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
-        <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
     </style>
 
     <style name="Theme.TMessages" parent="@android:style/Theme.Material.Light">
@@ -39,6 +37,10 @@
         <item name="android:alertDialogTheme">@style/Theme.TMessages.Dialog.Alert</item>
         <item name="android:colorControlActivated">#4991cc</item>
     </style>
+
+    <!--<style name="Theme_MAppCompat" parent="Theme.AppCompat">-->
+        <!--<item name="android:colorPrimary">#444444</item>-->
+    <!--</style>-->
 
     <style name="Theme.TMessages.PopupNotification" parent="Theme.TMessages">
         <item name="android:windowBackground">@android:color/transparent</item>

@@ -25,7 +25,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -93,7 +93,7 @@ public class ChangeUsernameActivity extends BaseFragment {
         });
 
         firstNameField = new EditText(context);
-        firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         firstNameField.setHintTextColor(0xff979797);
         firstNameField.setTextColor(0xff212121);
         firstNameField.setMaxLines(1);
@@ -107,7 +107,7 @@ public class ChangeUsernameActivity extends BaseFragment {
         AndroidUtilities.clearCursorDrawable(firstNameField);
         firstNameField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE && doneButton != null) {
                     doneButton.performClick();
                     return true;
@@ -124,12 +124,12 @@ public class ChangeUsernameActivity extends BaseFragment {
         }
 
         checkTextView = new TextView(context);
-        checkTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        checkTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         checkTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
         ((LinearLayout) fragmentView).addView(checkTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT, 24, 12, 24, 0));
 
         TextView helpTextView = new TextView(context);
-        helpTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        helpTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         helpTextView.setTextColor(0xff6d6d72);
         helpTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
         helpTextView.setText(AndroidUtilities.replaceTags(LocaleController.getString("UsernameHelp", R.string.UsernameHelp)));

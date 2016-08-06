@@ -60,6 +60,7 @@ public class TLRPC {
     public static final int LAYER = 53;
 
     public static class DraftMessage extends TLObject {
+        private static final long serialVersionUID = 1000L;
         public int flags;
         public boolean no_webpage;
         public int reply_to_msg_id;
@@ -85,9 +86,22 @@ public class TLRPC {
             }
             return result;
         }
+
+        @Override
+        public String toString() {
+            return "DraftMessage{" +
+                    "flags=" + flags +
+                    ", no_webpage=" + no_webpage +
+                    ", reply_to_msg_id=" + reply_to_msg_id +
+                    ", message='" + message + '\'' +
+                    ", entities=" + entities +
+                    ", date=" + date +
+                    '}';
+        }
     }
 
     public static class TL_draftMessageEmpty extends DraftMessage {
+        private static final long serialVersionUID = 1001L;
         public static int constructor = 0xba4baec5;
 
 
@@ -97,6 +111,7 @@ public class TLRPC {
     }
 
     public static class TL_draftMessage extends DraftMessage {
+        private static final long serialVersionUID = 1002L;
         public static int constructor = 0xfd8e711f;
 
 
@@ -148,6 +163,7 @@ public class TLRPC {
     }
 
     public static class ChatPhoto extends TLObject {
+        private static final long serialVersionUID = 1003L;
         public FileLocation photo_small;
         public FileLocation photo_big;
 
@@ -172,6 +188,7 @@ public class TLRPC {
     }
 
     public static class TL_chatPhotoEmpty extends ChatPhoto {
+        private static final long serialVersionUID = 1004L;
         public static int constructor = 0x37c1011c;
 
 
@@ -181,6 +198,7 @@ public class TLRPC {
     }
 
     public static class TL_chatPhoto extends ChatPhoto {
+        private static final long serialVersionUID = 1005L;
         public static int constructor = 0x6153276a;
 
 
@@ -197,6 +215,7 @@ public class TLRPC {
     }
 
     public static class TL_help_termsOfService extends TLObject {
+        private static final long serialVersionUID = 1006L;
         public static int constructor = 0xf1ee3e90;
 
         public String text;
@@ -225,6 +244,7 @@ public class TLRPC {
     }
 
     public static class NotifyPeer extends TLObject {
+        private static final long serialVersionUID = 1007L;
         public Peer peer;
 
         public static NotifyPeer TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
@@ -254,6 +274,7 @@ public class TLRPC {
     }
 
     public static class TL_notifyAll extends NotifyPeer {
+        private static final long serialVersionUID = 1008L;
         public static int constructor = 0x74d07c60;
 
 
@@ -263,6 +284,7 @@ public class TLRPC {
     }
 
     public static class TL_notifyChats extends NotifyPeer {
+        private static final long serialVersionUID = 1009L;
         public static int constructor = 0xc007cec3;
 
 
@@ -272,6 +294,7 @@ public class TLRPC {
     }
 
     public static class TL_notifyUsers extends NotifyPeer {
+        private static final long serialVersionUID = 1010L;
         public static int constructor = 0xb4c83b4c;
 
 
@@ -281,6 +304,7 @@ public class TLRPC {
     }
 
     public static class TL_notifyPeer extends NotifyPeer {
+        private static final long serialVersionUID = 1011L;
         public static int constructor = 0x9fd40bd8;
 
 
@@ -295,6 +319,7 @@ public class TLRPC {
     }
 
     public static class messages_SentEncryptedMessage extends TLObject {
+        private static final long serialVersionUID = 1012L;
         public int date;
         public EncryptedFile file;
 
@@ -319,6 +344,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_sentEncryptedMessage extends messages_SentEncryptedMessage {
+        private static final long serialVersionUID = 1013L;
         public static int constructor = 0x560f8935;
 
 
@@ -333,6 +359,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_sentEncryptedFile extends messages_SentEncryptedMessage {
+        private static final long serialVersionUID = 1014L;
         public static int constructor = 0x9493ff32;
 
 
@@ -349,6 +376,7 @@ public class TLRPC {
     }
 
     public static class TL_error extends TLObject {
+        private static final long serialVersionUID = 1015L;
         public static int constructor = 0xc4b9f9bb;
 
         public int code;
@@ -380,6 +408,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_checkedPhone extends TLObject {
+        private static final long serialVersionUID = 1016L;
         public static int constructor = 0x811ea28e;
 
         public boolean phone_registered;
@@ -408,6 +437,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_chatFull extends TLObject {
+        private static final long serialVersionUID = 1017L;
         public static int constructor = 0xe5d7d19c;
 
         public ChatFull full_chat;
@@ -480,6 +510,7 @@ public class TLRPC {
     }
 
     public static class TL_account_passwordSettings extends TLObject {
+        private static final long serialVersionUID = 1018L;
         public static int constructor = 0xb7b72ab3;
 
         public String email;
@@ -508,6 +539,7 @@ public class TLRPC {
     }
 
     public static class DocumentAttribute extends TLObject {
+        private static final long serialVersionUID = 1019L;
         public int w;
         public int h;
         public int duration;
@@ -565,6 +597,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeAnimated extends DocumentAttribute {
+        private static final long serialVersionUID = 1020L;
         public static int constructor = 0x11b58939;
 
 
@@ -574,6 +607,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeSticker_old extends TL_documentAttributeSticker {
+        private static final long serialVersionUID = 1021L;
         public static int constructor = 0xfb0a5727;
 
 
@@ -586,6 +620,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeImageSize extends DocumentAttribute {
+        private static final long serialVersionUID = 1022L;
         public static int constructor = 0x6c37c15c;
 
 
@@ -602,6 +637,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeAudio_old extends TL_documentAttributeAudio {
+        private static final long serialVersionUID = 1023L;
         public static int constructor = 0x51448e5;
 
 
@@ -616,6 +652,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeSticker extends DocumentAttribute {
+        private static final long serialVersionUID = 1024L;
         public static int constructor = 0x3a556302;
 
 
@@ -632,6 +669,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeVideo extends DocumentAttribute {
+        private static final long serialVersionUID = 1025L;
         public static int constructor = 0x5910cccb;
 
 
@@ -650,6 +688,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeAudio extends DocumentAttribute {
+        private static final long serialVersionUID = 1026L;
         public static int constructor = 0x9852f9c6;
 
 
@@ -686,6 +725,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeSticker_old2 extends TL_documentAttributeSticker {
+        private static final long serialVersionUID = 1027L;
         public static int constructor = 0x994c9882;
 
 
@@ -700,6 +740,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeFilename extends DocumentAttribute {
+        private static final long serialVersionUID = 1028L;
         public static int constructor = 0x15590068;
 
 
@@ -714,6 +755,7 @@ public class TLRPC {
     }
 
     public static class TL_documentAttributeAudio_layer45 extends TL_documentAttributeAudio {
+        private static final long serialVersionUID = 1029L;
         public static int constructor = 0xded218e0;
 
 
@@ -732,6 +774,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_botCallbackAnswer extends TLObject {
+        private static final long serialVersionUID = 1030L;
         public static int constructor = 0x1264f1c6;
 
         public int flags;
@@ -770,6 +813,7 @@ public class TLRPC {
     }
 
     public static class TL_contactStatus extends TLObject {
+        private static final long serialVersionUID = 1031L;
         public static int constructor = 0xd3680c61;
 
         public int user_id;
@@ -801,6 +845,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_authorization extends TLObject {
+        private static final long serialVersionUID = 1032L;
         public static int constructor = 0xff036af1;
 
         public User user;
@@ -829,6 +874,7 @@ public class TLRPC {
     }
 
     public static class messages_Messages extends TLObject {
+        private static final long serialVersionUID = 1033L;
         public ArrayList<Message> messages = new ArrayList<>();
         public ArrayList<Chat> chats = new ArrayList<>();
         public ArrayList<User> users = new ArrayList<>();
@@ -860,6 +906,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_messages extends messages_Messages {
+        private static final long serialVersionUID = 1034L;
         public static int constructor = 0x8c718e87;
 
 
@@ -935,6 +982,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_channelMessages extends messages_Messages {
+        private static final long serialVersionUID = 1035L;
         public static int constructor = 0x99262e37;
 
 
@@ -1016,6 +1064,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_messagesSlice extends messages_Messages {
+        private static final long serialVersionUID = 1036L;
         public static int constructor = 0xb446ae3;
 
 
@@ -1093,6 +1142,7 @@ public class TLRPC {
     }
 
     public static class help_AppChangelog extends TLObject {
+        private static final long serialVersionUID = 1037L;
         public String text;
 
         public static help_AppChangelog TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
@@ -1116,6 +1166,7 @@ public class TLRPC {
     }
 
     public static class TL_help_appChangelogEmpty extends help_AppChangelog {
+        private static final long serialVersionUID = 1038L;
         public static int constructor = 0xaf7e0394;
 
 
@@ -1125,6 +1176,7 @@ public class TLRPC {
     }
 
     public static class TL_help_appChangelog extends help_AppChangelog {
+        private static final long serialVersionUID = 1039L;
         public static int constructor = 0x4668e6bd;
 
 
@@ -1139,6 +1191,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_link extends TLObject {
+        private static final long serialVersionUID = 1040L;
         public static int constructor = 0x3ace484c;
 
         public ContactLink my_link;
@@ -1173,6 +1226,7 @@ public class TLRPC {
     }
 
     public static class EncryptedFile extends TLObject {
+        private static final long serialVersionUID = 1041L;
         public long id;
         public long access_hash;
         public int size;
@@ -1200,6 +1254,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedFile extends EncryptedFile {
+        private static final long serialVersionUID = 1042L;
         public static int constructor = 0x4a70994c;
 
 
@@ -1222,6 +1277,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedFileEmpty extends EncryptedFile {
+        private static final long serialVersionUID = 1043L;
         public static int constructor = 0xc21f497e;
 
 
@@ -1231,6 +1287,7 @@ public class TLRPC {
     }
 
     public static class Peer extends TLObject {
+        private static final long serialVersionUID = 1044L;
         public int channel_id;
         public int user_id;
         public int chat_id;
@@ -1259,6 +1316,7 @@ public class TLRPC {
     }
 
     public static class TL_peerChannel extends Peer {
+        private static final long serialVersionUID = 1045L;
         public static int constructor = 0xbddde532;
 
 
@@ -1273,6 +1331,7 @@ public class TLRPC {
     }
 
     public static class TL_peerUser extends Peer {
+        private static final long serialVersionUID = 1046L;
         public static int constructor = 0x9db1bc6d;
 
 
@@ -1287,6 +1346,7 @@ public class TLRPC {
     }
 
     public static class TL_peerChat extends Peer {
+        private static final long serialVersionUID = 1047L;
         public static int constructor = 0xbad0e5bb;
 
 
@@ -1301,6 +1361,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_affectedMessages extends TLObject {
+        private static final long serialVersionUID = 1048L;
         public static int constructor = 0x84d19185;
 
         public int pts;
@@ -1332,6 +1393,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_channelParticipant extends TLObject {
+        private static final long serialVersionUID = 1049L;
         public static int constructor = 0xd0d9b163;
 
         public ChannelParticipant participant;
@@ -1382,6 +1444,7 @@ public class TLRPC {
     }
 
     public static class TL_authorization extends TLObject {
+        private static final long serialVersionUID = 1050L;
         public static int constructor = 0x7bf2e6f6;
 
         public long hash;
@@ -1446,6 +1509,7 @@ public class TLRPC {
     }
 
     public static class updates_Difference extends TLObject {
+        private static final long serialVersionUID = 1051L;
         public int date;
         public int seq;
         public ArrayList<Message> new_messages = new ArrayList<>();
@@ -1480,6 +1544,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_differenceEmpty extends updates_Difference {
+        private static final long serialVersionUID = 1052L;
         public static int constructor = 0x5d75a138;
 
 
@@ -1496,6 +1561,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_differenceSlice extends updates_Difference {
+        private static final long serialVersionUID = 1053L;
         public static int constructor = 0xa8fb1981;
 
 
@@ -1615,6 +1681,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_difference extends updates_Difference {
+        private static final long serialVersionUID = 1054L;
         public static int constructor = 0xf49ca0;
 
 
@@ -1734,6 +1801,7 @@ public class TLRPC {
     }
 
     public static class PrivacyKey extends TLObject {
+        private static final long serialVersionUID = 1055L;
 
         public static PrivacyKey TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             PrivacyKey result = null;
@@ -1756,6 +1824,7 @@ public class TLRPC {
     }
 
     public static class TL_privacyKeyStatusTimestamp extends PrivacyKey {
+        private static final long serialVersionUID = 1056L;
         public static int constructor = 0xbc2eab30;
 
 
@@ -1765,6 +1834,7 @@ public class TLRPC {
     }
 
     public static class TL_privacyKeyChatInvite extends PrivacyKey {
+        private static final long serialVersionUID = 1057L;
         public static int constructor = 0x500e6dfa;
 
 
@@ -1774,6 +1844,7 @@ public class TLRPC {
     }
 
     public static class GeoPoint extends TLObject {
+        private static final long serialVersionUID = 1058L;
         public double _long;
         public double lat;
 
@@ -1798,6 +1869,7 @@ public class TLRPC {
     }
 
     public static class TL_geoPointEmpty extends GeoPoint {
+        private static final long serialVersionUID = 1059L;
         public static int constructor = 0x1117dd5f;
 
 
@@ -1807,6 +1879,7 @@ public class TLRPC {
     }
 
     public static class TL_geoPoint extends GeoPoint {
+        private static final long serialVersionUID = 1060L;
         public static int constructor = 0x2049d70c;
 
 
@@ -1823,6 +1896,7 @@ public class TLRPC {
     }
 
     public static class TL_account_privacyRules extends TLObject {
+        private static final long serialVersionUID = 1061L;
         public static int constructor = 0x554abb6f;
 
         public ArrayList<PrivacyRule> rules = new ArrayList<>();
@@ -1892,6 +1966,7 @@ public class TLRPC {
     }
 
     public static class ChatInvite extends TLObject {
+        private static final long serialVersionUID = 1062L;
         public int flags;
         public boolean channel;
         public boolean broadcast;
@@ -1921,6 +1996,7 @@ public class TLRPC {
     }
 
     public static class TL_chatInvite extends ChatInvite {
+        private static final long serialVersionUID = 1063L;
         public static int constructor = 0x93e99b60;
 
 
@@ -1945,6 +2021,7 @@ public class TLRPC {
     }
 
     public static class TL_chatInviteAlready extends ChatInvite {
+        private static final long serialVersionUID = 1064L;
         public static int constructor = 0x5a686d7c;
 
 
@@ -1959,6 +2036,7 @@ public class TLRPC {
     }
 
     public static class help_AppUpdate extends TLObject {
+        private static final long serialVersionUID = 1065L;
         public int id;
         public boolean critical;
         public String url;
@@ -1985,6 +2063,7 @@ public class TLRPC {
     }
 
     public static class TL_help_appUpdate extends help_AppUpdate {
+        private static final long serialVersionUID = 1066L;
         public static int constructor = 0x8987f311;
 
 
@@ -2005,6 +2084,7 @@ public class TLRPC {
     }
 
     public static class TL_help_noAppUpdate extends help_AppUpdate {
+        private static final long serialVersionUID = 1067L;
         public static int constructor = 0xc45a6536;
 
 
@@ -2014,6 +2094,7 @@ public class TLRPC {
     }
 
     public static class SendMessageAction extends TLObject {
+        private static final long serialVersionUID = 1068L;
         public int progress;
 
         public static SendMessageAction TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
@@ -2073,6 +2154,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageRecordAudioAction extends SendMessageAction {
+        private static final long serialVersionUID = 1069L;
         public static int constructor = 0xd52f73f7;
 
 
@@ -2082,6 +2164,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageUploadVideoAction_old extends TL_sendMessageUploadVideoAction {
+        private static final long serialVersionUID = 1070L;
         public static int constructor = 0x92042ff7;
 
 
@@ -2094,6 +2177,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageUploadAudioAction_old extends TL_sendMessageUploadAudioAction {
+        private static final long serialVersionUID = 1071L;
         public static int constructor = 0xe6ac8a6f;
 
 
@@ -2106,6 +2190,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageUploadAudioAction extends SendMessageAction {
+        private static final long serialVersionUID = 1072L;
         public static int constructor = 0xf351d7ab;
 
 
@@ -2120,6 +2205,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageUploadPhotoAction extends SendMessageAction {
+        private static final long serialVersionUID = 1073L;
         public static int constructor = 0xd1d34a26;
 
 
@@ -2134,6 +2220,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageUploadDocumentAction_old extends TL_sendMessageUploadDocumentAction {
+        private static final long serialVersionUID = 1074L;
         public static int constructor = 0x8faee98e;
 
 
@@ -2146,6 +2233,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageUploadVideoAction extends SendMessageAction {
+        private static final long serialVersionUID = 1075L;
         public static int constructor = 0xe9763aec;
 
 
@@ -2160,6 +2248,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageCancelAction extends SendMessageAction {
+        private static final long serialVersionUID = 1076L;
         public static int constructor = 0xfd5ec8f5;
 
 
@@ -2169,6 +2258,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageGeoLocationAction extends SendMessageAction {
+        private static final long serialVersionUID = 1077L;
         public static int constructor = 0x176f8ba1;
 
 
@@ -2178,6 +2268,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageChooseContactAction extends SendMessageAction {
+        private static final long serialVersionUID = 1078L;
         public static int constructor = 0x628cbc6f;
 
 
@@ -2187,6 +2278,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageTypingAction extends SendMessageAction {
+        private static final long serialVersionUID = 1079L;
         public static int constructor = 0x16bf744e;
 
 
@@ -2196,6 +2288,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageUploadPhotoAction_old extends TL_sendMessageUploadPhotoAction {
+        private static final long serialVersionUID = 1080L;
         public static int constructor = 0x990a3c1a;
 
 
@@ -2208,6 +2301,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageUploadDocumentAction extends SendMessageAction {
+        private static final long serialVersionUID = 1081L;
         public static int constructor = 0xaa0cd9e4;
 
 
@@ -2222,6 +2316,7 @@ public class TLRPC {
     }
 
     public static class TL_sendMessageRecordVideoAction extends SendMessageAction {
+        private static final long serialVersionUID = 1082L;
         public static int constructor = 0xa187d66f;
 
 
@@ -2231,6 +2326,7 @@ public class TLRPC {
     }
 
     public static class auth_SentCodeType extends TLObject {
+        private static final long serialVersionUID = 1083L;
         public int length;
         public String pattern;
 
@@ -2261,6 +2357,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_sentCodeTypeApp extends auth_SentCodeType {
+        private static final long serialVersionUID = 1084L;
         public static int constructor = 0x3dbb5986;
 
 
@@ -2275,6 +2372,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_sentCodeTypeCall extends auth_SentCodeType {
+        private static final long serialVersionUID = 1085L;
         public static int constructor = 0x5353e5a7;
 
 
@@ -2289,6 +2387,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_sentCodeTypeFlashCall extends auth_SentCodeType {
+        private static final long serialVersionUID = 1086L;
         public static int constructor = 0xab03c6d9;
 
 
@@ -2303,6 +2402,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_sentCodeTypeSms extends auth_SentCodeType {
+        private static final long serialVersionUID = 1087L;
         public static int constructor = 0xc000bba2;
 
 
@@ -2317,6 +2417,7 @@ public class TLRPC {
     }
 
     public static class TL_peerSettings extends TLObject {
+        private static final long serialVersionUID = 1088L;
         public static int constructor = 0x818426cd;
 
         public int flags;
@@ -2348,6 +2449,7 @@ public class TLRPC {
     }
 
     public static class FoundGif extends TLObject {
+        private static final long serialVersionUID = 1089L;
         public String url;
         public Photo photo;
         public Document document;
@@ -2378,6 +2480,7 @@ public class TLRPC {
     }
 
     public static class TL_foundGifCached extends FoundGif {
+        private static final long serialVersionUID = 1090L;
         public static int constructor = 0x9c750409;
 
 
@@ -2396,6 +2499,7 @@ public class TLRPC {
     }
 
     public static class TL_foundGif extends FoundGif {
+        private static final long serialVersionUID = 1091L;
         public static int constructor = 0x162ecc1f;
 
 
@@ -2420,6 +2524,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPhoneContact extends TLObject {
+        private static final long serialVersionUID = 1092L;
         public static int constructor = 0xf392b7f4;
 
         public long client_id;
@@ -2457,6 +2562,7 @@ public class TLRPC {
     }
 
     public static class PrivacyRule extends TLObject {
+        private static final long serialVersionUID = 1093L;
         public ArrayList<Integer> users = new ArrayList<>();
 
         public static PrivacyRule TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
@@ -2492,6 +2598,7 @@ public class TLRPC {
     }
 
     public static class TL_privacyValueAllowUsers extends PrivacyRule {
+        private static final long serialVersionUID = 1094L;
         public static int constructor = 0x4d5bbe0c;
 
 
@@ -2521,6 +2628,7 @@ public class TLRPC {
     }
 
     public static class TL_privacyValueDisallowAll extends PrivacyRule {
+        private static final long serialVersionUID = 1095L;
         public static int constructor = 0x8b73e763;
 
 
@@ -2530,6 +2638,7 @@ public class TLRPC {
     }
 
     public static class TL_privacyValueAllowContacts extends PrivacyRule {
+        private static final long serialVersionUID = 1096L;
         public static int constructor = 0xfffe1bac;
 
 
@@ -2539,6 +2648,7 @@ public class TLRPC {
     }
 
     public static class TL_privacyValueDisallowContacts extends PrivacyRule {
+        private static final long serialVersionUID = 1097L;
         public static int constructor = 0xf888fa1a;
 
 
@@ -2548,6 +2658,7 @@ public class TLRPC {
     }
 
     public static class TL_privacyValueAllowAll extends PrivacyRule {
+        private static final long serialVersionUID = 1098L;
         public static int constructor = 0x65427b82;
 
 
@@ -2557,6 +2668,7 @@ public class TLRPC {
     }
 
     public static class TL_privacyValueDisallowUsers extends PrivacyRule {
+        private static final long serialVersionUID = 1099L;
         public static int constructor = 0xc7f49b7;
 
 
@@ -2586,6 +2698,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaUnsupported_old extends TL_messageMediaUnsupported {
+        private static final long serialVersionUID = 1100L;
         public static int constructor = 0x29632a36;
 
 
@@ -2600,6 +2713,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaAudio_layer45 extends MessageMedia {
+        private static final long serialVersionUID = 1101L;
         public static int constructor = 0xc6b68300;
 
 
@@ -2614,6 +2728,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaPhoto_old extends TL_messageMediaPhoto {
+        private static final long serialVersionUID = 1102L;
         public static int constructor = 0xc8c45a2a;
 
 
@@ -2628,6 +2743,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaUnsupported extends MessageMedia {
+        private static final long serialVersionUID = 1103L;
         public static int constructor = 0x9f84f49e;
 
 
@@ -2637,6 +2753,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaEmpty extends MessageMedia {
+        private static final long serialVersionUID = 1104L;
         public static int constructor = 0x3ded6320;
 
 
@@ -2646,6 +2763,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaVenue extends MessageMedia {
+        private static final long serialVersionUID = 1105L;
         public static int constructor = 0x7912b71f;
 
 
@@ -2668,6 +2786,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaVideo_old extends TL_messageMediaVideo_layer45 {
+        private static final long serialVersionUID = 1106L;
         public static int constructor = 0xa2d24290;
 
 
@@ -2682,6 +2801,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaDocument_old extends TL_messageMediaDocument {
+        private static final long serialVersionUID = 1107L;
         public static int constructor = 0x2fda2204;
 
 
@@ -2696,6 +2816,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaDocument extends MessageMedia {
+        private static final long serialVersionUID = 1108L;
         public static int constructor = 0xf3e02ea8;
 
 
@@ -2712,6 +2833,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaContact extends MessageMedia {
+        private static final long serialVersionUID = 1109L;
         public static int constructor = 0x5e7d2f39;
 
 
@@ -2732,6 +2854,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaPhoto extends MessageMedia {
+        private static final long serialVersionUID = 1110L;
         public static int constructor = 0x3d8ce53d;
 
 
@@ -2748,6 +2871,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaVideo_layer45 extends MessageMedia {
+        private static final long serialVersionUID = 1111L;
         public static int constructor = 0x5bcf1675;
 
 
@@ -2764,6 +2888,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaGeo extends MessageMedia {
+        private static final long serialVersionUID = 1112L;
         public static int constructor = 0x56e0d474;
 
 
@@ -2778,6 +2903,7 @@ public class TLRPC {
     }
 
     public static class TL_messageMediaWebPage extends MessageMedia {
+        private static final long serialVersionUID = 1113L;
         public static int constructor = 0xa32dd600;
 
 
@@ -2792,6 +2918,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_sentCode extends TLObject {
+        private static final long serialVersionUID = 1114L;
         public static int constructor = 0x5e002502;
 
         public int flags;
@@ -2843,6 +2970,7 @@ public class TLRPC {
     }
 
     public static class BotInlineResult extends TLObject {
+        private static final long serialVersionUID = 1115L;
         public int flags;
         public String id;
         public String type;
@@ -2881,6 +3009,7 @@ public class TLRPC {
     }
 
     public static class TL_botInlineResult extends BotInlineResult {
+        private static final long serialVersionUID = 1116L;
         public static int constructor = 0x9bebaeb9;
 
 
@@ -2955,6 +3084,7 @@ public class TLRPC {
     }
 
     public static class TL_botInlineMediaResult extends BotInlineResult {
+        private static final long serialVersionUID = 1117L;
         public static int constructor = 0x17db940b;
 
 
@@ -2999,6 +3129,7 @@ public class TLRPC {
     }
 
     public static class PeerNotifySettings extends TLObject {
+        private static final long serialVersionUID = 1118L;
         public int flags;
         public boolean silent;
         public int mute_until;
@@ -3029,6 +3160,7 @@ public class TLRPC {
     }
 
     public static class TL_peerNotifySettings extends PeerNotifySettings {
+        private static final long serialVersionUID = 1119L;
         public static int constructor = 0x9acda4c0;
 
         public boolean show_previews;
@@ -3052,6 +3184,7 @@ public class TLRPC {
     }
 
     public static class TL_peerNotifySettings_layer47 extends TL_peerNotifySettings {
+        private static final long serialVersionUID = 1120L;
         public static int constructor = 0x8d5e11ee;
 
         public boolean show_previews;
@@ -3073,6 +3206,7 @@ public class TLRPC {
     }
 
     public static class TL_peerNotifySettingsEmpty extends PeerNotifySettings {
+        private static final long serialVersionUID = 1121L;
         public static int constructor = 0x70a68512;
 
 
@@ -3082,6 +3216,7 @@ public class TLRPC {
     }
 
     public static class contacts_Blocked extends TLObject {
+        private static final long serialVersionUID = 1122L;
         public ArrayList<TL_contactBlocked> blocked = new ArrayList<>();
         public ArrayList<User> users = new ArrayList<>();
         public int count;
@@ -3107,6 +3242,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_blocked extends contacts_Blocked {
+        private static final long serialVersionUID = 1123L;
         public static int constructor = 0x1c138d15;
 
 
@@ -3161,6 +3297,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_blockedSlice extends contacts_Blocked {
+        private static final long serialVersionUID = 1124L;
         public static int constructor = 0x900802a1;
 
 
@@ -3217,6 +3354,7 @@ public class TLRPC {
     }
 
     public static class messages_DhConfig extends TLObject {
+        private static final long serialVersionUID = 1125L;
         public byte[] random;
         public int g;
         public byte[] p;
@@ -3243,6 +3381,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_dhConfigNotModified extends messages_DhConfig {
+        private static final long serialVersionUID = 1126L;
         public static int constructor = 0xc0e24635;
 
 
@@ -3257,6 +3396,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_dhConfig extends messages_DhConfig {
+        private static final long serialVersionUID = 1127L;
         public static int constructor = 0x2c221edd;
 
 
@@ -3277,6 +3417,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_stickerSet extends TLObject {
+        private static final long serialVersionUID = 1128L;
         public static int constructor = 0xb60a24a6;
 
         public StickerSet set;
@@ -3349,6 +3490,7 @@ public class TLRPC {
     }
 
     public static class InputGeoPoint extends TLObject {
+        private static final long serialVersionUID = 1129L;
         public double lat;
         public double _long;
 
@@ -3373,6 +3515,7 @@ public class TLRPC {
     }
 
     public static class TL_inputGeoPoint extends InputGeoPoint {
+        private static final long serialVersionUID = 1130L;
         public static int constructor = 0xf3b7acc9;
 
 
@@ -3389,6 +3532,7 @@ public class TLRPC {
     }
 
     public static class TL_inputGeoPointEmpty extends InputGeoPoint {
+        private static final long serialVersionUID = 1131L;
         public static int constructor = 0xe4c123d6;
 
 
@@ -3398,6 +3542,7 @@ public class TLRPC {
     }
 
     public static class TL_help_inviteText extends TLObject {
+        private static final long serialVersionUID = 1132L;
         public static int constructor = 0x18cb9f78;
 
         public String message;
@@ -3426,6 +3571,7 @@ public class TLRPC {
     }
 
     public static class Audio extends TLObject {
+        private static final long serialVersionUID = 1133L;
         public long id;
         public long access_hash;
         public int date;
@@ -3467,6 +3613,7 @@ public class TLRPC {
     }
 
     public static class TL_audioEmpty_layer45 extends Audio {
+        private static final long serialVersionUID = 1134L;
         public static int constructor = 0x586988d8;
 
 
@@ -3481,6 +3628,7 @@ public class TLRPC {
     }
 
     public static class TL_audio_layer45 extends Audio {
+        private static final long serialVersionUID = 1135L;
         public static int constructor = 0xf9e35055;
 
 
@@ -3507,6 +3655,7 @@ public class TLRPC {
     }
 
     public static class TL_audio_old extends TL_audio_layer45 {
+        private static final long serialVersionUID = 1136L;
         public static int constructor = 0x427425e7;
 
 
@@ -3533,6 +3682,7 @@ public class TLRPC {
     }
 
     public static class TL_audioEncrypted extends TL_audio_layer45 {
+        private static final long serialVersionUID = 1137L;
         public static int constructor = 0x555555F6;
 
 
@@ -3563,6 +3713,7 @@ public class TLRPC {
     }
 
     public static class TL_audio_old2 extends TL_audio_layer45 {
+        private static final long serialVersionUID = 1138L;
         public static int constructor = 0xc7ac6496;
 
 
@@ -3591,6 +3742,7 @@ public class TLRPC {
     }
 
     public static class BotInfo extends TLObject {
+        private static final long serialVersionUID = 1139L;
         public int user_id;
         public String description;
         public ArrayList<TL_botCommand> commands = new ArrayList<>();
@@ -3620,6 +3772,7 @@ public class TLRPC {
     }
 
     public static class TL_botInfoEmpty_layer48 extends TL_botInfo {
+        private static final long serialVersionUID = 1140L;
         public static int constructor = 0xbb2e37ce;
 
 
@@ -3629,6 +3782,7 @@ public class TLRPC {
     }
 
     public static class TL_botInfo extends BotInfo {
+        private static final long serialVersionUID = 1141L;
         public static int constructor = 0x98e81d3a;
 
 
@@ -3666,6 +3820,7 @@ public class TLRPC {
     }
 
     public static class TL_botInfo_layer48 extends TL_botInfo {
+        private static final long serialVersionUID = 1142L;
         public static int constructor = 0x9cf585d;
 
 
@@ -3707,6 +3862,7 @@ public class TLRPC {
     }
 
     public static class ReplyMarkup extends TLObject {
+        private static final long serialVersionUID = 1143L;
         public ArrayList<TL_keyboardButtonRow> rows = new ArrayList<>();
         public int flags;
         public boolean selective;
@@ -3740,6 +3896,7 @@ public class TLRPC {
     }
 
     public static class TL_replyInlineMarkup extends ReplyMarkup {
+        private static final long serialVersionUID = 1144L;
         public static int constructor = 0x48a30254;
 
 
@@ -3773,6 +3930,7 @@ public class TLRPC {
     }
 
     public static class TL_replyKeyboardHide extends ReplyMarkup {
+        private static final long serialVersionUID = 1145L;
         public static int constructor = 0xa03e5b85;
 
 
@@ -3789,6 +3947,7 @@ public class TLRPC {
     }
 
     public static class TL_replyKeyboardForceReply extends ReplyMarkup {
+        private static final long serialVersionUID = 1146L;
         public static int constructor = 0xf4108aa0;
 
 
@@ -3807,6 +3966,7 @@ public class TLRPC {
     }
 
     public static class TL_replyKeyboardMarkup extends ReplyMarkup {
+        private static final long serialVersionUID = 1147L;
         public static int constructor = 0x3502758c;
 
 
@@ -3848,6 +4008,7 @@ public class TLRPC {
     }
 
     public static class contacts_Contacts extends TLObject {
+        private static final long serialVersionUID = 1148L;
         public ArrayList<TL_contact> contacts = new ArrayList<>();
         public ArrayList<User> users = new ArrayList<>();
 
@@ -3872,6 +4033,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_contactsNotModified extends contacts_Contacts {
+        private static final long serialVersionUID = 1149L;
         public static int constructor = 0xb74ba9d2;
 
 
@@ -3881,6 +4043,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_contacts extends contacts_Contacts {
+        private static final long serialVersionUID = 1150L;
         public static int constructor = 0x6f8b8cb2;
 
 
@@ -3935,6 +4098,7 @@ public class TLRPC {
     }
 
     public static class InputPrivacyKey extends TLObject {
+        private static final long serialVersionUID = 1151L;
 
         public static InputPrivacyKey TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             InputPrivacyKey result = null;
@@ -3957,6 +4121,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPrivacyKeyChatInvite extends InputPrivacyKey {
+        private static final long serialVersionUID = 1152L;
         public static int constructor = 0xbdfb0426;
 
 
@@ -3966,6 +4131,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPrivacyKeyStatusTimestamp extends InputPrivacyKey {
+        private static final long serialVersionUID = 1153L;
         public static int constructor = 0x4f96cb18;
 
 
@@ -3975,6 +4141,7 @@ public class TLRPC {
     }
 
     public static class photos_Photos extends TLObject {
+        private static final long serialVersionUID = 1154L;
         public ArrayList<Photo> photos = new ArrayList<>();
         public ArrayList<User> users = new ArrayList<>();
         public int count;
@@ -4000,6 +4167,7 @@ public class TLRPC {
     }
 
     public static class TL_photos_photos extends photos_Photos {
+        private static final long serialVersionUID = 1155L;
         public static int constructor = 0x8dca6aa5;
 
 
@@ -4054,6 +4222,7 @@ public class TLRPC {
     }
 
     public static class TL_photos_photosSlice extends photos_Photos {
+        private static final long serialVersionUID = 1156L;
         public static int constructor = 0x15051f54;
 
 
@@ -4110,6 +4279,7 @@ public class TLRPC {
     }
 
     public static class ChatFull extends TLObject {
+        private static final long serialVersionUID = 1157L;
         public int flags;
         public boolean can_view_participants;
         public boolean can_set_username;
@@ -4160,6 +4330,7 @@ public class TLRPC {
     }
 
     public static class TL_channelFull extends ChatFull {
+        private static final long serialVersionUID = 1158L;
         public static int constructor = 0xc3d5512f;
 
 
@@ -4251,6 +4422,7 @@ public class TLRPC {
     }
 
     public static class TL_channelFull_layer52 extends TL_channelFull {
+        private static final long serialVersionUID = 1159L;
         public static int constructor = 0x97bee562;
 
 
@@ -4342,6 +4514,7 @@ public class TLRPC {
     }
 
     public static class TL_chatFull extends ChatFull {
+        private static final long serialVersionUID = 1160L;
         public static int constructor = 0x2e02a614;
 
 
@@ -4385,6 +4558,7 @@ public class TLRPC {
     }
 
     public static class TL_channelFull_layer48 extends TL_channelFull {
+        private static final long serialVersionUID = 1161L;
         public static int constructor = 0x9e341ddf;
 
 
@@ -4468,6 +4642,7 @@ public class TLRPC {
     }
 
     public static class TL_channelFull_old extends TL_channelFull {
+        private static final long serialVersionUID = 1162L;
         public static int constructor = 0xfab31aa3;
 
 
@@ -4518,6 +4693,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPeerNotifySettings extends TLObject {
+        private static final long serialVersionUID = 1163L;
         public static int constructor = 0x38935eb2;
 
         public int flags;
@@ -4558,6 +4734,7 @@ public class TLRPC {
     }
 
     public static class TL_null extends TLObject {
+        private static final long serialVersionUID = 1164L;
         public static int constructor = 0x56730bcc;
 
 
@@ -4580,6 +4757,7 @@ public class TLRPC {
     }
 
     public static class TL_topPeerCategoryPeers extends TLObject {
+        private static final long serialVersionUID = 1165L;
         public static int constructor = 0xfb834291;
 
         public TopPeerCategory category;
@@ -4633,6 +4811,7 @@ public class TLRPC {
     }
 
     public static class InputUser extends TLObject {
+        private static final long serialVersionUID = 1166L;
         public int user_id;
         public long access_hash;
 
@@ -4660,6 +4839,7 @@ public class TLRPC {
     }
 
     public static class TL_inputUserEmpty extends InputUser {
+        private static final long serialVersionUID = 1167L;
         public static int constructor = 0xb98886cf;
 
 
@@ -4669,6 +4849,7 @@ public class TLRPC {
     }
 
     public static class TL_inputUserSelf extends InputUser {
+        private static final long serialVersionUID = 1168L;
         public static int constructor = 0xf7c1b13f;
 
 
@@ -4678,6 +4859,7 @@ public class TLRPC {
     }
 
     public static class TL_inputUser extends InputUser {
+        private static final long serialVersionUID = 1169L;
         public static int constructor = 0xd8292816;
 
 
@@ -4694,6 +4876,7 @@ public class TLRPC {
     }
 
     public static class KeyboardButton extends TLObject {
+        private static final long serialVersionUID = 1170L;
         public String text;
         public String query;
         public byte[] data;
@@ -4732,6 +4915,7 @@ public class TLRPC {
     }
 
     public static class TL_keyboardButton extends KeyboardButton {
+        private static final long serialVersionUID = 1171L;
         public static int constructor = 0xa2fa4880;
 
 
@@ -4746,6 +4930,7 @@ public class TLRPC {
     }
 
     public static class TL_keyboardButtonSwitchInline extends KeyboardButton {
+        private static final long serialVersionUID = 1172L;
         public static int constructor = 0xea1b7a14;
 
 
@@ -4762,6 +4947,7 @@ public class TLRPC {
     }
 
     public static class TL_keyboardButtonRequestPhone extends KeyboardButton {
+        private static final long serialVersionUID = 1173L;
         public static int constructor = 0xb16a6c29;
 
 
@@ -4776,6 +4962,7 @@ public class TLRPC {
     }
 
     public static class TL_keyboardButtonCallback extends KeyboardButton {
+        private static final long serialVersionUID = 1174L;
         public static int constructor = 0x683a5e46;
 
 
@@ -4792,6 +4979,7 @@ public class TLRPC {
     }
 
     public static class TL_keyboardButtonUrl extends KeyboardButton {
+        private static final long serialVersionUID = 1175L;
         public static int constructor = 0x258aff05;
 
 
@@ -4808,6 +4996,7 @@ public class TLRPC {
     }
 
     public static class TL_keyboardButtonRequestGeoLocation extends KeyboardButton {
+        private static final long serialVersionUID = 1176L;
         public static int constructor = 0xfc796b3f;
 
 
@@ -4822,6 +5011,7 @@ public class TLRPC {
     }
 
     public static class BotInlineMessage extends TLObject {
+        private static final long serialVersionUID = 1177L;
         public int flags;
         public GeoPoint geo;
         public ReplyMarkup reply_markup;
@@ -4867,6 +5057,7 @@ public class TLRPC {
     }
 
     public static class TL_botInlineMessageMediaGeo extends BotInlineMessage {
+        private static final long serialVersionUID = 1178L;
         public static int constructor = 0x3a8fd8b8;
 
 
@@ -4889,6 +5080,7 @@ public class TLRPC {
     }
 
     public static class TL_botInlineMessageMediaAuto extends BotInlineMessage {
+        private static final long serialVersionUID = 1179L;
         public static int constructor = 0xa74b15b;
 
 
@@ -4911,6 +5103,7 @@ public class TLRPC {
     }
 
     public static class TL_botInlineMessageText extends BotInlineMessage {
+        private static final long serialVersionUID = 1180L;
         public static int constructor = 0x8c7f65e2;
 
 
@@ -4960,6 +5153,7 @@ public class TLRPC {
     }
 
     public static class TL_botInlineMessageMediaContact extends BotInlineMessage {
+        private static final long serialVersionUID = 1181L;
         public static int constructor = 0x35edb4d4;
 
 
@@ -4986,6 +5180,7 @@ public class TLRPC {
     }
 
     public static class TL_botInlineMessageMediaVenue extends BotInlineMessage {
+        private static final long serialVersionUID = 1182L;
         public static int constructor = 0x4366232e;
 
 
@@ -5016,6 +5211,7 @@ public class TLRPC {
     }
 
     public static class TL_keyboardButtonRow extends TLObject {
+        private static final long serialVersionUID = 1183L;
         public static int constructor = 0x77608b83;
 
         public ArrayList<KeyboardButton> buttons = new ArrayList<>();
@@ -5063,6 +5259,7 @@ public class TLRPC {
     }
 
     public static class Bool extends TLObject {
+        private static final long serialVersionUID = 1184L;
 
         public static Bool TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             Bool result = null;
@@ -5085,6 +5282,7 @@ public class TLRPC {
     }
 
     public static class TL_boolTrue extends Bool {
+        private static final long serialVersionUID = 1185L;
         public static int constructor = 0x997275b5;
 
 
@@ -5094,6 +5292,7 @@ public class TLRPC {
     }
 
     public static class TL_boolFalse extends Bool {
+        private static final long serialVersionUID = 1186L;
         public static int constructor = 0xbc799737;
 
 
@@ -5103,6 +5302,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_exportedAuthorization extends TLObject {
+        private static final long serialVersionUID = 1187L;
         public static int constructor = 0xdf969c2d;
 
         public int id;
@@ -5134,6 +5334,7 @@ public class TLRPC {
     }
 
     public static class WebPage extends TLObject {
+        private static final long serialVersionUID = 1188L;
         public int flags;
         public long id;
         public String url;
@@ -5182,6 +5383,7 @@ public class TLRPC {
     }
 
     public static class TL_webPagePending extends WebPage {
+        private static final long serialVersionUID = 1189L;
         public static int constructor = 0xc586da1c;
 
 
@@ -5198,6 +5400,7 @@ public class TLRPC {
     }
 
     public static class TL_webPageEmpty extends WebPage {
+        private static final long serialVersionUID = 1190L;
         public static int constructor = 0xeb1477e8;
 
 
@@ -5212,6 +5415,7 @@ public class TLRPC {
     }
 
     public static class TL_webPageUrlPending extends WebPage {
+        private static final long serialVersionUID = 1191L;
         public static int constructor = 0xd41a5167;
 
 
@@ -5226,6 +5430,7 @@ public class TLRPC {
     }
 
     public static class TL_webPage_old extends WebPage {
+        private static final long serialVersionUID = 1192L;
         public static int constructor = 0xa31ea0b5;
 
 
@@ -5312,6 +5517,7 @@ public class TLRPC {
     }
 
     public static class TL_webPage extends WebPage {
+        private static final long serialVersionUID = 1193L;
         public static int constructor = 0xca820ed7;
 
 
@@ -5404,6 +5610,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_passwordRecovery extends TLObject {
+        private static final long serialVersionUID = 1194L;
         public static int constructor = 0x137948a5;
 
         public String email_pattern;
@@ -5432,6 +5639,7 @@ public class TLRPC {
     }
 
     public static class TL_botCommand extends TLObject {
+        private static final long serialVersionUID = 1195L;
         public static int constructor = 0xc27ac8c7;
 
         public String command;
@@ -5463,6 +5671,7 @@ public class TLRPC {
     }
 
     public static class InputNotifyPeer extends TLObject {
+        private static final long serialVersionUID = 1196L;
 
         public static InputNotifyPeer TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             InputNotifyPeer result = null;
@@ -5494,6 +5703,7 @@ public class TLRPC {
     }
 
     public static class TL_inputNotifyChats extends InputNotifyPeer {
+        private static final long serialVersionUID = 1197L;
         public static int constructor = 0x4a95e84e;
 
 
@@ -5503,6 +5713,7 @@ public class TLRPC {
     }
 
     public static class TL_inputNotifyPeer extends InputNotifyPeer {
+        private static final long serialVersionUID = 1198L;
         public static int constructor = 0xb8bc5b0c;
 
         public InputPeer peer;
@@ -5518,6 +5729,7 @@ public class TLRPC {
     }
 
     public static class TL_inputNotifyUsers extends InputNotifyPeer {
+        private static final long serialVersionUID = 1199L;
         public static int constructor = 0x193b4417;
 
 
@@ -5527,6 +5739,7 @@ public class TLRPC {
     }
 
     public static class TL_inputNotifyGeoChatPeer extends InputNotifyPeer {
+        private static final long serialVersionUID = 1200L;
         public static int constructor = 0x4d8ddec8;
 
         public TL_inputGeoChat peer;
@@ -5542,6 +5755,7 @@ public class TLRPC {
     }
 
     public static class TL_inputNotifyAll extends InputNotifyPeer {
+        private static final long serialVersionUID = 1201L;
         public static int constructor = 0xa429b886;
 
 
@@ -5551,6 +5765,7 @@ public class TLRPC {
     }
 
     public static class InputFileLocation extends TLObject {
+        private static final long serialVersionUID = 1202L;
         public long id;
         public long access_hash;
         public long volume_id;
@@ -5578,9 +5793,23 @@ public class TLRPC {
             }
             return result;
         }
+
+        @Override
+        public String toString() {
+            return "InputFileLocation{" +
+                    "id=" + id +
+                    ", access_hash=" + access_hash +
+                    ", volume_id=" + volume_id +
+                    ", local_id=" + local_id +
+                    ", secret=" + secret +
+                    '}';
+        }
+
+
     }
 
     public static class TL_inputEncryptedFileLocation extends InputFileLocation {
+        private static final long serialVersionUID = 1203L;
         public static int constructor = 0xf5235d55;
 
 
@@ -5597,6 +5826,7 @@ public class TLRPC {
     }
 
     public static class TL_inputDocumentFileLocation extends InputFileLocation {
+        private static final long serialVersionUID = 1204L;
         public static int constructor = 0x4e45abe9;
 
 
@@ -5613,6 +5843,7 @@ public class TLRPC {
     }
 
     public static class TL_inputFileLocation extends InputFileLocation {
+        private static final long serialVersionUID = 1205L;
         public static int constructor = 0x14637196;
 
 
@@ -5631,6 +5862,7 @@ public class TLRPC {
     }
 
     public static class TL_photos_photo extends TLObject {
+        private static final long serialVersionUID = 1206L;
         public static int constructor = 0x20212ca8;
 
         public Photo photo;
@@ -5681,6 +5913,7 @@ public class TLRPC {
     }
 
     public static class User extends TLObject {
+        private static final long serialVersionUID = 1207L;
         public int id;
         public String first_name;
         public String last_name;
@@ -5795,6 +6028,7 @@ public class TLRPC {
     }
 
     public static class TL_userContact_old2 extends User {
+        private static final long serialVersionUID = 1208L;
         public static int constructor = 0xcab35e18;
 
 
@@ -5823,6 +6057,7 @@ public class TLRPC {
     }
 
     public static class TL_userContact_old extends TL_userContact_old2 {
+        private static final long serialVersionUID = 1209L;
         public static int constructor = 0xf2fb8319;
 
 
@@ -5849,6 +6084,7 @@ public class TLRPC {
     }
 
     public static class TL_userSelf_old extends TL_userSelf_old3 {
+        private static final long serialVersionUID = 1210L;
         public static int constructor = 0x720535ec;
 
 
@@ -5875,6 +6111,7 @@ public class TLRPC {
     }
 
     public static class TL_userSelf_old3 extends User {
+        private static final long serialVersionUID = 1211L;
         public static int constructor = 0x1c60e608;
 
 
@@ -5901,6 +6138,7 @@ public class TLRPC {
     }
 
     public static class TL_userDeleted_old2 extends User {
+        private static final long serialVersionUID = 1212L;
         public static int constructor = 0xd6016d7a;
 
 
@@ -5921,6 +6159,7 @@ public class TLRPC {
     }
 
     public static class TL_userEmpty extends User {
+        private static final long serialVersionUID = 1213L;
         public static int constructor = 0x200250ba;
 
 
@@ -5935,6 +6174,7 @@ public class TLRPC {
     }
 
     public static class TL_userRequest_old extends TL_userRequest_old2 {
+        private static final long serialVersionUID = 1214L;
         public static int constructor = 0x22e8ceb0;
 
 
@@ -5961,6 +6201,7 @@ public class TLRPC {
     }
 
     public static class TL_userForeign_old extends TL_userForeign_old2 {
+        private static final long serialVersionUID = 1215L;
         public static int constructor = 0x5214c89d;
 
 
@@ -5985,6 +6226,7 @@ public class TLRPC {
     }
 
     public static class TL_userForeign_old2 extends User {
+        private static final long serialVersionUID = 1216L;
         public static int constructor = 0x75cf7a8;
 
 
@@ -6011,6 +6253,7 @@ public class TLRPC {
     }
 
     public static class TL_userRequest_old2 extends User {
+        private static final long serialVersionUID = 1217L;
         public static int constructor = 0xd9ccc4ef;
 
 
@@ -6039,6 +6282,7 @@ public class TLRPC {
     }
 
     public static class TL_userDeleted_old extends TL_userDeleted_old2 {
+        private static final long serialVersionUID = 1218L;
         public static int constructor = 0xb29ad7cc;
 
 
@@ -6057,6 +6301,7 @@ public class TLRPC {
     }
 
     public static class TL_userSelf_old2 extends TL_userSelf_old3 {
+        private static final long serialVersionUID = 1219L;
         public static int constructor = 0x7007b451;
 
 
@@ -6085,6 +6330,7 @@ public class TLRPC {
     }
 
     public static class TL_user_old extends TL_user {
+        private static final long serialVersionUID = 1220L;
         public static int constructor = 0x22e49072;
 
 
@@ -6167,6 +6413,7 @@ public class TLRPC {
     }
 
     public static class TL_user extends User {
+        private static final long serialVersionUID = 1221L;
         public static int constructor = 0xd10d979a;
 
 
@@ -6265,6 +6512,7 @@ public class TLRPC {
     }
 
     public static class ChannelParticipantRole extends TLObject {
+        private static final long serialVersionUID = 1222L;
 
         public static ChannelParticipantRole TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             ChannelParticipantRole result = null;
@@ -6290,6 +6538,7 @@ public class TLRPC {
     }
 
     public static class TL_channelRoleEditor extends ChannelParticipantRole {
+        private static final long serialVersionUID = 1223L;
         public static int constructor = 0x820bfe8c;
 
 
@@ -6299,6 +6548,7 @@ public class TLRPC {
     }
 
     public static class TL_channelRoleEmpty extends ChannelParticipantRole {
+        private static final long serialVersionUID = 1224L;
         public static int constructor = 0xb285a0c6;
 
 
@@ -6308,6 +6558,7 @@ public class TLRPC {
     }
 
     public static class TL_channelRoleModerator extends ChannelParticipantRole {
+        private static final long serialVersionUID = 1225L;
         public static int constructor = 0x9618d975;
 
 
@@ -6317,6 +6568,7 @@ public class TLRPC {
     }
 
     public static class ChannelParticipantsFilter extends TLObject {
+        private static final long serialVersionUID = 1226L;
 
         public static ChannelParticipantsFilter TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             ChannelParticipantsFilter result = null;
@@ -6345,6 +6597,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipantsAdmins extends ChannelParticipantsFilter {
+        private static final long serialVersionUID = 1227L;
         public static int constructor = 0xb4608969;
 
 
@@ -6354,6 +6607,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipantsRecent extends ChannelParticipantsFilter {
+        private static final long serialVersionUID = 1228L;
         public static int constructor = 0xde3f3c79;
 
 
@@ -6363,6 +6617,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipantsKicked extends ChannelParticipantsFilter {
+        private static final long serialVersionUID = 1229L;
         public static int constructor = 0x3c37bb7a;
 
 
@@ -6372,6 +6627,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipantsBots extends ChannelParticipantsFilter {
+        private static final long serialVersionUID = 1230L;
         public static int constructor = 0xb0d1865b;
 
 
@@ -6381,6 +6637,7 @@ public class TLRPC {
     }
 
     public static class GeoChatMessage extends TLObject {
+        private static final long serialVersionUID = 1231L;
         public int chat_id;
         public int id;
         public int from_id;
@@ -6413,6 +6670,7 @@ public class TLRPC {
     }
 
     public static class TL_geoChatMessage extends GeoChatMessage {
+        private static final long serialVersionUID = 1232L;
         public static int constructor = 0x4505f8e1;
 
 
@@ -6437,6 +6695,7 @@ public class TLRPC {
     }
 
     public static class TL_geoChatMessageService extends GeoChatMessage {
+        private static final long serialVersionUID = 1233L;
         public static int constructor = 0xd34fa24e;
 
 
@@ -6459,6 +6718,7 @@ public class TLRPC {
     }
 
     public static class TL_geoChatMessageEmpty extends GeoChatMessage {
+        private static final long serialVersionUID = 1234L;
         public static int constructor = 0x60311a9b;
 
 
@@ -6475,6 +6735,7 @@ public class TLRPC {
     }
 
     public static class MessageAction extends TLObject {
+        private static final long serialVersionUID = 1235L;
         public String title;
         public String address;
         public DecryptedMessageAction encryptedAction;
@@ -6568,6 +6829,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionLoginUnknownLocation extends MessageAction {
+        private static final long serialVersionUID = 1236L;
         public static int constructor = 0x555555F5;
 
 
@@ -6584,6 +6846,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEncryptedAction extends MessageAction {
+        private static final long serialVersionUID = 1237L;
         public static int constructor = 0x555555F7;
 
 
@@ -6598,6 +6861,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChatCreate extends MessageAction {
+        private static final long serialVersionUID = 1238L;
         public static int constructor = 0xa6638b9a;
 
 
@@ -6629,6 +6893,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChatMigrateTo extends MessageAction {
+        private static final long serialVersionUID = 1239L;
         public static int constructor = 0x51bdb021;
 
 
@@ -6643,6 +6908,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionHistoryClear extends MessageAction {
+        private static final long serialVersionUID = 1240L;
         public static int constructor = 0x9fbab604;
 
 
@@ -6652,6 +6918,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChatEditPhoto extends MessageAction {
+        private static final long serialVersionUID = 1241L;
         public static int constructor = 0x7fcb13a8;
 
 
@@ -6666,6 +6933,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChannelMigrateFrom extends MessageAction {
+        private static final long serialVersionUID = 1242L;
         public static int constructor = 0xb055eaee;
 
 
@@ -6682,6 +6950,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChatAddUser extends MessageAction {
+        private static final long serialVersionUID = 1243L;
         public static int constructor = 0x488a7337;
 
 
@@ -6711,6 +6980,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChatDeleteUser extends MessageAction {
+        private static final long serialVersionUID = 1244L;
         public static int constructor = 0xb2ae9b0c;
 
 
@@ -6725,6 +6995,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionCreatedBroadcastList extends MessageAction {
+        private static final long serialVersionUID = 1245L;
         public static int constructor = 0x55555557;
 
 
@@ -6734,6 +7005,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionUserJoined extends MessageAction {
+        private static final long serialVersionUID = 1246L;
         public static int constructor = 0x55555550;
 
 
@@ -6743,6 +7015,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionUserUpdatedPhoto extends MessageAction {
+        private static final long serialVersionUID = 1247L;
         public static int constructor = 0x55555551;
 
 
@@ -6757,6 +7030,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionGeoChatCheckin extends MessageAction {
+        private static final long serialVersionUID = 1248L;
         public static int constructor = 0xc7d53de;
 
 
@@ -6766,6 +7040,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChatJoinedByLink extends MessageAction {
+        private static final long serialVersionUID = 1249L;
         public static int constructor = 0xf89cf5e8;
 
 
@@ -6780,6 +7055,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChatAddUser_old extends TL_messageActionChatAddUser {
+        private static final long serialVersionUID = 1250L;
         public static int constructor = 0x5e3cfc4b;
 
 
@@ -6794,6 +7070,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionTTLChange extends MessageAction {
+        private static final long serialVersionUID = 1251L;
         public static int constructor = 0x55555552;
 
 
@@ -6808,6 +7085,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChannelCreate extends MessageAction {
+        private static final long serialVersionUID = 1252L;
         public static int constructor = 0x95d2ac92;
 
 
@@ -6822,6 +7100,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionPinMessage extends MessageAction {
+        private static final long serialVersionUID = 1253L;
         public static int constructor = 0x94bd38ed;
 
 
@@ -6831,6 +7110,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChatDeletePhoto extends MessageAction {
+        private static final long serialVersionUID = 1254L;
         public static int constructor = 0x95e3fbef;
 
 
@@ -6840,6 +7120,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionChatEditTitle extends MessageAction {
+        private static final long serialVersionUID = 1255L;
         public static int constructor = 0xb5a1ce5a;
 
 
@@ -6854,6 +7135,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionEmpty extends MessageAction {
+        private static final long serialVersionUID = 1256L;
         public static int constructor = 0xb6aef7b0;
 
 
@@ -6863,6 +7145,7 @@ public class TLRPC {
     }
 
     public static class TL_messageActionGeoChatCreate extends MessageAction {
+        private static final long serialVersionUID = 1257L;
         public static int constructor = 0x6f038ebc;
 
 
@@ -6879,6 +7162,7 @@ public class TLRPC {
     }
 
     public static class ReportReason extends TLObject {
+        private static final long serialVersionUID = 1258L;
         public String text;
 
         public static ReportReason TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
@@ -6908,6 +7192,7 @@ public class TLRPC {
     }
 
     public static class TL_inputReportReasonSpam extends ReportReason {
+        private static final long serialVersionUID = 1259L;
         public static int constructor = 0x58dbcab8;
 
 
@@ -6917,6 +7202,7 @@ public class TLRPC {
     }
 
     public static class TL_inputReportReasonViolence extends ReportReason {
+        private static final long serialVersionUID = 1260L;
         public static int constructor = 0x1e22c78d;
 
 
@@ -6926,6 +7212,7 @@ public class TLRPC {
     }
 
     public static class TL_inputReportReasonOther extends ReportReason {
+        private static final long serialVersionUID = 1261L;
         public static int constructor = 0xe1746d0a;
 
 
@@ -6940,6 +7227,7 @@ public class TLRPC {
     }
 
     public static class TL_inputReportReasonPornography extends ReportReason {
+        private static final long serialVersionUID = 1262L;
         public static int constructor = 0x2e59d922;
 
 
@@ -6949,6 +7237,7 @@ public class TLRPC {
     }
 
     public static class PeerNotifyEvents extends TLObject {
+        private static final long serialVersionUID = 1263L;
 
         public static PeerNotifyEvents TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             PeerNotifyEvents result = null;
@@ -6971,6 +7260,7 @@ public class TLRPC {
     }
 
     public static class TL_peerNotifyEventsEmpty extends PeerNotifyEvents {
+        private static final long serialVersionUID = 1264L;
         public static int constructor = 0xadd53cb3;
 
 
@@ -6980,6 +7270,7 @@ public class TLRPC {
     }
 
     public static class TL_peerNotifyEventsAll extends PeerNotifyEvents {
+        private static final long serialVersionUID = 1265L;
         public static int constructor = 0x6d1ded88;
 
 
@@ -6989,6 +7280,7 @@ public class TLRPC {
     }
 
     public static class TL_chatLocated extends TLObject {
+        private static final long serialVersionUID = 1266L;
         public static int constructor = 0x3631cf4c;
 
         public int chat_id;
@@ -7020,6 +7312,7 @@ public class TLRPC {
     }
 
     public static class DecryptedMessage extends TLObject {
+        private static final long serialVersionUID = 1267L;
         public long random_id;
         public int ttl;
         public String message;
@@ -7061,6 +7354,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessage_layer17 extends TL_decryptedMessage {
+        private static final long serialVersionUID = 1268L;
         public static int constructor = 0x204d3878;
 
 
@@ -7081,6 +7375,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageService extends DecryptedMessage {
+        private static final long serialVersionUID = 1269L;
         public static int constructor = 0x73164160;
 
 
@@ -7097,6 +7392,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageService_layer8 extends TL_decryptedMessageService {
+        private static final long serialVersionUID = 1270L;
         public static int constructor = 0xaa48327d;
 
 
@@ -7115,6 +7411,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessage_layer8 extends TL_decryptedMessage {
+        private static final long serialVersionUID = 1271L;
         public static int constructor = 0x1f814f1f;
 
 
@@ -7135,6 +7432,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessage extends DecryptedMessage {
+        private static final long serialVersionUID = 1272L;
         public static int constructor = 0x36b091de;
 
 
@@ -7198,6 +7496,7 @@ public class TLRPC {
     }
 
     public static class InputPeerNotifyEvents extends TLObject {
+        private static final long serialVersionUID = 1273L;
 
         public static InputPeerNotifyEvents TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             InputPeerNotifyEvents result = null;
@@ -7220,6 +7519,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPeerNotifyEventsAll extends InputPeerNotifyEvents {
+        private static final long serialVersionUID = 1274L;
         public static int constructor = 0xe86a2c74;
 
 
@@ -7229,6 +7529,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPeerNotifyEventsEmpty extends InputPeerNotifyEvents {
+        private static final long serialVersionUID = 1275L;
         public static int constructor = 0xf03064d8;
 
 
@@ -7238,6 +7539,7 @@ public class TLRPC {
     }
 
     public static class Video extends TLObject {
+        private static final long serialVersionUID = 1276L;
         public long id;
         public long access_hash;
         public int user_id;
@@ -7286,6 +7588,7 @@ public class TLRPC {
     }
 
     public static class TL_video_old3 extends TL_video_layer45 {
+        private static final long serialVersionUID = 1277L;
         public static int constructor = 0xee9f4a4d;
 
 
@@ -7318,6 +7621,7 @@ public class TLRPC {
     }
 
     public static class TL_video_layer45 extends Video {
+        private static final long serialVersionUID = 1278L;
         public static int constructor = 0xf72887d3;
 
 
@@ -7350,6 +7654,7 @@ public class TLRPC {
     }
 
     public static class TL_videoEncrypted extends TL_video_layer45 {
+        private static final long serialVersionUID = 1279L;
         public static int constructor = 0x55555553;
 
 
@@ -7388,6 +7693,7 @@ public class TLRPC {
     }
 
     public static class TL_video_old extends TL_video_layer45 {
+        private static final long serialVersionUID = 1280L;
         public static int constructor = 0x5a04a49f;
 
 
@@ -7422,6 +7728,7 @@ public class TLRPC {
     }
 
     public static class TL_video_old2 extends TL_video_layer45 {
+        private static final long serialVersionUID = 1281L;
         public static int constructor = 0x388fa391;
 
 
@@ -7458,6 +7765,7 @@ public class TLRPC {
     }
 
     public static class TL_videoEmpty_layer45 extends Video {
+        private static final long serialVersionUID = 1282L;
         public static int constructor = 0xc10658a8;
 
 
@@ -7472,6 +7780,7 @@ public class TLRPC {
     }
 
     public static class TL_exportedMessageLink extends TLObject {
+        private static final long serialVersionUID = 1283L;
         public static int constructor = 0x1f486803;
 
         public String link;
@@ -7500,6 +7809,7 @@ public class TLRPC {
     }
 
     public static class TopPeerCategory extends TLObject {
+        private static final long serialVersionUID = 1284L;
 
         public static TopPeerCategory TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             TopPeerCategory result = null;
@@ -7531,6 +7841,7 @@ public class TLRPC {
     }
 
     public static class TL_topPeerCategoryCorrespondents extends TopPeerCategory {
+        private static final long serialVersionUID = 1285L;
         public static int constructor = 0x637b7ed;
 
 
@@ -7540,6 +7851,7 @@ public class TLRPC {
     }
 
     public static class TL_topPeerCategoryGroups extends TopPeerCategory {
+        private static final long serialVersionUID = 1286L;
         public static int constructor = 0xbd17a14a;
 
 
@@ -7549,6 +7861,7 @@ public class TLRPC {
     }
 
     public static class TL_topPeerCategoryBotsInline extends TopPeerCategory {
+        private static final long serialVersionUID = 1287L;
         public static int constructor = 0x148677e2;
 
 
@@ -7558,6 +7871,7 @@ public class TLRPC {
     }
 
     public static class TL_topPeerCategoryChannels extends TopPeerCategory {
+        private static final long serialVersionUID = 1288L;
         public static int constructor = 0x161d9628;
 
 
@@ -7567,6 +7881,7 @@ public class TLRPC {
     }
 
     public static class TL_topPeerCategoryBotsPM extends TopPeerCategory {
+        private static final long serialVersionUID = 1289L;
         public static int constructor = 0xab661b5b;
 
 
@@ -7576,6 +7891,7 @@ public class TLRPC {
     }
 
     public static class TL_contactBlocked extends TLObject {
+        private static final long serialVersionUID = 1290L;
         public static int constructor = 0x561bc879;
 
         public int user_id;
@@ -7607,6 +7923,7 @@ public class TLRPC {
     }
 
     public static class InputDocument extends TLObject {
+        private static final long serialVersionUID = 1291L;
         public long id;
         public long access_hash;
 
@@ -7631,6 +7948,7 @@ public class TLRPC {
     }
 
     public static class TL_inputDocumentEmpty extends InputDocument {
+        private static final long serialVersionUID = 1292L;
         public static int constructor = 0x72f0eaae;
 
 
@@ -7640,6 +7958,7 @@ public class TLRPC {
     }
 
     public static class TL_inputDocument extends InputDocument {
+        private static final long serialVersionUID = 1293L;
         public static int constructor = 0x18798952;
 
 
@@ -7656,6 +7975,7 @@ public class TLRPC {
     }
 
     public static class TL_inputAppEvent extends TLObject {
+        private static final long serialVersionUID = 1294L;
         public static int constructor = 0x770656a8;
 
         public double time;
@@ -7693,6 +8013,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_affectedHistory extends TLObject {
+        private static final long serialVersionUID = 1295L;
         public static int constructor = 0xb45c69d1;
 
         public int pts;
@@ -7727,6 +8048,7 @@ public class TLRPC {
     }
 
     public static class Document extends TLObject {
+        private static final long serialVersionUID = 1296L;
         public long id;
         public long access_hash;
         public int user_id;
@@ -7771,6 +8093,7 @@ public class TLRPC {
     }
 
     public static class TL_documentEncrypted_old extends TL_document {
+        private static final long serialVersionUID = 1297L;
         public static int constructor = 0x55555556;
 
 
@@ -7805,6 +8128,7 @@ public class TLRPC {
     }
 
     public static class TL_document_old extends TL_document {
+        private static final long serialVersionUID = 1298L;
         public static int constructor = 0x9efc6326;
 
 
@@ -7835,6 +8159,7 @@ public class TLRPC {
     }
 
     public static class TL_documentEmpty extends Document {
+        private static final long serialVersionUID = 1299L;
         public static int constructor = 0x36f8c871;
 
 
@@ -7849,6 +8174,7 @@ public class TLRPC {
     }
 
     public static class TL_documentEncrypted extends Document {
+        private static final long serialVersionUID = 1300L;
         public static int constructor = 0x55555558;
 
 
@@ -7908,6 +8234,7 @@ public class TLRPC {
     }
 
     public static class TL_document extends Document {
+        private static final long serialVersionUID = 1301L;
         public static int constructor = 0xf9a39f4f;
 
 
@@ -7955,6 +8282,7 @@ public class TLRPC {
     }
 
     public static class ContactLink extends TLObject {
+        private static final long serialVersionUID = 1302L;
 
         public static ContactLink TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             ContactLink result = null;
@@ -7983,6 +8311,7 @@ public class TLRPC {
     }
 
     public static class TL_contactLinkNone extends ContactLink {
+        private static final long serialVersionUID = 1303L;
         public static int constructor = 0xfeedd3ad;
 
 
@@ -7992,6 +8321,7 @@ public class TLRPC {
     }
 
     public static class TL_contactLinkContact extends ContactLink {
+        private static final long serialVersionUID = 1304L;
         public static int constructor = 0xd502c2d0;
 
 
@@ -8001,6 +8331,7 @@ public class TLRPC {
     }
 
     public static class TL_contactLinkHasPhone extends ContactLink {
+        private static final long serialVersionUID = 1305L;
         public static int constructor = 0x268f3f59;
 
 
@@ -8010,6 +8341,7 @@ public class TLRPC {
     }
 
     public static class TL_contactLinkUnknown extends ContactLink {
+        private static final long serialVersionUID = 1306L;
         public static int constructor = 0x5f4f9247;
 
 
@@ -8019,6 +8351,7 @@ public class TLRPC {
     }
 
     public static class InputPrivacyRule extends TLObject {
+        private static final long serialVersionUID = 1307L;
         public ArrayList<InputUser> users = new ArrayList<>();
 
         public static InputPrivacyRule TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
@@ -8054,6 +8387,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPrivacyValueDisallowUsers extends InputPrivacyRule {
+        private static final long serialVersionUID = 1308L;
         public static int constructor = 0x90110467;
 
 
@@ -8087,6 +8421,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPrivacyValueDisallowAll extends InputPrivacyRule {
+        private static final long serialVersionUID = 1309L;
         public static int constructor = 0xd66b66c9;
 
 
@@ -8096,6 +8431,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPrivacyValueDisallowContacts extends InputPrivacyRule {
+        private static final long serialVersionUID = 1310L;
         public static int constructor = 0xba52007;
 
 
@@ -8105,6 +8441,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPrivacyValueAllowAll extends InputPrivacyRule {
+        private static final long serialVersionUID = 1311L;
         public static int constructor = 0x184b35ce;
 
 
@@ -8114,6 +8451,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPrivacyValueAllowContacts extends InputPrivacyRule {
+        private static final long serialVersionUID = 1312L;
         public static int constructor = 0xd09e07b;
 
 
@@ -8123,6 +8461,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPrivacyValueAllowUsers extends InputPrivacyRule {
+        private static final long serialVersionUID = 1313L;
         public static int constructor = 0x131cc67f;
 
 
@@ -8156,6 +8495,7 @@ public class TLRPC {
     }
 
     public static class InputMedia extends TLObject {
+        private static final long serialVersionUID = 1314L;
         public InputFile file;
         public InputFile thumb;
         public String mime_type;
@@ -8217,6 +8557,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaContact extends InputMedia {
+        private static final long serialVersionUID = 1315L;
         public static int constructor = 0xa6e45987;
 
 
@@ -8235,6 +8576,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaUploadedThumbDocument extends InputMedia {
+        private static final long serialVersionUID = 1316L;
         public static int constructor = 0xad613491;
 
 
@@ -8276,6 +8618,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaDocument extends InputMedia {
+        private static final long serialVersionUID = 1317L;
         public static int constructor = 0x1a77f29c;
 
         public InputDocument id;
@@ -8293,6 +8636,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaGifExternal extends InputMedia {
+        private static final long serialVersionUID = 1318L;
         public static int constructor = 0x4843b0fd;
 
 
@@ -8309,6 +8653,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaGeoPoint extends InputMedia {
+        private static final long serialVersionUID = 1319L;
         public static int constructor = 0xf9c44144;
 
 
@@ -8323,6 +8668,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaEmpty extends InputMedia {
+        private static final long serialVersionUID = 1320L;
         public static int constructor = 0x9664f57f;
 
 
@@ -8332,6 +8678,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaUploadedPhoto extends InputMedia {
+        private static final long serialVersionUID = 1321L;
         public static int constructor = 0xf7aff1c0;
 
 
@@ -8348,6 +8695,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaVenue extends InputMedia {
+        private static final long serialVersionUID = 1322L;
         public static int constructor = 0x2827a81a;
 
 
@@ -8370,6 +8718,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaUploadedDocument extends InputMedia {
+        private static final long serialVersionUID = 1323L;
         public static int constructor = 0x1d89306d;
 
 
@@ -8409,6 +8758,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMediaPhoto extends InputMedia {
+        private static final long serialVersionUID = 1324L;
         public static int constructor = 0xe9bfb4f3;
 
         public InputPhoto id;
@@ -8426,6 +8776,7 @@ public class TLRPC {
     }
 
     public static class geochats_Messages extends TLObject {
+        private static final long serialVersionUID = 1325L;
         public int count;
         public ArrayList<GeoChatMessage> messages = new ArrayList<>();
         public ArrayList<Chat> chats = new ArrayList<>();
@@ -8452,6 +8803,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_messagesSlice extends geochats_Messages {
+        private static final long serialVersionUID = 1326L;
         public static int constructor = 0xbc5863e8;
 
 
@@ -8529,6 +8881,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_messages extends geochats_Messages {
+        private static final long serialVersionUID = 1327L;
         public static int constructor = 0xd1526db1;
 
 
@@ -8604,6 +8957,7 @@ public class TLRPC {
     }
 
     public static class EncryptedMessage extends TLObject {
+        private static final long serialVersionUID = 1328L;
         public long random_id;
         public int chat_id;
         public int date;
@@ -8631,6 +8985,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedMessageService extends EncryptedMessage {
+        private static final long serialVersionUID = 1329L;
         public static int constructor = 0x23734b06;
 
 
@@ -8651,6 +9006,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedMessage extends EncryptedMessage {
+        private static final long serialVersionUID = 1330L;
         public static int constructor = 0xed18c118;
 
 
@@ -8673,6 +9029,7 @@ public class TLRPC {
     }
 
     public static class InputStickerSet extends TLObject {
+        private static final long serialVersionUID = 1331L;
         public long id;
         public long access_hash;
         public String short_name;
@@ -8701,6 +9058,7 @@ public class TLRPC {
     }
 
     public static class TL_inputStickerSetEmpty extends InputStickerSet {
+        private static final long serialVersionUID = 1332L;
         public static int constructor = 0xffb62b95;
 
 
@@ -8710,6 +9068,7 @@ public class TLRPC {
     }
 
     public static class TL_inputStickerSetID extends InputStickerSet {
+        private static final long serialVersionUID = 1333L;
         public static int constructor = 0x9de7a269;
 
 
@@ -8726,6 +9085,7 @@ public class TLRPC {
     }
 
     public static class TL_inputStickerSetShortName extends InputStickerSet {
+        private static final long serialVersionUID = 1334L;
         public static int constructor = 0x861cc8a0;
 
 
@@ -8740,6 +9100,7 @@ public class TLRPC {
     }
 
     public static class UserStatus extends TLObject {
+        private static final long serialVersionUID = 1335L;
         public int expires;
 
         public static UserStatus TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
@@ -8775,6 +9136,7 @@ public class TLRPC {
     }
 
     public static class TL_userStatusOffline extends UserStatus {
+        private static final long serialVersionUID = 1336L;
         public static int constructor = 0x8c703f;
 
 
@@ -8789,6 +9151,7 @@ public class TLRPC {
     }
 
     public static class TL_userStatusLastWeek extends UserStatus {
+        private static final long serialVersionUID = 1337L;
         public static int constructor = 0x7bf09fc;
 
 
@@ -8798,6 +9161,7 @@ public class TLRPC {
     }
 
     public static class TL_userStatusEmpty extends UserStatus {
+        private static final long serialVersionUID = 1338L;
         public static int constructor = 0x9d05049;
 
 
@@ -8807,6 +9171,7 @@ public class TLRPC {
     }
 
     public static class TL_userStatusLastMonth extends UserStatus {
+        private static final long serialVersionUID = 1339L;
         public static int constructor = 0x77ebc742;
 
 
@@ -8816,6 +9181,7 @@ public class TLRPC {
     }
 
     public static class TL_userStatusOnline extends UserStatus {
+        private static final long serialVersionUID = 1340L;
         public static int constructor = 0xedb93949;
 
 
@@ -8830,6 +9196,7 @@ public class TLRPC {
     }
 
     public static class TL_userStatusRecently extends UserStatus {
+        private static final long serialVersionUID = 1341L;
         public static int constructor = 0xe26f42f1;
 
 
@@ -8839,6 +9206,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_messageEditData extends TLObject {
+        private static final long serialVersionUID = 1342L;
         public static int constructor = 0x26b5dde6;
 
         public int flags;
@@ -8870,6 +9238,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_importedContacts extends TLObject {
+        private static final long serialVersionUID = 1343L;
         public static int constructor = 0xad524315;
 
         public ArrayList<TL_importedContact> imported = new ArrayList<>();
@@ -8957,6 +9326,7 @@ public class TLRPC {
     }
 
     public static class TL_disabledFeature extends TLObject {
+        private static final long serialVersionUID = 1344L;
         public static int constructor = 0xae636f24;
 
         public String feature;
@@ -8988,6 +9358,7 @@ public class TLRPC {
     }
 
     public static class TL_inlineBotSwitchPM extends TLObject {
+        private static final long serialVersionUID = 1345L;
         public static int constructor = 0x3c20629f;
 
         public String text;
@@ -9019,6 +9390,7 @@ public class TLRPC {
     }
 
     public static class Update extends TLObject {
+        private static final long serialVersionUID = 1346L;
         public int chat_id;
         public int user_id;
         public int inviter_id;
@@ -9234,6 +9606,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChatParticipantAdd extends Update {
+        private static final long serialVersionUID = 1347L;
         public static int constructor = 0xea4b0e5c;
 
 
@@ -9256,6 +9629,7 @@ public class TLRPC {
     }
 
     public static class TL_updateDraftMessage extends Update {
+        private static final long serialVersionUID = 1348L;
         public static int constructor = 0xee2bb969;
 
         public Peer peer;
@@ -9273,6 +9647,7 @@ public class TLRPC {
     }
 
     public static class TL_updateStickerSets extends Update {
+        private static final long serialVersionUID = 1349L;
         public static int constructor = 0x43ae3dec;
 
 
@@ -9282,6 +9657,7 @@ public class TLRPC {
     }
 
     public static class TL_updateEditChannelMessage extends Update {
+        private static final long serialVersionUID = 1350L;
         public static int constructor = 0x1b3f4df7;
 
         public Message message;
@@ -9301,6 +9677,7 @@ public class TLRPC {
     }
 
     public static class TL_updateBotCallbackQuery extends Update {
+        private static final long serialVersionUID = 1351L;
         public static int constructor = 0xa68c688c;
 
         public Peer peer;
@@ -9325,6 +9702,7 @@ public class TLRPC {
     }
 
     public static class TL_updateBotInlineQuery extends Update {
+        private static final long serialVersionUID = 1352L;
         public static int constructor = 0x54826690;
 
 
@@ -9353,6 +9731,7 @@ public class TLRPC {
     }
 
     public static class TL_updateNotifySettings extends Update {
+        private static final long serialVersionUID = 1353L;
         public static int constructor = 0xbec268ef;
 
         public NotifyPeer peer;
@@ -9370,6 +9749,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChannel extends Update {
+        private static final long serialVersionUID = 1354L;
         public static int constructor = 0xb6d45656;
 
 
@@ -9384,6 +9764,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChatParticipantDelete extends Update {
+        private static final long serialVersionUID = 1355L;
         public static int constructor = 0x6e5f8c22;
 
 
@@ -9402,6 +9783,7 @@ public class TLRPC {
     }
 
     public static class TL_updateUserTyping extends Update {
+        private static final long serialVersionUID = 1356L;
         public static int constructor = 0x5c486927;
 
 
@@ -9418,6 +9800,7 @@ public class TLRPC {
     }
 
     public static class TL_updateUserBlocked extends Update {
+        private static final long serialVersionUID = 1357L;
         public static int constructor = 0x80ece81a;
 
 
@@ -9434,6 +9817,7 @@ public class TLRPC {
     }
 
     public static class TL_updateNewAuthorization extends Update {
+        private static final long serialVersionUID = 1358L;
         public static int constructor = 0x8f06529a;
 
 
@@ -9454,6 +9838,7 @@ public class TLRPC {
     }
 
     public static class TL_updateContactRegistered extends Update {
+        private static final long serialVersionUID = 1359L;
         public static int constructor = 0x2575bbb9;
 
 
@@ -9470,6 +9855,7 @@ public class TLRPC {
     }
 
     public static class TL_updateReadChannelInbox extends Update {
+        private static final long serialVersionUID = 1360L;
         public static int constructor = 0x4214f37f;
 
 
@@ -9486,6 +9872,7 @@ public class TLRPC {
     }
 
     public static class TL_updateNewEncryptedMessage extends Update {
+        private static final long serialVersionUID = 1361L;
         public static int constructor = 0x12bcbd9a;
 
         public EncryptedMessage message;
@@ -9503,6 +9890,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChatAdmins extends Update {
+        private static final long serialVersionUID = 1362L;
         public static int constructor = 0x6e947941;
 
 
@@ -9521,6 +9909,7 @@ public class TLRPC {
     }
 
     public static class TL_updateSavedGifs extends Update {
+        private static final long serialVersionUID = 1363L;
         public static int constructor = 0x9375341e;
 
 
@@ -9530,6 +9919,7 @@ public class TLRPC {
     }
 
     public static class TL_updateNewChannelMessage extends Update {
+        private static final long serialVersionUID = 1364L;
         public static int constructor = 0x62ba04d9;
 
         public Message message;
@@ -9549,6 +9939,7 @@ public class TLRPC {
     }
 
     public static class TL_updateMessageID extends Update {
+        private static final long serialVersionUID = 1365L;
         public static int constructor = 0x4e90bfd6;
 
         public int id;
@@ -9566,6 +9957,7 @@ public class TLRPC {
     }
 
     public static class TL_updateDcOptions extends Update {
+        private static final long serialVersionUID = 1366L;
         public static int constructor = 0x8e5e9873;
 
 
@@ -9599,6 +9991,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChatParticipants extends Update {
+        private static final long serialVersionUID = 1367L;
         public static int constructor = 0x7761198;
 
 
@@ -9613,6 +10006,7 @@ public class TLRPC {
     }
 
     public static class TL_updatePrivacy extends Update {
+        private static final long serialVersionUID = 1368L;
         public static int constructor = 0xee3b272a;
 
 
@@ -9648,6 +10042,7 @@ public class TLRPC {
     }
 
     public static class TL_updateInlineBotCallbackQuery extends Update {
+        private static final long serialVersionUID = 1369L;
         public static int constructor = 0x2cbd95af;
 
         public TL_inputBotInlineMessageID msg_id;
@@ -9669,6 +10064,7 @@ public class TLRPC {
     }
 
     public static class TL_updateReadChannelOutbox extends Update {
+        private static final long serialVersionUID = 1370L;
         public static int constructor = 0x25d6c9c7;
 
 
@@ -9685,6 +10081,7 @@ public class TLRPC {
     }
 
     public static class TL_updateEncryptedChatTyping extends Update {
+        private static final long serialVersionUID = 1371L;
         public static int constructor = 0x1710f156;
 
 
@@ -9699,6 +10096,7 @@ public class TLRPC {
     }
 
     public static class TL_updateNewGeoChatMessage extends Update {
+        private static final long serialVersionUID = 1372L;
         public static int constructor = 0x5a68e3f7;
 
         public GeoChatMessage message;
@@ -9714,6 +10112,7 @@ public class TLRPC {
     }
 
     public static class TL_updateUserStatus extends Update {
+        private static final long serialVersionUID = 1373L;
         public static int constructor = 0x1bfbd823;
 
 
@@ -9730,6 +10129,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChannelMessageViews extends Update {
+        private static final long serialVersionUID = 1374L;
         public static int constructor = 0x98a12b4b;
 
         public int id;
@@ -9749,6 +10149,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChannelTooLong extends Update {
+        private static final long serialVersionUID = 1375L;
         public static int constructor = 0xeb0467fb;
 
 
@@ -9771,6 +10172,7 @@ public class TLRPC {
     }
 
     public static class TL_updateServiceNotification extends Update {
+        private static final long serialVersionUID = 1376L;
         public static int constructor = 0x382dd3e4;
 
         public String message;
@@ -9792,6 +10194,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChatParticipantAdmin extends Update {
+        private static final long serialVersionUID = 1377L;
         public static int constructor = 0xb6901959;
 
 
@@ -9812,6 +10215,7 @@ public class TLRPC {
     }
 
     public static class TL_updateNewStickerSet extends Update {
+        private static final long serialVersionUID = 1378L;
         public static int constructor = 0x688a30aa;
 
 
@@ -9826,6 +10230,7 @@ public class TLRPC {
     }
 
     public static class TL_updateContactLink extends Update {
+        private static final long serialVersionUID = 1379L;
         public static int constructor = 0x9d2e67c5;
 
 
@@ -9844,6 +10249,7 @@ public class TLRPC {
     }
 
     public static class TL_updateReadHistoryInbox extends Update {
+        private static final long serialVersionUID = 1380L;
         public static int constructor = 0x9961fd5c;
 
         public Peer peer;
@@ -9865,6 +10271,7 @@ public class TLRPC {
     }
 
     public static class TL_updateUserName extends Update {
+        private static final long serialVersionUID = 1381L;
         public static int constructor = 0xa7332b73;
 
 
@@ -9885,6 +10292,7 @@ public class TLRPC {
     }
 
     public static class TL_updateBotInlineSend extends Update {
+        private static final long serialVersionUID = 1382L;
         public static int constructor = 0xe48f964;
 
         public String id;
@@ -9919,6 +10327,7 @@ public class TLRPC {
     }
 
     public static class TL_updateEditMessage extends Update {
+        private static final long serialVersionUID = 1383L;
         public static int constructor = 0xe40370a3;
 
         public Message message;
@@ -9938,6 +10347,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChannelPinnedMessage extends Update {
+        private static final long serialVersionUID = 1384L;
         public static int constructor = 0x98592475;
 
         public int id;
@@ -9955,6 +10365,7 @@ public class TLRPC {
     }
 
     public static class TL_updateDeleteChannelMessages extends Update {
+        private static final long serialVersionUID = 1385L;
         public static int constructor = 0xc37521c9;
 
 
@@ -9990,6 +10401,7 @@ public class TLRPC {
     }
 
     public static class TL_updateUserPhone extends Update {
+        private static final long serialVersionUID = 1386L;
         public static int constructor = 0x12b9417b;
 
 
@@ -10006,6 +10418,7 @@ public class TLRPC {
     }
 
     public static class TL_updateWebPage extends Update {
+        private static final long serialVersionUID = 1387L;
         public static int constructor = 0x7f891213;
 
 
@@ -10024,6 +10437,7 @@ public class TLRPC {
     }
 
     public static class TL_updateEncryption extends Update {
+        private static final long serialVersionUID = 1388L;
         public static int constructor = 0xb4a2e88d;
 
 
@@ -10040,6 +10454,7 @@ public class TLRPC {
     }
 
     public static class TL_updateNewMessage extends Update {
+        private static final long serialVersionUID = 1389L;
         public static int constructor = 0x1f2b0afd;
 
         public Message message;
@@ -10059,6 +10474,7 @@ public class TLRPC {
     }
 
     public static class TL_updateStickerSetsOrder extends Update {
+        private static final long serialVersionUID = 1390L;
         public static int constructor = 0xf0dfb451;
 
 
@@ -10088,6 +10504,7 @@ public class TLRPC {
     }
 
     public static class TL_updateEncryptedMessagesRead extends Update {
+        private static final long serialVersionUID = 1391L;
         public static int constructor = 0x38fe25b7;
 
 
@@ -10106,6 +10523,7 @@ public class TLRPC {
     }
 
     public static class TL_updateReadMessagesContents extends Update {
+        private static final long serialVersionUID = 1392L;
         public static int constructor = 0x68c13933;
 
 
@@ -10139,6 +10557,7 @@ public class TLRPC {
     }
 
     public static class TL_updateDeleteMessages extends Update {
+        private static final long serialVersionUID = 1393L;
         public static int constructor = 0xa20db0e5;
 
 
@@ -10172,6 +10591,7 @@ public class TLRPC {
     }
 
     public static class TL_updateChatUserTyping extends Update {
+        private static final long serialVersionUID = 1394L;
         public static int constructor = 0x9a65ea1f;
 
 
@@ -10190,6 +10610,7 @@ public class TLRPC {
     }
 
     public static class TL_updateUserPhoto extends Update {
+        private static final long serialVersionUID = 1395L;
         public static int constructor = 0x95313b0c;
 
 
@@ -10210,6 +10631,7 @@ public class TLRPC {
     }
 
     public static class TL_updateReadHistoryOutbox extends Update {
+        private static final long serialVersionUID = 1396L;
         public static int constructor = 0x2f2f21bf;
 
         public Peer peer;
@@ -10231,6 +10653,7 @@ public class TLRPC {
     }
 
     public static class TL_receivedNotifyMessage extends TLObject {
+        private static final long serialVersionUID = 1397L;
         public static int constructor = 0xa384b779;
 
         public int id;
@@ -10262,6 +10685,7 @@ public class TLRPC {
     }
 
     public static class InputEncryptedFile extends TLObject {
+        private static final long serialVersionUID = 1398L;
         public long id;
         public long access_hash;
         public int parts;
@@ -10295,6 +10719,7 @@ public class TLRPC {
     }
 
     public static class TL_inputEncryptedFile extends InputEncryptedFile {
+        private static final long serialVersionUID = 1399L;
         public static int constructor = 0x5a17b5e5;
 
 
@@ -10311,6 +10736,7 @@ public class TLRPC {
     }
 
     public static class TL_inputEncryptedFileBigUploaded extends InputEncryptedFile {
+        private static final long serialVersionUID = 1400L;
         public static int constructor = 0x2dc173c8;
 
 
@@ -10329,6 +10755,7 @@ public class TLRPC {
     }
 
     public static class TL_inputEncryptedFileEmpty extends InputEncryptedFile {
+        private static final long serialVersionUID = 1401L;
         public static int constructor = 0x1837c364;
 
 
@@ -10338,6 +10765,7 @@ public class TLRPC {
     }
 
     public static class TL_inputEncryptedFileUploaded extends InputEncryptedFile {
+        private static final long serialVersionUID = 1402L;
         public static int constructor = 0x64bd0306;
 
 
@@ -10358,6 +10786,7 @@ public class TLRPC {
     }
 
     public static class messages_AllStickers extends TLObject {
+        private static final long serialVersionUID = 1403L;
         public String hash;
         public ArrayList<StickerSet> sets = new ArrayList<>();
         public ArrayList<TL_stickerPack> packs = new ArrayList<>();
@@ -10384,6 +10813,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_allStickers extends messages_AllStickers {
+        private static final long serialVersionUID = 1404L;
         public static int constructor = 0xedfd405f;
 
         public int hash;
@@ -10420,6 +10850,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_allStickersNotModified extends messages_AllStickers {
+        private static final long serialVersionUID = 1405L;
         public static int constructor = 0xe86602c3;
 
 
@@ -10429,6 +10860,7 @@ public class TLRPC {
     }
 
     public static class DecryptedMessageAction extends TLObject {
+        private static final long serialVersionUID = 1406L;
         public int ttl_seconds;
         public int layer;
         public ArrayList<Long> random_ids = new ArrayList<>();
@@ -10494,6 +10926,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionSetMessageTTL extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1407L;
         public static int constructor = 0xa1733aec;
 
 
@@ -10508,6 +10941,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionNotifyLayer extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1408L;
         public static int constructor = 0xf3048883;
 
 
@@ -10522,6 +10956,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionDeleteMessages extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1409L;
         public static int constructor = 0x65614304;
 
 
@@ -10551,6 +10986,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionCommitKey extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1410L;
         public static int constructor = 0xec2e0b9b;
 
 
@@ -10567,6 +11003,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionAbortKey extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1411L;
         public static int constructor = 0xdd05ec6b;
 
 
@@ -10581,6 +11018,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionFlushHistory extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1412L;
         public static int constructor = 0x6719e45c;
 
 
@@ -10590,6 +11028,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionTyping extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1413L;
         public static int constructor = 0xccb27641;
 
 
@@ -10604,6 +11043,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionAcceptKey extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1414L;
         public static int constructor = 0x6fe1735b;
 
 
@@ -10622,6 +11062,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionReadMessages extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1415L;
         public static int constructor = 0xc4f40be;
 
 
@@ -10651,6 +11092,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionResend extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1416L;
         public static int constructor = 0x511110b0;
 
 
@@ -10667,6 +11109,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionRequestKey extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1417L;
         public static int constructor = 0xf3c9611b;
 
 
@@ -10683,6 +11126,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionScreenshotMessages extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1418L;
         public static int constructor = 0x8ac1f475;
 
 
@@ -10712,6 +11156,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageActionNoop extends DecryptedMessageAction {
+        private static final long serialVersionUID = 1419L;
         public static int constructor = 0xa82fdd63;
 
 
@@ -10721,6 +11166,7 @@ public class TLRPC {
     }
 
     public static class account_Password extends TLObject {
+        private static final long serialVersionUID = 1420L;
         public byte[] current_salt;
         public byte[] new_salt;
         public String hint;
@@ -10748,6 +11194,7 @@ public class TLRPC {
     }
 
     public static class TL_account_password extends account_Password {
+        private static final long serialVersionUID = 1421L;
         public static int constructor = 0x7c18141c;
 
 
@@ -10770,6 +11217,7 @@ public class TLRPC {
     }
 
     public static class TL_account_noPassword extends account_Password {
+        private static final long serialVersionUID = 1422L;
         public static int constructor = 0x96dabc18;
 
 
@@ -10786,6 +11234,7 @@ public class TLRPC {
     }
 
     public static class UserProfilePhoto extends TLObject {
+        private static final long serialVersionUID = 1423L;
         public long photo_id;
         public FileLocation photo_small;
         public FileLocation photo_big;
@@ -10814,6 +11263,7 @@ public class TLRPC {
     }
 
     public static class TL_userProfilePhotoEmpty extends UserProfilePhoto {
+        private static final long serialVersionUID = 1424L;
         public static int constructor = 0x4f11bae1;
 
 
@@ -10823,6 +11273,7 @@ public class TLRPC {
     }
 
     public static class TL_userProfilePhoto extends UserProfilePhoto {
+        private static final long serialVersionUID = 1425L;
         public static int constructor = 0xd559d8c8;
 
 
@@ -10841,6 +11292,7 @@ public class TLRPC {
     }
 
     public static class TL_userProfilePhoto_old extends TL_userProfilePhoto {
+        private static final long serialVersionUID = 1426L;
         public static int constructor = 0x990d1493;
 
 
@@ -10857,6 +11309,7 @@ public class TLRPC {
     }
 
     public static class MessageEntity extends TLObject {
+        private static final long serialVersionUID = 1427L;
         public int offset;
         public int length;
         public String url;
@@ -10916,6 +11369,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityTextUrl extends MessageEntity {
+        private static final long serialVersionUID = 1428L;
         public static int constructor = 0x76a6d327;
 
 
@@ -10934,6 +11388,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityBotCommand extends MessageEntity {
+        private static final long serialVersionUID = 1429L;
         public static int constructor = 0x6cef8ac7;
 
 
@@ -10950,6 +11405,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityEmail extends MessageEntity {
+        private static final long serialVersionUID = 1430L;
         public static int constructor = 0x64e475c2;
 
 
@@ -10966,6 +11422,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityPre extends MessageEntity {
+        private static final long serialVersionUID = 1431L;
         public static int constructor = 0x73924be0;
 
 
@@ -10984,6 +11441,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityUnknown extends MessageEntity {
+        private static final long serialVersionUID = 1432L;
         public static int constructor = 0xbb92ba95;
 
 
@@ -11000,6 +11458,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityUrl extends MessageEntity {
+        private static final long serialVersionUID = 1433L;
         public static int constructor = 0x6ed02538;
 
 
@@ -11016,6 +11475,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityItalic extends MessageEntity {
+        private static final long serialVersionUID = 1434L;
         public static int constructor = 0x826f8b60;
 
 
@@ -11032,6 +11492,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityMention extends MessageEntity {
+        private static final long serialVersionUID = 1435L;
         public static int constructor = 0xfa04579d;
 
 
@@ -11048,6 +11509,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityMentionName extends MessageEntity {
+        private static final long serialVersionUID = 1436L;
         public static int constructor = 0x352dca58;
 
         public int user_id;
@@ -11067,6 +11529,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessageEntityMentionName extends MessageEntity {
+        private static final long serialVersionUID = 1437L;
         public static int constructor = 0x208e68c9;
 
         public InputUser user_id;
@@ -11086,6 +11549,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityBold extends MessageEntity {
+        private static final long serialVersionUID = 1438L;
         public static int constructor = 0xbd610bc9;
 
 
@@ -11102,6 +11566,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityHashtag extends MessageEntity {
+        private static final long serialVersionUID = 1439L;
         public static int constructor = 0x6f635b0d;
 
 
@@ -11118,6 +11583,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEntityCode extends MessageEntity {
+        private static final long serialVersionUID = 1440L;
         public static int constructor = 0x28a20571;
 
 
@@ -11134,6 +11600,7 @@ public class TLRPC {
     }
 
     public static class Photo extends TLObject {
+        private static final long serialVersionUID = 1441L;
         public long id;
         public long access_hash;
         public int user_id;
@@ -11169,6 +11636,7 @@ public class TLRPC {
     }
 
     public static class TL_photo_old extends TL_photo {
+        private static final long serialVersionUID = 1442L;
         public static int constructor = 0x22b56751;
 
 
@@ -11214,6 +11682,7 @@ public class TLRPC {
     }
 
     public static class TL_photo extends Photo {
+        private static final long serialVersionUID = 1443L;
         public static int constructor = 0xcded42fe;
 
 
@@ -11253,6 +11722,7 @@ public class TLRPC {
     }
 
     public static class TL_photo_old2 extends TL_photo {
+        private static final long serialVersionUID = 1444L;
         public static int constructor = 0xc3838076;
 
 
@@ -11296,6 +11766,7 @@ public class TLRPC {
     }
 
     public static class TL_photoEmpty extends Photo {
+        private static final long serialVersionUID = 1445L;
         public static int constructor = 0x2331b22d;
 
 
@@ -11310,6 +11781,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedChatRequested_old extends TL_encryptedChatRequested {
+        private static final long serialVersionUID = 1446L;
         public static int constructor = 0xfda9a7b7;
 
 
@@ -11336,6 +11808,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedChatRequested extends EncryptedChat {
+        private static final long serialVersionUID = 1447L;
         public static int constructor = 0xc878527e;
 
 
@@ -11360,6 +11833,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedChat extends EncryptedChat {
+        private static final long serialVersionUID = 1448L;
         public static int constructor = 0xfa56ce36;
 
 
@@ -11386,6 +11860,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedChat_old extends TL_encryptedChat {
+        private static final long serialVersionUID = 1449L;
         public static int constructor = 0x6601d14f;
 
 
@@ -11414,6 +11889,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedChatEmpty extends EncryptedChat {
+        private static final long serialVersionUID = 1450L;
         public static int constructor = 0xab7ec0a0;
 
 
@@ -11428,6 +11904,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedChatWaiting extends EncryptedChat {
+        private static final long serialVersionUID = 1451L;
         public static int constructor = 0x3bf703dc;
 
 
@@ -11450,6 +11927,7 @@ public class TLRPC {
     }
 
     public static class TL_encryptedChatDiscarded extends EncryptedChat {
+        private static final long serialVersionUID = 1452L;
         public static int constructor = 0x13d6dd27;
 
 
@@ -11464,6 +11942,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_statedMessage extends TLObject {
+        private static final long serialVersionUID = 1453L;
         public static int constructor = 0x17b1578b;
 
         public GeoChatMessage message;
@@ -11539,6 +12018,7 @@ public class TLRPC {
     }
 
     public static class TL_contact extends TLObject {
+        private static final long serialVersionUID = 1454L;
         public static int constructor = 0xf911c994;
 
         public int user_id;
@@ -11570,6 +12050,7 @@ public class TLRPC {
     }
 
     public static class TL_config extends TLObject {
+        private static final long serialVersionUID = 1455L;
         public static int constructor = 0xc9411388;
 
         public int date;
@@ -11696,6 +12177,7 @@ public class TLRPC {
     }
 
     public static class contacts_TopPeers extends TLObject {
+        private static final long serialVersionUID = 1456L;
         public ArrayList<TL_topPeerCategoryPeers> categories = new ArrayList<>();
         public ArrayList<Chat> chats = new ArrayList<>();
         public ArrayList<User> users = new ArrayList<>();
@@ -11721,6 +12203,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_topPeers extends contacts_TopPeers {
+        private static final long serialVersionUID = 1457L;
         public static int constructor = 0x70b772a8;
 
 
@@ -11796,6 +12279,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_topPeersNotModified extends contacts_TopPeers {
+        private static final long serialVersionUID = 1458L;
         public static int constructor = 0xde266ef5;
 
 
@@ -11805,6 +12289,7 @@ public class TLRPC {
     }
 
     public static class TL_help_support extends TLObject {
+        private static final long serialVersionUID = 1459L;
         public static int constructor = 0x17c6b5f6;
 
         public String phone_number;
@@ -11836,6 +12321,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_chats extends TLObject {
+        private static final long serialVersionUID = 1460L;
         public static int constructor = 0x64ff9fd5;
 
         public ArrayList<Chat> chats = new ArrayList<>();
@@ -11883,6 +12369,7 @@ public class TLRPC {
     }
 
     public static class InputChannel extends TLObject {
+        private static final long serialVersionUID = 1461L;
         public int channel_id;
         public long access_hash;
 
@@ -11907,6 +12394,7 @@ public class TLRPC {
     }
 
     public static class TL_inputChannelEmpty extends InputChannel {
+        private static final long serialVersionUID = 1462L;
         public static int constructor = 0xee8c1e86;
 
 
@@ -11916,6 +12404,7 @@ public class TLRPC {
     }
 
     public static class TL_inputChannel extends InputChannel {
+        private static final long serialVersionUID = 1463L;
         public static int constructor = 0xafeb712e;
 
 
@@ -11932,6 +12421,7 @@ public class TLRPC {
     }
 
     public static class TL_messageRange extends TLObject {
+        private static final long serialVersionUID = 1464L;
         public static int constructor = 0xae30253;
 
         public int min_id;
@@ -11963,6 +12453,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_botResults extends TLObject {
+        private static final long serialVersionUID = 1465L;
         public static int constructor = 0x256709a6;
 
         public int flags;
@@ -12033,6 +12524,7 @@ public class TLRPC {
     }
 
     public static class TL_inputBotInlineMessageID extends TLObject {
+        private static final long serialVersionUID = 1466L;
         public static int constructor = 0x890c3d89;
 
         public int dc_id;
@@ -12067,6 +12559,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_foundGifs extends TLObject {
+        private static final long serialVersionUID = 1467L;
         public static int constructor = 0x450a1c0a;
 
         public int next_offset;
@@ -12117,6 +12610,7 @@ public class TLRPC {
     }
 
     public static class updates_ChannelDifference extends TLObject {
+        private static final long serialVersionUID = 1468L;
         public int flags;
         public boolean isFinal;
         public int pts;
@@ -12155,6 +12649,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_channelDifferenceEmpty extends updates_ChannelDifference {
+        private static final long serialVersionUID = 1469L;
         public static int constructor = 0x3e11affb;
 
 
@@ -12179,6 +12674,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_channelDifference extends updates_ChannelDifference {
+        private static final long serialVersionUID = 1470L;
         public static int constructor = 0x2064674e;
 
 
@@ -12287,6 +12783,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_channelDifferenceTooLong extends updates_ChannelDifference {
+        private static final long serialVersionUID = 1471L;
         public static int constructor = 0x410dee07;
 
 
@@ -12382,6 +12879,7 @@ public class TLRPC {
     }
 
     public static class ChannelMessagesFilter extends TLObject {
+        private static final long serialVersionUID = 1472L;
         public int flags;
         public boolean exclude_new_messages;
         public ArrayList<TL_messageRange> ranges = new ArrayList<>();
@@ -12407,6 +12905,7 @@ public class TLRPC {
     }
 
     public static class TL_channelMessagesFilterEmpty extends ChannelMessagesFilter {
+        private static final long serialVersionUID = 1473L;
         public static int constructor = 0x94d42ee7;
 
 
@@ -12416,6 +12915,7 @@ public class TLRPC {
     }
 
     public static class TL_channelMessagesFilter extends ChannelMessagesFilter {
+        private static final long serialVersionUID = 1474L;
         public static int constructor = 0xcd77d957;
 
 
@@ -12453,6 +12953,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_resolvedPeer extends TLObject {
+        private static final long serialVersionUID = 1475L;
         public static int constructor = 0x7f077ad9;
 
         public Peer peer;
@@ -12522,9 +13023,12 @@ public class TLRPC {
                 users.get(a).serializeToStream(stream);
             }
         }
+
+
     }
 
     public static class ChannelParticipant extends TLObject {
+        private static final long serialVersionUID = 1476L;
         public int user_id;
         public int date;
         public int inviter_id;
@@ -12563,6 +13067,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipant extends ChannelParticipant {
+        private static final long serialVersionUID = 1477L;
         public static int constructor = 0x15ebac1d;
 
 
@@ -12579,6 +13084,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipantSelf extends ChannelParticipant {
+        private static final long serialVersionUID = 1478L;
         public static int constructor = 0xa3289a6d;
 
 
@@ -12597,6 +13103,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipantEditor extends ChannelParticipant {
+        private static final long serialVersionUID = 1479L;
         public static int constructor = 0x98192d61;
 
 
@@ -12615,6 +13122,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipantKicked extends ChannelParticipant {
+        private static final long serialVersionUID = 1480L;
         public static int constructor = 0x8cc5e69a;
 
 
@@ -12633,6 +13141,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipantModerator extends ChannelParticipant {
+        private static final long serialVersionUID = 1481L;
         public static int constructor = 0x91057fef;
 
 
@@ -12651,6 +13160,7 @@ public class TLRPC {
     }
 
     public static class TL_channelParticipantCreator extends ChannelParticipant {
+        private static final long serialVersionUID = 1482L;
         public static int constructor = 0xe3e2e1f9;
 
 
@@ -12665,6 +13175,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_channelParticipants extends TLObject {
+        private static final long serialVersionUID = 1483L;
         public static int constructor = 0xf56ee2a8;
 
         public int count;
@@ -12737,6 +13248,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_found extends TLObject {
+        private static final long serialVersionUID = 1484L;
         public static int constructor = 0x1aa1f784;
 
         public ArrayList<Peer> results = new ArrayList<>();
@@ -12828,6 +13340,7 @@ public class TLRPC {
     }
 
     public static class ChatParticipants extends TLObject {
+        private static final long serialVersionUID = 1485L;
         public int flags;
         public int chat_id;
         public ChatParticipant self_participant;
@@ -12862,6 +13375,7 @@ public class TLRPC {
     }
 
     public static class TL_chatParticipantsForbidden extends ChatParticipants {
+        private static final long serialVersionUID = 1486L;
         public static int constructor = 0xfc900c2b;
 
 
@@ -12884,6 +13398,7 @@ public class TLRPC {
     }
 
     public static class TL_chatParticipants extends ChatParticipants {
+        private static final long serialVersionUID = 1487L;
         public static int constructor = 0x3f460fed;
 
 
@@ -12921,6 +13436,7 @@ public class TLRPC {
     }
 
     public static class TL_chatParticipants_old extends TL_chatParticipants {
+        private static final long serialVersionUID = 1488L;
         public static int constructor = 0x7841b415;
 
 
@@ -12960,6 +13476,7 @@ public class TLRPC {
     }
 
     public static class TL_chatParticipantsForbidden_old extends TL_chatParticipantsForbidden {
+        private static final long serialVersionUID = 1489L;
         public static int constructor = 0xfd2bb8a;
 
 
@@ -12974,6 +13491,7 @@ public class TLRPC {
     }
 
     public static class DecryptedMessageMedia extends TLObject {
+        private static final long serialVersionUID = 1490L;
         public int duration;
         public String mime_type;
         public int size;
@@ -13062,6 +13580,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaAudio extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1491L;
         public static int constructor = 0x57e0a9cb;
 
 
@@ -13084,6 +13603,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaGeoPoint extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1492L;
         public static int constructor = 0x35480a59;
 
 
@@ -13100,6 +13620,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaContact extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1493L;
         public static int constructor = 0x588a0a97;
 
 
@@ -13120,6 +13641,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaEmpty extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1494L;
         public static int constructor = 0x89f5c4a;
 
 
@@ -13129,6 +13651,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaDocument extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1495L;
         public static int constructor = 0x7afe8ae2;
 
         public byte[] thumb;
@@ -13179,6 +13702,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaWebPage extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1496L;
         public static int constructor = 0xe50511d8;
 
 
@@ -13193,6 +13717,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaPhoto extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1497L;
         public static int constructor = 0xf1fa8d78;
 
         public byte[] thumb;
@@ -13224,6 +13749,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaVideo extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1498L;
         public static int constructor = 0x970c8c0e;
 
         public byte[] thumb;
@@ -13259,6 +13785,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaDocument_layer8 extends TL_decryptedMessageMediaDocument {
+        private static final long serialVersionUID = 1499L;
         public static int constructor = 0xb095434b;
 
         public byte[] thumb;
@@ -13288,6 +13815,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaVideo_layer8 extends TL_decryptedMessageMediaVideo {
+        private static final long serialVersionUID = 1500L;
         public static int constructor = 0x4cee6ef3;
 
         public byte[] thumb;
@@ -13319,6 +13847,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaVenue extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1501L;
         public static int constructor = 0x8a0df56f;
 
 
@@ -13343,6 +13872,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaExternalDocument extends DecryptedMessageMedia {
+        private static final long serialVersionUID = 1502L;
         public static int constructor = 0xfa95b0dd;
 
         public PhotoSize thumb;
@@ -13391,6 +13921,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaVideo_layer17 extends TL_decryptedMessageMediaVideo {
+        private static final long serialVersionUID = 1503L;
         public static int constructor = 0x524a415d;
 
         public byte[] thumb;
@@ -13424,6 +13955,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaAudio_layer8 extends TL_decryptedMessageMediaAudio {
+        private static final long serialVersionUID = 1504L;
         public static int constructor = 0x6080758f;
 
 
@@ -13444,6 +13976,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageMediaPhoto_layer8 extends TL_decryptedMessageMediaPhoto {
+        private static final long serialVersionUID = 1505L;
         public static int constructor = 0x32798a8c;
 
         public byte[] thumb;
@@ -13473,6 +14006,7 @@ public class TLRPC {
     }
 
     public static class ChatParticipant extends TLObject {
+        private static final long serialVersionUID = 1506L;
         public int user_id;
         public int inviter_id;
         public int date;
@@ -13501,6 +14035,7 @@ public class TLRPC {
     }
 
     public static class TL_chatParticipant extends ChatParticipant {
+        private static final long serialVersionUID = 1507L;
         public static int constructor = 0xc8d7493e;
 
 
@@ -13519,6 +14054,7 @@ public class TLRPC {
     }
 
     public static class TL_chatParticipantCreator extends ChatParticipant {
+        private static final long serialVersionUID = 1508L;
         public static int constructor = 0xda13538a;
 
 
@@ -13533,6 +14069,7 @@ public class TLRPC {
     }
 
     public static class TL_chatParticipantAdmin extends ChatParticipant {
+        private static final long serialVersionUID = 1509L;
         public static int constructor = 0xe2d6e436;
 
 
@@ -13551,6 +14088,7 @@ public class TLRPC {
     }
 
     public static class Chat extends TLObject {
+        private static final long serialVersionUID = 1510L;
         public int flags;
         public boolean creator;
         public boolean kicked;
@@ -13671,6 +14209,7 @@ public class TLRPC {
     }
 
     public static class TL_chat_old2 extends TL_chat {
+        private static final long serialVersionUID = 1511L;
         public static int constructor = 0x7312bc48;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -13708,6 +14247,7 @@ public class TLRPC {
     }
 
     public static class TL_channelForbidden extends Chat {
+        private static final long serialVersionUID = 1512L;
         public static int constructor = 0x8537784f;
 
 
@@ -13732,6 +14272,7 @@ public class TLRPC {
     }
 
     public static class TL_chatForbidden extends Chat {
+        private static final long serialVersionUID = 1513L;
         public static int constructor = 0x7328bdb;
 
 
@@ -13748,6 +14289,7 @@ public class TLRPC {
     }
 
     public static class TL_channel extends Chat {
+        private static final long serialVersionUID = 1514L;
         public static int constructor = 0xa14dca52;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -13813,6 +14355,7 @@ public class TLRPC {
     }
 
     public static class TL_channel_old extends TL_channel {
+        private static final long serialVersionUID = 1515L;
         public static int constructor = 0x678e9587;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -13862,6 +14405,7 @@ public class TLRPC {
     }
 
     public static class TL_chatForbidden_old extends TL_chatForbidden {
+        private static final long serialVersionUID = 1516L;
         public static int constructor = 0xfb0ccc41;
 
 
@@ -13880,6 +14424,7 @@ public class TLRPC {
     }
 
     public static class TL_chat extends Chat {
+        private static final long serialVersionUID = 1517L;
         public static int constructor = 0xd91cdd54;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -13923,6 +14468,7 @@ public class TLRPC {
     }
 
     public static class TL_geoChat extends Chat {
+        private static final long serialVersionUID = 1518L;
         public static int constructor = 0x75eaea5a;
 
 
@@ -13957,6 +14503,7 @@ public class TLRPC {
     }
 
     public static class TL_channelForbidden_layer52 extends Chat {
+        private static final long serialVersionUID = 1519L;
         public static int constructor = 0x2d85832c;
 
 
@@ -13975,6 +14522,7 @@ public class TLRPC {
     }
 
     public static class TL_chat_old extends TL_chat {
+        private static final long serialVersionUID = 1520L;
         public static int constructor = 0x6e9c9bc7;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -14000,6 +14548,7 @@ public class TLRPC {
     }
 
     public static class TL_channel_layer48 extends TL_channel {
+        private static final long serialVersionUID = 1521L;
         public static int constructor = 0x4b1b7506;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -14059,6 +14608,7 @@ public class TLRPC {
     }
 
     public static class StickerSet extends TLObject {
+        private static final long serialVersionUID = 1522L;
         public long id;
         public long access_hash;
         public String title;
@@ -14091,6 +14641,7 @@ public class TLRPC {
     }
 
     public static class TL_stickerSet_old extends TL_stickerSet {
+        private static final long serialVersionUID = 1523L;
         public static int constructor = 0xa7a43b17;
 
 
@@ -14111,6 +14662,7 @@ public class TLRPC {
     }
 
     public static class TL_stickerSet extends StickerSet {
+        private static final long serialVersionUID = 1524L;
         public static int constructor = 0xcd303b41;
 
 
@@ -14143,6 +14695,7 @@ public class TLRPC {
     }
 
     public static class storage_FileType extends TLObject {
+        private static final long serialVersionUID = 1525L;
 
         public static storage_FileType TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             storage_FileType result = null;
@@ -14189,6 +14742,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_fileUnknown extends storage_FileType {
+        private static final long serialVersionUID = 1526L;
         public static int constructor = 0xaa963b05;
 
 
@@ -14198,6 +14752,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_fileMp4 extends storage_FileType {
+        private static final long serialVersionUID = 1527L;
         public static int constructor = 0xb3cea0e4;
 
 
@@ -14207,6 +14762,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_fileWebp extends storage_FileType {
+        private static final long serialVersionUID = 1528L;
         public static int constructor = 0x1081464c;
 
 
@@ -14216,6 +14772,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_filePng extends storage_FileType {
+        private static final long serialVersionUID = 1529L;
         public static int constructor = 0xa4f63c0;
 
 
@@ -14225,6 +14782,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_fileGif extends storage_FileType {
+        private static final long serialVersionUID = 1530L;
         public static int constructor = 0xcae1aadf;
 
 
@@ -14234,6 +14792,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_filePdf extends storage_FileType {
+        private static final long serialVersionUID = 1531L;
         public static int constructor = 0xae1e508d;
 
 
@@ -14243,6 +14802,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_fileMp3 extends storage_FileType {
+        private static final long serialVersionUID = 1532L;
         public static int constructor = 0x528a0677;
 
 
@@ -14252,6 +14812,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_fileJpeg extends storage_FileType {
+        private static final long serialVersionUID = 1533L;
         public static int constructor = 0x7efe0e;
 
 
@@ -14261,6 +14822,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_fileMov extends storage_FileType {
+        private static final long serialVersionUID = 1534L;
         public static int constructor = 0x4b09ebbc;
 
 
@@ -14270,6 +14832,7 @@ public class TLRPC {
     }
 
     public static class TL_storage_filePartial extends storage_FileType {
+        private static final long serialVersionUID = 1535L;
         public static int constructor = 0x40bc6f52;
 
 
@@ -14279,6 +14842,7 @@ public class TLRPC {
     }
 
     public static class auth_CodeType extends TLObject {
+        private static final long serialVersionUID = 1536L;
 
         public static auth_CodeType TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             auth_CodeType result = null;
@@ -14304,6 +14868,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_codeTypeSms extends auth_CodeType {
+        private static final long serialVersionUID = 1537L;
         public static int constructor = 0x72a3158c;
 
 
@@ -14313,6 +14878,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_codeTypeCall extends auth_CodeType {
+        private static final long serialVersionUID = 1538L;
         public static int constructor = 0x741cd3e3;
 
 
@@ -14322,6 +14888,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_codeTypeFlashCall extends auth_CodeType {
+        private static final long serialVersionUID = 1539L;
         public static int constructor = 0x226ccefb;
 
 
@@ -14331,6 +14898,7 @@ public class TLRPC {
     }
 
     public static class MessagesFilter extends TLObject {
+        private static final long serialVersionUID = 1540L;
 
         public static MessagesFilter TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             MessagesFilter result = null;
@@ -14380,6 +14948,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterDocument extends MessagesFilter {
+        private static final long serialVersionUID = 1541L;
         public static int constructor = 0x9eddf188;
 
 
@@ -14389,6 +14958,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterMusic extends MessagesFilter {
+        private static final long serialVersionUID = 1542L;
         public static int constructor = 0x3751b49e;
 
 
@@ -14398,6 +14968,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterChatPhotos extends MessagesFilter {
+        private static final long serialVersionUID = 1543L;
         public static int constructor = 0x3a20ecb8;
 
 
@@ -14407,6 +14978,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterVideo extends MessagesFilter {
+        private static final long serialVersionUID = 1544L;
         public static int constructor = 0x9fc00e65;
 
 
@@ -14416,6 +14988,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterPhotos extends MessagesFilter {
+        private static final long serialVersionUID = 1545L;
         public static int constructor = 0x9609a51c;
 
 
@@ -14425,6 +14998,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterPhotoVideoDocuments extends MessagesFilter {
+        private static final long serialVersionUID = 1546L;
         public static int constructor = 0xd95e73bb;
 
 
@@ -14434,6 +15008,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterUrl extends MessagesFilter {
+        private static final long serialVersionUID = 1547L;
         public static int constructor = 0x7ef0dd87;
 
 
@@ -14443,6 +15018,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterGif extends MessagesFilter {
+        private static final long serialVersionUID = 1548L;
         public static int constructor = 0xffc86587;
 
 
@@ -14452,6 +15028,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterVoice extends MessagesFilter {
+        private static final long serialVersionUID = 1549L;
         public static int constructor = 0x50f5c392;
 
 
@@ -14461,6 +15038,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterEmpty extends MessagesFilter {
+        private static final long serialVersionUID = 1550L;
         public static int constructor = 0x57e2f66c;
 
 
@@ -14470,6 +15048,7 @@ public class TLRPC {
     }
 
     public static class TL_inputMessagesFilterPhotoVideo extends MessagesFilter {
+        private static final long serialVersionUID = 1551L;
         public static int constructor = 0x56e9f0e4;
 
 
@@ -14479,6 +15058,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_located extends TLObject {
+        private static final long serialVersionUID = 1552L;
         public static int constructor = 0x48feb267;
 
         public ArrayList<TL_chatLocated> results = new ArrayList<>();
@@ -14592,6 +15172,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_messageEmpty extends TLObject {
+        private static final long serialVersionUID = 1553L;
         public static int constructor = 0x3f4e0648;
 
 
@@ -14614,6 +15195,7 @@ public class TLRPC {
     }
 
     public static class TL_messageFwdHeader extends TLObject {
+        private static final long serialVersionUID = 1554L;
         public static int constructor = 0xc786ddcb;
 
         public int flags;
@@ -14666,6 +15248,7 @@ public class TLRPC {
     }
 
     public static class FileLocation extends TLObject {
+        private static final long serialVersionUID = 1555L;
         public int dc_id;
         public long volume_id;
         public int local_id;
@@ -14697,6 +15280,7 @@ public class TLRPC {
     }
 
     public static class TL_fileLocation extends FileLocation {
+        private static final long serialVersionUID = 1556L;
         public static int constructor = 0x53d69076;
 
 
@@ -14717,6 +15301,7 @@ public class TLRPC {
     }
 
     public static class TL_fileEncryptedLocation extends FileLocation {
+        private static final long serialVersionUID = 1557L;
         public static int constructor = 0x55555554;
 
 
@@ -14741,6 +15326,7 @@ public class TLRPC {
     }
 
     public static class TL_fileLocationUnavailable extends FileLocation {
+        private static final long serialVersionUID = 1558L;
         public static int constructor = 0x7c596b46;
 
 
@@ -14759,6 +15345,7 @@ public class TLRPC {
     }
 
     public static class TL_inputGeoChat extends TLObject {
+        private static final long serialVersionUID = 1559L;
         public static int constructor = 0x74d456fa;
 
         public int chat_id;
@@ -14790,6 +15377,7 @@ public class TLRPC {
     }
 
     public static class messages_SavedGifs extends TLObject {
+        private static final long serialVersionUID = 1560L;
         public int hash;
         public ArrayList<Document> gifs = new ArrayList<>();
 
@@ -14814,6 +15402,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_savedGifsNotModified extends messages_SavedGifs {
+        private static final long serialVersionUID = 1561L;
         public static int constructor = 0xe8025ca2;
 
 
@@ -14823,6 +15412,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_savedGifs extends messages_SavedGifs {
+        private static final long serialVersionUID = 1562L;
         public static int constructor = 0x2e0709a5;
 
 
@@ -14858,6 +15448,7 @@ public class TLRPC {
     }
 
     public static class PhotoSize extends TLObject {
+        private static final long serialVersionUID = 1563L;
         public String type;
         public FileLocation location;
         public int w;
@@ -14889,6 +15480,7 @@ public class TLRPC {
     }
 
     public static class TL_photoSize extends PhotoSize {
+        private static final long serialVersionUID = 1564L;
         public static int constructor = 0x77bfb61b;
 
 
@@ -14911,6 +15503,7 @@ public class TLRPC {
     }
 
     public static class TL_photoSizeEmpty extends PhotoSize {
+        private static final long serialVersionUID = 1565L;
         public static int constructor = 0xe17e23c;
 
 
@@ -14939,6 +15532,7 @@ public class TLRPC {
     }
 
     public static class TL_photoCachedSize extends PhotoSize {
+        private static final long serialVersionUID = 1566L;
         public static int constructor = 0xe9a734fa;
 
 
@@ -14961,6 +15555,7 @@ public class TLRPC {
     }
 
     public static class TL_contactFound extends TLObject {
+        private static final long serialVersionUID = 1567L;
         public static int constructor = 0xea879f95;
 
         public int user_id;
@@ -14989,6 +15584,7 @@ public class TLRPC {
     }
 
     public static class ExportedChatInvite extends TLObject {
+        private static final long serialVersionUID = 1568L;
         public String link;
 
         public static ExportedChatInvite TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
@@ -15012,6 +15608,7 @@ public class TLRPC {
     }
 
     public static class TL_chatInviteExported extends ExportedChatInvite {
+        private static final long serialVersionUID = 1569L;
         public static int constructor = 0xfc2e05bc;
 
 
@@ -15026,6 +15623,7 @@ public class TLRPC {
     }
 
     public static class TL_chatInviteEmpty extends ExportedChatInvite {
+        private static final long serialVersionUID = 1570L;
         public static int constructor = 0x69df3769;
 
 
@@ -15035,6 +15633,7 @@ public class TLRPC {
     }
 
     public static class InputFile extends TLObject {
+        private static final long serialVersionUID = 1571L;
         public long id;
         public int parts;
         public String name;
@@ -15061,6 +15660,7 @@ public class TLRPC {
     }
 
     public static class TL_inputFileBig extends InputFile {
+        private static final long serialVersionUID = 1572L;
         public static int constructor = 0xfa4f0bb5;
 
 
@@ -15079,6 +15679,7 @@ public class TLRPC {
     }
 
     public static class TL_inputFile extends InputFile {
+        private static final long serialVersionUID = 1573L;
         public static int constructor = 0xf52ff27f;
 
 
@@ -15099,6 +15700,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_state extends TLObject {
+        private static final long serialVersionUID = 1574L;
         public static int constructor = 0xa56c2a3e;
 
         public int pts;
@@ -15139,6 +15741,7 @@ public class TLRPC {
     }
 
     public static class TL_userFull extends TLObject {
+        private static final long serialVersionUID = 1575L;
         public static int constructor = 0x5932fc03;
 
         public int flags;
@@ -15200,6 +15803,7 @@ public class TLRPC {
     }
 
     public static class Updates extends TLObject {
+        private static final long serialVersionUID = 1576L;
         public ArrayList<Update> updates = new ArrayList<>();
         public ArrayList<User> users = new ArrayList<>();
         public ArrayList<Chat> chats = new ArrayList<>();
@@ -15261,6 +15865,7 @@ public class TLRPC {
     }
 
     public static class TL_updates extends Updates {
+        private static final long serialVersionUID = 1577L;
         public static int constructor = 0x74ae4240;
 
 
@@ -15316,6 +15921,7 @@ public class TLRPC {
     }
 
     public static class TL_updateShortMessage extends Updates {
+        private static final long serialVersionUID = 1578L;
         public static int constructor = 0x914fbf11;
 
 
@@ -15361,6 +15967,7 @@ public class TLRPC {
     }
 
     public static class TL_updateShortSentMessage extends Updates {
+        private static final long serialVersionUID = 1579L;
         public static int constructor = 0x11f1331c;
 
 
@@ -15395,6 +16002,7 @@ public class TLRPC {
     }
 
     public static class TL_updateShort extends Updates {
+        private static final long serialVersionUID = 1580L;
         public static int constructor = 0x78d4dec1;
 
 
@@ -15405,6 +16013,7 @@ public class TLRPC {
     }
 
     public static class TL_updateShortChatMessage extends Updates {
+        private static final long serialVersionUID = 1581L;
         public static int constructor = 0x16812688;
 
 
@@ -15451,6 +16060,7 @@ public class TLRPC {
     }
 
     public static class TL_updatesCombined extends Updates {
+        private static final long serialVersionUID = 1582L;
         public static int constructor = 0x725b04c3;
 
 
@@ -15507,10 +16117,12 @@ public class TLRPC {
     }
 
     public static class TL_updatesTooLong extends Updates {
+        private static final long serialVersionUID = 1583L;
         public static int constructor = 0xe317af7e;
     }
 
     public static class WallPaper extends TLObject {
+        private static final long serialVersionUID = 1584L;
         public int id;
         public String title;
         public ArrayList<PhotoSize> sizes = new ArrayList<>();
@@ -15538,6 +16150,7 @@ public class TLRPC {
     }
 
     public static class TL_wallPaper extends WallPaper {
+        private static final long serialVersionUID = 1585L;
         public static int constructor = 0xccb03657;
 
 
@@ -15577,6 +16190,7 @@ public class TLRPC {
     }
 
     public static class TL_wallPaperSolid extends WallPaper {
+        private static final long serialVersionUID = 1586L;
         public static int constructor = 0x63117f24;
 
 
@@ -15597,6 +16211,7 @@ public class TLRPC {
     }
 
     public static class TL_stickerPack extends TLObject {
+        private static final long serialVersionUID = 1587L;
         public static int constructor = 0x12b299d4;
 
         public String emoticon;
@@ -15643,6 +16258,7 @@ public class TLRPC {
     }
 
     public static class TL_inputEncryptedChat extends TLObject {
+        private static final long serialVersionUID = 1588L;
         public static int constructor = 0xf141b5e1;
 
         public int chat_id;
@@ -15674,6 +16290,7 @@ public class TLRPC {
     }
 
     public static class InputChatPhoto extends TLObject {
+        private static final long serialVersionUID = 1589L;
         public InputPhoto id;
         public InputPhotoCrop crop;
         public InputFile file;
@@ -15702,6 +16319,7 @@ public class TLRPC {
     }
 
     public static class TL_inputChatPhoto extends InputChatPhoto {
+        private static final long serialVersionUID = 1590L;
         public static int constructor = 0xb2e1bf08;
 
 
@@ -15718,6 +16336,7 @@ public class TLRPC {
     }
 
     public static class TL_inputChatPhotoEmpty extends InputChatPhoto {
+        private static final long serialVersionUID = 1591L;
         public static int constructor = 0x1ca48f57;
 
 
@@ -15727,6 +16346,7 @@ public class TLRPC {
     }
 
     public static class TL_inputChatUploadedPhoto extends InputChatPhoto {
+        private static final long serialVersionUID = 1592L;
         public static int constructor = 0x94254732;
 
 
@@ -15743,6 +16363,7 @@ public class TLRPC {
     }
 
     public static class TL_nearestDc extends TLObject {
+        private static final long serialVersionUID = 1593L;
         public static int constructor = 0x8e1a1775;
 
         public String country;
@@ -15777,6 +16398,7 @@ public class TLRPC {
     }
 
     public static class InputPhoto extends TLObject {
+        private static final long serialVersionUID = 1594L;
         public long id;
         public long access_hash;
 
@@ -15801,6 +16423,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPhotoEmpty extends InputPhoto {
+        private static final long serialVersionUID = 1595L;
         public static int constructor = 0x1cd7bf0d;
 
 
@@ -15810,6 +16433,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPhoto extends InputPhoto {
+        private static final long serialVersionUID = 1596L;
         public static int constructor = 0xfb95c6c4;
 
 
@@ -15826,6 +16450,7 @@ public class TLRPC {
     }
 
     public static class TL_importedContact extends TLObject {
+        private static final long serialVersionUID = 1597L;
         public static int constructor = 0xd0028438;
 
         public int user_id;
@@ -15857,6 +16482,7 @@ public class TLRPC {
     }
 
     public static class TL_accountDaysTTL extends TLObject {
+        private static final long serialVersionUID = 1598L;
         public static int constructor = 0xb8d0afdf;
 
         public int days;
@@ -15885,6 +16511,7 @@ public class TLRPC {
     }
 
     public static class messages_Stickers extends TLObject {
+        private static final long serialVersionUID = 1599L;
         public String hash;
         public ArrayList<Document> stickers = new ArrayList<>();
 
@@ -15909,6 +16536,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_stickersNotModified extends messages_Stickers {
+        private static final long serialVersionUID = 1600L;
         public static int constructor = 0xf1749a22;
 
 
@@ -15918,6 +16546,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_stickers extends messages_Stickers {
+        private static final long serialVersionUID = 1601L;
         public static int constructor = 0x8a8ecd32;
 
 
@@ -15953,6 +16582,7 @@ public class TLRPC {
     }
 
     public static class InputPeer extends TLObject {
+        private static final long serialVersionUID = 1602L;
         public int user_id;
         public long access_hash;
         public int chat_id;
@@ -15988,6 +16618,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPeerUser extends InputPeer {
+        private static final long serialVersionUID = 1603L;
         public static int constructor = 0x7b8e7de6;
 
 
@@ -16004,6 +16635,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPeerChat extends InputPeer {
+        private static final long serialVersionUID = 1604L;
         public static int constructor = 0x179be863;
 
 
@@ -16018,6 +16650,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPeerEmpty extends InputPeer {
+        private static final long serialVersionUID = 1605L;
         public static int constructor = 0x7f3b18ea;
 
 
@@ -16027,6 +16660,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPeerSelf extends InputPeer {
+        private static final long serialVersionUID = 1606L;
         public static int constructor = 0x7da07ec9;
 
 
@@ -16036,6 +16670,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPeerChannel extends InputPeer {
+        private static final long serialVersionUID = 1607L;
         public static int constructor = 0x20adaef8;
 
 
@@ -16052,6 +16687,7 @@ public class TLRPC {
     }
 
     public static class TL_account_passwordInputSettings extends TLObject {
+        private static final long serialVersionUID = 1608L;
         public static int constructor = 0x86916deb;
 
         public int flags;
@@ -16108,6 +16744,7 @@ public class TLRPC {
     }
 
     public static class TL_dcOption extends TLObject {
+        private static final long serialVersionUID = 1609L;
         public static int constructor = 0x5d8c6cc;
 
         public int flags;
@@ -16154,6 +16791,7 @@ public class TLRPC {
     }
 
     public static class TL_decryptedMessageLayer extends TLObject {
+        private static final long serialVersionUID = 1610L;
         public static int constructor = 0x1be31789;
 
         public byte[] random_bytes;
@@ -16194,6 +16832,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_peerDialogs extends TLObject {
+        private static final long serialVersionUID = 1611L;
         public static int constructor = 0x3371c354;
 
         public ArrayList<TL_dialog> dialogs = new ArrayList<>();
@@ -16310,6 +16949,7 @@ public class TLRPC {
     }
 
     public static class TL_topPeer extends TLObject {
+        private static final long serialVersionUID = 1612L;
         public static int constructor = 0xedcdc05b;
 
         public Peer peer;
@@ -16341,6 +16981,7 @@ public class TLRPC {
     }
 
     public static class InputPhotoCrop extends TLObject {
+        private static final long serialVersionUID = 1613L;
         public double crop_left;
         public double crop_top;
         public double crop_width;
@@ -16366,6 +17007,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPhotoCropAuto extends InputPhotoCrop {
+        private static final long serialVersionUID = 1614L;
         public static int constructor = 0xade6b004;
 
 
@@ -16375,6 +17017,7 @@ public class TLRPC {
     }
 
     public static class TL_inputPhotoCrop extends InputPhotoCrop {
+        private static final long serialVersionUID = 1615L;
         public static int constructor = 0xd9915325;
 
 
@@ -16393,6 +17036,7 @@ public class TLRPC {
     }
 
     public static class messages_Dialogs extends TLObject {
+        private static final long serialVersionUID = 1616L;
         public ArrayList<TL_dialog> dialogs = new ArrayList<>();
         public ArrayList<Message> messages = new ArrayList<>();
         public ArrayList<Chat> chats = new ArrayList<>();
@@ -16420,6 +17064,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_dialogs extends messages_Dialogs {
+        private static final long serialVersionUID = 1617L;
         public static int constructor = 0x15ba6c40;
 
 
@@ -16516,6 +17161,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_dialogsSlice extends messages_Dialogs {
+        private static final long serialVersionUID = 1618L;
         public static int constructor = 0x71e094f3;
 
 
@@ -16614,6 +17260,7 @@ public class TLRPC {
     }
 
     public static class TL_account_authorizations extends TLObject {
+        private static final long serialVersionUID = 1619L;
         public static int constructor = 0x1250abde;
 
         public ArrayList<TL_authorization> authorizations = new ArrayList<>();
@@ -16661,6 +17308,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_checkPhone extends TLObject {
+        private static final long serialVersionUID = 1620L;
         public static int constructor = 0x6fe51dfb;
 
         public String phone_number;
@@ -16676,6 +17324,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_sendCode extends TLObject {
+        private static final long serialVersionUID = 1621L;
         public static int constructor = 0x86aef0ec;
 
         public int flags;
@@ -16703,6 +17352,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_signUp extends TLObject {
+        private static final long serialVersionUID = 1622L;
         public static int constructor = 0x1b067634;
 
         public String phone_number;
@@ -16726,6 +17376,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_signIn extends TLObject {
+        private static final long serialVersionUID = 1623L;
         public static int constructor = 0xbcd51581;
 
         public String phone_number;
@@ -16745,6 +17396,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_logOut extends TLObject {
+        private static final long serialVersionUID = 1624L;
         public static int constructor = 0x5717da40;
 
 
@@ -16758,6 +17410,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_resetAuthorizations extends TLObject {
+        private static final long serialVersionUID = 1625L;
         public static int constructor = 0x9fab0d1a;
 
 
@@ -16771,6 +17424,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_sendInvites extends TLObject {
+        private static final long serialVersionUID = 1626L;
         public static int constructor = 0x771c1d97;
 
         public ArrayList<String> phone_numbers = new ArrayList<>();
@@ -16793,6 +17447,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_exportAuthorization extends TLObject {
+        private static final long serialVersionUID = 1627L;
         public static int constructor = 0xe5bfffcd;
 
         public int dc_id;
@@ -16808,6 +17463,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_importAuthorization extends TLObject {
+        private static final long serialVersionUID = 1628L;
         public static int constructor = 0xe3ef9613;
 
         public int id;
@@ -16825,6 +17481,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_bindTempAuthKey extends TLObject {
+        private static final long serialVersionUID = 1629L;
         public static int constructor = 0xcdd42a05;
 
         public long perm_auth_key_id;
@@ -16846,6 +17503,7 @@ public class TLRPC {
     }
 
     public static class TL_account_registerDevice extends TLObject {
+        private static final long serialVersionUID = 1630L;
         public static int constructor = 0x637ea878;
 
         public int token_type;
@@ -16863,6 +17521,7 @@ public class TLRPC {
     }
 
     public static class TL_account_unregisterDevice extends TLObject {
+        private static final long serialVersionUID = 1631L;
         public static int constructor = 0x65c55b40;
 
         public int token_type;
@@ -16880,6 +17539,7 @@ public class TLRPC {
     }
 
     public static class TL_account_updateNotifySettings extends TLObject {
+        private static final long serialVersionUID = 1632L;
         public static int constructor = 0x84be5b93;
 
         public InputNotifyPeer peer;
@@ -16897,6 +17557,7 @@ public class TLRPC {
     }
 
     public static class TL_account_getNotifySettings extends TLObject {
+        private static final long serialVersionUID = 1633L;
         public static int constructor = 0x12b3ad31;
 
         public InputNotifyPeer peer;
@@ -16912,6 +17573,7 @@ public class TLRPC {
     }
 
     public static class TL_account_resetNotifySettings extends TLObject {
+        private static final long serialVersionUID = 1634L;
         public static int constructor = 0xdb7e1747;
 
 
@@ -16925,6 +17587,7 @@ public class TLRPC {
     }
 
     public static class TL_account_updateProfile extends TLObject {
+        private static final long serialVersionUID = 1635L;
         public static int constructor = 0x78515775;
 
         public int flags;
@@ -16952,6 +17615,7 @@ public class TLRPC {
     }
 
     public static class TL_account_updateStatus extends TLObject {
+        private static final long serialVersionUID = 1636L;
         public static int constructor = 0x6628562c;
 
         public boolean offline;
@@ -16964,9 +17628,17 @@ public class TLRPC {
             stream.writeInt32(constructor);
             stream.writeBool(offline);
         }
+
+        @Override
+        public String toString() {
+            return "TL_account_updateStatus{" +
+                    "offline=" + offline +
+                    '}';
+        }
     }
 
     public static class TL_account_getWallPapers extends TLObject {
+        private static final long serialVersionUID = 1637L;
         public static int constructor = 0xc04cfac2;
 
 
@@ -16989,6 +17661,7 @@ public class TLRPC {
     }
 
     public static class TL_users_getUsers extends TLObject {
+        private static final long serialVersionUID = 1638L;
         public static int constructor = 0xd91a548;
 
         public ArrayList<InputUser> id = new ArrayList<>();
@@ -17018,6 +17691,7 @@ public class TLRPC {
     }
 
     public static class TL_account_reportPeer extends TLObject {
+        private static final long serialVersionUID = 1639L;
         public static int constructor = 0xae189d5f;
 
         public InputPeer peer;
@@ -17035,6 +17709,7 @@ public class TLRPC {
     }
 
     public static class TL_users_getFullUser extends TLObject {
+        private static final long serialVersionUID = 1640L;
         public static int constructor = 0xca30a5b1;
 
         public InputUser id;
@@ -17050,6 +17725,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_getStatuses extends TLObject {
+        private static final long serialVersionUID = 1641L;
         public static int constructor = 0xc4a353ee;
 
 
@@ -17072,6 +17748,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_getContacts extends TLObject {
+        private static final long serialVersionUID = 1642L;
         public static int constructor = 0x22c6aa08;
 
         public String hash;
@@ -17087,6 +17764,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_importContacts extends TLObject {
+        private static final long serialVersionUID = 1643L;
         public static int constructor = 0xda30b32d;
 
         public ArrayList<TL_inputPhoneContact> contacts = new ArrayList<>();
@@ -17109,6 +17787,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_deleteContact extends TLObject {
+        private static final long serialVersionUID = 1644L;
         public static int constructor = 0x8e953744;
 
         public InputUser id;
@@ -17124,6 +17803,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_deleteContacts extends TLObject {
+        private static final long serialVersionUID = 1645L;
         public static int constructor = 0x59ab389e;
 
         public ArrayList<InputUser> id = new ArrayList<>();
@@ -17144,6 +17824,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_block extends TLObject {
+        private static final long serialVersionUID = 1646L;
         public static int constructor = 0x332b49fc;
 
         public InputUser id;
@@ -17159,6 +17840,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_unblock extends TLObject {
+        private static final long serialVersionUID = 1647L;
         public static int constructor = 0xe54100bd;
 
         public InputUser id;
@@ -17174,6 +17856,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_getBlocked extends TLObject {
+        private static final long serialVersionUID = 1648L;
         public static int constructor = 0xf57c350f;
 
         public int offset;
@@ -17191,6 +17874,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_exportCard extends TLObject {
+        private static final long serialVersionUID = 1649L;
         public static int constructor = 0x84e53737;
 
 
@@ -17209,6 +17893,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_importCard extends TLObject {
+        private static final long serialVersionUID = 1650L;
         public static int constructor = 0x4fe196fe;
 
         public ArrayList<Integer> export_card = new ArrayList<>();
@@ -17229,6 +17914,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getMessages extends TLObject {
+        private static final long serialVersionUID = 1651L;
         public static int constructor = 0x4222fa74;
 
         public ArrayList<Integer> id = new ArrayList<>();
@@ -17249,6 +17935,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getDialogs extends TLObject {
+        private static final long serialVersionUID = 1652L;
         public static int constructor = 0x6b47f94d;
 
         public int offset_date;
@@ -17270,6 +17957,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getHistory extends TLObject {
+        private static final long serialVersionUID = 1653L;
         public static int constructor = 0xafa92846;
 
         public InputPeer peer;
@@ -17297,6 +17985,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_search extends TLObject {
+        private static final long serialVersionUID = 1654L;
         public static int constructor = 0xd4569248;
 
         public int flags;
@@ -17328,6 +18017,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_readHistory extends TLObject {
+        private static final long serialVersionUID = 1655L;
         public static int constructor = 0xe306d3a;
 
         public InputPeer peer;
@@ -17345,6 +18035,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_deleteHistory extends TLObject {
+        private static final long serialVersionUID = 1656L;
         public static int constructor = 0x1c015b09;
 
         public int flags;
@@ -17366,6 +18057,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_toggleChatAdmins extends TLObject {
+        private static final long serialVersionUID = 1657L;
         public static int constructor = 0xec8bd9e1;
 
         public int chat_id;
@@ -17383,6 +18075,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_editChatAdmin extends TLObject {
+        private static final long serialVersionUID = 1658L;
         public static int constructor = 0xa9e69f2e;
 
         public int chat_id;
@@ -17402,6 +18095,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_migrateChat extends TLObject {
+        private static final long serialVersionUID = 1659L;
         public static int constructor = 0x15a3b8e3;
 
         public int chat_id;
@@ -17417,6 +18111,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_searchGlobal extends TLObject {
+        private static final long serialVersionUID = 1660L;
         public static int constructor = 0x9e3cacb0;
 
         public String q;
@@ -17440,6 +18135,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_deleteMessages extends TLObject {
+        private static final long serialVersionUID = 1661L;
         public static int constructor = 0xa5f18925;
 
         public ArrayList<Integer> id = new ArrayList<>();
@@ -17460,6 +18156,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_receivedMessages extends TLObject {
+        private static final long serialVersionUID = 1662L;
         public static int constructor = 0x5a954c0;
 
         public int max_id;
@@ -17484,6 +18181,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_setTyping extends TLObject {
+        private static final long serialVersionUID = 1663L;
         public static int constructor = 0xa3825e50;
 
         public InputPeer peer;
@@ -17501,6 +18199,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_sendMessage extends TLObject {
+        private static final long serialVersionUID = 1664L;
         public static int constructor = 0xfa88427a;
 
         public int flags;
@@ -17547,6 +18246,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_sendMedia extends TLObject {
+        private static final long serialVersionUID = 1665L;
         public static int constructor = 0xc8f16791;
 
         public int flags;
@@ -17582,6 +18282,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_forwardMessages extends TLObject {
+        private static final long serialVersionUID = 1666L;
         public static int constructor = 0x708e0195;
 
         public int flags;
@@ -17619,6 +18320,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_reportSpam extends TLObject {
+        private static final long serialVersionUID = 1667L;
         public static int constructor = 0xcf1592db;
 
         public InputPeer peer;
@@ -17634,6 +18336,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_hideReportSpam extends TLObject {
+        private static final long serialVersionUID = 1668L;
         public static int constructor = 0xa8f1709b;
 
         public InputPeer peer;
@@ -17649,6 +18352,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getPeerSettings extends TLObject {
+        private static final long serialVersionUID = 1669L;
         public static int constructor = 0x3672e09c;
 
         public InputPeer peer;
@@ -17664,6 +18368,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getChats extends TLObject {
+        private static final long serialVersionUID = 1670L;
         public static int constructor = 0x3c6aa187;
 
         public ArrayList<Integer> id = new ArrayList<>();
@@ -17684,6 +18389,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getFullChat extends TLObject {
+        private static final long serialVersionUID = 1671L;
         public static int constructor = 0x3b831c66;
 
         public int chat_id;
@@ -17699,6 +18405,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_editChatTitle extends TLObject {
+        private static final long serialVersionUID = 1672L;
         public static int constructor = 0xdc452855;
 
         public int chat_id;
@@ -17716,6 +18423,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_editChatPhoto extends TLObject {
+        private static final long serialVersionUID = 1673L;
         public static int constructor = 0xca4c79d8;
 
         public int chat_id;
@@ -17733,6 +18441,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_addChatUser extends TLObject {
+        private static final long serialVersionUID = 1674L;
         public static int constructor = 0xf9a0aa09;
 
         public int chat_id;
@@ -17752,6 +18461,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_deleteChatUser extends TLObject {
+        private static final long serialVersionUID = 1675L;
         public static int constructor = 0xe0611f16;
 
         public int chat_id;
@@ -17769,6 +18479,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_createChat extends TLObject {
+        private static final long serialVersionUID = 1676L;
         public static int constructor = 0x9cb126e;
 
         public ArrayList<InputUser> users = new ArrayList<>();
@@ -17791,6 +18502,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_getState extends TLObject {
+        private static final long serialVersionUID = 1677L;
         public static int constructor = 0xedd4882a;
 
 
@@ -17804,6 +18516,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_getDifference extends TLObject {
+        private static final long serialVersionUID = 1678L;
         public static int constructor = 0xa041495;
 
         public int pts;
@@ -17823,6 +18536,7 @@ public class TLRPC {
     }
 
     public static class TL_updates_getChannelDifference extends TLObject {
+        private static final long serialVersionUID = 1679L;
         public static int constructor = 0xbb32d7c0;
 
         public InputChannel channel;
@@ -17844,6 +18558,7 @@ public class TLRPC {
     }
 
     public static class TL_photos_updateProfilePhoto extends TLObject {
+        private static final long serialVersionUID = 1680L;
         public static int constructor = 0xeef579a0;
 
         public InputPhoto id;
@@ -17861,6 +18576,7 @@ public class TLRPC {
     }
 
     public static class TL_photos_uploadProfilePhoto extends TLObject {
+        private static final long serialVersionUID = 1681L;
         public static int constructor = 0xd50f9c88;
 
         public InputFile file;
@@ -17882,6 +18598,7 @@ public class TLRPC {
     }
 
     public static class TL_photos_deletePhotos extends TLObject {
+        private static final long serialVersionUID = 1682L;
         public static int constructor = 0x87cf7f2f;
 
         public ArrayList<InputPhoto> id = new ArrayList<>();
@@ -17907,6 +18624,7 @@ public class TLRPC {
     }
 
     public static class TL_upload_getFile extends TLObject {
+        private static final long serialVersionUID = 1683L;
         public static int constructor = 0xe3a6cfb5;
 
         public InputFileLocation location;
@@ -17923,9 +18641,19 @@ public class TLRPC {
             stream.writeInt32(offset);
             stream.writeInt32(limit);
         }
+
+        @Override
+        public String toString() {
+            return "TL_upload_getFile{" +
+                    "location=" + location +
+                    ", offset=" + offset +
+                    ", limit=" + limit +
+                    '}';
+        }
     }
 
     public static class TL_help_getConfig extends TLObject {
+        private static final long serialVersionUID = 1684L;
         public static int constructor = 0xc4f9186b;
 
 
@@ -17939,6 +18667,7 @@ public class TLRPC {
     }
 
     public static class TL_help_getNearestDc extends TLObject {
+        private static final long serialVersionUID = 1685L;
         public static int constructor = 0x1fb33026;
 
 
@@ -17952,6 +18681,7 @@ public class TLRPC {
     }
 
     public static class TL_help_getAppUpdate extends TLObject {
+        private static final long serialVersionUID = 1686L;
         public static int constructor = 0xae2de196;
 
 
@@ -17965,6 +18695,7 @@ public class TLRPC {
     }
 
     public static class TL_help_saveAppLog extends TLObject {
+        private static final long serialVersionUID = 1687L;
         public static int constructor = 0x6f02f748;
 
         public ArrayList<TL_inputAppEvent> events = new ArrayList<>();
@@ -17985,6 +18716,7 @@ public class TLRPC {
     }
 
     public static class TL_help_getInviteText extends TLObject {
+        private static final long serialVersionUID = 1688L;
         public static int constructor = 0x4d392343;
 
 
@@ -17998,6 +18730,7 @@ public class TLRPC {
     }
 
     public static class TL_photos_getUserPhotos extends TLObject {
+        private static final long serialVersionUID = 1689L;
         public static int constructor = 0x91cd32a8;
 
         public InputUser user_id;
@@ -18019,6 +18752,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_forwardMessage extends TLObject {
+        private static final long serialVersionUID = 1690L;
         public static int constructor = 0x33963bf9;
 
         public InputPeer peer;
@@ -18038,6 +18772,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_sendBroadcast extends TLObject {
+        private static final long serialVersionUID = 1691L;
         public static int constructor = 0xbf73f4da;
 
         public ArrayList<InputUser> contacts = new ArrayList<>();
@@ -18069,6 +18804,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_getLocated extends TLObject {
+        private static final long serialVersionUID = 1692L;
         public static int constructor = 0x7f192d8f;
 
         public InputGeoPoint geo_point;
@@ -18088,6 +18824,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_getRecents extends TLObject {
+        private static final long serialVersionUID = 1693L;
         public static int constructor = 0xe1427e6f;
 
         public int offset;
@@ -18105,6 +18842,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_checkin extends TLObject {
+        private static final long serialVersionUID = 1694L;
         public static int constructor = 0x55b3e8fb;
 
         public TL_inputGeoChat peer;
@@ -18120,6 +18858,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_getFullChat extends TLObject {
+        private static final long serialVersionUID = 1695L;
         public static int constructor = 0x6722dd6f;
 
         public TL_inputGeoChat peer;
@@ -18135,6 +18874,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_editChatTitle extends TLObject {
+        private static final long serialVersionUID = 1696L;
         public static int constructor = 0x4c8e2273;
 
         public TL_inputGeoChat peer;
@@ -18154,6 +18894,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_editChatPhoto extends TLObject {
+        private static final long serialVersionUID = 1697L;
         public static int constructor = 0x35d81a95;
 
         public TL_inputGeoChat peer;
@@ -18171,6 +18912,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_search extends TLObject {
+        private static final long serialVersionUID = 1698L;
         public static int constructor = 0xcfcdc44d;
 
         public TL_inputGeoChat peer;
@@ -18200,6 +18942,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_getHistory extends TLObject {
+        private static final long serialVersionUID = 1699L;
         public static int constructor = 0xb53f7a68;
 
         public TL_inputGeoChat peer;
@@ -18221,6 +18964,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_setTyping extends TLObject {
+        private static final long serialVersionUID = 1700L;
         public static int constructor = 0x8b8a729;
 
         public TL_inputGeoChat peer;
@@ -18238,6 +18982,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_sendMessage extends TLObject {
+        private static final long serialVersionUID = 1701L;
         public static int constructor = 0x61b0044;
 
         public TL_inputGeoChat peer;
@@ -18257,6 +19002,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_sendMedia extends TLObject {
+        private static final long serialVersionUID = 1702L;
         public static int constructor = 0xb8f0deff;
 
         public TL_inputGeoChat peer;
@@ -18276,6 +19022,7 @@ public class TLRPC {
     }
 
     public static class TL_geochats_createGeoChat extends TLObject {
+        private static final long serialVersionUID = 1703L;
         public static int constructor = 0xe092e16;
 
         public String title;
@@ -18297,6 +19044,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getDhConfig extends TLObject {
+        private static final long serialVersionUID = 1704L;
         public static int constructor = 0x26cf8950;
 
         public int version;
@@ -18314,6 +19062,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_requestEncryption extends TLObject {
+        private static final long serialVersionUID = 1705L;
         public static int constructor = 0xf64daf43;
 
         public InputUser user_id;
@@ -18333,6 +19082,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_acceptEncryption extends TLObject {
+        private static final long serialVersionUID = 1706L;
         public static int constructor = 0x3dbc0415;
 
         public TL_inputEncryptedChat peer;
@@ -18352,6 +19102,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_discardEncryption extends TLObject {
+        private static final long serialVersionUID = 1707L;
         public static int constructor = 0xedd923c5;
 
         public int chat_id;
@@ -18367,6 +19118,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_setEncryptedTyping extends TLObject {
+        private static final long serialVersionUID = 1708L;
         public static int constructor = 0x791451ed;
 
         public TL_inputEncryptedChat peer;
@@ -18384,6 +19136,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_readEncryptedHistory extends TLObject {
+        private static final long serialVersionUID = 1709L;
         public static int constructor = 0x7f4b690a;
 
         public TL_inputEncryptedChat peer;
@@ -18401,6 +19154,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_receivedQueue extends TLObject {
+        private static final long serialVersionUID = 1710L;
         public static int constructor = 0x55a5bb66;
 
         public int max_qts;
@@ -18421,6 +19175,7 @@ public class TLRPC {
     }
 
     public static class TL_help_getSupport extends TLObject {
+        private static final long serialVersionUID = 1711L;
         public static int constructor = 0x9cdf08cd;
 
 
@@ -18434,6 +19189,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_readMessageContents extends TLObject {
+        private static final long serialVersionUID = 1712L;
         public static int constructor = 0x36a73f77;
 
         public ArrayList<Integer> id = new ArrayList<>();
@@ -18454,6 +19210,7 @@ public class TLRPC {
     }
 
     public static class TL_account_checkUsername extends TLObject {
+        private static final long serialVersionUID = 1713L;
         public static int constructor = 0x2714d86c;
 
         public String username;
@@ -18469,6 +19226,7 @@ public class TLRPC {
     }
 
     public static class TL_account_updateUsername extends TLObject {
+        private static final long serialVersionUID = 1714L;
         public static int constructor = 0x3e0bdd7c;
 
         public String username;
@@ -18484,6 +19242,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_search extends TLObject {
+        private static final long serialVersionUID = 1715L;
         public static int constructor = 0x11f812d8;
 
         public String q;
@@ -18501,6 +19260,7 @@ public class TLRPC {
     }
 
     public static class TL_account_getPrivacy extends TLObject {
+        private static final long serialVersionUID = 1716L;
         public static int constructor = 0xdadbc950;
 
         public InputPrivacyKey key;
@@ -18516,6 +19276,7 @@ public class TLRPC {
     }
 
     public static class TL_account_setPrivacy extends TLObject {
+        private static final long serialVersionUID = 1717L;
         public static int constructor = 0xc9f81ce8;
 
         public InputPrivacyKey key;
@@ -18538,6 +19299,7 @@ public class TLRPC {
     }
 
     public static class TL_account_deleteAccount extends TLObject {
+        private static final long serialVersionUID = 1718L;
         public static int constructor = 0x418d4e0b;
 
         public String reason;
@@ -18553,6 +19315,7 @@ public class TLRPC {
     }
 
     public static class TL_account_getAccountTTL extends TLObject {
+        private static final long serialVersionUID = 1719L;
         public static int constructor = 0x8fc711d;
 
 
@@ -18566,6 +19329,7 @@ public class TLRPC {
     }
 
     public static class TL_account_setAccountTTL extends TLObject {
+        private static final long serialVersionUID = 1720L;
         public static int constructor = 0x2442485e;
 
         public TL_accountDaysTTL ttl;
@@ -18581,6 +19345,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_resolveUsername extends TLObject {
+        private static final long serialVersionUID = 1721L;
         public static int constructor = 0xf93ccba3;
 
         public String username;
@@ -18596,6 +19361,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_getTopPeers extends TLObject {
+        private static final long serialVersionUID = 1722L;
         public static int constructor = 0xd4982db5;
 
         public int flags;
@@ -18627,6 +19393,7 @@ public class TLRPC {
     }
 
     public static class TL_contacts_resetTopPeerRating extends TLObject {
+        private static final long serialVersionUID = 1723L;
         public static int constructor = 0x1ae373ac;
 
         public TopPeerCategory category;
@@ -18644,6 +19411,7 @@ public class TLRPC {
     }
 
     public static class TL_account_sendChangePhoneCode extends TLObject {
+        private static final long serialVersionUID = 1724L;
         public static int constructor = 0x8e57deb;
 
         public int flags;
@@ -18667,6 +19435,7 @@ public class TLRPC {
     }
 
     public static class TL_account_changePhone extends TLObject {
+        private static final long serialVersionUID = 1725L;
         public static int constructor = 0x70c32edb;
 
         public String phone_number;
@@ -18686,6 +19455,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getStickers extends TLObject {
+        private static final long serialVersionUID = 1726L;
         public static int constructor = 0xae22e045;
 
         public String emoticon;
@@ -18703,6 +19473,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getAllStickers extends TLObject {
+        private static final long serialVersionUID = 1727L;
         public static int constructor = 0x1c9618b1;
 
         public int hash;
@@ -18718,6 +19489,7 @@ public class TLRPC {
     }
 
     public static class TL_account_updateDeviceLocked extends TLObject {
+        private static final long serialVersionUID = 1728L;
         public static int constructor = 0x38df3532;
 
         public int period;
@@ -18733,6 +19505,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getWebPagePreview extends TLObject {
+        private static final long serialVersionUID = 1729L;
         public static int constructor = 0x25223e24;
 
         public String message;
@@ -18748,6 +19521,7 @@ public class TLRPC {
     }
 
     public static class TL_account_getAuthorizations extends TLObject {
+        private static final long serialVersionUID = 1730L;
         public static int constructor = 0xe320c158;
 
 
@@ -18761,6 +19535,7 @@ public class TLRPC {
     }
 
     public static class TL_account_resetAuthorization extends TLObject {
+        private static final long serialVersionUID = 1731L;
         public static int constructor = 0xdf77f3bc;
 
         public long hash;
@@ -18776,6 +19551,7 @@ public class TLRPC {
     }
 
     public static class TL_account_getPassword extends TLObject {
+        private static final long serialVersionUID = 1732L;
         public static int constructor = 0x548a30f5;
 
 
@@ -18789,6 +19565,7 @@ public class TLRPC {
     }
 
     public static class TL_account_getPasswordSettings extends TLObject {
+        private static final long serialVersionUID = 1733L;
         public static int constructor = 0xbc8d11bb;
 
         public byte[] current_password_hash;
@@ -18804,6 +19581,7 @@ public class TLRPC {
     }
 
     public static class TL_account_updatePasswordSettings extends TLObject {
+        private static final long serialVersionUID = 1734L;
         public static int constructor = 0xfa7c4b86;
 
         public byte[] current_password_hash;
@@ -18821,6 +19599,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_checkPassword extends TLObject {
+        private static final long serialVersionUID = 1735L;
         public static int constructor = 0xa63011e;
 
         public byte[] password_hash;
@@ -18836,6 +19615,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_requestPasswordRecovery extends TLObject {
+        private static final long serialVersionUID = 1736L;
         public static int constructor = 0xd897bc66;
 
 
@@ -18849,6 +19629,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_recoverPassword extends TLObject {
+        private static final long serialVersionUID = 1737L;
         public static int constructor = 0x4ea56e92;
 
         public String code;
@@ -18864,6 +19645,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_resendCode extends TLObject {
+        private static final long serialVersionUID = 1738L;
         public static int constructor = 0x3ef1a9bf;
 
         public String phone_number;
@@ -18881,6 +19663,7 @@ public class TLRPC {
     }
 
     public static class TL_auth_cancelCode extends TLObject {
+        private static final long serialVersionUID = 1739L;
         public static int constructor = 0x1f040578;
 
         public String phone_number;
@@ -18898,6 +19681,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_exportChatInvite extends TLObject {
+        private static final long serialVersionUID = 1740L;
         public static int constructor = 0x7d885289;
 
         public int chat_id;
@@ -18913,6 +19697,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_checkChatInvite extends TLObject {
+        private static final long serialVersionUID = 1741L;
         public static int constructor = 0x3eadb1bb;
 
         public String hash;
@@ -18928,6 +19713,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_importChatInvite extends TLObject {
+        private static final long serialVersionUID = 1742L;
         public static int constructor = 0x6c50051c;
 
         public String hash;
@@ -18943,6 +19729,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getStickerSet extends TLObject {
+        private static final long serialVersionUID = 1743L;
         public static int constructor = 0x2619a90e;
 
         public InputStickerSet stickerset;
@@ -18958,6 +19745,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_installStickerSet extends TLObject {
+        private static final long serialVersionUID = 1744L;
         public static int constructor = 0x7b30c3a6;
 
         public InputStickerSet stickerset;
@@ -18975,6 +19763,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_uninstallStickerSet extends TLObject {
+        private static final long serialVersionUID = 1745L;
         public static int constructor = 0xf96e55de;
 
         public InputStickerSet stickerset;
@@ -18990,6 +19779,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_startBot extends TLObject {
+        private static final long serialVersionUID = 1746L;
         public static int constructor = 0xe6df7378;
 
         public InputUser bot;
@@ -19011,6 +19801,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getMessagesViews extends TLObject {
+        private static final long serialVersionUID = 1747L;
         public static int constructor = 0xc4c8a55d;
 
         public InputPeer peer;
@@ -19040,6 +19831,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_searchGifs extends TLObject {
+        private static final long serialVersionUID = 1748L;
         public static int constructor = 0xbf9a776b;
 
         public String q;
@@ -19057,6 +19849,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getSavedGifs extends TLObject {
+        private static final long serialVersionUID = 1749L;
         public static int constructor = 0x83bf3d52;
 
         public int hash;
@@ -19072,6 +19865,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_saveGif extends TLObject {
+        private static final long serialVersionUID = 1750L;
         public static int constructor = 0x327a30cb;
 
         public InputDocument id;
@@ -19089,6 +19883,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getInlineBotResults extends TLObject {
+        private static final long serialVersionUID = 1751L;
         public static int constructor = 0x514e999d;
 
         public int flags;
@@ -19116,6 +19911,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_sendInlineBotResult extends TLObject {
+        private static final long serialVersionUID = 1752L;
         public static int constructor = 0xb16e06fe;
 
         public int flags;
@@ -19149,6 +19945,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getMessageEditData extends TLObject {
+        private static final long serialVersionUID = 1753L;
         public static int constructor = 0xfda68d36;
 
         public InputPeer peer;
@@ -19166,6 +19963,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_editMessage extends TLObject {
+        private static final long serialVersionUID = 1754L;
         public static int constructor = 0xce91e4ca;
 
         public int flags;
@@ -19204,6 +20002,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getBotCallbackAnswer extends TLObject {
+        private static final long serialVersionUID = 1755L;
         public static int constructor = 0xa6e94f04;
 
         public InputPeer peer;
@@ -19223,6 +20022,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_setBotCallbackAnswer extends TLObject {
+        private static final long serialVersionUID = 1756L;
         public static int constructor = 0x481c591a;
 
         public int flags;
@@ -19246,6 +20046,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getPeerDialogs extends TLObject {
+        private static final long serialVersionUID = 1757L;
         public static int constructor = 0x2d9776b9;
 
         public ArrayList<InputPeer> peers = new ArrayList<>();
@@ -19266,6 +20067,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_editInlineBotMessage extends TLObject {
+        private static final long serialVersionUID = 1758L;
         public static int constructor = 0x130c2c85;
 
         public int flags;
@@ -19302,6 +20104,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_saveDraft extends TLObject {
+        private static final long serialVersionUID = 1759L;
         public static int constructor = 0xbc39e14b;
 
         public int flags;
@@ -19336,6 +20139,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getAllDrafts extends TLObject {
+        private static final long serialVersionUID = 1760L;
         public static int constructor = 0x6a3f8d65;
 
 
@@ -19349,6 +20153,7 @@ public class TLRPC {
     }
 
     public static class TL_help_getAppChangelog extends TLObject {
+        private static final long serialVersionUID = 1761L;
         public static int constructor = 0xb921197a;
 
 
@@ -19362,6 +20167,7 @@ public class TLRPC {
     }
 
     public static class TL_help_getTermsOfService extends TLObject {
+        private static final long serialVersionUID = 1762L;
         public static int constructor = 0x350170f3;
 
 
@@ -19375,6 +20181,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_reorderStickerSets extends TLObject {
+        private static final long serialVersionUID = 1763L;
         public static int constructor = 0x9fcfbc30;
 
         public ArrayList<Long> order = new ArrayList<>();
@@ -19395,6 +20202,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_getDocumentByHash extends TLObject {
+        private static final long serialVersionUID = 1764L;
         public static int constructor = 0x338e2464;
 
         public byte[] sha256;
@@ -19414,6 +20222,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_readHistory extends TLObject {
+        private static final long serialVersionUID = 1765L;
         public static int constructor = 0xcc104937;
 
         public InputChannel channel;
@@ -19431,6 +20240,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_deleteMessages extends TLObject {
+        private static final long serialVersionUID = 1766L;
         public static int constructor = 0x84c1fd4e;
 
         public InputChannel channel;
@@ -19453,6 +20263,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_deleteUserHistory extends TLObject {
+        private static final long serialVersionUID = 1767L;
         public static int constructor = 0xd10dd71b;
 
         public InputChannel channel;
@@ -19470,6 +20281,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_reportSpam extends TLObject {
+        private static final long serialVersionUID = 1768L;
         public static int constructor = 0xfe087810;
 
         public InputChannel channel;
@@ -19494,6 +20306,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_getMessages extends TLObject {
+        private static final long serialVersionUID = 1769L;
         public static int constructor = 0x93d7b347;
 
         public InputChannel channel;
@@ -19516,6 +20329,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_getParticipants extends TLObject {
+        private static final long serialVersionUID = 1770L;
         public static int constructor = 0x24d98f92;
 
         public InputChannel channel;
@@ -19537,6 +20351,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_getParticipant extends TLObject {
+        private static final long serialVersionUID = 1771L;
         public static int constructor = 0x546dd7a6;
 
         public InputChannel channel;
@@ -19554,6 +20369,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_getChannels extends TLObject {
+        private static final long serialVersionUID = 1772L;
         public static int constructor = 0xa7f6bbb;
 
         public ArrayList<InputChannel> id = new ArrayList<>();
@@ -19574,6 +20390,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_getFullChannel extends TLObject {
+        private static final long serialVersionUID = 1773L;
         public static int constructor = 0x8736a09;
 
         public InputChannel channel;
@@ -19589,6 +20406,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_createChannel extends TLObject {
+        private static final long serialVersionUID = 1774L;
         public static int constructor = 0xf4893d7f;
 
         public int flags;
@@ -19612,6 +20430,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_editAbout extends TLObject {
+        private static final long serialVersionUID = 1775L;
         public static int constructor = 0x13e27f1e;
 
         public InputChannel channel;
@@ -19629,6 +20448,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_editAdmin extends TLObject {
+        private static final long serialVersionUID = 1776L;
         public static int constructor = 0xeb7611d0;
 
         public InputChannel channel;
@@ -19648,6 +20468,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_editTitle extends TLObject {
+        private static final long serialVersionUID = 1777L;
         public static int constructor = 0x566decd0;
 
         public InputChannel channel;
@@ -19665,6 +20486,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_editPhoto extends TLObject {
+        private static final long serialVersionUID = 1778L;
         public static int constructor = 0xf12e57c9;
 
         public InputChannel channel;
@@ -19682,6 +20504,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_checkUsername extends TLObject {
+        private static final long serialVersionUID = 1779L;
         public static int constructor = 0x10e6bd2c;
 
         public InputChannel channel;
@@ -19699,6 +20522,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_updateUsername extends TLObject {
+        private static final long serialVersionUID = 1780L;
         public static int constructor = 0x3514b3de;
 
         public InputChannel channel;
@@ -19716,6 +20540,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_joinChannel extends TLObject {
+        private static final long serialVersionUID = 1781L;
         public static int constructor = 0x24b524c5;
 
         public InputChannel channel;
@@ -19731,6 +20556,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_leaveChannel extends TLObject {
+        private static final long serialVersionUID = 1782L;
         public static int constructor = 0xf836aa95;
 
         public InputChannel channel;
@@ -19746,6 +20572,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_inviteToChannel extends TLObject {
+        private static final long serialVersionUID = 1783L;
         public static int constructor = 0x199f3a6c;
 
         public InputChannel channel;
@@ -19768,6 +20595,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_kickFromChannel extends TLObject {
+        private static final long serialVersionUID = 1784L;
         public static int constructor = 0xa672de14;
 
         public InputChannel channel;
@@ -19787,6 +20615,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_exportInvite extends TLObject {
+        private static final long serialVersionUID = 1785L;
         public static int constructor = 0xc7560885;
 
         public InputChannel channel;
@@ -19802,6 +20631,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_deleteChannel extends TLObject {
+        private static final long serialVersionUID = 1786L;
         public static int constructor = 0xc0111fe3;
 
         public InputChannel channel;
@@ -19817,6 +20647,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_toggleInvites extends TLObject {
+        private static final long serialVersionUID = 1787L;
         public static int constructor = 0x49609307;
 
         public InputChannel channel;
@@ -19834,6 +20665,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_exportMessageLink extends TLObject {
+        private static final long serialVersionUID = 1788L;
         public static int constructor = 0xc846d22d;
 
         public InputChannel channel;
@@ -19851,6 +20683,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_toggleSignatures extends TLObject {
+        private static final long serialVersionUID = 1789L;
         public static int constructor = 0x1f69b606;
 
         public InputChannel channel;
@@ -19868,6 +20701,7 @@ public class TLRPC {
     }
 
     public static class TL_channels_updatePinnedMessage extends TLObject {
+        private static final long serialVersionUID = 1790L;
         public static int constructor = 0xa72ded52;
 
         public int flags;
@@ -19892,6 +20726,7 @@ public class TLRPC {
 
     //MessageMedia start
     public static class MessageMedia extends TLObject {
+        private static final long serialVersionUID = 1791L;
         public byte[] bytes;
         public Audio audio_unused;
         public Photo photo;
@@ -20029,6 +20864,7 @@ public class TLRPC {
 
     //EncryptedChat start
     public static class EncryptedChat extends TLObject {
+        private static final long serialVersionUID = 1792L;
         public int id;
         public long access_hash;
         public int date;
@@ -20091,6 +20927,7 @@ public class TLRPC {
 
     //Message start
     public static class Message extends TLObject {
+        private static final long serialVersionUID = 1793L;
         public int id;
         public int from_id;
         public Peer to_id;
@@ -20197,6 +21034,7 @@ public class TLRPC {
     }
 
     public static class TL_messageEmpty extends Message {
+        private static final long serialVersionUID = 1794L;
         public static int constructor = 0x83e5de54;
 
 
@@ -20212,6 +21050,7 @@ public class TLRPC {
     }
 
     public static class TL_messageService_old2 extends TL_messageService {
+        private static final long serialVersionUID = 1795L;
         public static int constructor = 0x1d86f70e;
 
 
@@ -20245,6 +21084,7 @@ public class TLRPC {
     }
 
     public static class TL_message extends Message {
+        private static final long serialVersionUID = 1796L;
         public static int constructor = 0xc09be45f;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -20390,6 +21230,7 @@ public class TLRPC {
     }
 
     public static class TL_message_layer47 extends TL_message {
+        private static final long serialVersionUID = 1797L;
         public static int constructor = 0xc992e15c;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -20543,6 +21384,7 @@ public class TLRPC {
     }
 
     public static class TL_message_old7 extends TL_message {
+        private static final long serialVersionUID = 1798L;
         public static int constructor = 0x5ba66c13;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -20670,6 +21512,7 @@ public class TLRPC {
     }
 
     public static class TL_messageForwarded_old2 extends Message {
+        private static final long serialVersionUID = 1799L;
         public static int constructor = 0xa367e716;
 
 
@@ -20721,6 +21564,7 @@ public class TLRPC {
     }
 
     public static class TL_message_old6 extends TL_message {
+        private static final long serialVersionUID = 1800L;
         public static int constructor = 0x2bebfa86;
 
 
@@ -20818,6 +21662,7 @@ public class TLRPC {
     }
 
     public static class TL_message_old5 extends TL_message {
+        private static final long serialVersionUID = 1801L;
         public static int constructor = 0xf07814c8;
 
 
@@ -20909,6 +21754,7 @@ public class TLRPC {
     }
 
     public static class TL_messageService_layer48 extends TL_messageService {
+        private static final long serialVersionUID = 1802L;
         public static int constructor = 0xc06b9607;
 
 
@@ -20956,6 +21802,7 @@ public class TLRPC {
     }
 
     public static class TL_message_old4 extends TL_message {
+        private static final long serialVersionUID = 1803L;
         public static int constructor = 0xc3060325;
 
 
@@ -21022,6 +21869,7 @@ public class TLRPC {
     }
 
     public static class TL_message_old3 extends TL_message {
+        private static final long serialVersionUID = 1804L;
         public static int constructor = 0xa7ab1991;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -21081,6 +21929,7 @@ public class TLRPC {
     }
 
     public static class TL_message_old2 extends TL_message {
+        private static final long serialVersionUID = 1805L;
         public static int constructor = 0x567699b3;
 
 
@@ -21119,6 +21968,7 @@ public class TLRPC {
     }
 
     public static class TL_messageService_old extends TL_messageService {
+        private static final long serialVersionUID = 1806L;
         public static int constructor = 0x9f8d60bb;
 
 
@@ -21146,6 +21996,7 @@ public class TLRPC {
     }
 
     public static class TL_messageForwarded_old extends TL_messageForwarded_old2 {
+        private static final long serialVersionUID = 1807L;
         public static int constructor = 0x5f46804;
 
 
@@ -21191,6 +22042,7 @@ public class TLRPC {
     }
 
     public static class TL_message_old extends TL_message {
+        private static final long serialVersionUID = 1808L;
         public static int constructor = 0x22eb6aba;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -21223,6 +22075,7 @@ public class TLRPC {
     }
 
     public static class TL_message_secret extends TL_message {
+        private static final long serialVersionUID = 1809L;
         public static int constructor = 0x555555f9;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -21295,6 +22148,7 @@ public class TLRPC {
     }
 
     public static class TL_message_secret_old extends TL_message_secret {
+        private static final long serialVersionUID = 1810L;
         public static int constructor = 0x555555F8;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -21334,6 +22188,7 @@ public class TLRPC {
     }
 
     public static class TL_messageService extends Message {
+        private static final long serialVersionUID = 1811L;
         public static int constructor = 0x9e19a1f6;
 
         public void readParams(AbstractSerializedData stream, boolean exception) {
@@ -21381,6 +22236,7 @@ public class TLRPC {
 
     //TL_dialog start
     public static class TL_dialog extends TLObject {
+        private static final long serialVersionUID = 1812L;
         public static int constructor = 0x66ffba14;
 
         public int flags;
@@ -21445,6 +22301,7 @@ public class TLRPC {
 
     //ChatParticipant start
     public static class TL_chatChannelParticipant extends ChatParticipant {
+        private static final long serialVersionUID = 1813L;
         public static int constructor = 0xc8d7493e;
 
         public TLRPC.ChannelParticipant channelParticipant;
@@ -21453,6 +22310,7 @@ public class TLRPC {
 
     //Chat start
     public static class TL_chatEmpty extends Chat {
+        private static final long serialVersionUID = 1814L;
         public static int constructor = 0x9ba2d800;
 
 
@@ -21471,6 +22329,7 @@ public class TLRPC {
 
     //functions memory optimize
     public static class TL_upload_saveFilePart extends TLObject {
+        private static final long serialVersionUID = 1815L;
         public static int constructor = 0xb304a621;
 
         public long file_id;
@@ -21501,6 +22360,7 @@ public class TLRPC {
     }
 
     public static class TL_upload_saveBigFilePart extends TLObject {
+        private static final long serialVersionUID = 1816L;
         public static int constructor = 0xde7b673d;
 
         public long file_id;
@@ -21533,6 +22393,7 @@ public class TLRPC {
     }
 
     public static class TL_upload_file extends TLObject {
+        private static final long serialVersionUID = 1817L;
         public static int constructor = 0x96a18d5;
 
         public storage_FileType type;
@@ -21571,6 +22432,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_sendEncryptedFile extends TLObject {
+        private static final long serialVersionUID = 1818L;
         public static int constructor = 0x9a901b66;
 
         public TL_inputEncryptedChat peer;
@@ -21600,6 +22462,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_sendEncrypted extends TLObject {
+        private static final long serialVersionUID = 1819L;
         public static int constructor = 0xa9776773;
 
         public TL_inputEncryptedChat peer;
@@ -21627,6 +22490,7 @@ public class TLRPC {
     }
 
     public static class TL_messages_sendEncryptedService extends TLObject {
+        private static final long serialVersionUID = 1820L;
         public static int constructor = 0x32d439a4;
 
         public TL_inputEncryptedChat peer;
@@ -21656,6 +22520,7 @@ public class TLRPC {
     //functions
 
     public static class Vector extends TLObject {
+        private static final long serialVersionUID = 1821L;
         public static int constructor = 0x1cb5c415;
         public ArrayList<Object> objects = new ArrayList<>();
     }

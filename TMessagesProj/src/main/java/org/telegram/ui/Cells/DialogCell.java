@@ -10,18 +10,21 @@ package org.telegram.ui.Cells;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.text.Layout;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.MotionEvent;
 
+import org.telegram.Util;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.PhoneFormat.PhoneFormat;
 import org.telegram.messenger.ChatObject;
@@ -30,6 +33,7 @@ import org.telegram.messenger.MessageObject;
 import org.telegram.messenger.UserObject;
 import org.telegram.messenger.FileLog;
 import org.telegram.messenger.query.DraftQuery;
+import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.messenger.ContactsController;
 import org.telegram.messenger.Emoji;
@@ -131,24 +135,30 @@ public class DialogCell extends BaseCell {
 
     private boolean isSelected;
 
+    //hojjat plus
+    private GradientDrawable statusBG;
+    private boolean drawStatus;
+    int avatarLeft;
+
     public DialogCell(Context context) {
         super(context);
 
         if (namePaint == null) {
             namePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            namePaint.setTextSize(AndroidUtilities.dp(17));
+            namePaint.setTextSize(AndroidUtilities.sp(17));
             namePaint.setColor(0xff212121);
             namePaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
             nameEncryptedPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            nameEncryptedPaint.setTextSize(AndroidUtilities.dp(17));
+            nameEncryptedPaint.setTextSize(AndroidUtilities.sp(17));
             nameEncryptedPaint.setColor(0xff00a60e);
             nameEncryptedPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
             messagePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            messagePaint.setTextSize(AndroidUtilities.dp(16));
+            messagePaint.setTextSize(AndroidUtilities.sp(16));
             messagePaint.setColor(Theme.DIALOGS_MESSAGE_TEXT_COLOR);
             messagePaint.linkColor = Theme.DIALOGS_MESSAGE_TEXT_COLOR;
+            messagePaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             linePaint = new Paint();
             linePaint.setColor(0xffdcdcdc);
@@ -157,15 +167,17 @@ public class DialogCell extends BaseCell {
             backPaint.setColor(0x0f000000);
 
             messagePrintingPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            messagePrintingPaint.setTextSize(AndroidUtilities.dp(16));
+            messagePrintingPaint.setTextSize(AndroidUtilities.sp(16));
             messagePrintingPaint.setColor(Theme.DIALOGS_PRINTING_TEXT_COLOR);
+            messagePrintingPaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             timePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            timePaint.setTextSize(AndroidUtilities.dp(13));
+            timePaint.setTextSize(AndroidUtilities.sp(13));
             timePaint.setColor(0xff999999);
+            timePaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             countPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            countPaint.setTextSize(AndroidUtilities.dp(13));
+            countPaint.setTextSize(AndroidUtilities.sp(13));
             countPaint.setColor(0xffffffff);
             countPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
@@ -188,6 +200,12 @@ public class DialogCell extends BaseCell {
         avatarImage = new ImageReceiver(this);
         avatarImage.setRoundRadius(AndroidUtilities.dp(26));
         avatarDrawable = new AvatarDrawable();
+
+        //plus hojjat
+        statusBG = new GradientDrawable();
+        statusBG.setColor(Color.GRAY);
+        statusBG.setCornerRadius(AndroidUtilities.dp(16));
+        statusBG.setStroke(AndroidUtilities.dp(2), Color.WHITE);
     }
 
     public void setDialog(TLRPC.TL_dialog dialog, int i, int type) {
@@ -272,6 +290,9 @@ public class DialogCell extends BaseCell {
         drawNameLock = false;
         drawNameBot = false;
         drawVerified = false;
+
+        //plus hojjat
+        drawStatus = false;
 
         if (encryptedChat != null) {
             drawNameLock = true;
@@ -527,6 +548,8 @@ public class DialogCell extends BaseCell {
             if (encryptedChat != null) {
                 currentNamePaint = nameEncryptedPaint;
             }
+            //plus hojjat
+            if(!drawNameBot)drawStatus = true;
         }
         if (nameString.length() == 0) {
             nameString = LocaleController.getString("HiddenName", R.string.HiddenName);
@@ -604,7 +627,7 @@ public class DialogCell extends BaseCell {
         }
 
         int messageWidth = getMeasuredWidth() - AndroidUtilities.dp(AndroidUtilities.leftBaseline + 16);
-        int avatarLeft;
+//        int avatarLeft;
         if (!LocaleController.isRTL) {
             messageLeft = AndroidUtilities.dp(AndroidUtilities.leftBaseline);
             avatarLeft = AndroidUtilities.dp(AndroidUtilities.isTablet() ? 13 : 9);
@@ -865,6 +888,8 @@ public class DialogCell extends BaseCell {
                 photo = user.photo.photo_small;
             }
             avatarDrawable.setInfo(user);
+            //Plus
+            setStatusColor();
         } else if (chat != null) {
             if (chat.photo != null) {
                 photo = chat.photo.photo_small;
@@ -881,6 +906,25 @@ public class DialogCell extends BaseCell {
 
         invalidate();
     }
+
+    //plus hojjat
+    private void setStatusColor(){
+        String s = LocaleController.formatUserStatus(user);
+        if (s.equals(LocaleController.getString("ALongTimeAgo", R.string.ALongTimeAgo))){
+            statusBG.setColor(Color.BLACK);
+        } else if(s.equals(LocaleController.getString("Online", R.string.Online))){
+            statusBG.setColor(0xff00e676);
+        } else if(s.equals(LocaleController.getString("Lately", R.string.Lately))){
+            statusBG.setColor(Color.LTGRAY);
+        } else {
+            statusBG.setColor(Color.GRAY);
+        }
+        int l = user.status != null ? ConnectionsManager.getInstance().getCurrentTime() - user.status.expires : -2;
+        if(l > 0 && l < 86400){
+            statusBG.setColor(Color.LTGRAY);
+        }
+    }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -978,6 +1022,13 @@ public class DialogCell extends BaseCell {
         }
 
         avatarImage.draw(canvas);
+
+        //plus hojjat
+        //hojjat: I used avatarLeft instead of avatarLeftMargin
+        if(drawStatus){
+            setDrawableBounds(statusBG, AndroidUtilities.dp(36) + avatarLeft , AndroidUtilities.dp(46), AndroidUtilities.dp(16), AndroidUtilities.dp(16));
+            statusBG.draw(canvas);
+        }
     }
 
     @Override

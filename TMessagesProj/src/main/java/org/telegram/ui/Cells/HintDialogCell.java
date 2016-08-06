@@ -14,14 +14,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ContactsController;
@@ -58,7 +58,7 @@ public class HintDialogCell extends FrameLayout {
 
         nameTextView = new TextView(context);
         nameTextView.setTextColor(0xff212121);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         nameTextView.setMaxLines(2);
         nameTextView.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
         nameTextView.setLines(2);
@@ -70,7 +70,7 @@ public class HintDialogCell extends FrameLayout {
             countDrawableGrey = getResources().getDrawable(R.drawable.dialogs_badge2);
 
             countPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            countPaint.setTextSize(AndroidUtilities.dp(13));
+            countPaint.setTextSize(AndroidUtilities.sp(13));
             countPaint.setColor(0xffffffff);
             countPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         }

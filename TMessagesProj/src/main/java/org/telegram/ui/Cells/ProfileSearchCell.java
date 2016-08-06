@@ -15,7 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 
@@ -94,28 +94,28 @@ public class ProfileSearchCell extends BaseCell {
 
         if (namePaint == null) {
             namePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            namePaint.setTextSize(AndroidUtilities.dp(17));
+            namePaint.setTextSize(AndroidUtilities.sp(17));
             namePaint.setColor(0xff212121);
             namePaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
             nameEncryptedPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            nameEncryptedPaint.setTextSize(AndroidUtilities.dp(17));
+            nameEncryptedPaint.setTextSize(AndroidUtilities.sp(17));
             nameEncryptedPaint.setColor(0xff00a60e);
             nameEncryptedPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 
             onlinePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            onlinePaint.setTextSize(AndroidUtilities.dp(16));
+            onlinePaint.setTextSize(AndroidUtilities.sp(16));
             onlinePaint.setColor(Theme.MSG_LINK_TEXT_COLOR);
 
             offlinePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            offlinePaint.setTextSize(AndroidUtilities.dp(16));
+            offlinePaint.setTextSize(AndroidUtilities.sp(16));
             offlinePaint.setColor(0xff999999);
 
             linePaint = new Paint();
             linePaint.setColor(0xffdcdcdc);
 
             countPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            countPaint.setTextSize(AndroidUtilities.dp(13));
+            countPaint.setTextSize(AndroidUtilities.sp(13));
             countPaint.setColor(0xffffffff);
             countPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
 

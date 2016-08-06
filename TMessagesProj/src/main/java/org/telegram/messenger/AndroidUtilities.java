@@ -57,12 +57,13 @@ import android.widget.EdgeEffect;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import net.hockeyapp.android.CrashManager;
 import net.hockeyapp.android.CrashManagerListener;
 import net.hockeyapp.android.UpdateManager;
 
+import org.telegram.Util;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.BaseFragment;
@@ -97,6 +98,7 @@ public class AndroidUtilities {
 
     public static int statusBarHeight = 0;
     public static float density = 1;
+    public static float scaledDensity = 1;
     public static Point displaySize = new Point();
     public static Integer photoSize = null;
     public static DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -109,6 +111,9 @@ public class AndroidUtilities {
     private static RectF bitmapRect;
 
     public static Pattern WEB_URL = null;
+
+    public static final String PERSIAN_FONT = "fonts/IranSans-Regular.ttf";
+
     static {
         try {
             final String GOOD_IRI_CHAR = "a-zA-Z0-9\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF";
@@ -138,6 +143,7 @@ public class AndroidUtilities {
 
     static {
         density = ApplicationLoader.applicationContext.getResources().getDisplayMetrics().density;
+        scaledDensity = ApplicationLoader.applicationContext.getResources().getDisplayMetrics().scaledDensity;
         leftBaseline = isTablet() ? 80 : 72;
         checkDisplaySize();
     }
@@ -303,7 +309,7 @@ public class AndroidUtilities {
         }
         try {
             prevOrientation = activity.getRequestedOrientation();
-            WindowManager manager = (WindowManager)activity.getSystemService(Activity.WINDOW_SERVICE);
+            WindowManager manager = (WindowManager) activity.getSystemService(Activity.WINDOW_SERVICE);
             if (manager != null && manager.getDefaultDisplay() != null) {
                 int rotation = manager.getDefaultDisplay().getRotation();
                 int orientation = activity.getResources().getConfiguration().orientation;
@@ -354,6 +360,15 @@ public class AndroidUtilities {
     }
 
     public static Typeface getTypeface(String assetPath) {
+//        if (LocaleController.getCurrentLanguageName().equals("فارسی")) {
+//            assetPath = PERSIAN_FONT;
+//        }
+        if (!Util.hojjatUi && assetPath.equals(PERSIAN_FONT)) {
+            assetPath = "";
+        }
+        if(Util.hojjatUi){
+            assetPath = PERSIAN_FONT;
+        }
         synchronized (typefaceCache) {
             if (!typefaceCache.containsKey(assetPath)) {
                 try {
@@ -401,7 +416,7 @@ public class AndroidUtilities {
             return;
         }
         try {
-            InputMethodManager inputManager = (InputMethodManager)view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager inputManager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
         } catch (Exception e) {
             FileLog.e("tmessages", e);
@@ -471,6 +486,13 @@ public class AndroidUtilities {
         return (int) Math.ceil(density * value);
     }
 
+    public static int sp(float value){
+        if(value == 0){
+            return 0;
+        }
+        return (int) Math.ceil(scaledDensity * value);
+    }
+
     public static int compare(int lhs, int rhs) {
         if (lhs == rhs) {
             return 0;
@@ -510,7 +532,7 @@ public class AndroidUtilities {
     }
 
     public static long makeBroadcastId(int id) {
-        return 0x0000000100000000L | ((long)id & 0x00000000FFFFFFFFL);
+        return 0x0000000100000000L | ((long) id & 0x00000000FFFFFFFFL);
     }
 
     public static int getMyLayerVersion(int layer) {
@@ -681,7 +703,7 @@ public class AndroidUtilities {
             return;
         }
         try {
-            Field mCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
+            Field mCursorDrawableRes = android.widget.TextView.class.getDeclaredField("mCursorDrawableRes");
             mCursorDrawableRes.setAccessible(true);
             mCursorDrawableRes.setInt(editText, 0);
         } catch (Exception e) {
@@ -844,7 +866,7 @@ public class AndroidUtilities {
             if (mAttachInfo != null) {
                 Field mStableInsetsField = mAttachInfo.getClass().getDeclaredField("mStableInsets");
                 mStableInsetsField.setAccessible(true);
-                Rect insets = (Rect)mStableInsetsField.get(mAttachInfo);
+                Rect insets = (Rect) mStableInsetsField.get(mAttachInfo);
                 return insets.bottom;
             }
         } catch (Exception e) {
@@ -1129,7 +1151,7 @@ public class AndroidUtilities {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Telegram");
             if (!storageDir.mkdirs()) {
-                if (!storageDir.exists()){
+                if (!storageDir.exists()) {
                     FileLog.d("tmessages", "failed to create directory");
                     return null;
                 }
@@ -1176,7 +1198,7 @@ public class AndroidUtilities {
                     }
 
                     final String selection = "_id=?";
-                    final String[] selectionArgs = new String[] {
+                    final String[] selectionArgs = new String[]{
                             split[1]
                     };
 

@@ -15,7 +15,7 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -41,7 +41,8 @@ public class CheckBoxCell extends FrameLayout {
 
         textView = new TextView(context);
         textView.setTextColor(0xff212121);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        textView.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
         textView.setLines(1);
         textView.setMaxLines(1);
         textView.setSingleLine(true);
@@ -51,7 +52,8 @@ public class CheckBoxCell extends FrameLayout {
 
         valueTextView = new TextView(context);
         valueTextView.setTextColor(0xff2f8cc9);
-        valueTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        valueTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        valueTextView.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
         valueTextView.setLines(1);
         valueTextView.setMaxLines(1);
         valueTextView.setSingleLine(true);

@@ -17,7 +17,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ImageLoader;
@@ -80,7 +80,7 @@ public class SharedDocumentCell extends FrameLayout implements MediaController.F
 
         extTextView = new TextView(context);
         extTextView.setTextColor(0xffffffff);
-        extTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        extTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         extTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         extTextView.setLines(1);
         extTextView.setMaxLines(1);
@@ -101,7 +101,7 @@ public class SharedDocumentCell extends FrameLayout implements MediaController.F
 
         nameTextView = new TextView(context);
         nameTextView.setTextColor(0xff212121);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         nameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         nameTextView.setLines(1);
         nameTextView.setMaxLines(1);
@@ -116,7 +116,7 @@ public class SharedDocumentCell extends FrameLayout implements MediaController.F
 
         dateTextView = new TextView(context);
         dateTextView.setTextColor(0xff999999);
-        dateTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        dateTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         dateTextView.setLines(1);
         dateTextView.setMaxLines(1);
         dateTextView.setSingleLine(true);

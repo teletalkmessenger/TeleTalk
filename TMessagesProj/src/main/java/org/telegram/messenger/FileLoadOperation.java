@@ -8,6 +8,8 @@
 
 package org.telegram.messenger;
 
+import android.util.Log;
+
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.RequestDelegate;
 import org.telegram.tgnet.TLObject;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileLoadOperation {
+    private static final String TAG = "HOJJAT_FileLoadOperatio";
 
     private static class RequestInfo {
         private int requestToken;
@@ -530,6 +533,7 @@ public class FileLoadOperation {
                 }
             }, null, (isForceRequest ? ConnectionsManager.RequestFlagForceDownload : 0) | ConnectionsManager.RequestFlagFailOnServerErrors, datacenter_id, requestsCount % 2 == 0 ? ConnectionsManager.ConnectionTypeDownload : ConnectionsManager.ConnectionTypeDownload2, isLast);
             requestsCount++;
+            Log.d(TAG, "startDownloadRequest, req= "+ req);
         }
     }
 

@@ -17,7 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ImageLoader;
@@ -207,14 +207,14 @@ public class AudioPlayerActivity extends BaseFragment implements NotificationCen
         frameLayout.addView(seekBarContainer, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 30, Gravity.BOTTOM | Gravity.LEFT, 0, 0, 0, 66));
 
         timeTextView = new TextView(context);
-        timeTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+        timeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         timeTextView.setTextColor(0xff19a7e8);
         timeTextView.setGravity(Gravity.CENTER);
         timeTextView.setText("0:00");
         seekBarContainer.addView(timeTextView, LayoutHelper.createFrame(44, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.LEFT));
 
         durationTextView = new TextView(context);
-        durationTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+        durationTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         durationTextView.setTextColor(0xff8a8a8a);
         durationTextView.setGravity(Gravity.CENTER);
         durationTextView.setText("3:00");

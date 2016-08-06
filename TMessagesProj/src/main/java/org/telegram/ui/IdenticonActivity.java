@@ -25,7 +25,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.FileLog;
@@ -48,7 +48,7 @@ public class IdenticonActivity extends BaseFragment {
 
     private static class LinkMovementMethodMy extends LinkMovementMethod {
         @Override
-        public boolean onTouchEvent(@NonNull TextView widget, @NonNull Spannable buffer, @NonNull MotionEvent event) {
+        public boolean onTouchEvent(@NonNull android.widget.TextView widget, @NonNull Spannable buffer, @NonNull MotionEvent event) {
             try {
                 return super.onTouchEvent(widget, buffer, event);
             } catch (Exception e) {
@@ -110,7 +110,7 @@ public class IdenticonActivity extends BaseFragment {
 
         TextView textView = new TextView(context);
         textView.setTextColor(0xff7f7f7f);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textView.setLinksClickable(true);
         textView.setClickable(true);
         textView.setMovementMethod(new LinkMovementMethodMy());

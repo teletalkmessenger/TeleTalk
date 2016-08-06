@@ -34,7 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -178,7 +178,7 @@ public class TwoStepVerificationActivity extends BaseFragment implements Notific
 
         titleTextView = new TextView(context);
         titleTextView.setTextColor(0xff757575);
-        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         titleTextView.setGravity(Gravity.CENTER_HORIZONTAL);
         linearLayout.addView(titleTextView);
         LinearLayout.LayoutParams layoutParams3 = (LinearLayout.LayoutParams) titleTextView.getLayoutParams();
@@ -189,7 +189,7 @@ public class TwoStepVerificationActivity extends BaseFragment implements Notific
         titleTextView.setLayoutParams(layoutParams3);
 
         passwordEditText = new EditText(context);
-        passwordEditText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+        passwordEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         passwordEditText.setTextColor(0xff000000);
         passwordEditText.setMaxLines(1);
         passwordEditText.setLines(1);
@@ -210,7 +210,7 @@ public class TwoStepVerificationActivity extends BaseFragment implements Notific
         passwordEditText.setLayoutParams(layoutParams3);
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_NEXT || i == EditorInfo.IME_ACTION_DONE) {
                     processDone();
                     return true;
@@ -237,7 +237,7 @@ public class TwoStepVerificationActivity extends BaseFragment implements Notific
 
         bottomTextView = new TextView(context);
         bottomTextView.setTextColor(0xff757575);
-        bottomTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        bottomTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         bottomTextView.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP);
         bottomTextView.setText(LocaleController.getString("YourEmailInfo", R.string.YourEmailInfo));
         linearLayout.addView(bottomTextView);
@@ -260,7 +260,7 @@ public class TwoStepVerificationActivity extends BaseFragment implements Notific
 
         bottomButton = new TextView(context);
         bottomButton.setTextColor(0xff4d83b3);
-        bottomButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        bottomButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         bottomButton.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.BOTTOM);
         bottomButton.setText(LocaleController.getString("YourEmailSkip", R.string.YourEmailSkip));
         bottomButton.setPadding(0, AndroidUtilities.dp(10), 0, 0);

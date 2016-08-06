@@ -39,7 +39,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -316,7 +316,7 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
             bottomView.addView(avatarImageView, LayoutHelper.createFrame(40, 40, Gravity.TOP | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT), LocaleController.isRTL ? 0 : 12, 12, LocaleController.isRTL ? 12 : 0, 0));
 
             nameTextView = new TextView(context);
-            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             nameTextView.setTextColor(0xff212121);
             nameTextView.setMaxLines(1);
             nameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
@@ -326,7 +326,7 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
             bottomView.addView(nameTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT), LocaleController.isRTL ? 12 : 72, 10, LocaleController.isRTL ? 72 : 12, 0));
 
             distanceTextView = new TextView(context);
-            distanceTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            distanceTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             distanceTextView.setTextColor(0xff2f8cc9);
             distanceTextView.setMaxLines(1);
             distanceTextView.setEllipsize(TextUtils.TruncateAt.END);
@@ -577,7 +577,7 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
 
             TextView emptyTextView = new TextView(context);
             emptyTextView.setTextColor(0xff808080);
-            emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+            emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             emptyTextView.setGravity(Gravity.CENTER);
             emptyTextView.setText(LocaleController.getString("NoResult", R.string.NoResult));
             emptyTextLayout.addView(emptyTextView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT, 0.5f));

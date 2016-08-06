@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -121,7 +121,7 @@ public class SessionsActivity extends BaseFragment implements NotificationCenter
         TextView textView = new TextView(context);
         textView.setTextColor(0xff8a8a8a);
         textView.setGravity(Gravity.CENTER);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
         textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         textView.setText(LocaleController.getString("NoOtherSessions", R.string.NoOtherSessions));
         emptyLayout.addView(textView);
@@ -135,7 +135,7 @@ public class SessionsActivity extends BaseFragment implements NotificationCenter
         textView = new TextView(context);
         textView.setTextColor(0xff8a8a8a);
         textView.setGravity(Gravity.CENTER);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
         textView.setPadding(AndroidUtilities.dp(20), 0, AndroidUtilities.dp(20), 0);
         textView.setText(LocaleController.getString("NoOtherSessionsInfo", R.string.NoOtherSessionsInfo));
         emptyLayout.addView(textView);

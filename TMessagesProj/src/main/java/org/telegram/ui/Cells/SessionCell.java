@@ -16,7 +16,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -51,7 +51,7 @@ public class SessionCell extends FrameLayout {
 
         nameTextView = new TextView(context);
         nameTextView.setTextColor(0xff212121);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         nameTextView.setLines(1);
         nameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         nameTextView.setMaxLines(1);
@@ -60,7 +60,7 @@ public class SessionCell extends FrameLayout {
         nameTextView.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP);
 
         onlineTextView = new TextView(context);
-        onlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        onlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         onlineTextView.setGravity((LocaleController.isRTL ? Gravity.LEFT : Gravity.RIGHT) | Gravity.TOP);
 
         if (LocaleController.isRTL) {
@@ -73,7 +73,7 @@ public class SessionCell extends FrameLayout {
 
         detailTextView = new TextView(context);
         detailTextView.setTextColor(0xff212121);
-        detailTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        detailTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         detailTextView.setLines(1);
         detailTextView.setMaxLines(1);
         detailTextView.setSingleLine(true);
@@ -83,7 +83,7 @@ public class SessionCell extends FrameLayout {
 
         detailExTextView = new TextView(context);
         detailExTextView.setTextColor(0xff999999);
-        detailExTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        detailExTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         detailExTextView.setLines(1);
         detailExTextView.setMaxLines(1);
         detailExTextView.setSingleLine(true);

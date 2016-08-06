@@ -33,7 +33,8 @@ import android.text.Layout;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+//import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ImageSpan;
@@ -51,7 +52,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -215,7 +216,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
                 if (text.length() > 1 && text.charAt(0) == '@') {
                     int index = TextUtils.indexOf(text, ' ');
                     if (index != -1) {
-                        TextPaint paint = getPaint();
+                        TextPaint paint = new TextPaint(getPaint());
                         CharSequence str = text.subSequence(0, index + 1);
                         int size = (int) Math.ceil(paint.measureText(text, 0, index + 1));
                         int width = getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
@@ -565,7 +566,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         messageEditText.setInputType(messageEditText.getInputType() | EditorInfo.TYPE_TEXT_FLAG_CAP_SENTENCES | EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE);
         messageEditText.setSingleLine(false);
         messageEditText.setMaxLines(4);
-        messageEditText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        messageEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         messageEditText.setGravity(Gravity.BOTTOM);
         messageEditText.setPadding(0, AndroidUtilities.dp(11), 0, AndroidUtilities.dp(12));
         messageEditText.setBackgroundDrawable(null);
@@ -603,7 +604,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
             boolean ctrlPressed = false;
 
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEND) {
                     sendMessage();
                     return true;
@@ -805,7 +806,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
 
         recordedAudioTimeTextView = new TextView(context);
         recordedAudioTimeTextView.setTextColor(0xffffffff);
-        recordedAudioTimeTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        recordedAudioTimeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         recordedAudioTimeTextView.setText("0:13");
         recordedAudioPanel.addView(recordedAudioTimeTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.RIGHT | Gravity.CENTER_VERTICAL, 0, 0, 13, 0));
 
@@ -825,7 +826,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         TextView textView = new TextView(context);
         textView.setText(LocaleController.getString("SlideToCancel", R.string.SlideToCancel));
         textView.setTextColor(0xff999999);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         slideText.addView(textView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL, 6, 0, 0, 0));
 
         LinearLayout linearLayout = new LinearLayout(context);
@@ -840,7 +841,7 @@ public class ChatActivityEnterView extends FrameLayout implements NotificationCe
         recordTimeText = new TextView(context);
         recordTimeText.setText("00:00");
         recordTimeText.setTextColor(0xff4d4c4b);
-        recordTimeText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        recordTimeText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         linearLayout.addView(recordTimeText, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL, 6, 0, 0, 0));
 
         sendButtonContainer = new FrameLayout(context);

@@ -37,7 +37,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.Emoji;
@@ -722,7 +722,7 @@ public class EmojiView extends FrameLayout implements NotificationCenter.Notific
 
             stickersEmptyView = new TextView(context);
             stickersEmptyView.setText(LocaleController.getString("NoStickers", R.string.NoStickers));
-            stickersEmptyView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            stickersEmptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             stickersEmptyView.setTextColor(0xff888888);
             stickersWrap.addView(stickersEmptyView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER));
             stickersGridView.setEmptyView(stickersEmptyView);

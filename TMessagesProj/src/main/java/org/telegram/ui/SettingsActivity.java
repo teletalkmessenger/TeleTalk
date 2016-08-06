@@ -50,7 +50,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -163,7 +163,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
 
     private static class LinkMovementMethodMy extends LinkMovementMethod {
         @Override
-        public boolean onTouchEvent(@NonNull TextView widget, @NonNull Spannable buffer, @NonNull MotionEvent event) {
+        public boolean onTouchEvent(@NonNull android.widget.TextView widget, @NonNull Spannable buffer, @NonNull MotionEvent event) {
             try {
                 return super.onTouchEvent(widget, buffer, event);
             } catch (Exception e) {
@@ -710,7 +710,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
 
         nameTextView = new TextView(context);
         nameTextView.setTextColor(0xffffffff);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         nameTextView.setLines(1);
         nameTextView.setMaxLines(1);
         nameTextView.setSingleLine(true);
@@ -723,7 +723,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
 
         onlineTextView = new TextView(context);
         onlineTextView.setTextColor(AvatarDrawable.getProfileTextColorForId(5));
-        onlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        onlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         onlineTextView.setLines(1);
         onlineTextView.setMaxLines(1);
         onlineTextView.setSingleLine(true);

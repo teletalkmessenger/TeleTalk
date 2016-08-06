@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -153,7 +153,7 @@ public class StickersAlert extends BottomSheet implements NotificationCenter.Not
         titleTextView.setLines(1);
         titleTextView.setSingleLine(true);
         titleTextView.setTextColor(Theme.STICKERS_SHEET_TITLE_TEXT_COLOR);
-        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         titleTextView.setEllipsize(TextUtils.TruncateAt.MIDDLE);
         titleTextView.setPadding(AndroidUtilities.dp(18), 0, AndroidUtilities.dp(18), 0);
         titleTextView.setGravity(Gravity.CENTER_VERTICAL);
@@ -325,12 +325,12 @@ public class StickersAlert extends BottomSheet implements NotificationCenter.Not
         stickerPreviewLayout.addView(stickerImageView, LayoutHelper.createFrame(size, size, Gravity.CENTER));
 
         stickerEmojiTextView = new TextView(context);
-        stickerEmojiTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        stickerEmojiTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
         stickerEmojiTextView.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
         stickerPreviewLayout.addView(stickerEmojiTextView, LayoutHelper.createFrame(size, size, Gravity.CENTER));
 
         previewSendButton = new TextView(context);
-        previewSendButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        previewSendButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         previewSendButton.setTextColor(Theme.STICKERS_SHEET_SEND_TEXT_COLOR);
         previewSendButton.setGravity(Gravity.CENTER);
         previewSendButton.setBackgroundColor(0xffffffff);

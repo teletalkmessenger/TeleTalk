@@ -37,7 +37,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.AnimatorListenerAdapterProxy;
@@ -135,7 +135,7 @@ public class ChatAttachAlert extends BottomSheet implements NotificationCenter.N
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setEllipsize(TextUtils.TruncateAt.END);
             textView.setTextColor(Theme.ATTACH_SHEET_TEXT_COLOR);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             addView(textView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.TOP, 0, 64, 0, 0));
         }
 
@@ -203,7 +203,7 @@ public class ChatAttachAlert extends BottomSheet implements NotificationCenter.N
 
             nameTextView = new TextView(context);
             nameTextView.setTextColor(Theme.ATTACH_SHEET_TEXT_COLOR);
-            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             nameTextView.setMaxLines(2);
             nameTextView.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
             nameTextView.setLines(2);
@@ -580,7 +580,7 @@ public class ChatAttachAlert extends BottomSheet implements NotificationCenter.N
         hintTextView = new TextView(context);
         hintTextView.setBackgroundResource(R.drawable.tooltip);
         hintTextView.setTextColor(Theme.CHAT_GIF_HINT_TEXT_COLOR);
-        hintTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        hintTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         hintTextView.setPadding(AndroidUtilities.dp(10), 0, AndroidUtilities.dp(10), 0);
         hintTextView.setText(LocaleController.getString("AttachBotsHelp", R.string.AttachBotsHelp));
         hintTextView.setGravity(Gravity.CENTER_VERTICAL);

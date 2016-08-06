@@ -14,7 +14,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.ui.Components.LayoutHelper;
@@ -35,7 +35,7 @@ public class PhotoEditToolCell extends FrameLayout {
         nameTextView = new TextView(context);
         nameTextView.setGravity(Gravity.CENTER);
         nameTextView.setTextColor(0xffffffff);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
         nameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         nameTextView.setMaxLines(1);
         nameTextView.setSingleLine(true);
@@ -44,7 +44,7 @@ public class PhotoEditToolCell extends FrameLayout {
 
         valueTextView = new TextView(context);
         valueTextView.setTextColor(0xff6cc3ff);
-        valueTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 11);
+        valueTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
         valueTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         addView(valueTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.TOP, 57, 3, 0, 0));
     }

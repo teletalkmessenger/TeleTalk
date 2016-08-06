@@ -24,7 +24,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.PhoneFormat.PhoneFormat;
 import org.telegram.messenger.AndroidUtilities;
@@ -65,7 +65,7 @@ public class DrawerProfileCell extends FrameLayout {
 
         nameTextView = new TextView(context);
         nameTextView.setTextColor(0xffffffff);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         nameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         nameTextView.setLines(1);
         nameTextView.setMaxLines(1);
@@ -76,7 +76,7 @@ public class DrawerProfileCell extends FrameLayout {
 
         phoneTextView = new TextView(context);
         phoneTextView.setTextColor(0xffc2e5ff);
-        phoneTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        phoneTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         phoneTextView.setLines(1);
         phoneTextView.setMaxLines(1);
         phoneTextView.setSingleLine(true);

@@ -93,7 +93,6 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     protected final Runnable mInvalidateTask = new Runnable() {
         @Override
         public void run() {
-            Log.d(TAG, "mInvalidateTask");
             if (secondParentView != null) {
                 secondParentView.invalidate();
             } else if (parentView != null) {
@@ -105,7 +104,6 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     private Runnable uiRunnable = new Runnable() {
         @Override
         public void run() {
-            Log.d(TAG, "uiRunnable");
             if (destroyWhenDone && nativePtr != 0) {
                 destroyDecoder(nativePtr);
                 nativePtr = 0;
@@ -138,7 +136,6 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     private Runnable loadFrameRunnable = new Runnable() {
         @Override
         public void run() {
-            Log.d(TAG, "loadFrameRunnable");
             if (!isRecycled) {
                 if (!decoderCreated && nativePtr == 0) {
                     nativePtr = createDecoder(path.getAbsolutePath(), metaData);
@@ -161,7 +158,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
                         } else {
                             if (showAd && firstFrameAfterAd) {
                                 nextRenderingShader = null;
-                                nextRenderingShader  = null;
+                                nextRenderingShader = null;
                                 renderingBitmap = null;
                                 renderingShader = null;
                                 try {
@@ -198,7 +195,6 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
             adPixels = new int[backgroundBitmap.getHeight() * backgroundBitmap.getWidth()];
             backgroundBitmap.getPixels(adPixels, 0, backgroundBitmap.getWidth(), 0, 0,
                     backgroundBitmap.getWidth(), backgroundBitmap.getHeight());
-
             //avoid memory leaks
             ad.bitmap.recycle();
             ad.bitmap = null;
@@ -231,7 +227,6 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     private final Runnable mStartTask = new Runnable() {
         @Override
         public void run() {
-            Log.d(TAG, "mStartTask");
             if (secondParentView != null) {
                 secondParentView.invalidate();
             } else if (parentView != null) {
@@ -241,7 +236,6 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     };
 
     public AnimatedFileDrawable(File file, boolean createDecoder) {
-        Log.d(TAG, "AnimatedFileDrawable()");
         path = file;
         if (createDecoder) {
             nativePtr = createDecoder(file.getAbsolutePath(), metaData);
@@ -313,7 +307,7 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
 
     @Override
     public void start() {
-        Log.d(TAG, "start() called with: " + "");
+        Log.d(TAG, "start()");
         if (isRunning) {
             return;
         }
@@ -325,7 +319,6 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
     }
 
     private void scheduleNextGetFrame() {
-        Log.d(TAG, "scheduleNextGetFrame(): " + loadFrameTask + " , " + nativePtr + " , " + decoderCreated + " , " + destroyWhenDone);
         if (loadFrameTask != null || nativePtr == 0 && decoderCreated || destroyWhenDone) {
             return;
         }
@@ -344,14 +337,14 @@ public class AnimatedFileDrawable extends BitmapDrawable implements Animatable {
 
     @Override
     public int getIntrinsicHeight() {
-//        return decoderCreated ? metaData[1] : AndroidUtilities.dp(100);
-        return backgroundBitmap.getHeight();
+        return decoderCreated ? metaData[1] : AndroidUtilities.dp(100);
+//        return backgroundBitmap.getHeight();
     }
 
     @Override
     public int getIntrinsicWidth() {
-//        return decoderCreated ? metaData[0] : AndroidUtilities.dp(100);
-        return backgroundBitmap.getWidth();
+        return decoderCreated ? metaData[0] : AndroidUtilities.dp(100);
+//        return backgroundBitmap.getWidth();
     }
 
     @Override

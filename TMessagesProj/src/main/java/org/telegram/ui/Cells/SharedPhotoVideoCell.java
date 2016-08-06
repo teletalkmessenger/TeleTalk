@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.AnimatorListenerAdapterProxy;
@@ -82,7 +82,7 @@ public class SharedPhotoVideoCell extends FrameLayout {
 
             videoTextView = new TextView(context);
             videoTextView.setTextColor(0xffffffff);
-            videoTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+            videoTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             videoTextView.setGravity(Gravity.CENTER_VERTICAL);
             videoInfoContainer.addView(videoTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_VERTICAL, 4, 0, 0, 1));
 

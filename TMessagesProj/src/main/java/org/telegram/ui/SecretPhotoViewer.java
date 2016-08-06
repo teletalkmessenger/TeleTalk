@@ -21,7 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -73,7 +73,7 @@ public class SecretPhotoViewer implements NotificationCenter.NotificationCenterD
             setWillNotDraw(false);
 
             infoPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-            infoPaint.setTextSize(AndroidUtilities.dp(15));
+            infoPaint.setTextSize(AndroidUtilities.sp(15));
             infoPaint.setColor(0xffffffff);
 
             deleteProgressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

@@ -16,7 +16,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.view.View;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -93,7 +93,7 @@ public class NumberTextView extends View {
     }
 
     public void setTextSize(int size) {
-        textPaint.setTextSize(AndroidUtilities.dp(size));
+        textPaint.setTextSize(AndroidUtilities.sp(size));
         oldLetters.clear();
         letters.clear();
         setNumber(currentNumber, false);

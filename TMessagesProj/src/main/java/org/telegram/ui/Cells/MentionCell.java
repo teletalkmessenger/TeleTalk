@@ -15,7 +15,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.Emoji;
@@ -49,7 +49,7 @@ public class MentionCell extends LinearLayout {
 
         nameTextView = new TextView(context);
         nameTextView.setTextColor(0xff000000);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         nameTextView.setSingleLine(true);
         nameTextView.setGravity(Gravity.LEFT);
         nameTextView.setEllipsize(TextUtils.TruncateAt.END);
@@ -57,7 +57,7 @@ public class MentionCell extends LinearLayout {
 
         usernameTextView = new TextView(context);
         usernameTextView.setTextColor(0xff999999);
-        usernameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        usernameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         usernameTextView.setSingleLine(true);
         usernameTextView.setGravity(Gravity.LEFT);
         usernameTextView.setEllipsize(TextUtils.TruncateAt.END);

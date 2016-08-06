@@ -15,7 +15,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.FileLog;
@@ -36,7 +36,7 @@ public class TimerDrawable extends Drawable {
             emptyTimerDrawable = context.getResources().getDrawable(R.drawable.header_timer);
             timerDrawable = context.getResources().getDrawable(R.drawable.header_timer2);
             timePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-            timePaint.setTextSize(AndroidUtilities.dp(11));
+            timePaint.setTextSize(AndroidUtilities.sp(11));
             timePaint.setColor(0xffffffff);
             timePaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         }

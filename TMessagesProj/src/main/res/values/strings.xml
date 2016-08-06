@@ -3,8 +3,8 @@
 
 
 <resources>
-    <string name="AppName">MyTelegram</string>
-    <string name="AppNameBeta">MyTelegram Beta</string>
+    <string name="AppName">Oddgram</string>
+    <string name="AppNameBeta">Oddgram Beta</string>
     <string name="LanguageName">English</string>
     <string name="LanguageNameInEnglish">English</string>
     <string name="LanguageCode">en</string>
@@ -1204,4 +1204,23 @@
     <string name="formatterDay12H">h:mm a</string>
     <string name="formatDateAtTime">%1$s at %2$s</string>
     <string name="gcm_defaultSenderId" />
+
+    <!--hojjat strings-->
+    <string name="BottomBarMesseges">Messages</string>
+    <string name="BottomBarExplore">Explore</string>
+    <string name="BottomBarNearBy">Near By</string>
+    <string name="AboutNearby">
+        About Nearby AboutNearby About Nearby
+        About Nearby About Nearby About Nearby
+        About Nearby About Nearby
+    </string>
+
+    <string name="MessageTypeVideo">Video</string>
+    <string name="MessageTypeImage">Image</string>
+    <string name="MessageTypeGif">Gif</string>
+    <string name="MessageTypeText">Text</string>
+    <string name="MessageTypeMusic">Music</string>
+    <string name="LetsSearchForNearbies">Lets see whose around\nto chat with!</string>
+    <string name="SearchForNearbies">Search</string>
+    <string name="N_PeopleAreAround">There are %1$d people around!</string>
 </resources>

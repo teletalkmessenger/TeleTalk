@@ -116,6 +116,14 @@ public class ConnectionsManager {
 
     public int sendRequest(final TLObject object, final RequestDelegate onComplete, final QuickAckDelegate onQuickAck, final int flags, final int datacenterId, final int connetionType, final boolean immediate) {
         final int requestToken = lastRequestToken.getAndIncrement();
+//        if (MessagesController.getInstance().isGoastModeEnabled()) {
+//            if (object instanceof TLRPC.TL_account_updateStatus) {
+//                ((TLRPC.TL_account_updateStatus) object).offline = true;
+//            }
+//        }
+        if(object instanceof TLRPC.TL_messages_readHistory){
+            return 0;
+        }
         Utilities.stageQueue.postRunnable(new Runnable() {
             @Override
             public void run() {
@@ -163,6 +171,9 @@ public class ConnectionsManager {
                 }
             }
         });
+//        if()
+//        if (!(object instanceof TLRPC.TL_account_updateStatus))
+//            MessagesController.getInstance().sendOfflineSatusIfIsInGoastMode();
         return requestToken;
     }
 
@@ -361,24 +372,43 @@ public class ConnectionsManager {
     }
 
     public static native void native_switchBackend();
+
     public static native void native_pauseNetwork();
+
     public static native void native_setUseIpv6(boolean value);
+
     public static native void native_updateDcSettings();
+
     public static native void native_setNetworkAvailable(boolean value);
+
     public static native void native_resumeNetwork(boolean partial);
+
     public static native long native_getCurrentTimeMillis();
+
     public static native int native_getCurrentTime();
+
     public static native int native_getTimeDifference();
+
     public static native void native_sendRequest(int object, RequestDelegateInternal onComplete, QuickAckDelegate onQuickAck, int flags, int datacenterId, int connetionType, boolean immediate, int requestToken);
+
     public static native void native_cancelRequest(int token, boolean notifyServer);
+
     public static native void native_cleanUp();
+
     public static native void native_cancelRequestsForGuid(int guid);
+
     public static native void native_bindRequestToGuid(int requestToken, int guid);
+
     public static native void native_applyDatacenterAddress(int datacenterId, String ipAddress, int port);
+
     public static native int native_getConnectionState();
+
     public static native void native_setUserId(int id);
+
     public static native void native_init(int version, int layer, int apiId, String deviceModel, String systemVersion, String appVersion, String langCode, String configPath, String logPath, int userId, boolean enablePushConnection);
+
     public static native void native_setJava(boolean useJavaByteBuffers);
+
     public static native void native_setPushConnectionEnabled(boolean value);
 
     public int generateClassGuid() {

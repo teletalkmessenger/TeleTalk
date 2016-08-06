@@ -26,7 +26,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -214,7 +214,7 @@ public class WebFrameLayout extends FrameLayout {
 
         if (hasDescription) {
             textView = new TextView(context);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             textView.setTextColor(0xff222222);
             textView.setText(descripton);
             textView.setSingleLine(true);
@@ -225,7 +225,7 @@ public class WebFrameLayout extends FrameLayout {
         }
 
         textView = new TextView(context);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         textView.setTextColor(0xff8a8a8a);
         textView.setText(title);
         textView.setSingleLine(true);
@@ -243,7 +243,7 @@ public class WebFrameLayout extends FrameLayout {
         addView(frameLayout, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48, Gravity.LEFT | Gravity.BOTTOM));
 
         textView = new TextView(context);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         textView.setTextColor(0xff19a7e8);
         textView.setGravity(Gravity.CENTER);
         textView.setBackgroundDrawable(Theme.createBarSelectorDrawable(Theme.ACTION_BAR_AUDIO_SELECTOR_COLOR, false));
@@ -265,7 +265,7 @@ public class WebFrameLayout extends FrameLayout {
         frameLayout.addView(linearLayout, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.RIGHT));
 
         textView = new TextView(context);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         textView.setTextColor(0xff19a7e8);
         textView.setGravity(Gravity.CENTER);
         textView.setBackgroundDrawable(Theme.createBarSelectorDrawable(Theme.ACTION_BAR_AUDIO_SELECTOR_COLOR, false));
@@ -291,7 +291,7 @@ public class WebFrameLayout extends FrameLayout {
         });
 
         textView = new TextView(context);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         textView.setTextColor(0xff19a7e8);
         textView.setGravity(Gravity.CENTER);
         textView.setBackgroundDrawable(Theme.createBarSelectorDrawable(Theme.ACTION_BAR_AUDIO_SELECTOR_COLOR, false));

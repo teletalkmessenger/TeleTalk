@@ -180,7 +180,7 @@ public interface ExoPlayer {
   /**
    * A component of an {@link ExoPlayer} that can receive messages on the playback thread.
    * <p>
-   * Messages can be delivered to a component via {@link ExoPlayer#sendMessage} and
+   * MessageHelper can be delivered to a component via {@link ExoPlayer#sendMessage} and
    * {@link ExoPlayer#blockingSendMessage}.
    */
   public interface ExoPlayerComponent {

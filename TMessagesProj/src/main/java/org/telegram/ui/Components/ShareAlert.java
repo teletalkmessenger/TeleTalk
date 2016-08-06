@@ -27,7 +27,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.SQLite.SQLiteCursor;
@@ -215,7 +215,7 @@ public class ShareAlert extends BottomSheet {
 
         doneButtonBadgeTextView = new TextView(context);
         doneButtonBadgeTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
-        doneButtonBadgeTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        doneButtonBadgeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         doneButtonBadgeTextView.setTextColor(Theme.SHARE_SHEET_BADGE_TEXT_COLOR);
         doneButtonBadgeTextView.setGravity(Gravity.CENTER);
         doneButtonBadgeTextView.setBackgroundResource(R.drawable.bluecounter);
@@ -224,7 +224,7 @@ public class ShareAlert extends BottomSheet {
         doneButton.addView(doneButtonBadgeTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, 23, Gravity.CENTER_VERTICAL, 0, 0, 10, 0));
 
         doneButtonTextView = new TextView(context);
-        doneButtonTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        doneButtonTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         doneButtonTextView.setGravity(Gravity.CENTER);
         doneButtonTextView.setCompoundDrawablePadding(AndroidUtilities.dp(8));
         doneButtonTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
@@ -241,7 +241,7 @@ public class ShareAlert extends BottomSheet {
         nameTextView.setMaxLines(1);
         nameTextView.setSingleLine(true);
         nameTextView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         nameTextView.setBackgroundDrawable(null);
         nameTextView.setHintTextColor(Theme.SHARE_SHEET_EDIT_PLACEHOLDER_TEXT_COLOR);
         nameTextView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);

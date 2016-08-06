@@ -28,7 +28,7 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.MessagesController;
@@ -330,7 +330,7 @@ public class ProfileNotificationsActivity extends BaseFragment implements Notifi
 
                     TextView textView = new TextView(getParentActivity());
                     textView.setText(LocaleController.getString("SmartNotificationsSoundAtMost", R.string.SmartNotificationsSoundAtMost));
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                     linearLayout2.addView(textView);
                     layoutParams1 = (LinearLayout.LayoutParams) textView.getLayoutParams();
                     layoutParams1.width = LayoutHelper.WRAP_CONTENT;
@@ -349,7 +349,7 @@ public class ProfileNotificationsActivity extends BaseFragment implements Notifi
 
                     textView = new TextView(getParentActivity());
                     textView.setText(LocaleController.getString("SmartNotificationsTimes", R.string.SmartNotificationsTimes));
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                     linearLayout2.addView(textView);
                     layoutParams1 = (LinearLayout.LayoutParams) textView.getLayoutParams();
                     layoutParams1.width = LayoutHelper.WRAP_CONTENT;
@@ -368,7 +368,7 @@ public class ProfileNotificationsActivity extends BaseFragment implements Notifi
 
                     textView = new TextView(getParentActivity());
                     textView.setText(LocaleController.getString("SmartNotificationsWithin", R.string.SmartNotificationsWithin));
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                     linearLayout2.addView(textView);
                     layoutParams1 = (LinearLayout.LayoutParams) textView.getLayoutParams();
                     layoutParams1.width = LayoutHelper.WRAP_CONTENT;
@@ -387,7 +387,7 @@ public class ProfileNotificationsActivity extends BaseFragment implements Notifi
 
                     textView = new TextView(getParentActivity());
                     textView.setText(LocaleController.getString("SmartNotificationsMinutes", R.string.SmartNotificationsMinutes));
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                     linearLayout2.addView(textView);
                     layoutParams1 = (LinearLayout.LayoutParams) textView.getLayoutParams();
                     layoutParams1.width = LayoutHelper.WRAP_CONTENT;

@@ -22,7 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.AnimatorListenerAdapterProxy;
@@ -81,7 +81,7 @@ public class PlayerView extends FrameLayout implements NotificationCenter.Notifi
         titleTextView.setLines(1);
         titleTextView.setSingleLine(true);
         titleTextView.setEllipsize(TextUtils.TruncateAt.END);
-        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         titleTextView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
         addView(titleTextView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 36, Gravity.LEFT | Gravity.TOP, 35, 0, 36, 0));
 

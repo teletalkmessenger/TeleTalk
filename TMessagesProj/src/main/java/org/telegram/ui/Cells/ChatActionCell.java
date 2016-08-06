@@ -15,7 +15,7 @@ import android.graphics.Paint;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.style.URLSpan;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
@@ -78,7 +78,7 @@ public class ChatActionCell extends BaseCell {
         imageReceiver = new ImageReceiver(this);
         imageReceiver.setRoundRadius(AndroidUtilities.dp(32));
         avatarDrawable = new AvatarDrawable();
-        textPaint.setTextSize(AndroidUtilities.dp(MessagesController.getInstance().fontSize - 2));
+        textPaint.setTextSize(AndroidUtilities.sp(MessagesController.getInstance().fontSize - 2));
     }
 
     public void setDelegate(ChatActionCellDelegate delegate) {

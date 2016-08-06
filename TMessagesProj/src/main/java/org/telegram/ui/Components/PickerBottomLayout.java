@@ -14,7 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -41,7 +41,7 @@ public class PickerBottomLayout extends FrameLayout {
         setBackgroundColor(isDarkTheme ? 0xff1a1a1a : 0xffffffff);
 
         cancelButton = new TextView(context);
-        cancelButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        cancelButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         cancelButton.setTextColor(isDarkTheme ? 0xffffffff : 0xff19a7e8);
         cancelButton.setGravity(Gravity.CENTER);
         cancelButton.setBackgroundDrawable(Theme.createBarSelectorDrawable(isDarkTheme ? Theme.ACTION_BAR_PICKER_SELECTOR_COLOR : Theme.ACTION_BAR_AUDIO_SELECTOR_COLOR, false));
@@ -58,7 +58,7 @@ public class PickerBottomLayout extends FrameLayout {
 
         doneButtonBadgeTextView = new TextView(context);
         doneButtonBadgeTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
-        doneButtonBadgeTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        doneButtonBadgeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         doneButtonBadgeTextView.setTextColor(0xffffffff);
         doneButtonBadgeTextView.setGravity(Gravity.CENTER);
         doneButtonBadgeTextView.setBackgroundResource(isDarkTheme ? R.drawable.photobadge : R.drawable.bluecounter);
@@ -67,7 +67,7 @@ public class PickerBottomLayout extends FrameLayout {
         doneButton.addView(doneButtonBadgeTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, 23, Gravity.CENTER_VERTICAL, 0, 0, 10, 0));
 
         doneButtonTextView = new TextView(context);
-        doneButtonTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        doneButtonTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         doneButtonTextView.setTextColor(isDarkTheme ? 0xffffffff : 0xff19a7e8);
         doneButtonTextView.setGravity(Gravity.CENTER);
         doneButtonTextView.setCompoundDrawablePadding(AndroidUtilities.dp(8));

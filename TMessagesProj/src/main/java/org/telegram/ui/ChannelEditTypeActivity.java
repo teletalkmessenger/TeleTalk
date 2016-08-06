@@ -23,7 +23,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -240,7 +240,7 @@ public class ChannelEditTypeActivity extends BaseFragment implements Notificatio
 
         EditText editText = new EditText(context);
         editText.setText("telegram.me/");
-        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         editText.setHintTextColor(0xff979797);
         editText.setTextColor(0xff212121);
         editText.setMaxLines(1);
@@ -254,7 +254,7 @@ public class ChannelEditTypeActivity extends BaseFragment implements Notificatio
         publicContainer.addView(editText, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, 36));
 
         nameTextView = new EditText(context);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         if (!isPrivate) {
             nameTextView.setText(currentChat.username);
         }
@@ -308,7 +308,7 @@ public class ChannelEditTypeActivity extends BaseFragment implements Notificatio
         });
 
         checkTextView = new TextView(context);
-        checkTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        checkTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         checkTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
         checkTextView.setVisibility(View.GONE);
         linkContainer.addView(checkTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT, 17, 3, 17, 7));

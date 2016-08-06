@@ -36,12 +36,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     private final PageListener pageListener = new PageListener();
     public OnPageChangeListener delegatePageListener;
 
-    private LinearLayout tabsContainer;
-    private ViewPager pager;
+    protected LinearLayout tabsContainer;
+    protected ViewPager pager;
 
-    private int tabCount;
+    protected int tabCount;
 
-    private int currentPosition = 0;
+    protected int currentPosition = 0;
     private float currentPositionOffset = 0f;
 
     private Paint rectPaint;
@@ -113,7 +113,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         });
     }
 
-    private void addIconTab(final int position, int resId) {
+    protected void addIconTab(final int position, int resId) {
         ImageView tab = new ImageView(getContext());
         tab.setFocusable(true);
         tab.setImageResource(resId);
@@ -128,7 +128,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         tab.setSelected(position == currentPosition);
     }
 
-    private void updateTabStyles() {
+    protected void updateTabStyles() {
         for (int i = 0; i < tabCount; i++) {
             View v = tabsContainer.getChildAt(i);
             v.setLayoutParams(defaultTabLayoutParams);
@@ -151,8 +151,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         tabsContainer.measure(MeasureSpec.EXACTLY | myWidth, heightMeasureSpec);
     }
 
-    private void scrollToChild(int position, int offset) {
-        Log.d("HOJJAT_HOJJAT", "scrollToChild() called with: " + "position = [" + position + "], offset = [" + offset + "]");
+    protected void scrollToChild(int position, int offset) {
         if (tabCount == 0) {
             return;
         }

@@ -16,7 +16,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.FileLog;
@@ -39,7 +39,7 @@ public class LetterDrawable extends Drawable {
             paint.setColor(0xfff0f0f0);
             namePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             namePaint.setColor(0xffffffff);
-            namePaint.setTextSize(AndroidUtilities.dp(28));
+            namePaint.setTextSize(AndroidUtilities.sp(28));
         }
     }
 

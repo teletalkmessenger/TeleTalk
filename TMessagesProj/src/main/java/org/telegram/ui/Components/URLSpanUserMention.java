@@ -8,7 +8,6 @@
 
 package org.telegram.ui.Components;
 
-import android.text.TextPaint;
 
 import org.telegram.ui.ActionBar.Theme;
 
@@ -19,7 +18,7 @@ public class URLSpanUserMention extends URLSpanNoUnderline {
     }
 
     @Override
-    public void updateDrawState(TextPaint ds) {
+    public void updateDrawState(android.text.TextPaint ds) {
         super.updateDrawState(ds);
         ds.setColor(Theme.MSG_LINK_TEXT_COLOR);
         ds.setUnderlineText(false);

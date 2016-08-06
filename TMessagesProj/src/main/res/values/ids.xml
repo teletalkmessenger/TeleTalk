@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="avatar" type="id" />
+    <item name="desc" type="id" />
+    <item name="channel" type="id" />
+</resources>

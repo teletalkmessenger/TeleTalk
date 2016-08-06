@@ -37,7 +37,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -153,7 +153,7 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
             } else {
                 titleTextView.setText(LocaleController.getString("EnterCurrentPasscode", R.string.EnterCurrentPasscode));
             }
-            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             titleTextView.setGravity(Gravity.CENTER_HORIZONTAL);
             frameLayout.addView(titleTextView);
             FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) titleTextView.getLayoutParams();
@@ -164,7 +164,7 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
             titleTextView.setLayoutParams(layoutParams);
 
             passwordEditText = new EditText(context);
-            passwordEditText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+            passwordEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             passwordEditText.setTextColor(0xff000000);
             passwordEditText.setMaxLines(1);
             passwordEditText.setLines(1);
@@ -191,7 +191,7 @@ public class PasscodeActivity extends BaseFragment implements NotificationCenter
             passwordEditText.setLayoutParams(layoutParams);
             passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                     if (passcodeSetStep == 0) {
                         processNext();
                         return true;

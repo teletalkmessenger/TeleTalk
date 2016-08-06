@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.PhoneFormat.PhoneFormat;
@@ -146,7 +146,7 @@ public class ContactAddActivity extends BaseFragment implements NotificationCent
 
         nameTextView = new TextView(context);
         nameTextView.setTextColor(0xff212121);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         nameTextView.setLines(1);
         nameTextView.setMaxLines(1);
         nameTextView.setSingleLine(true);
@@ -165,7 +165,7 @@ public class ContactAddActivity extends BaseFragment implements NotificationCent
 
         onlineTextView = new TextView(context);
         onlineTextView.setTextColor(0xff999999);
-        onlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        onlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         onlineTextView.setLines(1);
         onlineTextView.setMaxLines(1);
         onlineTextView.setSingleLine(true);
@@ -182,7 +182,7 @@ public class ContactAddActivity extends BaseFragment implements NotificationCent
         onlineTextView.setLayoutParams(layoutParams3);
 
         firstNameField = new EditText(context);
-        firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         firstNameField.setHintTextColor(0xff979797);
         firstNameField.setTextColor(0xff212121);
         firstNameField.setMaxLines(1);
@@ -203,7 +203,7 @@ public class ContactAddActivity extends BaseFragment implements NotificationCent
         firstNameField.setLayoutParams(layoutParams);
         firstNameField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_NEXT) {
                     lastNameField.requestFocus();
                     lastNameField.setSelection(lastNameField.length());
@@ -214,7 +214,7 @@ public class ContactAddActivity extends BaseFragment implements NotificationCent
         });
 
         lastNameField = new EditText(context);
-        lastNameField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        lastNameField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         lastNameField.setHintTextColor(0xff979797);
         lastNameField.setTextColor(0xff212121);
         lastNameField.setMaxLines(1);
@@ -235,7 +235,7 @@ public class ContactAddActivity extends BaseFragment implements NotificationCent
         lastNameField.setLayoutParams(layoutParams);
         lastNameField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE) {
                     doneButton.performClick();
                     return true;

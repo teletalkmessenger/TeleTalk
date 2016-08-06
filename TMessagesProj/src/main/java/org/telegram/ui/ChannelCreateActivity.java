@@ -42,7 +42,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.PhoneFormat.PhoneFormat;
@@ -387,7 +387,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
             }
             nameTextView.setMaxLines(4);
             nameTextView.setGravity(Gravity.CENTER_VERTICAL | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT));
-            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             nameTextView.setHintTextColor(0xff979797);
             nameTextView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
             nameTextView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
@@ -417,7 +417,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
             });
 
             descriptionTextView = new EditText(context);
-            descriptionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            descriptionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             descriptionTextView.setHintTextColor(0xff979797);
             descriptionTextView.setTextColor(0xff212121);
             descriptionTextView.setPadding(0, 0, 0, AndroidUtilities.dp(6));
@@ -432,7 +432,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
             linearLayout.addView(descriptionTextView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 24, 18, 24, 0));
             descriptionTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                     if (i == EditorInfo.IME_ACTION_DONE && doneButton != null) {
                         doneButton.performClick();
                         return true;
@@ -458,7 +458,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
             });
 
             TextView helpTextView = new TextView(context);
-            helpTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+            helpTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             helpTextView.setTextColor(0xff6d6d72);
             helpTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
             helpTextView.setText(LocaleController.getString("DescriptionInfo", R.string.DescriptionInfo));
@@ -527,7 +527,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
 
             EditText editText = new EditText(context);
             editText.setText("telegram.me/");
-            editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             editText.setHintTextColor(0xff979797);
             editText.setTextColor(0xff212121);
             editText.setMaxLines(1);
@@ -541,7 +541,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
             publicContainer.addView(editText, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, 36));
 
             nameTextView = new EditText(context);
-            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             nameTextView.setHintTextColor(0xff979797);
             nameTextView.setTextColor(0xff212121);
             nameTextView.setMaxLines(1);
@@ -592,7 +592,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
             });
 
             checkTextView = new TextView(context);
-            checkTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+            checkTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             checkTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
             checkTextView.setVisibility(View.GONE);
             linkContainer.addView(checkTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT, 17, 3, 17, 7));
@@ -616,7 +616,7 @@ public class ChannelCreateActivity extends BaseFragment implements NotificationC
             linearLayout.addView(frameLayout, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
 
             nameTextView = new EditText(context);
-            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             nameTextView.setHintTextColor(0xff979797);
             nameTextView.setTextColor(0xff212121);
             nameTextView.setInputType(InputType.TYPE_TEXT_VARIATION_FILTER | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_MULTI_LINE);

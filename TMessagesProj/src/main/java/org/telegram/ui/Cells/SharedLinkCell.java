@@ -17,7 +17,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -90,10 +90,10 @@ public class SharedLinkCell extends FrameLayout {
             titleTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             titleTextPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             titleTextPaint.setColor(0xff212121);
-            titleTextPaint.setTextSize(AndroidUtilities.dp(16));
+            titleTextPaint.setTextSize(AndroidUtilities.sp(16));
 
             descriptionTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-            descriptionTextPaint.setTextSize(AndroidUtilities.dp(16));
+            descriptionTextPaint.setTextSize(AndroidUtilities.sp(16));
 
             paint = new Paint();
             paint.setColor(0xffd9d9d9);

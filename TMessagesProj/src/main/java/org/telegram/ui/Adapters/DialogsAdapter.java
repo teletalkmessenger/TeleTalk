@@ -72,6 +72,8 @@ public class DialogsAdapter extends RecyclerView.Adapter {
             return MessagesController.getInstance().dialogsFavs;
         } else if (dialogsType == 9) {
             return MessagesController.getInstance().dialogsGroupsAll;
+        } else if (dialogsType == 913) {
+            return MessagesController.getInstance().dialogs;
         }
         //
         return null;
@@ -143,5 +145,18 @@ public class DialogsAdapter extends RecyclerView.Adapter {
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        if (!listViewIsVisible)
+            return;
+        super.notifyDataSetChanged();
+    }
+
+    boolean listViewIsVisible = true;
+
+    public void setListViewIsVisible(boolean listViewIsVisible) {
+        this.listViewIsVisible = listViewIsVisible;
     }
 }

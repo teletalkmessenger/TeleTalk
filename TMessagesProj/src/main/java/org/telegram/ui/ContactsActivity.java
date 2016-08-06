@@ -31,7 +31,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.messenger.AndroidUtilities;
@@ -228,7 +228,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
 
         emptyTextView = new TextView(context);
         emptyTextView.setTextColor(0xff808080);
-        emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+        emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         emptyTextView.setGravity(Gravity.CENTER);
         emptyTextView.setText(LocaleController.getString("NoContacts", R.string.NoContacts));
         emptyTextLayout.addView(emptyTextView);

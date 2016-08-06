@@ -22,13 +22,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.widget.Toast;
 
 import org.telegram.SQLite.SQLiteCursor;
+import org.telegram.Util;
+import org.telegram.hojjat.PreferenceManager;
 import org.telegram.messenger.query.BotQuery;
 import org.telegram.messenger.query.DraftQuery;
 import org.telegram.messenger.query.MessagesQuery;
@@ -54,6 +58,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Semaphore;
 
 public class MessagesController implements NotificationCenter.NotificationCenterDelegate {
+    private static final String TAG = "HOJJAT_MessagesControll";
 
     private ConcurrentHashMap<Integer, TLRPC.Chat> chats = new ConcurrentHashMap<>(100, 1.0f, 2);
     private ConcurrentHashMap<Integer, TLRPC.EncryptedChat> encryptedChats = new ConcurrentHashMap<>(10, 1.0f, 2);
@@ -155,7 +160,7 @@ public class MessagesController implements NotificationCenter.NotificationCenter
     private String uploadingAvatar = null;
 
     public boolean enableJoined = true;
-    public int fontSize = AndroidUtilities.dp(16);
+    public int fontSize = AndroidUtilities.dp(Util.hojjatUi ? 16 : 16);
     public int maxGroupCount = 200;
     public int maxBroadcastCount = 100;
     public int maxMegagroupCount = 5000;
@@ -270,7 +275,8 @@ public class MessagesController implements NotificationCenter.NotificationCenter
         maxEditTime = preferences.getInt("maxEditTime", 3600);
         groupBigSize = preferences.getInt("groupBigSize", 10);
         ratingDecay = preferences.getInt("ratingDecay", 2419200);
-        fontSize = preferences.getInt("fons_size", AndroidUtilities.isTablet() ? 18 : 16);
+        fontSize = preferences.getInt("fons_size", AndroidUtilities.isTablet() ? 16 : 14);
+//        if (Util.hojjatUi) fontSize -= 1;
         String disabledFeaturesString = preferences.getString("disabledFeatures", null);
         if (disabledFeaturesString != null && disabledFeaturesString.length() != 0) {
             try {
@@ -289,6 +295,7 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                 FileLog.e("tmessages", e);
             }
         }
+        setGoastMode();
     }
 
     public void updateConfig(final TLRPC.TL_config config) {
@@ -718,14 +725,14 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                         oldUser.flags |= 8;
                     } else {
                         oldUser.username = null;
-                        oldUser.flags = oldUser.flags &~ 8;
+                        oldUser.flags = oldUser.flags & ~8;
                     }
                     if (user.photo != null) {
                         oldUser.photo = user.photo;
                         oldUser.flags |= 32;
                     } else {
                         oldUser.photo = null;
-                        oldUser.flags = oldUser.flags &~ 32;
+                        oldUser.flags = oldUser.flags & ~32;
                     }
                 }
             } else {
@@ -750,14 +757,14 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                     user.flags |= 8;
                 } else {
                     user.username = null;
-                    user.flags = user.flags &~ 8;
+                    user.flags = user.flags & ~8;
                 }
                 if (oldUser.photo != null) {
                     user.photo = oldUser.photo;
                     user.flags |= 32;
                 } else {
                     user.photo = null;
-                    user.flags = user.flags &~ 32;
+                    user.flags = user.flags & ~32;
                 }
                 users.put(user.id, user);
             }
@@ -807,7 +814,7 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                         oldChat.flags |= 64;
                     } else {
                         oldChat.username = null;
-                        oldChat.flags = oldChat.flags &~ 64;
+                        oldChat.flags = oldChat.flags & ~64;
                     }
                 }
             } else {
@@ -834,7 +841,7 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                     chat.flags |= 64;
                 } else {
                     chat.username = null;
-                    chat.flags = chat.flags &~ 64;
+                    chat.flags = chat.flags & ~64;
                 }
                 chats.put(chat.id, chat);
             }
@@ -2081,14 +2088,84 @@ public class MessagesController implements NotificationCenter.NotificationCenter
         }
     }
 
+    boolean goastModeEnabled = false;
+
+    private void setGoastMode() {
+        PreferenceManager prefs = PreferenceManager.getInstance(ApplicationLoader.applicationContext);
+        goastModeEnabled = prefs.getBoolean(PreferenceManager.GHOAST_MODE_ENABLED, false);
+        sendCurrentStatus(goastModeEnabled);
+    }
+
+    public void enableGoastMode() {
+        goastModeEnabled = true;
+        PreferenceManager prefs = PreferenceManager.getInstance(ApplicationLoader.applicationContext);
+        prefs.saveBoolean(PreferenceManager.GHOAST_MODE_ENABLED, goastModeEnabled);
+        sendCurrentStatus(true);
+    }
+
+    public void disableGoastMode() {
+        goastModeEnabled = false;
+        PreferenceManager prefs = PreferenceManager.getInstance(ApplicationLoader.applicationContext);
+        prefs.saveBoolean(PreferenceManager.GHOAST_MODE_ENABLED, goastModeEnabled);
+        sendCurrentStatus(false);
+    }
+
+    public boolean isGoastModeEnabled() {
+        return goastModeEnabled;
+    }
+
+    public void sendOfflineSatusIfIsInGoastMode() {
+//        if (goastModeEnabled)
+//            sendCurrentStatus(true);
+        if (goastModeEnabled)
+            offlineSent = false;
+    }
+
+    private void sendCurrentStatus(final boolean offline) {
+        TLRPC.TL_account_updateStatus req = new TLRPC.TL_account_updateStatus();
+        req.offline = offline;
+        ConnectionsManager.getInstance().sendRequest(req, new RequestDelegate() {
+            @Override
+            public void run(TLObject response, TLRPC.TL_error error) {
+                if (error == null) {
+                    if ((offline && response instanceof TLRPC.TL_boolFalse) || (!offline && response instanceof TLRPC.TL_boolTrue)) {
+                        Log.e(TAG, "TL_account_updateStatus offline:" + offline + "   was rejected");
+                    }
+                }
+            }
+        });
+    }
+
     public void updateTimerProc() {
         long currentTime = System.currentTimeMillis();
 
         checkDeletingTask(false);
 
         if (UserConfig.isClientActivated()) {
+
             if (ConnectionsManager.getInstance().getPauseTime() == 0 && ApplicationLoader.isScreenOn && !ApplicationLoader.mainInterfacePaused) {
-                if (statusSettingState != 1 && (lastStatusUpdateTime == 0 || Math.abs(System.currentTimeMillis() - lastStatusUpdateTime) >= 55000 || offlineSent)) {
+                if (goastModeEnabled) {
+//                    if(!offlineSent) {
+//                        if (statusRequest != 0) {
+//                            ConnectionsManager.getInstance().cancelRequest(statusRequest, false);
+//                        }
+//                        TLRPC.TL_account_updateStatus req = new TLRPC.TL_account_updateStatus();
+//                        req.offline = true;
+//                        statusRequest = ConnectionsManager.getInstance().sendRequest(req, new RequestDelegate() {
+//                            @Override
+//                            public void run(TLObject response, TLRPC.TL_error error) {
+//                                if (error == null) {
+//                                    offlineSent = true;
+//                                } else {
+//                                    if (lastStatusUpdateTime != 0) {
+//                                        lastStatusUpdateTime += 5000;
+//                                    }
+//                                }
+//                                statusRequest = 0;
+//                            }
+//                        });
+//                    }
+                } else if (statusSettingState != 1 && (lastStatusUpdateTime == 0 || Math.abs(System.currentTimeMillis() - lastStatusUpdateTime) >= 55000 || offlineSent)) {
                     statusSettingState = 1;
 
                     if (statusRequest != 0) {
@@ -2134,6 +2211,7 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                     }
                 });
             }
+
 
             if (!updatesQueueChannels.isEmpty()) {
                 ArrayList<Integer> keys = new ArrayList<>(updatesQueueChannels.keySet());
@@ -3597,6 +3675,7 @@ public class MessagesController implements NotificationCenter.NotificationCenter
     }
 
     public void markMessageContentAsRead(final MessageObject messageObject) {
+        //hojjat TODO
         ArrayList<Long> arrayList = new ArrayList<>();
         long messageId = messageObject.getId();
         if (messageObject.messageOwner.to_id.channel_id != 0) {
@@ -3623,6 +3702,7 @@ public class MessagesController implements NotificationCenter.NotificationCenter
     }
 
     public void markMessageAsRead(final long dialog_id, final long random_id, int ttl) {
+        //hojjat TODO
         if (random_id == 0 || dialog_id == 0 || ttl <= 0 && ttl != Integer.MIN_VALUE) {
             return;
         }
@@ -3702,19 +3782,21 @@ public class MessagesController implements NotificationCenter.NotificationCenter
             });
 
             if (max_positive_id != Integer.MAX_VALUE) {
-                ConnectionsManager.getInstance().sendRequest(req, new RequestDelegate() {
-                    @Override
-                    public void run(TLObject response, TLRPC.TL_error error) {
-                        if (error == null) {
-                            if (response instanceof TLRPC.TL_messages_affectedMessages) {
-                                TLRPC.TL_messages_affectedMessages res = (TLRPC.TL_messages_affectedMessages) response;
-                                processNewDifferenceParams(-1, res.pts, -1, res.pts_count);
+                if (!MessagesController.getInstance().isGoastModeEnabled())
+                    ConnectionsManager.getInstance().sendRequest(req, new RequestDelegate() {
+                        @Override
+                        public void run(TLObject response, TLRPC.TL_error error) {
+                            if (error == null) {
+                                if (response instanceof TLRPC.TL_messages_affectedMessages) {
+                                    TLRPC.TL_messages_affectedMessages res = (TLRPC.TL_messages_affectedMessages) response;
+                                    processNewDifferenceParams(-1, res.pts, -1, res.pts_count);
+                                }
                             }
                         }
-                    }
-                });
+                    });
             }
         } else {
+            //Hojjat TODO
             if (max_date == 0) {
                 return;
             }
@@ -7410,7 +7492,7 @@ public class MessagesController implements NotificationCenter.NotificationCenter
         }
     }
 
-    public static void openByUserName(String username, final BaseFragment fragment, final int type) {
+    public static void openByUserName(final String username, final BaseFragment fragment, final int type) {
         if (username == null || fragment == null) {
             return;
         }
@@ -7442,6 +7524,13 @@ public class MessagesController implements NotificationCenter.NotificationCenter
                             fragment.setVisibleDialog(null);
                             if (error == null) {
                                 TLRPC.TL_contacts_resolvedPeer res = (TLRPC.TL_contacts_resolvedPeer) response;
+                                Log.i(TAG, "openByUserName:" + username + "   res:  #chats=" + res.chats.size() + " #users=" + res.users.size());
+                                for (TLRPC.Chat chat : res.chats) {
+                                    Log.i(TAG, " chat:: " + chat);
+                                }
+                                for (TLRPC.User user1 : res.users) {
+                                    Log.i(TAG, " user::" + user1);
+                                }
                                 getInstance().putUsers(res.users, false);
                                 getInstance().putChats(res.chats, false);
                                 MessagesStorage.getInstance().putUsersAndChats(res.users, res.chats, false, true);

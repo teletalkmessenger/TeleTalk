@@ -15,7 +15,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -31,7 +31,7 @@ public class BotSwitchCell extends FrameLayout {
         setBackgroundResource(R.drawable.list_selector);
 
         textView = new TextView(context);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         textView.setTextColor(0xff4391cc);
         textView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         textView.setSingleLine(true);

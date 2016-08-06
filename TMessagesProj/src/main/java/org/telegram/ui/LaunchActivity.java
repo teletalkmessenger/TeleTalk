@@ -20,6 +20,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,42 +40,49 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import org.telegram.messenger.AndroidUtilities;
+//import com.roughike.bottombar.BottomBar;
+//import com.roughike.bottombar.OnMenuTabClickListener;
+//import com.roughike.bottombar.scrollsweetness.BottomNavigationBehavior;
+
 import org.telegram.PhoneFormat.PhoneFormat;
+import org.telegram.hojjat.ui.Modules.Nearby.NearbyActivity;
+import org.telegram.hojjat.ui.Modules.Trends.TrendsActivity;
+import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.ChatObject;
 import org.telegram.messenger.ContactsController;
+import org.telegram.messenger.FileLog;
 import org.telegram.messenger.ImageLoader;
+import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MessageObject;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.MessagesStorage;
 import org.telegram.messenger.NativeCrashManager;
-import org.telegram.messenger.SendMessagesHelper;
-import org.telegram.messenger.UserObject;
-import org.telegram.messenger.Utilities;
-import org.telegram.messenger.ApplicationLoader;
-import org.telegram.messenger.FileLog;
-import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
+import org.telegram.messenger.SendMessagesHelper;
+import org.telegram.messenger.UserConfig;
+import org.telegram.messenger.UserObject;
+import org.telegram.messenger.Utilities;
 import org.telegram.messenger.browser.Browser;
 import org.telegram.messenger.query.DraftQuery;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.tgnet.RequestDelegate;
 import org.telegram.tgnet.TLObject;
 import org.telegram.tgnet.TLRPC;
-import org.telegram.messenger.UserConfig;
-import org.telegram.ui.Adapters.DrawerLayoutAdapter;
 import org.telegram.ui.ActionBar.ActionBarLayout;
 import org.telegram.ui.ActionBar.BaseFragment;
 import org.telegram.ui.ActionBar.DrawerLayoutContainer;
+import org.telegram.ui.ActionBar.Theme;
+import org.telegram.ui.Adapters.DrawerLayoutAdapter;
 import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.PasscodeView;
 import org.telegram.ui.Components.StickersAlert;
-import org.telegram.ui.ActionBar.Theme;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -119,6 +127,14 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
     private boolean tabletFullSize;
 
     private Runnable lockRunnable;
+    //    private BottomBar mBottomBar;
+
+    DialogsActivity dialogs;
+    NearbyActivity nearbyActivity;
+    TrendsActivity trendsActivity;
+
+    private org.telegram.hojjat.ui.Components.BottomBar.BottomBar bottomBar;
+    private BottomBarAdapter bottomBarAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +180,11 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         actionBarLayout = new ActionBarLayout(this);
 
         drawerLayoutContainer = new DrawerLayoutContainer(this);
-        setContentView(drawerLayoutContainer, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        LinearLayout mainContariner = new LinearLayout(this);
+        mainContariner.setOrientation(LinearLayout.VERTICAL);
+//        setContentView(drawerLayoutContainer, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        setContentView(mainContariner, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        mainContariner.addView(drawerLayoutContainer, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 0, (float) 1));
 
         if (AndroidUtilities.isTablet()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -193,7 +213,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
 
             rightActionBarLayout = new ActionBarLayout(this);
             launchLayout.addView(rightActionBarLayout);
-            relativeLayoutParams = (RelativeLayout.LayoutParams)rightActionBarLayout.getLayoutParams();
+            relativeLayoutParams = (RelativeLayout.LayoutParams) rightActionBarLayout.getLayoutParams();
             relativeLayoutParams.width = AndroidUtilities.dp(320);
             relativeLayoutParams.height = LayoutHelper.MATCH_PARENT;
             rightActionBarLayout.setLayoutParams(relativeLayoutParams);
@@ -257,7 +277,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
             layersActionBarLayout.setUseAlphaAnimations(true);
             layersActionBarLayout.setBackgroundResource(R.drawable.boxshadow);
             launchLayout.addView(layersActionBarLayout);
-            relativeLayoutParams = (RelativeLayout.LayoutParams)layersActionBarLayout.getLayoutParams();
+            relativeLayoutParams = (RelativeLayout.LayoutParams) layersActionBarLayout.getLayoutParams();
             relativeLayoutParams.width = AndroidUtilities.dp(530);
             relativeLayoutParams.height = AndroidUtilities.dp(528);
             layersActionBarLayout.setLayoutParams(relativeLayoutParams);
@@ -371,7 +391,8 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                 actionBarLayout.addFragmentToStack(new LoginActivity());
                 drawerLayoutContainer.setAllowOpenDrawer(false, false);
             } else {
-                actionBarLayout.addFragmentToStack(new DialogsActivity(null));
+                dialogs = new DialogsActivity(null);
+                actionBarLayout.addFragmentToStack(dialogs);
                 drawerLayoutContainer.setAllowOpenDrawer(true, false);
             }
 
@@ -453,6 +474,53 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
             drawerLayoutContainer.setAllowOpenDrawer(allowOpen, false);
         }
 
+        bottomBar = new org.telegram.hojjat.ui.Components.BottomBar.BottomBar(this);
+        bottomBar.setActiveColor(getResources().getColor(R.color.primary));
+        bottomBar.setDeactiveColor(getResources().getColor(R.color.darkGray));
+        bottomBar.setBackgroundColor(getResources().getColor(R.color.lightGray));
+        bottomBarAdapter = new BottomBarAdapter();
+        bottomBar.setAdapter(bottomBarAdapter);
+        bottomBar.setOnTabSelectedListener(((org.telegram.hojjat.ui.Components.BottomBar.BottomBar.OnTabSelectedListener) bottomBarAdapter));
+        mainContariner.addView(bottomBar, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+
+//        setTheme(R.style.Theme_MAppCompat);
+//
+////        mBottomBar = BottomBar.attach(this, savedInstanceState, Color.RED, Color.BLUE, (float)0.6);
+////        it must be set if using attach with colors
+////        mBottomBar.setFixedInactiveIconColor(0xFF444444);
+//
+//        mBottomBar = BottomBar.attach(this, savedInstanceState);
+//        mBottomBar.setTypeFace(AndroidUtilities.PERSIAN_FONT);
+////        mBottomBar.setMaxFixedTabs(2);
+////        mBottomBar.noTopOffset();
+////        mBottomBar.ignoreNightMode();
+//        mBottomBar.setActiveTabColor(0xff527da3);
+//        mBottomBar.setItems(R.menu.bottom_bar_menu);
+////        mBottomBar.mapColorForTab(0, 0xFF999999);
+////        mBottomBar.mapColorForTab(1, 0xFF999999);
+////        mBottomBar.mapColorForTab(2, 0xFF999999);
+//        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+//            @Override
+//            public void onMenuTabSelected(@IdRes int menuItemId) {
+//                if (menuItemId == R.id.bottomBarMessages) {
+//                    actionBarLayout.presentFragment(new DialogsActivity(null), true, true, true);
+//                } else if (menuItemId == R.id.bottomBarExplore) {
+//                    actionBarLayout.presentFragment(new TrendsActivity(), true, true, true);
+//                } else if (menuItemId == R.id.bottomBarDiscover) {
+//                    actionBarLayout.presentFragment(new NearbyActivity(), true, true, true);
+//                }
+//            }
+//
+//            @Override
+//            public void onMenuTabReSelected(@IdRes int menuItemId) {
+//                if (menuItemId == R.id.bottomBarExplore) {
+//                    // The user reselected item number one, scroll your content to top.
+//                }
+//            }
+//        });
+//        setTheme(R.style.Theme_TMessages);
+
         handleIntent(getIntent(), false, savedInstanceState != null, false);
         needLayout();
 
@@ -467,6 +535,24 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                 }
             }
         });
+    }
+
+    public void updateViewToFragment(BaseFragment fragment) {
+        if (fragment instanceof DialogsActivity || fragment instanceof TrendsActivity || fragment instanceof NearbyActivity) {
+            showBottomBar();
+        } else {
+            hideBottomBar();
+        }
+    }
+
+    private void hideBottomBar() {
+//        mBottomBar.hide();
+        bottomBar.setVisibility(View.GONE);
+    }
+
+    private void showBottomBar() {
+//        mBottomBar.show();
+        bottomBar.setVisibility(View.VISIBLE);
     }
 
     private void showPasscodeActivity() {
@@ -979,6 +1065,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                         args.putString("selectAlertStringGroup", LocaleController.getString("SendMessagesToGroup", R.string.SendMessagesToGroup));
                     }
                     DialogsActivity fragment = new DialogsActivity(args);
+                    dialogs = fragment;
                     fragment.setDelegate(this);
                     boolean removeLast;
                     if (AndroidUtilities.isTablet()) {
@@ -1023,7 +1110,8 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                         }
                     } else {
                         if (actionBarLayout.fragmentsStack.isEmpty()) {
-                            actionBarLayout.addFragmentToStack(new DialogsActivity(null));
+                            dialogs = new DialogsActivity(null);
+                            actionBarLayout.addFragmentToStack(dialogs);
                             drawerLayoutContainer.setAllowOpenDrawer(true, false);
                         }
                     }
@@ -1033,12 +1121,18 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                             actionBarLayout.addFragmentToStack(new LoginActivity());
                             drawerLayoutContainer.setAllowOpenDrawer(false, false);
                         } else {
-                            actionBarLayout.addFragmentToStack(new DialogsActivity(null));
+                            dialogs = new DialogsActivity(null);
+                            actionBarLayout.addFragmentToStack(dialogs);
                             drawerLayoutContainer.setAllowOpenDrawer(true, false);
                         }
                     }
                 }
-                actionBarLayout.showLastFragment();
+                if (isLastFragmentTrendsOrNearby()) {
+                    dialogs = new DialogsActivity(null);
+                    actionBarLayout.presentFragment(dialogs, true, true, true);
+                } else {
+                    actionBarLayout.showLastFragment();
+                }
                 if (AndroidUtilities.isTablet()) {
                     layersActionBarLayout.showLastFragment();
                     rightActionBarLayout.showLastFragment();
@@ -1047,6 +1141,15 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
 
             intent.setAction(null);
             return pushOpened;
+        }
+        return false;
+    }
+
+    private boolean isLastFragmentTrendsOrNearby() {
+        if (actionBarLayout.fragmentsStack.size() == 1) {
+            BaseFragment f = actionBarLayout.fragmentsStack.get(0);
+            if (f instanceof TrendsActivity || f instanceof NearbyActivity)
+                return true;
         }
         return false;
     }
@@ -1094,6 +1197,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                                         args.putInt("dialogsType", 2);
                                         args.putString("addToGroupAlertString", LocaleController.formatString("AddToTheGroupTitle", R.string.AddToTheGroupTitle, UserObject.getUserName(user), "%1$s"));
                                         DialogsActivity fragment = new DialogsActivity(args);
+                                        dialogs = fragment;
                                         fragment.setDelegate(new DialogsActivity.DialogsActivityDelegate() {
                                             @Override
                                             public void didSelectDialog(DialogsActivity fragment, long did, boolean param) {
@@ -1279,6 +1383,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
             Bundle args = new Bundle();
             args.putBoolean("onlySelect", true);
             DialogsActivity fragment = new DialogsActivity(args);
+            dialogs = fragment;
             fragment.setDelegate(new DialogsActivity.DialogsActivityDelegate() {
                 @Override
                 public void didSelectDialog(DialogsActivity fragment, long did, boolean param) {
@@ -1361,8 +1466,8 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
     @Override
     public void didSelectDialog(DialogsActivity dialogsFragment, long dialog_id, boolean param) {
         if (dialog_id != 0) {
-            int lower_part = (int)dialog_id;
-            int high_id = (int)(dialog_id >> 32);
+            int lower_part = (int) dialog_id;
+            int high_id = (int) (dialog_id >> 32);
 
             Bundle args = new Bundle();
             args.putBoolean("scrollToTopOnResume", true);
@@ -1388,7 +1493,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
             ChatActivity fragment = new ChatActivity(args);
 
             if (videoPath != null) {
-                if(android.os.Build.VERSION.SDK_INT >= 16) {
+                if (android.os.Build.VERSION.SDK_INT >= 16) {
                     if (AndroidUtilities.isTablet()) {
                         actionBarLayout.presentFragment(fragment, false, true, true);
                     } else {
@@ -1819,8 +1924,8 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                     if (!AndroidUtilities.isGoogleMapsInstalled(lastFragment)) {
                         return;
                     }
-                    LocationActivity fragment = new LocationActivity();
-                    fragment.setDelegate(new LocationActivity.LocationActivityDelegate() {
+                    org.telegram.ui.LocationActivity fragment = new org.telegram.ui.LocationActivity();
+                    fragment.setDelegate(new org.telegram.ui.LocationActivity.LocationActivityDelegate() {
                         @Override
                         public void didSelectLocation(TLRPC.MessageMedia location) {
                             for (HashMap.Entry<String, MessageObject> entry : waitingForLocation.entrySet()) {
@@ -1943,6 +2048,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         } catch (Exception e) {
             FileLog.e("tmessages", e);
         }
+//        mBottomBar.onSaveInstanceState(outState);
     }
 
     @Override
@@ -2052,7 +2158,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         if (AndroidUtilities.isTablet()) {
             drawerLayoutContainer.setAllowOpenDrawer(!(fragment instanceof LoginActivity || fragment instanceof CountrySelectActivity) && layersActionBarLayout.getVisibility() != View.VISIBLE, true);
             if (fragment instanceof DialogsActivity) {
-                DialogsActivity dialogsActivity = (DialogsActivity)fragment;
+                DialogsActivity dialogsActivity = (DialogsActivity) fragment;
                 if (dialogsActivity.isMainDialogList() && layout != actionBarLayout) {
                     actionBarLayout.removeAllFragments();
                     actionBarLayout.presentFragment(fragment, removeLast, forceWithoutAnimation, false);
@@ -2141,7 +2247,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         if (AndroidUtilities.isTablet()) {
             drawerLayoutContainer.setAllowOpenDrawer(!(fragment instanceof LoginActivity || fragment instanceof CountrySelectActivity) && layersActionBarLayout.getVisibility() != View.VISIBLE, true);
             if (fragment instanceof DialogsActivity) {
-                DialogsActivity dialogsActivity = (DialogsActivity)fragment;
+                DialogsActivity dialogsActivity = (DialogsActivity) fragment;
                 if (dialogsActivity.isMainDialogList() && layout != actionBarLayout) {
                     actionBarLayout.removeAllFragments();
                     actionBarLayout.addFragmentToStack(fragment);
@@ -2238,5 +2344,99 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
             }
         }
         drawerLayoutAdapter.notifyDataSetChanged();
+    }
+
+    class BottomBarAdapter extends org.telegram.hojjat.ui.Components.BottomBar.BottomBarAdapter implements org.telegram.hojjat.ui.Components.BottomBar.BottomBar.OnTabSelectedListener {
+
+        final int tabMessages = 0;
+        final int tabNearby = 1;
+        final int tabExplore = 2;
+        Typeface typeface = AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT);
+
+        @Override
+        public String getLabel(int position) {
+            int tab = getTabInPosition(position);
+            switch (tab) {
+                case tabMessages:
+                    return LocaleController.getString("BottomBarMesseges", R.string.BottomBarMesseges);
+                case tabNearby:
+                    return LocaleController.getString("BottomBarNearBy", R.string.BottomBarNearBy);
+                case tabExplore:
+                    return LocaleController.getString("BottomBarExplore", R.string.BottomBarExplore);
+            }
+            return null;
+        }
+
+        @Override
+        public int getIconResource(int position) {
+            int tab = getTabInPosition(position);
+            switch (tab) {
+                case tabMessages:
+                    return R.drawable.bottom_bar_messages;
+                case tabNearby:
+                    return R.drawable.bottom_bar_nearby;
+                case tabExplore:
+                    return R.drawable.bottom_bar_trends;
+            }
+            return 0;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public int getDefaultSelectedTab() {
+            if (LocaleController.isRTL)
+                return getCount() - 1;
+            return 0;
+        }
+
+        @Override
+        public Typeface getTextTypeface(int position) {
+            return typeface;
+        }
+
+        int getTabInPosition(int position) {
+            if (LocaleController.isRTL)
+                position = getCount() - (position + 1);
+            return position;
+        }
+
+        @Override
+        public void onTabSelected(int position) {
+            int tab = getTabInPosition(position);
+            BaseFragment currFragment = actionBarLayout.fragmentsStack.get(actionBarLayout.fragmentsStack.size() - 1);
+            switch (tab) {
+                case tabMessages:
+                    if (currFragment instanceof DialogsActivity)
+                        return;
+                    if (dialogs == null)
+                        dialogs = new DialogsActivity(null);
+                    if (actionBarLayout.fragmentsStack.contains(dialogs))
+                        actionBarLayout.removeFragmentFromStack(dialogs);
+                    actionBarLayout.presentFragment(dialogs, false, true, true);
+                    break;
+                case tabNearby:
+                    if (currFragment instanceof NearbyActivity)
+                        return;
+                    if (nearbyActivity == null)
+                        nearbyActivity = new NearbyActivity();
+                    if (actionBarLayout.fragmentsStack.contains(nearbyActivity))
+                        actionBarLayout.removeFragmentFromStack(nearbyActivity);
+                    actionBarLayout.presentFragment(nearbyActivity, false, true, true);
+                    break;
+                case tabExplore:
+                    if (currFragment instanceof TrendsActivity)
+                        return;
+                    if (trendsActivity == null)
+                        trendsActivity = new TrendsActivity();
+                    if (actionBarLayout.fragmentsStack.contains(trendsActivity))
+                        actionBarLayout.removeFragmentFromStack(trendsActivity);
+                    actionBarLayout.presentFragment(trendsActivity, false, true, true);
+                    break;
+            }
+        }
     }
 }

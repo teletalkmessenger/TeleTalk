@@ -15,7 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -36,7 +36,7 @@ public class EmptyTextProgressView extends FrameLayout {
         addView(progressBar, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT));
 
         textView = new TextView(context);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         textView.setTextColor(0xff808080);
         textView.setGravity(Gravity.CENTER);
         textView.setVisibility(INVISIBLE);
@@ -67,7 +67,7 @@ public class EmptyTextProgressView extends FrameLayout {
     }
 
     public void setTextSize(int size) {
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
     }
 
     public void setShowAtCenter(boolean value) {

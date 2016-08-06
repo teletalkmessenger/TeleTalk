@@ -17,7 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.MediaController;
@@ -55,7 +55,7 @@ public class PhotoPickerAlbumsCell extends FrameLayout {
             addView(linearLayout, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 28, Gravity.LEFT | Gravity.BOTTOM));
 
             nameTextView = new TextView(context);
-            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+            nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
             nameTextView.setTextColor(0xffffffff);
             nameTextView.setSingleLine(true);
             nameTextView.setEllipsize(TextUtils.TruncateAt.END);
@@ -64,7 +64,7 @@ public class PhotoPickerAlbumsCell extends FrameLayout {
             linearLayout.addView(nameTextView, LayoutHelper.createLinear(0, LayoutHelper.MATCH_PARENT, 1.0f, 8, 0, 0, 0));
 
             countTextView = new TextView(context);
-            countTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+            countTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
             countTextView.setTextColor(0xffaaaaaa);
             countTextView.setSingleLine(true);
             countTextView.setEllipsize(TextUtils.TruncateAt.END);

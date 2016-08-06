@@ -10,7 +10,6 @@ package org.telegram.ui.Cells;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -19,15 +18,20 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Handler;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+
+import org.telegram.hojjat.MessageType;
+import org.telegram.hojjat.network.OddgramService;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.TextUtils;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 import android.view.ViewStructure;
@@ -54,6 +58,7 @@ import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.Components.AvatarDrawable;
 import org.telegram.ui.Components.LinkPath;
 import org.telegram.ui.Components.RadialProgress;
+import org.telegram.ui.Components.RecyclerListView;
 import org.telegram.ui.Components.SeekBar;
 import org.telegram.ui.Components.SeekBarWaveform;
 import org.telegram.ui.Components.StaticLayoutEx;
@@ -68,24 +73,41 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static org.telegram.messenger.AndroidUtilities.*;
 
 public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate, ImageReceiver.ImageReceiverDelegate, MediaController.FileDownloadProgressListener {
 
     public interface ChatMessageCellDelegate {
         void didPressedUserAvatar(ChatMessageCell cell, TLRPC.User user);
+
         void didPressedViaBot(ChatMessageCell cell, String username);
+
         void didPressedChannelAvatar(ChatMessageCell cell, TLRPC.Chat chat, int postId);
+
         void didPressedCancelSendButton(ChatMessageCell cell);
+
         void didLongPressed(ChatMessageCell cell);
+
         void didPressedReplyMessage(ChatMessageCell cell, int id);
+
         void didPressedUrl(MessageObject messageObject, ClickableSpan url, boolean longPress);
+
         void needOpenWebView(String url, String title, String description, String originalUrl, int w, int h);
+
         void didPressedImage(ChatMessageCell cell);
+
         void didPressedShare(ChatMessageCell cell);
+
         void didPressedOther(ChatMessageCell cell);
+
         void didPressedBotButton(ChatMessageCell cell, TLRPC.KeyboardButton button);
+
         boolean needPlayAudio(MessageObject messageObject);
+
         boolean canPerformActions();
     }
 
@@ -226,7 +248,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
     private int pressedBotButton;
 
     //
-    private int TAG;
+    private int ObserverTag;
 
     public boolean isChat;
     private boolean isPressed;
@@ -330,6 +352,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         if (infoPaint == null) {
             infoPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             infoPaint.setTextSize(dp(12));
+            infoPaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             docNamePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             docNamePaint.setTypeface(getTypeface("fonts/rmedium.ttf"));
@@ -352,6 +375,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
             locationAddressPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             locationAddressPaint.setTextSize(dp(13));
+            locationAddressPaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             urlPaint = new Paint();
             urlPaint.setColor(Theme.MSG_LINK_SELECT_BACKGROUND_COLOR);
@@ -361,6 +385,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
             audioTimePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
             audioTimePaint.setTextSize(dp(12));
+            audioTimePaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             audioTitlePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             audioTitlePaint.setTextSize(dp(16));
@@ -368,6 +393,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
             audioPerformerPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             audioPerformerPaint.setTextSize(dp(15));
+            audioPerformerPaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             botButtonPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             botButtonPaint.setTextSize(dp(15));
@@ -380,10 +406,12 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
             contactPhonePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             contactPhonePaint.setTextSize(dp(13));
+            contactPhonePaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             durationPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             durationPaint.setTextSize(dp(12));
             durationPaint.setColor(Theme.MSG_WEB_PREVIEW_DURATION_TEXT_COLOR);
+            durationPaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             timePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
             timePaint.setTextSize(dp(12));
@@ -394,6 +422,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
             forwardNamePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
             forwardNamePaint.setTextSize(dp(14));
+            forwardNamePaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             replyNamePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
             replyNamePaint.setTypeface(getTypeface("fonts/rmedium.ttf"));
@@ -402,6 +431,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             replyTextPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
             replyTextPaint.setTextSize(dp(14));
             replyTextPaint.linkColor = Theme.MSG_LINK_TEXT_COLOR;
+            replyTextPaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
             replyLinePaint = new Paint();
         }
@@ -409,7 +439,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         avatarImage.setRoundRadius(dp(21));
         avatarDrawable = new AvatarDrawable();
         replyImageReceiver = new ImageReceiver(this);
-        TAG = MediaController.getInstance().generateObserverTag();
+        ObserverTag = MediaController.getInstance().generateObserverTag();
 
         contactAvatarDrawable = new AvatarDrawable();
         photoImage = new ImageReceiver(this);
@@ -1356,7 +1386,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         TLRPC.FileLocation newPhoto = null;
 
         if (isAvatarVisible) {
-            if (newUser != null && newUser.photo != null){
+            if (newUser != null && newUser.photo != null) {
                 newPhoto = newUser.photo.photo_small;
             } else if (newChat != null && newChat.photo != null) {
                 newPhoto = newChat.photo.photo_small;
@@ -1415,6 +1445,8 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         replyImageReceiver.onDetachedFromWindow();
         photoImage.onDetachedFromWindow();
         MediaController.getInstance().removeLoadingFileObserver(this);
+        if (logMessageViewdHandler != null)
+            logMessageViewdHandler.removeCallbacks(logMessageViewd);
     }
 
     @Override
@@ -2056,7 +2088,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
                     if (webPage.document != null) {
                         TLRPC.Document document = webPage.document;
-                        if (MessageObject.isGifDocument(document)){
+                        if (MessageObject.isGifDocument(document)) {
                             if (!MediaController.getInstance().canAutoplayGifs()) {
                                 messageObject.audioProgress = 1;
                             }
@@ -2778,6 +2810,61 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         }
         updateWaveform();
         updateButtonState(dataChanged);
+
+        if (logMessageViewdHandler != null) {
+            logMessageViewdHandler.removeCallbacks(logMessageViewd);
+            logMessageViewdHandler.postDelayed(logMessageViewd, LOG_MESSAGE_VIEWED_AFTER);
+        }
+    }
+
+    public void enableMessageViewdLog(final String channel, RecyclerListView parentList) {
+        this.channel = channel;
+        this.parentList = parentList;
+        oddgramService = OddgramService.ServiceGenerator.createService(OddgramService.class);
+        logMessageViewdHandler = new Handler();
+        logMessageViewd = new Runnable() {
+            @Override
+            public void run() {
+                if (isFullyVisible()) {
+                    String type = "" + MessageType.getMessageType(currentMessageObject);
+                    oddgramService.log(type, currentMessageObject.messageOwner.id, channel, currentMessageObject.messageOwner.views).enqueue(new Callback<OddgramService.POJOS.LogResponse>() {
+                        @Override
+                        public void onResponse(Call<OddgramService.POJOS.LogResponse> call, Response<OddgramService.POJOS.LogResponse> response) {
+                            Log.i(TAG, "log_onResponse: " + response.body());
+                        }
+
+                        @Override
+                        public void onFailure(Call<OddgramService.POJOS.LogResponse> call, Throwable t) {
+                            Log.i(TAG, "log_onFailure: ");
+                        }
+                    });
+                    Log.i(TAG, "log message::" + currentMessageObject.messageOwner.message);
+                }
+            }
+        };
+    }
+
+    private static final int LOG_MESSAGE_VIEWED_AFTER = 3 * 1000;
+    private static final String TAG = "ChatMessageCell";
+    String channel;
+    RecyclerListView parentList;
+    OddgramService oddgramService;
+    Handler logMessageViewdHandler;
+    Runnable logMessageViewd;
+
+
+    private boolean isFullyVisible() {
+        Rect scrollBounds = new Rect();
+        parentList.getDrawingRect(scrollBounds);
+
+        float top = getY();
+        float bottom = top + getHeight();
+
+        if (scrollBounds.top < top && scrollBounds.bottom > bottom) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -3641,7 +3728,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     if (!FileLoader.getInstance().isLoadingFile(fileName)) {
                         if (!cancelLoading &&
                                 (currentMessageObject.type == 1 && MediaController.getInstance().canDownloadMedia(MediaController.AUTODOWNLOAD_MASK_PHOTO) ||
-                                        currentMessageObject.type == 8 && MediaController.getInstance().canDownloadMedia(MediaController.AUTODOWNLOAD_MASK_GIF) && MessageObject.isNewGifDocument(currentMessageObject.messageOwner.media.document)) ) {
+                                        currentMessageObject.type == 8 && MediaController.getInstance().canDownloadMedia(MediaController.AUTODOWNLOAD_MASK_GIF) && MessageObject.isNewGifDocument(currentMessageObject.messageOwner.media.document))) {
                             progressVisible = true;
                             buttonState = 1;
                         } else {
@@ -3743,8 +3830,6 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 invalidate();
             } else {
                 photoImage.setAllowStartAnimation(true);
-                //hojjat
-//                photoImage.setImageBitmap(BitmapFactory.decodeResource(null, R.drawable.addmember));
                 photoImage.startAnimation();
                 currentMessageObject.audioProgress = 0;
                 buttonState = -1;
@@ -4173,7 +4258,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             try {
                 replyNameLayout = new StaticLayout(stringFinalName, replyNamePaint, maxWidth + dp(6), Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
                 if (replyNameLayout.getLineCount() > 0) {
-                    replyNameWidth = (int)Math.ceil(replyNameLayout.getLineWidth(0)) + dp(12 + (needReplyImage ? 44 : 0));
+                    replyNameWidth = (int) Math.ceil(replyNameLayout.getLineWidth(0)) + dp(12 + (needReplyImage ? 44 : 0));
                     replyNameOffset = replyNameLayout.getLineLeft(0);
                 }
             } catch (Exception e) {
@@ -4483,7 +4568,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 boolean drawCheck2 = false;
                 boolean drawClock = false;
                 boolean drawError = false;
-                boolean isBroadcast = (int)(currentMessageObject.getDialogId() >> 32) == 1;
+                boolean isBroadcast = (int) (currentMessageObject.getDialogId() >> 32) == 1;
 
                 if (currentMessageObject.isSending()) {
                     drawCheck1 = false;
@@ -4569,7 +4654,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
     @Override
     public int getObserverTag() {
-        return TAG;
+        return ObserverTag;
     }
 
     public MessageObject getMessageObject() {

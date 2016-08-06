@@ -34,7 +34,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.PhoneFormat.PhoneFormat;
@@ -184,7 +184,7 @@ public class GroupCreateActivity extends BaseFragment implements NotificationCen
         linearLayout.addView(frameLayout, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
 
         userSelectEditText = new EditText(context);
-        userSelectEditText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        userSelectEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         userSelectEditText.setHintTextColor(0xff979797);
         userSelectEditText.setTextColor(0xff212121);
         userSelectEditText.setInputType(InputType.TYPE_TEXT_VARIATION_FILTER | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_MULTI_LINE);

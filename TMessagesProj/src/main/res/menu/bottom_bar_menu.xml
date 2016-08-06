@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottomBarMessages"
+        android:icon="@drawable/bottom_bar_messages"
+        android:title="@string/BottomBarMesseges" />
+    <item
+        android:id="@+id/bottomBarDiscover"
+        android:icon="@drawable/bottom_bar_nearby"
+        android:title="@string/BottomBarNearBy" />
+    <item
+        android:id="@+id/bottomBarExplore"
+        android:icon="@drawable/bottom_bar_trends"
+        android:title="@string/BottomBarExplore" />
+</menu>

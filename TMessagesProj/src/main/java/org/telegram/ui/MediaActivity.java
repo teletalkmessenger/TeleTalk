@@ -38,7 +38,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ChatObject;
@@ -593,7 +593,7 @@ public class MediaActivity extends BaseFragment implements NotificationCenter.No
         emptyTextView = new TextView(context);
         emptyTextView.setTextColor(0xff8a8a8a);
         emptyTextView.setGravity(Gravity.CENTER);
-        emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17);
+        emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
         emptyTextView.setPadding(AndroidUtilities.dp(40), 0, AndroidUtilities.dp(40), AndroidUtilities.dp(128));
         emptyView.addView(emptyTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER, 0, 24, 0, 0));
 
@@ -890,11 +890,11 @@ public class MediaActivity extends BaseFragment implements NotificationCenter.No
             }
             if (emptyTextView != null) {
                 emptyTextView.setText(LocaleController.getString("NoResult", R.string.NoResult));
-                emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+                emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                 emptyImageView.setVisibility(View.GONE);
             }
         } else {
-            emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17);
+            emptyTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
             emptyImageView.setVisibility(View.VISIBLE);
             if (selectedMode == 0) {
                 listView.setAdapter(photoVideoAdapter);

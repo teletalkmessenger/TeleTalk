@@ -15,7 +15,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.Emoji;
@@ -45,7 +45,7 @@ public class StickerEmojiCell extends FrameLayout {
         addView(imageView, LayoutHelper.createFrame(66, 66, Gravity.CENTER));
 
         emojiTextView = new TextView(context);
-        emojiTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        emojiTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         addView(emojiTextView, LayoutHelper.createFrame(28, 28, Gravity.BOTTOM | Gravity.RIGHT));
     }
 

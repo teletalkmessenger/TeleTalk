@@ -35,8 +35,9 @@ import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
+import org.telegram.Util;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ContactsController;
 import org.telegram.messenger.LocaleController;
@@ -381,7 +382,7 @@ public class PopupNotificationActivity extends Activity implements NotificationC
 
         nameTextView = new TextView(this);
         nameTextView.setTextColor(0xffffffff);
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         nameTextView.setLines(1);
         nameTextView.setMaxLines(1);
         nameTextView.setSingleLine(true);
@@ -399,7 +400,8 @@ public class PopupNotificationActivity extends Activity implements NotificationC
 
         onlineTextView = new TextView(this);
         onlineTextView.setTextColor(Theme.ACTION_BAR_SUBTITLE_COLOR);
-        onlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        onlineTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        onlineTextView.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
         onlineTextView.setLines(1);
         onlineTextView.setMaxLines(1);
         onlineTextView.setSingleLine(true);

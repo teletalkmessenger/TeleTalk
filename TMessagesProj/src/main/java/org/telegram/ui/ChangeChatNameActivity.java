@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -92,7 +92,7 @@ public class ChangeChatNameActivity extends BaseFragment {
 
         firstNameField = new EditText(context);
         firstNameField.setText(currentChat.title);
-        firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         firstNameField.setHintTextColor(0xff979797);
         firstNameField.setTextColor(0xff212121);
         firstNameField.setMaxLines(3);
@@ -104,7 +104,7 @@ public class ChangeChatNameActivity extends BaseFragment {
         AndroidUtilities.clearCursorDrawable(firstNameField);
         firstNameField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE && doneButton != null) {
                     doneButton.performClick();
                     return true;

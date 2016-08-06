@@ -17,7 +17,7 @@ import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
 import android.view.Gravity;
@@ -61,9 +61,10 @@ public class AboutLinkCell extends FrameLayout {
         super(context);
 
         textPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setTextSize(AndroidUtilities.dp(16));
+        textPaint.setTextSize(AndroidUtilities.sp(16));
         textPaint.setColor(0xff000000);
         textPaint.linkColor = Theme.MSG_LINK_TEXT_COLOR;
+        textPaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
         urlPaint = new Paint();
         urlPaint.setColor(Theme.MSG_LINK_SELECT_BACKGROUND_COLOR);

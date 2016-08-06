@@ -13,7 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 
@@ -80,7 +80,7 @@ public class PopupAudioView extends BaseCell implements SeekBar.SeekBarDelegate,
             statesDrawable[7][1] = getResources().getDrawable(R.drawable.file_b_cancel_s);
 
             timePaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-            timePaint.setTextSize(AndroidUtilities.dp(16));
+            timePaint.setTextSize(AndroidUtilities.sp(16));
         }
 
         TAG = MediaController.getInstance().generateObserverTag();

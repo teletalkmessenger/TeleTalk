@@ -232,7 +232,6 @@ public class BaseFragment {
     public boolean dismissDialogOnPause(Dialog dialog) {
         return true;
     }
-
     public void onBeginSlide() {
         try {
             if (visibleDialog != null && visibleDialog.isShowing()) {
@@ -255,8 +254,9 @@ public class BaseFragment {
 
     }
 
+    //IMPORTANT! you should call super if you override it
     protected void onBecomeFullyVisible() {
-
+        parentLayout.fragmentBecameFullyVisible(this);
     }
 
     protected AnimatorSet onCustomTransitionAnimation(boolean isOpen, final Runnable callback) {

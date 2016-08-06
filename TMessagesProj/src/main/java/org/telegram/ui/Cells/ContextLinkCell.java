@@ -16,7 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
@@ -105,10 +105,10 @@ public class ContextLinkCell extends View implements MediaController.FileDownloa
             titleTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             titleTextPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             titleTextPaint.setColor(0xff212121);
-            titleTextPaint.setTextSize(AndroidUtilities.dp(15));
+            titleTextPaint.setTextSize(AndroidUtilities.sp(15));
 
             descriptionTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-            descriptionTextPaint.setTextSize(AndroidUtilities.dp(13));
+            descriptionTextPaint.setTextSize(AndroidUtilities.sp(13));
 
             paint = new Paint();
             paint.setColor(0xffd9d9d9);

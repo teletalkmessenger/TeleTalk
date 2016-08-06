@@ -55,7 +55,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.PhoneFormat.PhoneFormat;
@@ -1254,7 +1254,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             } else {
                 emptyView.setText(LocaleController.getString("NoMessages", R.string.NoMessages));
             }
-            emptyView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            emptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             emptyView.setGravity(Gravity.CENTER);
             emptyView.setTextColor(Theme.CHAT_EMPTY_VIEW_TEXT_COLOR);
             emptyView.setBackgroundResource(R.drawable.system);
@@ -1271,7 +1271,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             emptyViewContainer.addView(secretChatPlaceholder, new FrameLayout.LayoutParams(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER));
 
             secretViewStatusTextView = new TextView(context);
-            secretViewStatusTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+            secretViewStatusTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             secretViewStatusTextView.setTextColor(Theme.SECRET_CHAT_INFO_TEXT_COLOR);
             secretViewStatusTextView.setGravity(Gravity.CENTER_HORIZONTAL);
             secretViewStatusTextView.setMaxWidth(AndroidUtilities.dp(210));
@@ -1284,7 +1284,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
             TextView textView = new TextView(context);
             textView.setText(LocaleController.getString("EncryptedDescriptionTitle", R.string.EncryptedDescriptionTitle));
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             textView.setTextColor(Theme.SECRET_CHAT_INFO_TEXT_COLOR);
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.setMaxWidth(AndroidUtilities.dp(260));
@@ -1299,7 +1299,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 imageView.setImageResource(R.drawable.ic_lock_white);
 
                 textView = new TextView(context);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
                 textView.setTextColor(Theme.SECRET_CHAT_INFO_TEXT_COLOR);
                 textView.setGravity(Gravity.CENTER_VERTICAL | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT));
                 textView.setMaxWidth(AndroidUtilities.dp(260));
@@ -1622,7 +1622,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         addToContactsButton = new TextView(context);
         addToContactsButton.setTextColor(Theme.CHAT_ADD_CONTACT_TEXT_COLOR);
         addToContactsButton.setVisibility(View.GONE);
-        addToContactsButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        addToContactsButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         addToContactsButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         addToContactsButton.setSingleLine(true);
         addToContactsButton.setMaxLines(1);
@@ -1645,7 +1645,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
         reportSpamButton = new TextView(context);
         reportSpamButton.setTextColor(Theme.CHAT_REPORT_SPAM_TEXT_COLOR);
-        reportSpamButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        reportSpamButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         reportSpamButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         reportSpamButton.setSingleLine(true);
         reportSpamButton.setMaxLines(1);
@@ -1717,7 +1717,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         contentView.addView(alertView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 50, Gravity.TOP | Gravity.LEFT));
 
         alertNameTextView = new TextView(context);
-        alertNameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        alertNameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         alertNameTextView.setTextColor(Theme.ALERT_PANEL_NAME_TEXT_COLOR);
         alertNameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         alertNameTextView.setSingleLine(true);
@@ -1726,7 +1726,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         alertView.addView(alertNameTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.LEFT, 8, 5, 8, 0));
 
         alertTextView = new TextView(context);
-        alertTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        alertTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         alertTextView.setTextColor(Theme.ALERT_PANEL_MESSAGE_TEXT_COLOR);
         alertTextView.setSingleLine(true);
         alertTextView.setEllipsize(TextUtils.TruncateAt.END);
@@ -2189,7 +2189,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         pagedownButtonCounter = new TextView(context);
         pagedownButtonCounter.setVisibility(View.INVISIBLE);
         pagedownButtonCounter.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
-        pagedownButtonCounter.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        pagedownButtonCounter.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         pagedownButtonCounter.setTextColor(0xffffffff);
         pagedownButtonCounter.setGravity(Gravity.CENTER);
         pagedownButtonCounter.setBackgroundResource(R.drawable.chat_badge);
@@ -2501,7 +2501,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         contentView.addView(bottomOverlay, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 51, Gravity.BOTTOM));
 
         bottomOverlayText = new TextView(context);
-        bottomOverlayText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        bottomOverlayText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         bottomOverlayText.setTextColor(Theme.CHAT_BOTTOM_OVERLAY_TEXT_COLOR);
         bottomOverlay.addView(bottomOverlayText, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER));
 
@@ -2573,7 +2573,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         });
 
         bottomOverlayChatText = new TextView(context);
-        bottomOverlayChatText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        bottomOverlayChatText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
         bottomOverlayChatText.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         bottomOverlayChatText.setTextColor(Theme.CHAT_BOTTOM_CHAT_OVERLAY_TEXT_COLOR);
         bottomOverlayChat.addView(bottomOverlayChatText, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER));
@@ -2892,7 +2892,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         gifHintTextView = new TextView(getParentActivity());
         gifHintTextView.setBackgroundResource(R.drawable.tooltip);
         gifHintTextView.setTextColor(Theme.CHAT_GIF_HINT_TEXT_COLOR);
-        gifHintTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        gifHintTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         gifHintTextView.setPadding(AndroidUtilities.dp(10), 0, AndroidUtilities.dp(10), 0);
         gifHintTextView.setText(LocaleController.getString("TapHereGifs", R.string.TapHereGifs));
         gifHintTextView.setGravity(Gravity.CENTER_VERTICAL);
@@ -3149,8 +3149,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (!AndroidUtilities.isGoogleMapsInstalled(ChatActivity.this)) {
                 return;
             }
-            LocationActivity fragment = new LocationActivity();
-            fragment.setDelegate(new LocationActivity.LocationActivityDelegate() {
+            org.telegram.ui.LocationActivity fragment = new org.telegram.ui.LocationActivity();
+            fragment.setDelegate(new org.telegram.ui.LocationActivity.LocationActivityDelegate() {
                 @Override
                 public void didSelectLocation(TLRPC.MessageMedia location) {
                     SendMessagesHelper.getInstance().sendMessage(location, dialog_id, replyingMessageObject, null, null);
@@ -4594,7 +4594,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 loadsCount++;
                 long did = (Long) args[0];
                 int loadIndex = did == dialog_id ? 0 : 1;
-                int count = (Integer) args[1] ;
+                int count = (Integer) args[1];
                 boolean isCache = (Boolean) args[3];
                 int fnid = (Integer) args[4];
                 int last_unread_date = (Integer) args[7];
@@ -4615,7 +4615,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     forwardEndReached[0] = false;
                     minMessageId[0] = 0;
                 }
-                if (loadsCount == 1 && messArr.size() > 20 ) {
+                if (loadsCount == 1 && messArr.size() > 20) {
                     loadsCount++;
                 }
 
@@ -6978,6 +6978,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 
         if (single || type < 2 || type == 20) {
             if (type >= 0) {
+                //hojjat
+                Log.d(TAG, "createMenu: type=" + type);
                 selectedObject = message;
                 if (getParentActivity() == null) {
                     return;
@@ -7110,6 +7112,14 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             items.add(LocaleController.getString("Delete", R.string.Delete));
                             options.add(1);
                         }
+                        if (MessagesController.getInstance().isGoastModeEnabled()) {
+                            items.add("disable goast mode");
+                        } else {
+                            items.add("enable goast mode");
+                        }
+                        options.add(914);
+                        items.add("test fragment");
+                        options.add(915);
                     } else {
                         if (allowChatActions) {
                             items.add(LocaleController.getString("Reply", R.string.Reply));
@@ -7164,7 +7174,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         processSelectedOption(options.get(i));
                     }
                 });
-
                 builder.setTitle(LocaleController.getString("Message", R.string.Message));
                 showDialog(builder.create());
             }
@@ -7599,6 +7608,18 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 } catch (Exception e) {
                     FileLog.e("tmessages", e);
                 }
+                break;
+            }
+            case 914: {
+                if (MessagesController.getInstance().isGoastModeEnabled()) {
+                    MessagesController.getInstance().disableGoastMode();
+                } else {
+                    MessagesController.getInstance().enableGoastMode();
+                }
+                break;
+            }
+            case 915: {
+                presentFragment(new ChatActivity(arguments));
                 break;
             }
         }
@@ -8087,6 +8108,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     view = new ChatMessageCell(mContext);
                 }
                 ChatMessageCell chatMessageCell = (ChatMessageCell) view;
+                enableMessageViedLoggingIfNeeded(chatMessageCell);
                 chatMessageCell.setDelegate(new ChatMessageCell.ChatMessageCellDelegate() {
                     @Override
                     public void didPressedShare(ChatMessageCell cell) {
@@ -8289,7 +8311,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                             if (!AndroidUtilities.isGoogleMapsInstalled(ChatActivity.this)) {
                                 return;
                             }
-                            LocationActivity fragment = new LocationActivity();
+                            org.telegram.ui.LocationActivity fragment = new org.telegram.ui.LocationActivity();
                             fragment.setMessageObject(message);
                             presentFragment(fragment);
                         } else if (message.type == 9 || message.type == 0) {
@@ -8376,7 +8398,6 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
 //                ((TextView) holder.itemView).setText("Advertisment");
 //            } else {
 //                position = getRealPosition(position);
-
             if (position == botInfoRow) {
                 BotHelpCell helpView = (BotHelpCell) holder.itemView;
                 helpView.setText(!botInfo.isEmpty() ? botInfo.get(currentUser.id).description : null);
@@ -8562,6 +8583,16 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             }
         }
 
+    }
+
+    private void enableMessageViedLoggingIfNeeded(ChatMessageCell message) {
+        if (!ChatObject.isChannel(currentChat))
+            return;
+        if (!ConnectionsManager.isNetworkOnline())
+            return;
+        if (currentChat.username == null) //private channel
+            return;
+        message.enableMessageViewdLog(currentChat.username, chatListView);
     }
 
     static class InChatAdProvider {

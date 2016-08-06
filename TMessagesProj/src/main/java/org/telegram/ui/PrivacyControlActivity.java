@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ContactsController;
@@ -79,7 +79,7 @@ public class PrivacyControlActivity extends BaseFragment implements Notification
 
     private static class LinkMovementMethodMy extends LinkMovementMethod {
         @Override
-        public boolean onTouchEvent(TextView widget, Spannable buffer, MotionEvent event) {
+        public boolean onTouchEvent(android.widget.TextView widget, Spannable buffer, MotionEvent event) {
             try {
                 return super.onTouchEvent(widget, buffer, event);
             } catch (Exception e) {

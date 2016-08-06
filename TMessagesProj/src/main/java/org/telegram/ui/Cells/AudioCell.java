@@ -17,7 +17,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -83,7 +83,7 @@ public class AudioCell extends FrameLayout {
 
         titleTextView = new TextView(context);
         titleTextView.setTextColor(0xff212121);
-        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         titleTextView.setLines(1);
         titleTextView.setMaxLines(1);
@@ -94,7 +94,8 @@ public class AudioCell extends FrameLayout {
 
         genreTextView = new TextView(context);
         genreTextView.setTextColor(0xff8a8a8a);
-        genreTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        genreTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        genreTextView.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
         genreTextView.setLines(1);
         genreTextView.setMaxLines(1);
         genreTextView.setSingleLine(true);
@@ -104,7 +105,8 @@ public class AudioCell extends FrameLayout {
 
         authorTextView = new TextView(context);
         authorTextView.setTextColor(0xff8a8a8a);
-        authorTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        authorTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        authorTextView.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
         authorTextView.setLines(1);
         authorTextView.setMaxLines(1);
         authorTextView.setSingleLine(true);
@@ -114,7 +116,8 @@ public class AudioCell extends FrameLayout {
 
         timeTextView = new TextView(context);
         timeTextView.setTextColor(0xff999999);
-        timeTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        timeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+        timeTextView.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
         timeTextView.setLines(1);
         timeTextView.setMaxLines(1);
         timeTextView.setSingleLine(true);

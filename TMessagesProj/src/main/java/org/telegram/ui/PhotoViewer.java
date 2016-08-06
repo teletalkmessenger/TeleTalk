@@ -57,7 +57,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
 import org.telegram.Util;
@@ -1308,7 +1308,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         captionTextViewOld.setLinkTextColor(0xffffffff);
         captionTextViewOld.setTextColor(0xffffffff);
         captionTextViewOld.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-        captionTextViewOld.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        captionTextViewOld.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         captionTextViewOld.setVisibility(View.INVISIBLE);
         containerView.addView(captionTextViewOld, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.BOTTOM | Gravity.LEFT, 0, 0, 0, 48));
 
@@ -1319,7 +1319,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         captionTextViewNew.setLinkTextColor(0xffffffff);
         captionTextViewNew.setTextColor(0xffffffff);
         captionTextViewNew.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-        captionTextViewNew.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        captionTextViewNew.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         captionTextViewNew.setVisibility(View.INVISIBLE);
         containerView.addView(captionTextViewNew, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.BOTTOM | Gravity.LEFT, 0, 0, 0, 48));
 
@@ -1343,7 +1343,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         });
 
         nameTextView = new TextView(containerView.getContext());
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         nameTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         nameTextView.setSingleLine(true);
         nameTextView.setMaxLines(1);
@@ -1353,7 +1353,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         bottomLayout.addView(nameTextView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.LEFT, 16, 5, 60, 0));
 
         dateTextView = new TextView(containerView.getContext());
-        dateTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        dateTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         dateTextView.setSingleLine(true);
         dateTextView.setMaxLines(1);
         dateTextView.setEllipsize(TextUtils.TruncateAt.END);
@@ -1435,7 +1435,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             videoPlayerTime = new TextView(containerView.getContext());
             videoPlayerTime.setTextColor(0xffffffff);
             videoPlayerTime.setGravity(Gravity.CENTER_VERTICAL);
-            videoPlayerTime.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+            videoPlayerTime.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
             videoPlayerControlFrameLayout.addView(videoPlayerTime, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.RIGHT | Gravity.TOP, 0, 0, 8, 0));
         }
 

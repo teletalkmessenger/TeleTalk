@@ -46,7 +46,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.PhoneFormat.PhoneFormat;
 import org.telegram.messenger.AndroidUtilities;
@@ -531,7 +531,7 @@ public class LoginActivity extends BaseFragment {
             setOrientation(VERTICAL);
 
             countryButton = new TextView(context);
-            countryButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            countryButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             countryButton.setPadding(AndroidUtilities.dp(12), AndroidUtilities.dp(10), AndroidUtilities.dp(12), 0);
             countryButton.setTextColor(0xff212121);
             countryButton.setMaxLines(1);
@@ -574,7 +574,7 @@ public class LoginActivity extends BaseFragment {
             TextView textView = new TextView(context);
             textView.setText("+");
             textView.setTextColor(0xff212121);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             linearLayout.addView(textView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT));
 
             codeField = new EditText(context);
@@ -582,7 +582,7 @@ public class LoginActivity extends BaseFragment {
             codeField.setTextColor(0xff212121);
             AndroidUtilities.clearCursorDrawable(codeField);
             codeField.setPadding(AndroidUtilities.dp(10), 0, 0, 0);
-            codeField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            codeField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             codeField.setMaxLines(1);
             codeField.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
             codeField.setImeOptions(EditorInfo.IME_ACTION_NEXT | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
@@ -668,7 +668,7 @@ public class LoginActivity extends BaseFragment {
             });
             codeField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                     if (i == EditorInfo.IME_ACTION_NEXT) {
                         phoneField.requestFocus();
                         phoneField.setSelection(phoneField.length());
@@ -684,7 +684,7 @@ public class LoginActivity extends BaseFragment {
             phoneField.setHintTextColor(0xff979797);
             phoneField.setPadding(0, 0, 0, 0);
             AndroidUtilities.clearCursorDrawable(phoneField);
-            phoneField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            phoneField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             phoneField.setMaxLines(1);
             phoneField.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
             phoneField.setImeOptions(EditorInfo.IME_ACTION_NEXT | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
@@ -765,7 +765,7 @@ public class LoginActivity extends BaseFragment {
             });
             phoneField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                     if (i == EditorInfo.IME_ACTION_NEXT) {
                         onNextPressed();
                         return true;
@@ -777,7 +777,7 @@ public class LoginActivity extends BaseFragment {
             textView = new TextView(context);
             textView.setText(LocaleController.getString("StartText", R.string.StartText));
             textView.setTextColor(0xff757575);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             textView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
             textView.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             addView(textView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT, 0, 28, 0, 10));
@@ -1092,7 +1092,7 @@ public class LoginActivity extends BaseFragment {
 
             confirmTextView = new TextView(context);
             confirmTextView.setTextColor(0xff757575);
-            confirmTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            confirmTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             confirmTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
             confirmTextView.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
 
@@ -1119,7 +1119,7 @@ public class LoginActivity extends BaseFragment {
             AndroidUtilities.clearCursorDrawable(codeField);
             codeField.setHintTextColor(0xff979797);
             codeField.setImeOptions(EditorInfo.IME_ACTION_NEXT | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
-            codeField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            codeField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             codeField.setInputType(InputType.TYPE_CLASS_PHONE);
             codeField.setMaxLines(1);
             codeField.setPadding(0, 0, 0, 0);
@@ -1147,7 +1147,7 @@ public class LoginActivity extends BaseFragment {
             });
             codeField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                     if (i == EditorInfo.IME_ACTION_NEXT) {
                         onNextPressed();
                         return true;
@@ -1162,7 +1162,7 @@ public class LoginActivity extends BaseFragment {
             }
 
             timeText = new TextView(context);
-            timeText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            timeText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             timeText.setTextColor(0xff757575);
             timeText.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             timeText.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
@@ -1176,7 +1176,7 @@ public class LoginActivity extends BaseFragment {
             problemText = new TextView(context);
             problemText.setText(LocaleController.getString("DidNotGetTheCode", R.string.DidNotGetTheCode));
             problemText.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
-            problemText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            problemText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             problemText.setTextColor(0xff4d83b3);
             problemText.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             problemText.setPadding(0, AndroidUtilities.dp(2), 0, AndroidUtilities.dp(12));
@@ -1214,7 +1214,7 @@ public class LoginActivity extends BaseFragment {
             TextView wrongNumber = new TextView(context);
             wrongNumber.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.CENTER_HORIZONTAL);
             wrongNumber.setTextColor(0xff4d83b3);
-            wrongNumber.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            wrongNumber.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             wrongNumber.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             wrongNumber.setPadding(0, AndroidUtilities.dp(24), 0, 0);
             linearLayout.addView(wrongNumber, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.BOTTOM | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT), 0, 0, 0, 10));
@@ -1752,7 +1752,7 @@ public class LoginActivity extends BaseFragment {
 
             confirmTextView = new TextView(context);
             confirmTextView.setTextColor(0xff757575);
-            confirmTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            confirmTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             confirmTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
             confirmTextView.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             confirmTextView.setText(LocaleController.getString("LoginPasswordText", R.string.LoginPasswordText));
@@ -1764,7 +1764,7 @@ public class LoginActivity extends BaseFragment {
             codeField.setHintTextColor(0xff979797);
             codeField.setHint(LocaleController.getString("LoginPassword", R.string.LoginPassword));
             codeField.setImeOptions(EditorInfo.IME_ACTION_NEXT | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
-            codeField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            codeField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             codeField.setMaxLines(1);
             codeField.setPadding(0, 0, 0, 0);
             codeField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -1774,7 +1774,7 @@ public class LoginActivity extends BaseFragment {
             addView(codeField, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 36, Gravity.CENTER_HORIZONTAL, 0, 20, 0, 0));
             codeField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                     if (i == EditorInfo.IME_ACTION_NEXT) {
                         onNextPressed();
                         return true;
@@ -1787,7 +1787,7 @@ public class LoginActivity extends BaseFragment {
             cancelButton.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP);
             cancelButton.setTextColor(0xff4d83b3);
             cancelButton.setText(LocaleController.getString("ForgotPassword", R.string.ForgotPassword));
-            cancelButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            cancelButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             cancelButton.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             cancelButton.setPadding(0, AndroidUtilities.dp(14), 0, 0);
             addView(cancelButton, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT)));
@@ -1855,7 +1855,7 @@ public class LoginActivity extends BaseFragment {
             resetAccountButton.setVisibility(GONE);
             resetAccountButton.setText(LocaleController.getString("ResetMyAccount", R.string.ResetMyAccount));
             resetAccountButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
-            resetAccountButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            resetAccountButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             resetAccountButton.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             resetAccountButton.setPadding(0, AndroidUtilities.dp(14), 0, 0);
             addView(resetAccountButton, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT), 0, 34, 0, 0));
@@ -1903,7 +1903,7 @@ public class LoginActivity extends BaseFragment {
             resetAccountText.setVisibility(GONE);
             resetAccountText.setTextColor(0xff757575);
             resetAccountText.setText(LocaleController.getString("ResetMyAccountText", R.string.ResetMyAccountText));
-            resetAccountText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            resetAccountText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             resetAccountText.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             addView(resetAccountText, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT), 0, 7, 0, 14));
         }
@@ -2093,7 +2093,7 @@ public class LoginActivity extends BaseFragment {
 
             confirmTextView = new TextView(context);
             confirmTextView.setTextColor(0xff757575);
-            confirmTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            confirmTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             confirmTextView.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT));
             confirmTextView.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             confirmTextView.setText(LocaleController.getString("RestoreEmailSentInfo", R.string.RestoreEmailSentInfo));
@@ -2105,7 +2105,7 @@ public class LoginActivity extends BaseFragment {
             codeField.setHintTextColor(0xff979797);
             codeField.setHint(LocaleController.getString("PasswordCode", R.string.PasswordCode));
             codeField.setImeOptions(EditorInfo.IME_ACTION_NEXT | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
-            codeField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            codeField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             codeField.setMaxLines(1);
             codeField.setPadding(0, 0, 0, 0);
             codeField.setInputType(InputType.TYPE_CLASS_PHONE);
@@ -2115,7 +2115,7 @@ public class LoginActivity extends BaseFragment {
             addView(codeField, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 36, Gravity.CENTER_HORIZONTAL, 0, 20, 0, 0));
             codeField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                     if (i == EditorInfo.IME_ACTION_NEXT) {
                         onNextPressed();
                         return true;
@@ -2127,7 +2127,7 @@ public class LoginActivity extends BaseFragment {
             cancelButton = new TextView(context);
             cancelButton.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.BOTTOM);
             cancelButton.setTextColor(0xff4d83b3);
-            cancelButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            cancelButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             cancelButton.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             cancelButton.setPadding(0, AndroidUtilities.dp(14), 0, 0);
             addView(cancelButton, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.BOTTOM | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT), 0, 0, 0, 14));
@@ -2313,7 +2313,7 @@ public class LoginActivity extends BaseFragment {
             textView.setText(LocaleController.getString("RegisterText", R.string.RegisterText));
             textView.setTextColor(0xff757575);
             textView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             addView(textView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT, 0, 8, 0, 0));
 
             firstNameField = new EditText(context);
@@ -2322,13 +2322,13 @@ public class LoginActivity extends BaseFragment {
             AndroidUtilities.clearCursorDrawable(firstNameField);
             firstNameField.setHint(LocaleController.getString("FirstName", R.string.FirstName));
             firstNameField.setImeOptions(EditorInfo.IME_ACTION_NEXT | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
-            firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             firstNameField.setMaxLines(1);
             firstNameField.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
             addView(firstNameField, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 36, 0, 26, 0, 0));
             firstNameField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                     if (i == EditorInfo.IME_ACTION_NEXT) {
                         lastNameField.requestFocus();
                         return true;
@@ -2343,7 +2343,7 @@ public class LoginActivity extends BaseFragment {
             lastNameField.setTextColor(0xff212121);
             AndroidUtilities.clearCursorDrawable(lastNameField);
             lastNameField.setImeOptions(EditorInfo.IME_ACTION_NEXT | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
-            lastNameField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            lastNameField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             lastNameField.setMaxLines(1);
             lastNameField.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
             addView(lastNameField, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 36, 0, 10, 0, 0));
@@ -2356,7 +2356,7 @@ public class LoginActivity extends BaseFragment {
             wrongNumber.setText(LocaleController.getString("CancelRegistration", R.string.CancelRegistration));
             wrongNumber.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.CENTER_HORIZONTAL);
             wrongNumber.setTextColor(0xff4d83b3);
-            wrongNumber.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            wrongNumber.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             wrongNumber.setLineSpacing(AndroidUtilities.dp(2), 1.0f);
             wrongNumber.setPadding(0, AndroidUtilities.dp(24), 0, 0);
             linearLayout.addView(wrongNumber, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.BOTTOM | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT), 0, 0, 0, 10));

@@ -17,7 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.FileLog;
@@ -59,11 +59,11 @@ public class AvatarDrawable extends Drawable {
         if (namePaint == null) {
             namePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             namePaint.setColor(0xffffffff);
-            namePaint.setTextSize(AndroidUtilities.dp(20));
+            namePaint.setTextSize(AndroidUtilities.sp(20));
 
             namePaintSmall = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             namePaintSmall.setColor(0xffffffff);
-            namePaintSmall.setTextSize(AndroidUtilities.dp(14));
+            namePaintSmall.setTextSize(AndroidUtilities.sp(14));
 
             broadcastDrawable = ApplicationLoader.applicationContext.getResources().getDrawable(R.drawable.broadcast_w);
         }

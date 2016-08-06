@@ -8,7 +8,11 @@
 
 package org.telegram.tgnet;
 
-public class TLObject {
+import java.io.Serializable;
+
+public class TLObject implements Serializable{
+
+    private static final long serialVersionUID = 913L;
 
     public boolean disableFree = false;
     private static final ThreadLocal<NativeByteBuffer> sizeCalculator = new ThreadLocal<NativeByteBuffer>() {

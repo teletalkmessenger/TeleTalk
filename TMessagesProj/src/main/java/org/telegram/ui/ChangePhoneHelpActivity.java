@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.PhoneFormat.PhoneFormat;
 import org.telegram.messenger.AndroidUtilities;
@@ -94,7 +94,7 @@ public class ChangePhoneHelpActivity extends BaseFragment {
         imageView.setLayoutParams(layoutParams2);
 
         TextView textView = new TextView(context);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textView.setGravity(Gravity.CENTER_HORIZONTAL);
         textView.setTextColor(0xff212121);
 
@@ -115,7 +115,7 @@ public class ChangePhoneHelpActivity extends BaseFragment {
         textView.setLayoutParams(layoutParams2);
 
         textView = new TextView(context);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         textView.setGravity(Gravity.CENTER_HORIZONTAL);
         textView.setTextColor(0xff4d83b3);
         textView.setText(LocaleController.getString("PhoneNumberChange", R.string.PhoneNumberChange));

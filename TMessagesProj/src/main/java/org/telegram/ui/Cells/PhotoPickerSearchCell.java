@@ -18,7 +18,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -53,7 +53,7 @@ public class PhotoPickerSearchCell extends LinearLayout {
 
             textView1 = new TextView(context);
             textView1.setGravity(Gravity.CENTER_VERTICAL);
-            textView1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            textView1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             textView1.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             textView1.setTextColor(0xffffffff);
             textView1.setSingleLine(true);
@@ -62,7 +62,7 @@ public class PhotoPickerSearchCell extends LinearLayout {
 
             textView2 = new TextView(context);
             textView2.setGravity(Gravity.CENTER_VERTICAL);
-            textView2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+            textView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
             textView2.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
             textView2.setTextColor(0xff666666);
             textView2.setSingleLine(true);

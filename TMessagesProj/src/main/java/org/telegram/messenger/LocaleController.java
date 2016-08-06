@@ -162,35 +162,43 @@ public class LocaleController {
         languagesDict.put(localeInfo.shortName, localeInfo);
 
         localeInfo = new LocaleInfo();
-        localeInfo.name = "Italiano";
-        localeInfo.nameEnglish = "Italian";
-        localeInfo.shortName = "it";
+        localeInfo.name = "فارسی";
+        localeInfo.nameEnglish = "Persian";
+        localeInfo.shortName = "fa_IR";
         localeInfo.pathToFile = null;
         sortedLanguages.add(localeInfo);
         languagesDict.put(localeInfo.shortName, localeInfo);
 
-        localeInfo = new LocaleInfo();
-        localeInfo.name = "Español";
-        localeInfo.nameEnglish = "Spanish";
-        localeInfo.shortName = "es";
-        sortedLanguages.add(localeInfo);
-        languagesDict.put(localeInfo.shortName, localeInfo);
-
-        localeInfo = new LocaleInfo();
-        localeInfo.name = "Deutsch";
-        localeInfo.nameEnglish = "German";
-        localeInfo.shortName = "de";
-        localeInfo.pathToFile = null;
-        sortedLanguages.add(localeInfo);
-        languagesDict.put(localeInfo.shortName, localeInfo);
-
-        localeInfo = new LocaleInfo();
-        localeInfo.name = "Nederlands";
-        localeInfo.nameEnglish = "Dutch";
-        localeInfo.shortName = "nl";
-        localeInfo.pathToFile = null;
-        sortedLanguages.add(localeInfo);
-        languagesDict.put(localeInfo.shortName, localeInfo);
+//        localeInfo = new LocaleInfo();
+//        localeInfo.name = "Italiano";
+//        localeInfo.nameEnglish = "Italian";
+//        localeInfo.shortName = "it";
+//        localeInfo.pathToFile = null;
+//        sortedLanguages.add(localeInfo);
+//        languagesDict.put(localeInfo.shortName, localeInfo);
+//
+//        localeInfo = new LocaleInfo();
+//        localeInfo.name = "Español";
+//        localeInfo.nameEnglish = "Spanish";
+//        localeInfo.shortName = "es";
+//        sortedLanguages.add(localeInfo);
+//        languagesDict.put(localeInfo.shortName, localeInfo);
+//
+//        localeInfo = new LocaleInfo();
+//        localeInfo.name = "Deutsch";
+//        localeInfo.nameEnglish = "German";
+//        localeInfo.shortName = "de";
+//        localeInfo.pathToFile = null;
+//        sortedLanguages.add(localeInfo);
+//        languagesDict.put(localeInfo.shortName, localeInfo);
+//
+//        localeInfo = new LocaleInfo();
+//        localeInfo.name = "Nederlands";
+//        localeInfo.nameEnglish = "Dutch";
+//        localeInfo.shortName = "nl";
+//        localeInfo.pathToFile = null;
+//        sortedLanguages.add(localeInfo);
+//        languagesDict.put(localeInfo.shortName, localeInfo);
 
         localeInfo = new LocaleInfo();
         localeInfo.name = "العربية";
@@ -200,29 +208,29 @@ public class LocaleController {
         sortedLanguages.add(localeInfo);
         languagesDict.put(localeInfo.shortName, localeInfo);
 
-        localeInfo = new LocaleInfo();
-        localeInfo.name = "Português (Brasil)";
-        localeInfo.nameEnglish = "Portuguese (Brazil)";
-        localeInfo.shortName = "pt_BR";
-        localeInfo.pathToFile = null;
-        sortedLanguages.add(localeInfo);
-        languagesDict.put(localeInfo.shortName, localeInfo);
-
-        localeInfo = new LocaleInfo();
-        localeInfo.name = "Português (Portugal)";
-        localeInfo.nameEnglish = "Portuguese (Portugal)";
-        localeInfo.shortName = "pt_PT";
-        localeInfo.pathToFile = null;
-        sortedLanguages.add(localeInfo);
-        languagesDict.put(localeInfo.shortName, localeInfo);
-
-        localeInfo = new LocaleInfo();
-        localeInfo.name = "한국어";
-        localeInfo.nameEnglish = "Korean";
-        localeInfo.shortName = "ko";
-        localeInfo.pathToFile = null;
-        sortedLanguages.add(localeInfo);
-        languagesDict.put(localeInfo.shortName, localeInfo);
+//        localeInfo = new LocaleInfo();
+//        localeInfo.name = "Português (Brasil)";
+//        localeInfo.nameEnglish = "Portuguese (Brazil)";
+//        localeInfo.shortName = "pt_BR";
+//        localeInfo.pathToFile = null;
+//        sortedLanguages.add(localeInfo);
+//        languagesDict.put(localeInfo.shortName, localeInfo);
+//
+//        localeInfo = new LocaleInfo();
+//        localeInfo.name = "Português (Portugal)";
+//        localeInfo.nameEnglish = "Portuguese (Portugal)";
+//        localeInfo.shortName = "pt_PT";
+//        localeInfo.pathToFile = null;
+//        sortedLanguages.add(localeInfo);
+//        languagesDict.put(localeInfo.shortName, localeInfo);
+//
+//        localeInfo = new LocaleInfo();
+//        localeInfo.name = "한국어";
+//        localeInfo.nameEnglish = "Korean";
+//        localeInfo.shortName = "ko";
+//        localeInfo.pathToFile = null;
+//        sortedLanguages.add(localeInfo);
+//        languagesDict.put(localeInfo.shortName, localeInfo);
 
         loadOtherLanguages();
 
@@ -814,7 +822,7 @@ public class LocaleController {
         if (lang == null) {
             lang = "en";
         }
-        isRTL = lang.toLowerCase().equals("ar");
+        isRTL = lang.toLowerCase().equals("ar") || lang.toLowerCase().equals("fa");
         nameDisplayOrder = lang.toLowerCase().equals("ko") ? 2 : 1;
 
         formatterMonth = createFormatter(locale, getStringInternal("formatterMonth", R.string.formatterMonth), "dd MMM");

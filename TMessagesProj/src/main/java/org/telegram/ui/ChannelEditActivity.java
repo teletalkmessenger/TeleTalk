@@ -29,7 +29,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.FileLog;
@@ -282,7 +282,7 @@ public class ChannelEditActivity extends BaseFragment implements AvatarUpdater.A
         }
         nameTextView.setMaxLines(4);
         nameTextView.setGravity(Gravity.CENTER_VERTICAL | (LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT));
-        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         nameTextView.setHintTextColor(0xff979797);
         nameTextView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
         nameTextView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
@@ -321,7 +321,7 @@ public class ChannelEditActivity extends BaseFragment implements AvatarUpdater.A
         linearLayout.addView(linearLayout2, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
 
         descriptionTextView = new EditText(context);
-        descriptionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        descriptionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         descriptionTextView.setHintTextColor(0xff979797);
         descriptionTextView.setTextColor(0xff212121);
         descriptionTextView.setPadding(0, 0, 0, AndroidUtilities.dp(6));
@@ -337,7 +337,7 @@ public class ChannelEditActivity extends BaseFragment implements AvatarUpdater.A
         linearLayout2.addView(descriptionTextView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 17, 12, 17, 6));
         descriptionTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE && doneButton != null) {
                     doneButton.performClick();
                     return true;

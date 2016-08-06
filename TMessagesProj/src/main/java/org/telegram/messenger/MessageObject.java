@@ -15,7 +15,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.StaticLayout;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.text.TextUtils;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
@@ -39,7 +39,7 @@ import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MessageObject {
+public class MessageObject{
 
     public static final int MESSAGE_SEND_STATE_SENDING = 1;
     public static final int MESSAGE_SEND_STATE_SENT = 0;
@@ -101,7 +101,8 @@ public class MessageObject {
             textPaint.linkColor = Theme.MSG_LINK_TEXT_COLOR;
         }
 
-        textPaint.setTextSize(AndroidUtilities.dp(MessagesController.getInstance().fontSize));
+        textPaint.setTextSize(AndroidUtilities.sp(MessagesController.getInstance().fontSize));
+        textPaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
 
         messageOwner = message;
 
@@ -394,7 +395,8 @@ public class MessageObject {
             textPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             textPaint.setColor(Theme.MSG_TEXT_COLOR);
             textPaint.linkColor = Theme.MSG_LINK_TEXT_COLOR;
-            textPaint.setTextSize(AndroidUtilities.dp(MessagesController.getInstance().fontSize));
+            textPaint.setTextSize(AndroidUtilities.sp(MessagesController.getInstance().fontSize));
+            textPaint.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT));
         }
         return textPaint;
     }
@@ -449,7 +451,7 @@ public class MessageObject {
         }
         if (botButtonPaint == null) {
             botButtonPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-            botButtonPaint.setTextSize(AndroidUtilities.dp(15));
+            botButtonPaint.setTextSize(AndroidUtilities.sp(15));
             botButtonPaint.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         }
         for (int a = 0; a < messageOwner.reply_markup.rows.size(); a++) {

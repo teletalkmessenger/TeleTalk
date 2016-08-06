@@ -29,7 +29,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -2066,7 +2066,7 @@ public class PhotoFilterView extends FrameLayout {
         toolsView.addView(frameLayout, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48, Gravity.BOTTOM | Gravity.LEFT));
 
         cancelTextView = new TextView(context);
-        cancelTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        cancelTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         cancelTextView.setTextColor(0xffffffff);
         cancelTextView.setGravity(Gravity.CENTER);
         cancelTextView.setBackgroundDrawable(Theme.createBarSelectorDrawable(Theme.ACTION_BAR_PICKER_SELECTOR_COLOR, false));
@@ -2076,7 +2076,7 @@ public class PhotoFilterView extends FrameLayout {
         frameLayout.addView(cancelTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.TOP | Gravity.LEFT));
 
         doneTextView = new TextView(context);
-        doneTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        doneTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         doneTextView.setTextColor(0xff51bdf3);
         doneTextView.setGravity(Gravity.CENTER);
         doneTextView.setBackgroundDrawable(Theme.createBarSelectorDrawable(Theme.ACTION_BAR_PICKER_SELECTOR_COLOR, false));
@@ -2229,17 +2229,17 @@ public class PhotoFilterView extends FrameLayout {
         });
 
         infoTextView = new TextView(context);
-        infoTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+        infoTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         infoTextView.setTextColor(0xffffffff);
         frameLayout.addView(infoTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL, 0, 9, 0, 0));
 
         paramTextView = new TextView(context);
-        paramTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+        paramTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         paramTextView.setTextColor(0xff808080);
         frameLayout.addView(paramTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL, 0, 26, 0, 0));
 
         valueTextView = new TextView(context);
-        valueTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+        valueTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         valueTextView.setTextColor(0xffffffff);
         frameLayout.addView(valueTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL, 0, 3, 0, 0));
 
@@ -2288,7 +2288,7 @@ public class PhotoFilterView extends FrameLayout {
 
         for (int a = 0; a < 4; a++) {
             curveTextView[a] = new TextView(context);
-            curveTextView[a].setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            curveTextView[a].setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             curveTextView[a].setGravity(Gravity.CENTER_VERTICAL);
             curveTextView[a].setTag(a);
             if (a == 0) {
@@ -2323,7 +2323,7 @@ public class PhotoFilterView extends FrameLayout {
         tintLayout.addView(tintTextViewContainer, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, 28, Gravity.CENTER_HORIZONTAL));
 
         tintShadowsButton = new TextView(context);
-        tintShadowsButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        tintShadowsButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         tintShadowsButton.setGravity(Gravity.CENTER_VERTICAL);
         tintShadowsButton.setText(LocaleController.getString("TintShadows", R.string.TintShadows).toUpperCase());
         tintShadowsButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
@@ -2337,7 +2337,7 @@ public class PhotoFilterView extends FrameLayout {
         });
 
         tintHighlightsButton = new TextView(context);
-        tintHighlightsButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        tintHighlightsButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         tintHighlightsButton.setGravity(Gravity.CENTER_VERTICAL);
         tintHighlightsButton.setText(LocaleController.getString("TintHighlights", R.string.TintHighlights).toUpperCase());
         tintHighlightsButton.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
@@ -2382,7 +2382,7 @@ public class PhotoFilterView extends FrameLayout {
         blurOffButton = new TextView(context);
         blurOffButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.blur_off_active, 0, 0);
         blurOffButton.setCompoundDrawablePadding(AndroidUtilities.dp(2));
-        blurOffButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        blurOffButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         blurOffButton.setTextColor(0xff51bdf3);
         blurOffButton.setGravity(Gravity.CENTER_HORIZONTAL);
         blurOffButton.setText(LocaleController.getString("BlurOff", R.string.BlurOff));
@@ -2402,7 +2402,7 @@ public class PhotoFilterView extends FrameLayout {
         blurRadialButton = new TextView(context);
         blurRadialButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.blur_radial, 0, 0);
         blurRadialButton.setCompoundDrawablePadding(AndroidUtilities.dp(2));
-        blurRadialButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        blurRadialButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         blurRadialButton.setTextColor(0xffffffff);
         blurRadialButton.setGravity(Gravity.CENTER_HORIZONTAL);
         blurRadialButton.setText(LocaleController.getString("BlurRadial", R.string.BlurRadial));
@@ -2423,7 +2423,7 @@ public class PhotoFilterView extends FrameLayout {
         blurLinearButton = new TextView(context);
         blurLinearButton.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.blur_linear, 0, 0);
         blurLinearButton.setCompoundDrawablePadding(AndroidUtilities.dp(2));
-        blurLinearButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        blurLinearButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         blurLinearButton.setTextColor(0xffffffff);
         blurLinearButton.setGravity(Gravity.CENTER_HORIZONTAL);
         blurLinearButton.setText(LocaleController.getString("BlurLinear", R.string.BlurLinear));

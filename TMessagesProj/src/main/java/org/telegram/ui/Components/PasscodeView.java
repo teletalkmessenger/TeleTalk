@@ -45,7 +45,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -83,7 +83,7 @@ public class PasscodeView extends FrameLayout {
             for (int a = 0; a < 4; a++) {
                 TextView textView = new TextView(context);
                 textView.setTextColor(0xffffffff);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                 textView.setGravity(Gravity.CENTER);
                 textView.setAlpha(0);
                 textView.setPivotX(AndroidUtilities.dp(25));
@@ -98,7 +98,7 @@ public class PasscodeView extends FrameLayout {
 
                 textView = new TextView(context);
                 textView.setTextColor(0xffffffff);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
                 textView.setGravity(Gravity.CENTER);
                 textView.setAlpha(0);
                 textView.setText(DOT);
@@ -461,7 +461,7 @@ public class PasscodeView extends FrameLayout {
 
         passcodeTextView = new TextView(context);
         passcodeTextView.setTextColor(0xffffffff);
-        passcodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        passcodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         passcodeTextView.setGravity(Gravity.CENTER_HORIZONTAL);
         passwordFrameLayout.addView(passcodeTextView);
         layoutParams = (LayoutParams) passcodeTextView.getLayoutParams();
@@ -483,7 +483,7 @@ public class PasscodeView extends FrameLayout {
         passwordEditText2.setLayoutParams(layoutParams);
 
         passwordEditText = new EditText(context);
-        passwordEditText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36);
+        passwordEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
         passwordEditText.setTextColor(0xffffffff);
         passwordEditText.setMaxLines(1);
         passwordEditText.setLines(1);
@@ -504,7 +504,7 @@ public class PasscodeView extends FrameLayout {
         passwordEditText.setLayoutParams(layoutParams);
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE) {
                     processDone(false);
                     return true;
@@ -591,7 +591,7 @@ public class PasscodeView extends FrameLayout {
         for (int a = 0; a < 10; a++) {
             TextView textView = new TextView(context);
             textView.setTextColor(0xffffffff);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
             textView.setGravity(Gravity.CENTER);
             textView.setText(String.format(Locale.US, "%d", a));
             numbersFrameLayout.addView(textView);
@@ -603,7 +603,7 @@ public class PasscodeView extends FrameLayout {
             numberTextViews.add(textView);
 
             textView = new TextView(context);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             textView.setTextColor(0x7fffffff);
             textView.setGravity(Gravity.CENTER);
             numbersFrameLayout.addView(textView);

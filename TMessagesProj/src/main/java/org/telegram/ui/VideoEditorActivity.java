@@ -27,7 +27,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Box;

@@ -14,7 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.Emoji;
@@ -103,7 +103,7 @@ public class BotKeyboardView extends LinearLayout {
                     TextView textView = new TextView(getContext());
                     textView.setTag(button);
                     textView.setTextColor(0xff36474f);
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                     textView.setGravity(Gravity.CENTER);
                     textView.setBackgroundResource(R.drawable.bot_keyboard_states);
                     textView.setPadding(AndroidUtilities.dp(4), 0, AndroidUtilities.dp(4), 0);

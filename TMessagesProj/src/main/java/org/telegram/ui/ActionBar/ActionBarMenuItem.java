@@ -27,7 +27,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -227,7 +227,7 @@ public class ActionBarMenuItem extends FrameLayout {
             textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
         }
         textView.setPadding(AndroidUtilities.dp(16), 0, AndroidUtilities.dp(16), 0);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         textView.setMinWidth(AndroidUtilities.dp(196));
         textView.setTag(id);
         textView.setText(text);
@@ -395,7 +395,7 @@ public class ActionBarMenuItem extends FrameLayout {
             searchContainer.setVisibility(GONE);
 
             searchField = new EditText(getContext());
-            searchField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+            searchField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             searchField.setHintTextColor(0x88ffffff);
             searchField.setTextColor(0xffffffff);
             searchField.setSingleLine(true);
@@ -420,9 +420,10 @@ public class ActionBarMenuItem extends FrameLayout {
                     return false;
                 }
             });
+
             searchField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                public boolean onEditorAction(android.widget.TextView v, int actionId, KeyEvent event) {
                     if (/*actionId == EditorInfo.IME_ACTION_SEARCH || */event != null && (event.getAction() == KeyEvent.ACTION_UP && event.getKeyCode() == KeyEvent.KEYCODE_SEARCH || event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                         AndroidUtilities.hideKeyboard(searchField);
                         if (listener != null) {

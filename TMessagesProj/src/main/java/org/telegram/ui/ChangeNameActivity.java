@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -87,7 +87,7 @@ public class ChangeNameActivity extends BaseFragment {
         });
 
         firstNameField = new EditText(context);
-        firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        firstNameField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         firstNameField.setHintTextColor(0xff979797);
         firstNameField.setTextColor(0xff212121);
         firstNameField.setMaxLines(1);
@@ -101,7 +101,7 @@ public class ChangeNameActivity extends BaseFragment {
         linearLayout.addView(firstNameField, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 36, 24, 24, 24, 0));
         firstNameField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_NEXT) {
                     lastNameField.requestFocus();
                     lastNameField.setSelection(lastNameField.length());
@@ -112,7 +112,7 @@ public class ChangeNameActivity extends BaseFragment {
         });
 
         lastNameField = new EditText(context);
-        lastNameField.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+        lastNameField.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         lastNameField.setHintTextColor(0xff979797);
         lastNameField.setTextColor(0xff212121);
         lastNameField.setMaxLines(1);
@@ -126,7 +126,7 @@ public class ChangeNameActivity extends BaseFragment {
         linearLayout.addView(lastNameField, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 36, 24, 16, 24, 0));
         lastNameField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            public boolean onEditorAction(android.widget.TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE) {
                     doneButton.performClick();
                     return true;

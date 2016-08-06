@@ -16,7 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
@@ -118,21 +118,21 @@ public class ChannelIntroActivity extends BaseFragment {
         whatIsChannelText = new TextView(context);
         whatIsChannelText.setTextColor(0xff212121);
         whatIsChannelText.setGravity(Gravity.CENTER_HORIZONTAL);
-        whatIsChannelText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+        whatIsChannelText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         whatIsChannelText.setText(LocaleController.getString("ChannelAlertTitle", R.string.ChannelAlertTitle));
         viewGroup.addView(whatIsChannelText);
 
         descriptionText = new TextView(context);
         descriptionText.setTextColor(0xff787878);
         descriptionText.setGravity(Gravity.CENTER_HORIZONTAL);
-        descriptionText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        descriptionText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         descriptionText.setText(LocaleController.getString("ChannelAlertText", R.string.ChannelAlertText));
         viewGroup.addView(descriptionText);
 
         createChannelText = new TextView(context);
         createChannelText.setTextColor(0xff4c8eca);
         createChannelText.setGravity(Gravity.CENTER);
-        createChannelText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        createChannelText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         createChannelText.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
         createChannelText.setText(LocaleController.getString("ChannelAlertCreate", R.string.ChannelAlertCreate));
         viewGroup.addView(createChannelText);

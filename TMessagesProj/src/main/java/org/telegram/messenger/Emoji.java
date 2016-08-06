@@ -27,7 +27,7 @@ import android.text.style.DynamicDrawableSpan;
 import android.text.style.ImageSpan;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import org.telegram.hojjat.ui.Widgets.TextView;
 
 public class Emoji {
     private static HashMap<CharSequence, DrawableInfo> rects = new HashMap<>();

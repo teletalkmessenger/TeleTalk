@@ -13,7 +13,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.text.TextPaint;
+import org.telegram.hojjat.ui.Widgets.TextPaint;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -79,7 +79,7 @@ public class PhotoFilterCurvesControl extends View {
         paintCurve.setStyle(Paint.Style.STROKE);
 
         textPaint.setColor(0xffbfbfbf);
-        textPaint.setTextSize(AndroidUtilities.dp(13));
+        textPaint.setTextSize(AndroidUtilities.sp(13));
     }
 
     public void setDelegate(PhotoFilterCurvesControlDelegate photoFilterCurvesControlDelegate) {

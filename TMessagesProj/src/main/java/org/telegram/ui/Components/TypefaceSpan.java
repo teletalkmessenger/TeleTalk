@@ -10,7 +10,6 @@ package org.telegram.ui.Components;
 
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
 
 public class TypefaceSpan extends MetricAffectingSpan {
@@ -35,7 +34,7 @@ public class TypefaceSpan extends MetricAffectingSpan {
     }
 
     @Override
-    public void updateMeasureState(TextPaint p) {
+    public void updateMeasureState(android.text.TextPaint p) {
         if (mTypeface != null) {
             p.setTypeface(mTypeface);
         }
@@ -46,7 +45,7 @@ public class TypefaceSpan extends MetricAffectingSpan {
     }
 
     @Override
-    public void updateDrawState(TextPaint tp) {
+    public void updateDrawState(android.text.TextPaint tp) {
         if (mTypeface != null) {
             tp.setTypeface(mTypeface);
         }
