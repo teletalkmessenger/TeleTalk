@@ -55,6 +55,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+
+import org.telegram.SQLite.SQLiteCursor;
+import org.telegram.SQLite.SQLiteException;
+import org.telegram.SQLite.SQLitePreparedStatement;
+import org.telegram.armin.tmp.MessageHelper;
 import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
@@ -353,6 +358,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private final static int search = 40;
 
     private final static int id_chat_compose_panel = 1000;
+
+    //ARMIN
+    private final static int bookmark = 248971;
 
     RecyclerListView.OnItemLongClickListener onItemLongClickListener = new RecyclerListView.OnItemLongClickListener() {
         @Override
@@ -870,6 +878,50 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     SendMessagesHelper.getInstance().sendMessage("/settings", dialog_id, null, null, false, null, null, null);
                 } else if (id == search) {
                     openSearchWithText(null);
+                } else if(id == bookmark){
+                    try {
+                        SQLiteCursor cursor = MessagesStorage.getInstance().getDatabase().queryFinalized("SELECT message_id, channel_id, access_hash FROM bookmarked_messages ORDER BY bookmark_time DESC LIMIT 400");
+                        ArrayList<Number[]> channel_messages = new ArrayList<>();
+                        ArrayList<Integer> message_ids = new ArrayList<>();
+                        while (cursor.next()) {
+                            Integer msg_id = cursor.intValue(0);
+                            Integer ch_id = cursor.intValue(1);
+                            Long hash = cursor.longValue(2);
+                            if (ch_id != 0) {
+                                channel_messages.add(new Number[]{msg_id, ch_id, hash});
+                            } else {
+                                message_ids.add(msg_id);
+                            }
+                        }
+                        if (message_ids.size() > 0) {
+                            MessageHelper.getInstance().getMessages(message_ids);
+                        }
+                        if (channel_messages.size() > 0) {
+                            MessageHelper.getInstance().getChannelMessages(channel_messages);
+                        }
+                    } catch (SQLiteException e) {
+                        Log.d("SQLITE-ARMIN", e.getMessage());
+                    }
+                    try {
+                        for (int a = 1; a >= 0; a--) {
+                            for (HashMap.Entry<Integer, MessageObject> entry : selectedMessagesIds[a].entrySet()) {
+                                MessageObject msgObject = entry.getValue();
+                                SQLitePreparedStatement stmnt = MessagesStorage.getInstance().getDatabase().executeFast("INSERT OR IGNORE INTO bookmarked_messages(message_id, channel_id, access_hash) VALUES(?, null, null)");
+                                if (ChatObject.isChannel(currentChat)) {
+                                    int channel_id = msgObject.messageOwner.to_id.channel_id;
+                                    long access_hash = currentChat.access_hash;
+                                    stmnt = MessagesStorage.getInstance().getDatabase().executeFast("INSERT OR IGNORE INTO bookmarked_messages(message_id, channel_id, access_hash) VALUES(?, ?, ?)");
+                                    stmnt.bindInteger(2, channel_id);
+                                    stmnt.bindLong(3, access_hash);
+                                }
+                                int msgId = entry.getKey();
+                                stmnt.bindInteger(1, msgId);
+                                stmnt.stepThis().dispose();
+                            }
+                        }
+                    } catch (SQLiteException e) {
+                        Log.d("SQLITE-ARMIN", e.getMessage());
+                    }
                 }
             }
         });
@@ -996,6 +1048,9 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 return true;
             }
         });
+
+        // ARMIN
+        actionModeViews.add(actionMode.addItem(bookmark, R.drawable.admin_star2, Theme.ACTION_BAR_MODE_SELECTOR_COLOR, null, AndroidUtilities.dp(54)));
 
         actionModeTitleContainer = new FrameLayout(context) {
 

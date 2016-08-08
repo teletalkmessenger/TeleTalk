@@ -171,6 +171,9 @@ public class MessagesStorage {
                 database.executeFast("CREATE TABLE bot_info(uid INTEGER PRIMARY KEY, info BLOB)").stepThis().dispose();
                 database.executeFast("CREATE TABLE pending_tasks(id INTEGER PRIMARY KEY, data BLOB);").stepThis().dispose();
 
+                //bookmark
+                database.executeFast("CREATE TABLE bookmarked_messages(id INTEGER PRIMARY KEY AUTOINCREMENT, message_id INTEGER NOT NULL, channel_id INTEGER, access_hash INTEGER, bookmark_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP);").stepThis().dispose();
+
                 //version
                 database.executeFast("PRAGMA user_version = 34").stepThis().dispose();
 

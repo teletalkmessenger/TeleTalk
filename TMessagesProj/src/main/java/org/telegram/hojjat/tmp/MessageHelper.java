@@ -112,7 +112,7 @@ public class MessageHelper implements MessageReceiver{
 //                if (count <= offset)
 //                    continue;
 //                String[] split = line.split(":::");
-//                MessageHelper.getInstance().getMessage(split[0], new Integer(split[1]), this);
+//                MessageHelper.getInstance().getMessages(split[0], new Integer(split[1]), this);
 //                if (count - offset >= 5)
 //                    break;
 //            }

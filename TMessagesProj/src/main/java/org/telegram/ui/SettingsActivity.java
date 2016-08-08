@@ -35,6 +35,7 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Base64;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -50,6 +51,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
 import org.telegram.hojjat.ui.Widgets.TextView;
 import android.widget.Toast;
 
@@ -817,7 +819,6 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
                 }
             }
         });
-
         return fragmentView;
     }
 
