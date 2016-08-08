@@ -63,6 +63,9 @@ public class ActionBar extends FrameLayout {
     protected BaseFragment parentFragment;
     public ActionBarMenuOnItemClick actionBarMenuOnItemClick;
 
+    private int START_GRAVITY = Gravity.LEFT;
+    private int END_GRAVITY = Gravity.RIGHT;
+
     public ActionBar(Context context) {
         super(context);
     }
@@ -75,7 +78,7 @@ public class ActionBar extends FrameLayout {
         backButtonImageView.setScaleType(ImageView.ScaleType.CENTER);
         backButtonImageView.setBackgroundDrawable(Theme.createBarSelectorDrawable(itemsBackgroundColor));
         backButtonImageView.setPadding(AndroidUtilities.dp(1), 0, 0, 0);
-        addView(backButtonImageView, LayoutHelper.createFrame(54, 54, Gravity.LEFT | Gravity.TOP));
+        addView(backButtonImageView, LayoutHelper.createFrame(54, 54, START_GRAVITY | Gravity.TOP));
 
         backButtonImageView.setOnClickListener(new OnClickListener() {
             @Override
@@ -115,9 +118,9 @@ public class ActionBar extends FrameLayout {
             return;
         }
         subtitleTextView = new SimpleTextView(getContext());
-        subtitleTextView.setGravity(Gravity.LEFT);
+        subtitleTextView.setGravity(START_GRAVITY);
         subtitleTextView.setTextColor(Theme.ACTION_BAR_SUBTITLE_COLOR);
-        addView(subtitleTextView, 0, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.TOP));
+        addView(subtitleTextView, 0, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, START_GRAVITY | Gravity.TOP));
     }
 
     public void setAddToContainer(boolean value) {
@@ -143,10 +146,10 @@ public class ActionBar extends FrameLayout {
             return;
         }
         titleTextView = new SimpleTextView(getContext());
-        titleTextView.setGravity(Gravity.LEFT);
+        titleTextView.setGravity(START_GRAVITY);
         titleTextView.setTextColor(0xffffffff);
         titleTextView.setTypeface(AndroidUtilities.getTypeface("fonts/rmedium.ttf"));
-        addView(titleTextView, 0, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.TOP));
+        addView(titleTextView, 0, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, START_GRAVITY | Gravity.TOP));
     }
 
     public void setTitle(CharSequence value) {
@@ -180,7 +183,7 @@ public class ActionBar extends FrameLayout {
             return menu;
         }
         menu = new ActionBarMenu(getContext(), this);
-        addView(menu, 0, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, Gravity.RIGHT));
+        addView(menu, 0, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, END_GRAVITY));
         return menu;
     }
 
@@ -199,7 +202,7 @@ public class ActionBar extends FrameLayout {
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams)actionMode.getLayoutParams();
         layoutParams.height = LayoutHelper.MATCH_PARENT;
         layoutParams.width = LayoutHelper.MATCH_PARENT;
-        layoutParams.gravity = Gravity.RIGHT;
+        layoutParams.gravity = END_GRAVITY;
         actionMode.setLayoutParams(layoutParams);
         actionMode.setVisibility(INVISIBLE);
 
@@ -210,7 +213,7 @@ public class ActionBar extends FrameLayout {
             layoutParams = (FrameLayout.LayoutParams)actionModeTop.getLayoutParams();
             layoutParams.height = AndroidUtilities.statusBarHeight;
             layoutParams.width = LayoutHelper.MATCH_PARENT;
-            layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
+            layoutParams.gravity = Gravity.TOP | START_GRAVITY;
             actionModeTop.setLayoutParams(layoutParams);
             actionModeTop.setVisibility(INVISIBLE);
         }
@@ -338,7 +341,7 @@ public class ActionBar extends FrameLayout {
             FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) actionModeTop.getLayoutParams();
             layoutParams.height = AndroidUtilities.statusBarHeight;
             layoutParams.width = LayoutHelper.MATCH_PARENT;
-            layoutParams.gravity = Gravity.TOP | Gravity.LEFT;
+            layoutParams.gravity = Gravity.TOP | START_GRAVITY;
             actionModeTop.setLayoutParams(layoutParams);
         }
     }
@@ -481,7 +484,7 @@ public class ActionBar extends FrameLayout {
 
             int gravity = lp.gravity;
             if (gravity == -1) {
-                gravity = Gravity.TOP | Gravity.LEFT;
+                gravity = Gravity.TOP | START_GRAVITY;
             }
 
             final int absoluteGravity = gravity & Gravity.HORIZONTAL_GRAVITY_MASK;

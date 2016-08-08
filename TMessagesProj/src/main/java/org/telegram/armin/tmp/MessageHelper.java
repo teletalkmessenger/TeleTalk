@@ -10,6 +10,7 @@ import org.telegram.tgnet.TLObject;
 import org.telegram.tgnet.TLRPC;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by vandermonde on 8/7/16.
@@ -33,9 +34,10 @@ public class MessageHelper {
         return localInstance;
     }
 
-    public void getMessages(ArrayList<Integer> message_ids){
+    public void getMessages(HashMap<Integer, Integer> message_ids){
         TLRPC.TL_messages_getMessages req = new TLRPC.TL_messages_getMessages();
-        req.id = message_ids;
+        req.id = new ArrayList<>();
+        req.id.addAll(message_ids.values());
         ConnectionsManager.getInstance().sendRequest(req, new RequestDelegate() {
             @Override
             public void run(TLObject response, TLRPC.TL_error error) {
@@ -52,8 +54,8 @@ public class MessageHelper {
         });
     }
 
-    public void getChannelMessages(ArrayList<Number[]> info){
-        for (Number[] numbers : info) {
+    public void getChannelMessages(HashMap<Integer, Number[]> info){
+        for (Number[] numbers : info.values()) {
             TLRPC.InputChannel inputChannel = new TLRPC.TL_inputChannel();
             inputChannel.channel_id = (int) numbers[1];
             inputChannel.access_hash = (long) numbers[2];

@@ -880,18 +880,20 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                     openSearchWithText(null);
                 } else if(id == bookmark){
                     try {
-                        SQLiteCursor cursor = MessagesStorage.getInstance().getDatabase().queryFinalized("SELECT message_id, channel_id, access_hash FROM bookmarked_messages ORDER BY bookmark_time DESC LIMIT 400");
-                        ArrayList<Number[]> channel_messages = new ArrayList<>();
-                        ArrayList<Integer> message_ids = new ArrayList<>();
+                        SQLiteCursor cursor = MessagesStorage.getInstance().getDatabase().queryFinalized("SELECT message_id, channel_id, access_hash, bookmark_time FROM bookmarked_messages ORDER BY bookmark_time DESC LIMIT 400");
+                        HashMap<Integer, Number[]> channel_messages = new HashMap<>();
+                        HashMap<Integer, Integer> message_ids = new HashMap<>();
+                        int key = 0;
                         while (cursor.next()) {
                             Integer msg_id = cursor.intValue(0);
                             Integer ch_id = cursor.intValue(1);
                             Long hash = cursor.longValue(2);
                             if (ch_id != 0) {
-                                channel_messages.add(new Number[]{msg_id, ch_id, hash});
+                                channel_messages.put(key, new Number[]{msg_id, ch_id, hash});
                             } else {
-                                message_ids.add(msg_id);
+                                message_ids.put(key, msg_id);
                             }
+                            key++;
                         }
                         if (message_ids.size() > 0) {
                             MessageHelper.getInstance().getMessages(message_ids);
