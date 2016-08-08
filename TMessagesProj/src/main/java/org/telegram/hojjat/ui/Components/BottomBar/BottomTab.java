@@ -70,18 +70,10 @@ public class BottomTab extends FrameLayout {
         super.setSelected(selected);
     }
 
-    public void setSelectedSilently(boolean selected) {
-        setColor(selected ? activeColor : deactiveColor);
-        label.setVisibility(selected ? VISIBLE : INVISIBLE);
-        icon.setTranslationY(-AndroidUtilities.dp(8));
-        super.setSelected(selected);
-    }
-
     private void startSelectionAnim(boolean selected) {
         int fromColor = selected ? deactiveColor : activeColor;
         int toColor = selected ? activeColor : deactiveColor;
         int duration = selected ? ACTIVATION_ANIM_DURATION : DEACTIVATION_ANIM_DURATION;
-//        int translateY = selected ? label.getTop() - icon.getBottom() : 0;
         int translateY = selected ? -AndroidUtilities.dp(8) : 0;
 
         label.setVisibility(selected ? VISIBLE : INVISIBLE);

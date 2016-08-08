@@ -96,6 +96,7 @@ public class NearbyActivity extends BaseFragment implements NearbyView, View.OnC
 
     private void addUserInfoBar() {
         userInfo = new PartyInfo(context);
+        userInfo.showTextIcon(false);
         beforeSerachLayout.addView(userInfo, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
     }
 
@@ -230,7 +231,6 @@ public class NearbyActivity extends BaseFragment implements NearbyView, View.OnC
         userInfo.title.setText(user.name);
         userInfo.desc.setText(user.status);
         Picasso.with(context)
-//                .load(user.img)
                 .load("http://about.library.ubc.ca/files/2014/09/Mark_Christensen.jpeg")
                 .fit()
                 .centerCrop()

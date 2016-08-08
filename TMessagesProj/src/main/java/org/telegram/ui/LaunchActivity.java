@@ -28,6 +28,7 @@ import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -45,11 +46,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-//import com.roughike.bottombar.BottomBar;
-//import com.roughike.bottombar.OnMenuTabClickListener;
-//import com.roughike.bottombar.scrollsweetness.BottomNavigationBehavior;
-
 import org.telegram.PhoneFormat.PhoneFormat;
+import org.telegram.hojjat.ui.Components.BottomBar.BottomBar;
 import org.telegram.hojjat.ui.Modules.Nearby.NearbyActivity;
 import org.telegram.hojjat.ui.Modules.Trends.TrendsActivity;
 import org.telegram.messenger.AndroidUtilities;
@@ -133,7 +131,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
     NearbyActivity nearbyActivity;
     TrendsActivity trendsActivity;
 
-    private org.telegram.hojjat.ui.Components.BottomBar.BottomBar bottomBar;
+    private BottomBar bottomBar;
     private BottomBarAdapter bottomBarAdapter;
 
     @Override
@@ -185,6 +183,16 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
 //        setContentView(drawerLayoutContainer, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         setContentView(mainContariner, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mainContariner.addView(drawerLayoutContainer, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 0, (float) 1));
+
+        bottomBar = new BottomBar(this);
+        bottomBar.setActiveColor(getResources().getColor(R.color.primary));
+        bottomBar.setDeactiveColor(getResources().getColor(R.color.darkGray));
+        bottomBar.setBackgroundColor(getResources().getColor(R.color.lightGray));
+        bottomBar.setRtl(LocaleController.isRTL);
+        bottomBarAdapter = new BottomBarAdapter();
+        bottomBar.setAdapter(bottomBarAdapter);
+        bottomBar.setOnTabSelectedListener((bottomBarAdapter));
+        mainContariner.addView(bottomBar, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
 
         if (AndroidUtilities.isTablet()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -474,53 +482,6 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
             drawerLayoutContainer.setAllowOpenDrawer(allowOpen, false);
         }
 
-        bottomBar = new org.telegram.hojjat.ui.Components.BottomBar.BottomBar(this);
-        bottomBar.setActiveColor(getResources().getColor(R.color.primary));
-        bottomBar.setDeactiveColor(getResources().getColor(R.color.darkGray));
-        bottomBar.setBackgroundColor(getResources().getColor(R.color.lightGray));
-        bottomBarAdapter = new BottomBarAdapter();
-        bottomBar.setAdapter(bottomBarAdapter);
-        bottomBar.setOnTabSelectedListener(((org.telegram.hojjat.ui.Components.BottomBar.BottomBar.OnTabSelectedListener) bottomBarAdapter));
-        mainContariner.addView(bottomBar, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
-
-
-//        setTheme(R.style.Theme_MAppCompat);
-//
-////        mBottomBar = BottomBar.attach(this, savedInstanceState, Color.RED, Color.BLUE, (float)0.6);
-////        it must be set if using attach with colors
-////        mBottomBar.setFixedInactiveIconColor(0xFF444444);
-//
-//        mBottomBar = BottomBar.attach(this, savedInstanceState);
-//        mBottomBar.setTypeFace(AndroidUtilities.PERSIAN_FONT);
-////        mBottomBar.setMaxFixedTabs(2);
-////        mBottomBar.noTopOffset();
-////        mBottomBar.ignoreNightMode();
-//        mBottomBar.setActiveTabColor(0xff527da3);
-//        mBottomBar.setItems(R.menu.bottom_bar_menu);
-////        mBottomBar.mapColorForTab(0, 0xFF999999);
-////        mBottomBar.mapColorForTab(1, 0xFF999999);
-////        mBottomBar.mapColorForTab(2, 0xFF999999);
-//        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-//            @Override
-//            public void onMenuTabSelected(@IdRes int menuItemId) {
-//                if (menuItemId == R.id.bottomBarMessages) {
-//                    actionBarLayout.presentFragment(new DialogsActivity(null), true, true, true);
-//                } else if (menuItemId == R.id.bottomBarExplore) {
-//                    actionBarLayout.presentFragment(new TrendsActivity(), true, true, true);
-//                } else if (menuItemId == R.id.bottomBarDiscover) {
-//                    actionBarLayout.presentFragment(new NearbyActivity(), true, true, true);
-//                }
-//            }
-//
-//            @Override
-//            public void onMenuTabReSelected(@IdRes int menuItemId) {
-//                if (menuItemId == R.id.bottomBarExplore) {
-//                    // The user reselected item number one, scroll your content to top.
-//                }
-//            }
-//        });
-//        setTheme(R.style.Theme_TMessages);
-
         handleIntent(getIntent(), false, savedInstanceState != null, false);
         needLayout();
 
@@ -538,21 +499,12 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
     }
 
     public void updateViewToFragment(BaseFragment fragment) {
-        if (fragment instanceof DialogsActivity || fragment instanceof TrendsActivity || fragment instanceof NearbyActivity) {
-            showBottomBar();
-        } else {
-            hideBottomBar();
-        }
+        bottomBarAdapter.updateForFragment(fragment);
     }
 
-    private void hideBottomBar() {
-//        mBottomBar.hide();
-        bottomBar.setVisibility(View.GONE);
-    }
-
-    private void showBottomBar() {
-//        mBottomBar.show();
-        bottomBar.setVisibility(View.VISIBLE);
+    public void notifyLanguageChanged() {
+        bottomBar.setRtl(LocaleController.isRTL);
+        bottomBar.recreate();
     }
 
     private void showPasscodeActivity() {
@@ -2347,15 +2299,14 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
     }
 
     class BottomBarAdapter extends org.telegram.hojjat.ui.Components.BottomBar.BottomBarAdapter implements org.telegram.hojjat.ui.Components.BottomBar.BottomBar.OnTabSelectedListener {
-
+        private static final String TAG = "BottomBarAdapter";
         final int tabMessages = 0;
         final int tabNearby = 1;
         final int tabExplore = 2;
         Typeface typeface = AndroidUtilities.getTypeface(AndroidUtilities.PERSIAN_FONT);
 
         @Override
-        public String getLabel(int position) {
-            int tab = getTabInPosition(position);
+        public String getLabel(int tab) {
             switch (tab) {
                 case tabMessages:
                     return LocaleController.getString("BottomBarMesseges", R.string.BottomBarMesseges);
@@ -2368,8 +2319,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         }
 
         @Override
-        public int getIconResource(int position) {
-            int tab = getTabInPosition(position);
+        public int getIconResource(int tab) {
             switch (tab) {
                 case tabMessages:
                     return R.drawable.bottom_bar_messages;
@@ -2388,8 +2338,6 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
 
         @Override
         public int getDefaultSelectedTab() {
-            if (LocaleController.isRTL)
-                return getCount() - 1;
             return 0;
         }
 
@@ -2398,45 +2346,57 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
             return typeface;
         }
 
-        int getTabInPosition(int position) {
-            if (LocaleController.isRTL)
-                position = getCount() - (position + 1);
-            return position;
-        }
-
         @Override
-        public void onTabSelected(int position) {
-            int tab = getTabInPosition(position);
-            BaseFragment currFragment = actionBarLayout.fragmentsStack.get(actionBarLayout.fragmentsStack.size() - 1);
+        public void onTabSelected(int tab) {
+            BaseFragment fragment = null;
             switch (tab) {
                 case tabMessages:
-                    if (currFragment instanceof DialogsActivity)
-                        return;
-                    if (dialogs == null)
-                        dialogs = new DialogsActivity(null);
-                    if (actionBarLayout.fragmentsStack.contains(dialogs))
-                        actionBarLayout.removeFragmentFromStack(dialogs);
-                    actionBarLayout.presentFragment(dialogs, false, true, true);
+                    fragment = getFragmentFromStack(DialogsActivity.class);
+                    if (fragment != null)
+                        actionBarLayout.removeFragmentFromStack(fragment);
+                    if (fragment == null)
+                        fragment = new DialogsActivity(null);
                     break;
                 case tabNearby:
-                    if (currFragment instanceof NearbyActivity)
-                        return;
-                    if (nearbyActivity == null)
-                        nearbyActivity = new NearbyActivity();
-                    if (actionBarLayout.fragmentsStack.contains(nearbyActivity))
-                        actionBarLayout.removeFragmentFromStack(nearbyActivity);
-                    actionBarLayout.presentFragment(nearbyActivity, false, true, true);
+                    fragment = getFragmentFromStack(NearbyActivity.class);
+                    if (fragment != null)
+                        actionBarLayout.removeFragmentFromStack(fragment);
+                    if (fragment == null)
+                        fragment = new NearbyActivity();
                     break;
                 case tabExplore:
-                    if (currFragment instanceof TrendsActivity)
-                        return;
-                    if (trendsActivity == null)
-                        trendsActivity = new TrendsActivity();
-                    if (actionBarLayout.fragmentsStack.contains(trendsActivity))
-                        actionBarLayout.removeFragmentFromStack(trendsActivity);
-                    actionBarLayout.presentFragment(trendsActivity, false, true, true);
+                    fragment = getFragmentFromStack(TrendsActivity.class);
+                    if (fragment != null)
+                        actionBarLayout.removeFragmentFromStack(fragment);
+                    if (fragment == null)
+                        fragment = new TrendsActivity();
                     break;
             }
+            actionBarLayout.presentFragment(fragment, false, true, true);
+        }
+
+        BaseFragment getFragmentFromStack(Class type) {
+            for (BaseFragment fragment : actionBarLayout.fragmentsStack) {
+                if (type.isAssignableFrom(fragment.getClass()))
+                    return fragment;
+            }
+            return null;
+        }
+
+        public void updateForFragment(BaseFragment fragment) {
+            Log.i(TAG, "updateForFragment: " + fragment.getClass().getName());
+            if (fragment instanceof DialogsActivity || fragment instanceof TrendsActivity || fragment instanceof NearbyActivity) {
+                bottomBar.setVisibility(View.VISIBLE);
+                int toBeSelectedTab;
+                if (fragment instanceof DialogsActivity)
+                    toBeSelectedTab = tabMessages;
+                else if (fragment instanceof TrendsActivity)
+                    toBeSelectedTab = tabExplore;
+                else
+                    toBeSelectedTab = tabNearby;
+                bottomBar.setSelectedTab(toBeSelectedTab, true);
+            } else
+                bottomBar.setVisibility(View.GONE);
         }
     }
 }

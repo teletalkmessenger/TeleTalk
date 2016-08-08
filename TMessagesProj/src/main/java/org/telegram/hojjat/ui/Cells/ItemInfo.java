@@ -31,7 +31,7 @@ public class ItemInfo extends RelativeLayout {
         init();
     }
 
-    private void init() {
+    protected void init() {
         int pad = AndroidUtilities.dp(10);
         setPadding(pad, pad, pad, pad);
         avatar = new ImageView(getContext());

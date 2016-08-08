@@ -55,7 +55,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+
+import org.telegram.hojjat.network.ApiHelper;
 import org.telegram.hojjat.ui.Widgets.TextView;
+
 import android.widget.Toast;
 
 import org.telegram.PhoneFormat.PhoneFormat;
@@ -145,6 +148,7 @@ import java.util.regex.Matcher;
 @SuppressWarnings("unchecked")
 public class ChatActivity extends BaseFragment implements NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate,
         PhotoViewer.PhotoViewerProvider {
+    private static final String TAG = "ChatActivity";
 
     protected TLRPC.Chat currentChat;
     protected TLRPC.User currentUser;
@@ -375,6 +379,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             createMenu(view, true);
         }
     };
+    private boolean channelLoged;
 
     public ChatActivity(Bundle args) {
         super(args);
@@ -602,6 +607,15 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         }
 
         return true;
+    }
+
+    private void logChannelIfNeeded() {
+        if (channelLoged || !ChatObject.isChannel(currentChat) || !ConnectionsManager.isNetworkOnline() || info == null)
+            return;
+        channelLoged = true;
+        if (currentChat.username == null) //private channel
+            return;
+        ApiHelper.getInstance().logChannel(currentChat.id, currentChat.username, (long) currentChat.participants_count);
     }
 
     @Override
@@ -5646,6 +5660,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         chatAdapter.notifyDataSetChanged();
                     }
                 }
+                logChannelIfNeeded();
             }
         } else if (id == NotificationCenter.chatInfoCantLoad) {
             int chatId = (Integer) args[0];
@@ -8613,6 +8628,4 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             return messArr;
         }
     }
-
-    private static final String TAG = "HOJJAT_ChatActivity";
 }

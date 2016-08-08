@@ -170,6 +170,8 @@ public class LanguageSelectActivity extends BaseFragment {
                 if (localeInfo != null) {
                     LocaleController.getInstance().applyLanguage(localeInfo, true);
                     parentLayout.rebuildAllFragmentViews(false);
+                    if(getParentActivity() instanceof LaunchActivity)
+                        ((LaunchActivity) getParentActivity()).notifyLanguageChanged();
                 }
                 finishFragment();
             }

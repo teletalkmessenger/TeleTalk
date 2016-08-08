@@ -31,11 +31,13 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import org.telegram.hojjat.ui.Modules.Nearby.NearbyActivity;
 import org.telegram.hojjat.ui.Modules.Trends.TrendsActivity;
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.R;
 import org.telegram.messenger.AnimatorListenerAdapterProxy;
 import org.telegram.ui.Components.LayoutHelper;
+import org.telegram.ui.DialogsActivity;
 import org.telegram.ui.LaunchActivity;
 
 import java.util.ArrayList;
@@ -506,7 +508,10 @@ public class ActionBarLayout extends FrameLayout {
         BaseFragment lastFragment = fragmentsStack.get(fragmentsStack.size() - 1);
         if (lastFragment.onBackPressed()) {
             if (!fragmentsStack.isEmpty()) {
-                closeLastFragment(true);
+                boolean animate = true;
+                if (lastFragment instanceof TrendsActivity || lastFragment instanceof NearbyActivity || lastFragment instanceof DialogsActivity)
+                    animate = false;
+                closeLastFragment(animate);
             }
         }
     }
@@ -643,7 +648,7 @@ public class ActionBarLayout extends FrameLayout {
         if (checkTransitionAnimation() || delegate != null && check && !delegate.needPresentFragment(fragment, removeLast, forceWithoutAnimation, this) || !fragment.onFragmentCreate()) {
             return false;
         }
-        if(parentActivity instanceof LaunchActivity){
+        if (parentActivity instanceof LaunchActivity) {
             ((LaunchActivity) parentActivity).updateViewToFragment(fragment);
         }
         if (parentActivity.getCurrentFocus() != null) {

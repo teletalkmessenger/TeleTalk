@@ -3,6 +3,7 @@ package org.telegram.hojjat.ui.Modules.Trends;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class TrendsActivity extends BaseFragment {
 
     @Override
     public View createView(Context context) {
-        if(fragmentView != null)
+        if (fragmentView != null)
             return fragmentView;
         this.context = context;
         LinearLayout container = new LinearLayout(context);
@@ -87,22 +88,23 @@ public class TrendsActivity extends BaseFragment {
             }
         });
         int padMed = (int) context.getResources().getDimension(R.dimen.space_medium);
-        ListItemSpaceDecoration decor = new ListItemSpaceDecoration(padMed, 0, padMed, padMed);
+        ListItemSpaceDecoration decor = new ListItemSpaceDecoration(0, 0, 0, padMed);
         decor.setNoBottomSpaceForLastItem(true);
         listView.addItemDecoration(decor);
-        container.addView(listView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+        container.addView(listView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT, Gravity.CENTER));
     }
 
     private void addTabsBar(LinearLayout container) {
         tabsBar = new TagTabBar(context);
         tabsBar.setBackgroundColor(context.getResources().getColor(R.color.lightGray));
+        tabsBar.setRtl(LocaleController.isRTL);
         tabsBar.setAdapter(tabsAdapter = new TagTabsAdapter());
         tabsBar.setOnTabSelectedListener(((TagTabsAdapter) tabsAdapter));
         container.addView(tabsBar, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
     }
 
     class TagTabsAdapter extends TagTabAdapter implements TagTabBar.OnTabSelectedListener {
-        int count = 4;
+        int count = 5;
         private final Typeface typeface;
 
         public TagTabsAdapter() {
@@ -123,8 +125,9 @@ public class TrendsActivity extends BaseFragment {
                     return LocaleController.getString("MessageTypeText", R.string.MessageTypeText);
                 case music:
                     return LocaleController.getString("MessageTypeMusic", R.string.MessageTypeMusic);
+                default:
+                    return "ERROR!";
             }
-            return "";
         }
 
         @Override
@@ -141,14 +144,12 @@ public class TrendsActivity extends BaseFragment {
                     return R.drawable.ic_tag_tab_text;
                 case music:
                     return R.drawable.ic_tag_tab_music;
+                default:
+                    return R.drawable.ic_tag_tab_music;
             }
-            return 0;
         }
 
         MessageType getMessageTypeForPosition(int position) {
-            if (LocaleController.isRTL) {
-                position = getCount() - (position + 1);
-            }
             switch (position) {
                 case 0:
                     return MessageType.video;
@@ -160,8 +161,9 @@ public class TrendsActivity extends BaseFragment {
                     return MessageType.text;
                 case 4:
                     return MessageType.music;
+                default:
+                    return MessageType.unknown;
             }
-            return null;
         }
 
         @Override
@@ -186,8 +188,6 @@ public class TrendsActivity extends BaseFragment {
 
         @Override
         public int getDefaultSelectedTab() {
-            if(LocaleController.isRTL)
-                return getCount() -1;
             return 0;
         }
 
