@@ -4300,6 +4300,31 @@ public class TLRPC {
         public int pinned_msg_id;
         public ChatParticipants participants;
 
+        @Override
+        public String toString() {
+            return "ChatFull{" +
+                    "flags=" + flags +
+                    ", can_view_participants=" + can_view_participants +
+                    ", can_set_username=" + can_set_username +
+                    ", id=" + id +
+                    ", about='" + about + '\'' +
+                    ", participants_count=" + participants_count +
+                    ", admins_count=" + admins_count +
+                    ", kicked_count=" + kicked_count +
+                    ", read_inbox_max_id=" + read_inbox_max_id +
+                    ", read_outbox_max_id=" + read_outbox_max_id +
+                    ", unread_count=" + unread_count +
+                    ", chat_photo=" + chat_photo +
+                    ", notify_settings=" + notify_settings +
+                    ", exported_invite=" + exported_invite +
+                    ", bot_info=" + bot_info +
+                    ", migrated_from_chat_id=" + migrated_from_chat_id +
+                    ", migrated_from_max_id=" + migrated_from_max_id +
+                    ", pinned_msg_id=" + pinned_msg_id +
+                    ", participants=" + participants +
+                    '}';
+        }
+
         public static ChatFull TLdeserialize(AbstractSerializedData stream, int constructor, boolean exception) {
             ChatFull result = null;
             switch (constructor) {

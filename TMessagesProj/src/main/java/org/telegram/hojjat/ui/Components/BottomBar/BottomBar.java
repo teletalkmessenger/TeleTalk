@@ -18,6 +18,8 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
     int activeColor = Color.RED;
     int deactiveColor = Color.BLUE;
 
+    boolean isRtl;
+
     public void setActiveColor(int activeColor) {
         this.activeColor = activeColor;
     }
@@ -55,8 +57,16 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
             return;
         this.adapter = adapter;
         setWeightSum(adapter.getCount());
+        recreate();
+    }
+
+    public void recreate() {
         removeAllViews();
         addTabs();
+    }
+
+    public void setRtl(boolean rtl) {
+        isRtl = rtl;
     }
 
     private void addTabs() {
@@ -73,20 +83,30 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
             addTab(tab);
         }
         if (adapter.getDefaultSelectedTab() < adapter.getCount())
-            ((BottomTab) getChildAt(adapter.getDefaultSelectedTab())).setSelectedSilently(true);
+            setSelectedTab(adapter.getDefaultSelectedTab(), true);
     }
 
     private void addTab(BottomTab tab) {
         tab.setOnClickListener(this);
-        addView(tab, LayoutHelper.createLinear(0, LayoutHelper.MATCH_PARENT, 1f));
+        if (isRtl)
+            addView(tab, 0, LayoutHelper.createLinear(0, LayoutHelper.MATCH_PARENT, 1f));
+        else
+            addView(tab, LayoutHelper.createLinear(0, LayoutHelper.MATCH_PARENT, 1f));
+    }
+
+    public void setSelectedTab(int tag, boolean silently) {
+        BottomTab tab;
+        for (int i = 0; i < getChildCount(); i++) {
+            tab = ((BottomTab) getChildAt(i));
+            tab.setSelected(((int) tab.getTag()) == tag);
+        }
+        if (!silently && delegate != null)
+            delegate.onTabSelected(tag);
     }
 
     @Override
     public void onClick(View v) {
-        int clicked = ((int) v.getTag());
-        for (int i = 0; i < getChildCount(); i++)
-            getChildAt(i).setSelected(clicked == i);
-        if (delegate != null)
-            delegate.onTabSelected(clicked);
+        int tag = ((int) v.getTag());
+        setSelectedTab(tag, false);
     }
 }

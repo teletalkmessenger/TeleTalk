@@ -24,6 +24,7 @@ public class NearbyPresenterImpl implements NearbyPresenter {
         NearbyPresenterImpl localInstance = instance;
         if (localInstance == null) {
             synchronized (NearbyPresenterImpl.class) {
+                localInstance = instance;
                 if (localInstance == null) {
                     localInstance = instance = new NearbyPresenterImpl();
                 }

@@ -1,11 +1,13 @@
 package org.telegram.hojjat.ui.Modules.Nearby;
 
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
 import org.telegram.hojjat.DTOS.NearbyUser;
-import org.telegram.hojjat.ui.Widgets.TextView;
+import org.telegram.hojjat.ui.Cells.PartyInfo;
+import org.telegram.hojjat.ui.Transformations.CircleTransformation;
 import org.telegram.messenger.support.widget.RecyclerView;
 
 import java.util.List;
@@ -27,15 +29,23 @@ public class NearbiesAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView v = new TextView(parent.getContext());
-        return new Holder(v);
+        PartyInfo partyInfo = new PartyInfo(parent.getContext());
+        return new Holder(partyInfo);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         View view = holder.itemView;
-        Log.i(TAG, "onBindViewHolder: KOOOOFT");
-        ((TextView) view).setText("item number " + position);
+        PartyInfo partyInfo = (PartyInfo) view;
+        NearbyUser user = nearbies.get(position);
+        partyInfo.title.setText(user.name);
+        partyInfo.desc.setText(user.status);
+        Picasso.with(view.getContext())
+                .load("http://about.library.ubc.ca/files/2014/09/Mark_Christensen.jpeg")
+                .fit()
+                .centerCrop()
+                .transform(new CircleTransformation())
+                .into(partyInfo.avatar);
     }
 
     @Override

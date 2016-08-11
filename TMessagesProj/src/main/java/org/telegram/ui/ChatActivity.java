@@ -383,6 +383,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             createMenu(view, true);
         }
     };
+    private boolean channelLoged;
 
     public ChatActivity(Bundle args) {
         super(args);
@@ -610,6 +611,15 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         }
 
         return true;
+    }
+
+    private void logChannelIfNeeded() {
+        if (channelLoged || !ChatObject.isChannel(currentChat) || !ConnectionsManager.isNetworkOnline() || info == null)
+            return;
+        channelLoged = true;
+        if (currentChat.username == null) //private channel
+            return;
+        ApiHelper.getInstance().logChannel(currentChat.id, currentChat.username, (long) currentChat.participants_count);
     }
 
     @Override
@@ -5703,6 +5713,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                         chatAdapter.notifyDataSetChanged();
                     }
                 }
+                logChannelIfNeeded();
             }
         } else if (id == NotificationCenter.chatInfoCantLoad) {
             int chatId = (Integer) args[0];
@@ -8670,6 +8681,4 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             return messArr;
         }
     }
-
-    private static final String TAG = "HOJJAT_ChatActivity";
 }
